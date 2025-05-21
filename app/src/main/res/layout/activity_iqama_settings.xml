@@ -1,0 +1,1448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layoutDirection="rtl"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/fajer_igama"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="30sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#dadada" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical"
+                        android:padding="15dp"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layoutDirection="rtl"
+                            android:orientation="vertical"
+                            android:textDirection="rtl">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/det_iqama"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_fajer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rbfRelative"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:button="@null"
+                                    android:drawableRight="@drawable/btn_radio"
+                                    android:drawablePadding="10dp"
+                                    android:padding="10dp"
+                                    android:text="@string/percent"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/spinner_text_size" />
+
+                                <RadioButton
+                                    android:id="@+id/rbfConstant"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:button="@null"
+                                    android:checked="false"
+                                    android:drawableRight="@drawable/btn_radio"
+                                    android:drawablePadding="10dp"
+                                    android:padding="10dp"
+                                    android:text="@string/contstant"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/spinner_text_size" />
+
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:id="@+id/llfRelative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/igamaPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_fajer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:id="@+id/llfConstant"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/igamaPeriod1"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <EditText
+                                android:id="@+id/ed_fajerIq"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.5"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:hint="11:00"
+                                android:imeOptions="actionNext"
+                                android:inputType="datetime"
+                                android:padding="10dp"
+                                android:singleLine="true"
+                                android:textSize="@dimen/spinner_text_size" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+
+
+
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/azkarPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_fajerِAzkarP"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/azkarAppearPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_fajerِAzkarApp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:textStyle="bold"
+                        android:paddingBottom="10dp"
+                        android:text="@string/sh_igama"
+                        android:textColor="@color/black"
+                        android:textSize="30sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#dadada" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical"
+                        android:padding="15dp"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layoutDirection="rtl"
+                            android:orientation="vertical"
+                            android:textDirection="rtl">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/det_iqama"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_sunrise"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rbsRelative"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:button="@null"
+                                    android:drawableRight="@drawable/btn_radio"
+                                    android:drawablePadding="10dp"
+                                    android:padding="10dp"
+                                    android:text="@string/percent"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/spinner_text_size" />
+
+                                <RadioButton
+                                    android:id="@+id/rbsConstant"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:button="@null"
+                                    android:checked="false"
+                                    android:drawableRight="@drawable/btn_radio"
+                                    android:drawablePadding="10dp"
+                                    android:padding="10dp"
+                                    android:text="@string/contstant"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/spinner_text_size" />
+
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:id="@+id/llsRelative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/igamaPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_sunrise"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:id="@+id/llsConstant"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/igamaPeriod1"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <EditText
+                                android:id="@+id/ed_sunriseIq"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.5"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:hint="11:00"
+                                android:imeOptions="actionNext"
+                                android:inputType="datetime"
+                                android:padding="10dp"
+                                android:singleLine="true"
+                                android:textSize="@dimen/spinner_text_size" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/dhohr_igama"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="30sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#dadada" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical"
+                        android:padding="15dp"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layoutDirection="rtl"
+                            android:orientation="vertical"
+                            android:textDirection="rtl">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/det_iqama"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_Thahr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rbthRelative"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:button="@null"
+                                    android:drawableRight="@drawable/btn_radio"
+                                    android:drawablePadding="10dp"
+                                    android:padding="10dp"
+                                    android:text="@string/percent"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/spinner_text_size" />
+
+                                <RadioButton
+                                    android:id="@+id/rbthConstant"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:button="@null"
+                                    android:checked="false"
+                                    android:drawableRight="@drawable/btn_radio"
+                                    android:drawablePadding="10dp"
+                                    android:padding="10dp"
+                                    android:text="@string/contstant"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/spinner_text_size" />
+
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:id="@+id/llthRelative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/igamaPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_thahr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:id="@+id/llthConstant"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/igamaPeriod1"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <EditText
+                                android:id="@+id/ed_thahrIq"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.5"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:hint="11:00PM"
+                                android:imeOptions="actionNext"
+                                android:inputType="datetime"
+                                android:padding="10dp"
+                                android:singleLine="true"
+                                android:textSize="@dimen/spinner_text_size" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/azkarPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_thahrAzkarP"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/azkarAppearPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_thahrAzkarApp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/aser_igama"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="30sp" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#dadada" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical"
+                        android:padding="15dp"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layoutDirection="rtl"
+                            android:orientation="vertical"
+                            android:textDirection="rtl">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/det_iqama"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_Asr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rbasrRelative"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:button="@null"
+                                    android:drawableRight="@drawable/btn_radio"
+                                    android:drawablePadding="10dp"
+                                    android:padding="10dp"
+                                    android:text="@string/percent"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/spinner_text_size" />
+
+                                <RadioButton
+                                    android:id="@+id/rbasrConstant"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:button="@null"
+                                    android:checked="false"
+                                    android:drawableRight="@drawable/btn_radio"
+                                    android:drawablePadding="10dp"
+                                    android:padding="10dp"
+                                    android:text="@string/contstant"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/spinner_text_size" />
+
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:id="@+id/llasrRelative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/igamaPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_asr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:id="@+id/llasrConstant"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/igamaPeriod1"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <EditText
+                                android:id="@+id/ed_asrIq"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.5"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:hint="11:00"
+                                android:imeOptions="actionNext"
+                                android:inputType="datetime"
+                                android:padding="10dp"
+                                android:singleLine="true"
+                                android:textSize="@dimen/spinner_text_size" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+
+
+
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/azkarPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_asrAzkarP"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/azkarAppearPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_asrAzkarApp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/magrib_igama"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="30sp" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#dadada" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical"
+                        android:padding="15dp"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layoutDirection="rtl"
+                            android:orientation="vertical"
+                            android:textDirection="rtl">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/det_iqama"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_Mg"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rbmgRelative"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:button="@null"
+                                    android:drawableRight="@drawable/btn_radio"
+                                    android:drawablePadding="10dp"
+                                    android:padding="10dp"
+                                    android:text="@string/percent"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/spinner_text_size" />
+
+                                <RadioButton
+                                    android:id="@+id/rbmgConstant"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:button="@null"
+                                    android:checked="false"
+                                    android:drawableRight="@drawable/btn_radio"
+                                    android:drawablePadding="10dp"
+                                    android:padding="10dp"
+                                    android:text="@string/contstant"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/spinner_text_size" />
+
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:id="@+id/llmgRelative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/igamaPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_mg"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:id="@+id/llmgConstant"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/igamaPeriod1"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <EditText
+                                android:id="@+id/ed_mgIq"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.5"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:hint="11:00"
+                                android:imeOptions="actionNext"
+                                android:inputType="datetime"
+                                android:padding="10dp"
+                                android:singleLine="true"
+                                android:textSize="@dimen/spinner_text_size" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+
+
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/azkarPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_mgAzkarP"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/azkarAppearPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_mgAzkarApp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/isha_igama"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="30sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#dadada" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical"
+                        android:padding="15dp"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layoutDirection="rtl"
+                            android:orientation="vertical"
+                            android:textDirection="rtl">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/det_iqama"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_Ish"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rbishRelative"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:button="@null"
+                                    android:drawableRight="@drawable/btn_radio"
+                                    android:drawablePadding="10dp"
+                                    android:padding="10dp"
+                                    android:text="@string/percent"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/spinner_text_size" />
+
+                                <RadioButton
+                                    android:id="@+id/rbishConstant"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:button="@null"
+                                    android:checked="false"
+                                    android:drawableRight="@drawable/btn_radio"
+                                    android:drawablePadding="10dp"
+                                    android:padding="10dp"
+                                    android:text="@string/contstant"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/spinner_text_size" />
+
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:id="@+id/llishRelative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/igamaPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_ish"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:id="@+id/llishConstant"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/igamaPeriod1"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <EditText
+                                android:id="@+id/ed_ishIq"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.5"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:hint="11:00"
+                                android:imeOptions="actionNext"
+                                android:inputType="datetime"
+                                android:padding="10dp"
+                                android:singleLine="true"
+                                android:textSize="@dimen/spinner_text_size" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+
+
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/azkarPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_ishAzkarP"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#dadada" />
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:padding="10dp"
+                                android:text="@string/azkarAppearPeriod"
+                                android:textSize="@dimen/spinner_text_size" />
+
+                            <NumberPicker
+                                android:id="@+id/np_ishAzkarApp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:theme="@style/NumberPickerText" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:layout_margin="10dp"
+        android:id="@+id/btn_save"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/back_text"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+</RelativeLayout>

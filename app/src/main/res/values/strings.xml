@@ -1,0 +1,434 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">محراب</string>
+
+    <string name="sat">السبت</string>
+    <string name="sun">الأحد</string>
+    <string name="mon">الإثنين</string>
+    <string name="tus">الثلاثاء</string>
+    <string name="wes">الأربعاء</string>
+    <string name="ths">الخميس</string>
+    <string name="fri">الجمعة</string>
+
+    <string name="em1">يناير</string>
+    <string name="em2">فبراير</string>
+    <string name="em3">مارس</string>
+    <string name="em4">أبريل</string>
+    <string name="em5">مايو</string>
+    <string name="em6">يونيو</string>
+    <string name="em7">يوليو</string>
+    <string name="em8">أغسطس</string>
+    <string name="em9">سبتمبر</string>
+    <string name="em10">أكتوبر</string>
+    <string name="em11">نوفمبر</string>
+    <string name="em12">ديسمبر</string>
+
+    <string name="mt">هـ</string>
+    <string name="mt1">م</string>
+
+    <string name="lan_6">4.0 BLE detects that the device does not support Bluetooth</string>
+    <string name="lan_7">Native Bluetooth hardware or driver was not found!</string>
+    <string name="fajer_igama">صلاة الفجر</string>
+    <string name="adan_sound">تنبيه الأذان الصوتي</string>
+    <string name="iqama_sound">تنبيه الإقامة الصوتي</string>
+    <string name="det_iqama">تحديد الإقامة</string>
+    <string name="percent">نسبي</string>
+    <string name="contstant">وقت ثابت</string>
+    <string name="igamaPeriod">زمن الإقامة (دقيقة)</string>
+    <string name="igamaPeriod1">وقت الإقامة</string>
+    <string name="azkarPeriod">ظهور الأذكار بعد الإقامة (دقيقة)</string>
+    <string name="azkarAppearPeriod">فترة ظهور الخشوع (دقيقة)</string>
+    <string name="sh_igama">صلاة الشروق/الضحى</string>
+    <string name="aser_igama">صلاة العصر</string>
+    <string name="magrib_igama">صلاة المغرب</string>
+    <string name="isha_igama">صلاة العشاء</string>
+    <string name="dhohr_igama">صلاة الظهر</string>
+    <string name="save">حفظ</string>
+
+    <string name="azkar"> الأذكار والأدعية</string>
+    <string name="azkar_settings">إضافة ,تعديل, حذف الأذكار</string>
+
+    <string name="text_azkar">أدخل نص الذكر</string>
+    <string name="azkartext"> الأذكار </string>
+
+    <string name="pn1">الفجر</string>
+    <string name="pn2">الشروق</string>
+    <string name="pn3">الظهر</string>
+    <string name="pn4">العصر</string>
+    <string name="pn5">المغرب</string>
+    <string name="pn6">العشاء</string>
+    <string name="pn7">الجمعة</string>
+    <string name="pn8">صلاة الجمعة</string>
+
+
+    <string name="add">إضافة</string>
+    <string name="cancel_delete">إلغاء</string>
+    <string name="add_azkar">إضافة أذكار جديدة</string>
+    <string name="edit_azkar">تعديل </string>
+
+    <string name="confirm_delete">حذف</string>
+    <string name="tv_delAttention1">هل أنت متأكد أنك تريد حذف هذا الذكر؟</string>
+
+    <string name="wait">يرجى الانتظار...</string>
+    <string name="success_add">تم الإضافة بنجاح</string>
+    <string name="success_edit">تم التعديل</string>
+    <string name="advertisement">الإعلانات</string>
+    <string name="NewAds_settings">إضافة إعلان يظهر في وقت محددة</string>
+    <string name="tv_delTitle">حذف الخبر</string>
+    <string name="tv_delAttention">هل أنت متأكد أنك تريد حذف هذا الخبر؟</string>
+    <string name="ads_edit">تعديل إعلان</string>
+    <string name="adsTitle">عنوان الإعلان</string>
+    <string name="enter_adsTitle">أدخل عنوان الإعلان</string>
+    <string name="adsText">نص الإعلان</string>
+    <string name="adsPeriod">فترة ظهور الإعلان</string>
+    <string name="adsAppearance">عدد مرات ظهور الإعلان</string>
+    <string name="adsTime">أوقات ظهور الإعلان</string>
+    <string name="edit">تعديل</string>
+
+    <string name="time">الوقت</string>
+    <string name="date">التاريخ</string>
+
+    <string name="cancel">إلغاء</string>
+    <string name="set">ضبط</string>
+
+    <string name="text_close_phone">إعدادات تنبيهات إغلاق الهاتف</string>
+    <string name="closeNotifSoundFajr">حالة التنبيهات الصوتية لإغلاق الهاتف لصلاة الفجر</string>
+    <string name="closeNotifSoundShrouk">حالة التنبيهات الصوتية لإغلاق الهاتف لصلاة الشروق/الضحى</string>
+    <string name="closeNotifSoundDuhr">حالة التنبيهات الصوتية لإغلاق الهاتف لصلاة الظهر</string>
+    <string name="closeNotifSoundAsr">حالة التنبيهات الصوتية لإغلاق الهاتف لصلاة العصر</string>
+    <string name="closeNotifSoundMaghrib">حالة التنبيهات الصوتية لإغلاق الهاتف لصلاة المغرب</string>
+    <string name="closeNotifSoundIsha">حالة التنبيهات الصوتية لإغلاق الهاتف لصلاة العشاء</string>
+    <string name="closeNotifSoundGomaa">حالة التنبيهات الصوتية لإغلاق الهاتف لصلاة الجمعة</string>
+
+    <string name="arNotif">نص التنبيه باللغة العربية </string>
+    <string name="enNotif">نص التنبيه باللغة الانجليزية </string>
+    <string name="urNotif">نص التنبيه باللغة الأوردو </string>
+
+
+    <string name="testText">سبحان الله  <annotation font="century_gothic_bold">[33] </annotation> , والحمد لله [33], والله أكبر [33]
+لا إله إلا الله وحده لا شريك له, له الملك وله الحمد وهو على كل شيئ قدير </string>
+    <string name="adsDay">أيام ظهور الإعلان</string>
+
+    <string name="tv_delMsg">هذه الفترة الوحيدة للاعلان سيتم حذف كل الاعلان, هل تريد الاستمرار؟</string>
+    <string name="ok">موافق</string>
+    <string name="required">هذا الحقل مطلوب</string>
+    <string name="chooseAdvImage">يجب اختيار صورة للإعلان</string>
+    <string name="chooseVideo">يجب اختيار فيديو للإعلان</string>
+    <string name="addAdvDesc">يجب إدخال نص للإعلان</string>
+    <string name="addStartDate">أدخل تاريخ بداية ظهورالإعلان</string>
+    <string name="addEndDate">أدخل تاريخ نهاية ظهورالإعلان</string>
+    <string name="error_date">يجب أن يكون تاريخ النهاية أكبر من تاريخ البداية</string>
+    <string name="addStartTime">أدخل وقت بداية ظهورالإعلان</string>
+    <string name="addEndTime">أدخل وقت نهاية ظهورالإعلان</string>
+    <string name="error_time">يجب أن يكون وقت النهاية أكبر من تاريخ البداية</string>
+    <string name="addDays">يجب إدخال أيام ظهور الإعلان</string>
+    <string name="conflictWithAnotherAdv">يوجد تعارض في الوقت مع إعلان آخر</string>
+    <string name="conflictWithPray">يوجد تعارض مع مواعيد الصلاة</string>
+    <string name="AdvAddedSuccess">تم إضافة الاعلان</string>
+    <string name="periodAdded">تم إضافة الفترة إلى  الإعلان</string>
+    <string name="AdvNotAdded">لم يتم إضافة الإعلان</string>
+    <string name="success_delete">تم الحذف بنجاح</string>
+    <string name="formatDate" formatted="false">%s-%s-%s</string>
+    <string name="formatTime" formatted="false" tools:ignore="ExtraTranslation">%s:%s</string>
+    <string name="successEdit">تم تعديل الاعلان</string>
+    <string name="successPeriodEdit">تم تعديل فترة الاعلان</string>
+    <string name="chooseTime">اختر وقت</string>
+    <string name="advSuccessEdit">تم تعديل الاعلان</string>
+    <string name="chooseImage">اختر صورة</string>
+    <string name="NoImages">لا يوجد مجلد صور على الجهاز</string>
+    <string name="noVideo">لا يوجد مجلد فيديو على الجهاز</string>
+    <string name="imageTooLarge">حجم الصورة كبير اختر صورة أخرى</string>
+    <string name="failLoadImage">حدث خطأ اختر صورة أخرى</string>
+
+    <string name="ads"> إضافة إعلان</string>
+    <string name="video">فيديو</string>
+    <string name="txt">نص</string>
+    <string name="repeatNo">عدد المرات</string>
+    <string name="advError">خطأ في ملف الاعلان</string>
+    <string name="notification_settings">التنبيهات</string>
+    <string name="closeNotifScreen">حالة التنبيهات المرئية لإغلاق الهاتف</string>
+    <string name="hintScreenNotif">تشغيل التنبيه المرئي</string>
+    <string name="closeNotifSound">حالة التنبيهات الصوتية لإغلاق الهاتف</string>
+    <string name="hintSoundNotif">تشغيل التنبيه الصوتي</string>
+    <string name="notifTimer">إظهار التنبيهات قبل إقامة الصلاة ب</string>
+    <string name="sec">ثانية</string>
+    <string name="notifTextPeriod">تحديد نص التنبيه ومدته</string>
+    <string name="kateb_setting">اعدادات خطبة الجمعة</string>
+    <string name="kateb_show">ظهور شاشة الخطيب</string>
+    <string name="kateb_show_check">تفعيل خيار الظهور الخطيب</string>
+    <string name="settings_add_khotba">إضافة خطبة</string>
+    <string name="kateb_setting_1">اعدادات شاشة الخطيب</string>
+    <string name="requiredField">هذا الحقل مطلوب</string>
+    <string name="khotbaApperance">مدة ظهور الخطبة (دقيقة)</string>
+    <string name="alkhushue_settings">اعدادات شاشة الخشوع</string>
+    <string name="sound_settings">اعدادات اصوات التنبيهات</string>
+    <string name="adv">شريط الأخبار</string>
+    <string name="newstext">نص الخبر</string>
+    <string name="text">أدخل نص الخبر</string>
+    <string name="add_adv">إضافة خبر جديد</string>
+    <string name="start">أدخل تاريخ البداية</string>
+    <string name="end">أدخل تاريخ النهاية</string>
+    <string name="sort">أدخل الترتيب للخبر</string>
+    <string name="adv_settings">إضافة ,تعديل, حذف الأخبار</string>
+
+    <string-array name="city_them">
+        <item>الثيم الاساسي عمودي</item>
+        <item>الثيم الثاني عمودي</item>
+        <item>الثيم الثالث عمودي</item>
+        <item>الثيم الرابع عمودي</item>
+        <item>الثيم الخامس عمودي</item>
+        <item>الثيم الاول افقي</item>
+        <item>الثيم الثاني افقي</item>
+        <item>الثيم الثالث افقي</item>
+        <item>الثيم الرابع افقي</item>
+        <item>الثيم الخامس افقي</item>
+    </string-array>
+
+    <string-array name="city_name">
+        <item>أختر</item>
+        <item>إبراء</item>
+        <item>أبو الطبول</item>
+        <item>أدم</item>
+        <item>إزكي</item>
+        <item>الأشخرة</item>
+        <item>الأفلاج</item>
+        <item>البريمي</item>
+        <item>البشائر</item>
+        <item>الجازر</item>
+        <item>الجبل الأخضر</item>
+        <item>الحبي</item>
+        <item>الحشمان</item>
+        <item>الحلانيات</item>
+        <item>الحمراء</item>
+        <item>الخابورة</item>
+        <item>الخوير (الصحراء)</item>
+        <item>الدقم</item>
+        <item>الرستاق</item>
+        <item>السنينة</item>
+        <item>السويق</item>
+        <item>الشويمية</item>
+        <item>العوابي</item>
+        <item>القابل (الشرقية)</item>
+        <item>القابل (الظاهرة)</item>
+        <item>الكامل والوافي</item>
+        <item>المزيونة</item>
+        <item>المصنعة</item>
+        <item>المضيبي</item>
+        <item>الواسط الظاهرة</item>
+        <item>الواصل (الشرقية)</item>
+        <item>أمل</item>
+        <item>بخا</item>
+        <item>بدبد</item>
+        <item>بدية (الشرقية)</item>
+        <item>بركاء</item>
+        <item>بهلا</item>
+        <item>ثمريت</item>
+        <item>جبال</item>
+        <item>جبل شمس</item>
+        <item>جدة الحراسيس</item>
+        <item>جعلان بني بو حسن</item>
+        <item>جعلان بني بو علي</item>
+        <item>جما</item>
+        <item>حبروت</item>
+        <item>حج</item>
+        <item>خزان (الظاهرة)</item>
+        <item>خضرفي</item>
+        <item>خيلة</item>
+        <item>دبا البيعة</item>
+        <item>دماء والطائيين</item>
+        <item>رأس الحد</item>
+        <item>رأس مدركة</item>
+        <item>رخيوت</item>
+        <item>ريسوت</item>
+        <item>سدح</item>
+        <item>سمائل</item>
+        <item>سمد الشأن</item>
+        <item>سناو</item>
+        <item>سيق</item>
+        <item>شليم</item>
+        <item>شناص</item>
+        <item>صحار</item>
+        <item>صحم</item>
+        <item>صراب</item>
+        <item>صرفيت</item>
+        <item>صلالة</item>
+        <item>صور</item>
+        <item>ضلكوت</item>
+        <item>ضنك</item>
+        <item>طاقة</item>
+        <item>عبري</item>
+        <item>فهود</item>
+        <item>قرن العلم</item>
+        <item>قريات</item>
+        <item>قلهات</item>
+        <item>كهنات</item>
+        <item>ليما</item>
+        <item>ليوا</item>
+        <item>محضة</item>
+        <item>محوت</item>
+        <item>مدحاء</item>
+        <item>مرباط</item>
+        <item>مرمول</item>
+        <item>مسقط</item>
+        <item>مصيرة</item>
+        <item>مقشن</item>
+        <item>منح</item>
+        <item>نافي</item>
+        <item>نخل</item>
+        <item>نزوى</item>
+        <item>نمر</item>
+        <item>هرويل</item>
+        <item>هيما</item>
+        <item>وادي المعول</item>
+        <item>وادي بني خالد</item>
+        <item>وادي حيبي</item>
+        <item>ينقل</item>
+    </string-array>
+
+    <string-array name="city_name_en">
+        <item></item>
+        <item>iibra</item>
+        <item>abu_altabul</item>
+        <item>adama</item>
+        <item>iizki</item>
+        <item>al_ashkhira</item>
+        <item>al_aflaj</item>
+        <item>albarimi</item>
+        <item>albashayir</item>
+        <item>aljazir</item>
+        <item>aljabal_alakhdar</item>
+        <item>alhabiyu</item>
+        <item>alhushman</item>
+        <item>alhalaniat</item>
+        <item>alhamra</item>
+        <item>alkhabura</item>
+        <item>alkhawayr_alshraa</item>
+        <item>aldaqum</item>
+        <item>alrustaq</item>
+        <item>alsanina</item>
+        <item>alsawiq</item>
+        <item>alshuwaymia</item>
+        <item>aleawabi</item>
+        <item>alqabil_alsharqiat</item>
+        <item>alqabil_alzahirat</item>
+        <item>alkamil_walwafi</item>
+        <item>almazyuna</item>
+        <item>almusanaea</item>
+        <item>almudibi</item>
+        <item>alwasit_alzzahira</item>
+        <item>alwasl_alsharqiat</item>
+        <item>amal</item>
+        <item>bakha</item>
+        <item>bidabad</item>
+        <item>badia_alsharqiat</item>
+        <item>biraka</item>
+        <item>bihla</item>
+        <item>thamrit</item>
+        <item>jibal</item>
+        <item>jabal_shams</item>
+        <item>jidat_alharasis</item>
+        <item>juelan_bani_baw_hasan</item>
+        <item>jelan_bani_bw_eali</item>
+        <item>jama</item>
+        <item>habrut</item>
+        <item>haj</item>
+        <item>khazzan_alzahirat</item>
+        <item>khadirfi</item>
+        <item>khayla</item>
+        <item>daba_albayea</item>
+        <item>dima_waltaayiyin</item>
+        <item>ras_alhadi</item>
+        <item>ras_mudrika</item>
+        <item>rakhyut</item>
+        <item>raysut</item>
+        <item>sadah</item>
+        <item>samayil</item>
+        <item>samid_alshaan</item>
+        <item>snaw</item>
+        <item>sabaq</item>
+        <item>shalim</item>
+        <item>shanas</item>
+        <item>sahar</item>
+        <item>sahm</item>
+        <item>sarab</item>
+        <item>sarfit</item>
+        <item>salala</item>
+        <item>sur</item>
+        <item>dalakut</item>
+        <item>dink</item>
+        <item>taqa</item>
+        <item>eabri</item>
+        <item>fahud</item>
+        <item>qarn_aleilm</item>
+        <item>quriyat</item>
+        <item>qalhat</item>
+        <item>kahnat</item>
+        <item>lima</item>
+        <item>liwa</item>
+        <item>mahada</item>
+        <item>mahawat</item>
+        <item>midha</item>
+        <item>marbat</item>
+        <item>marmul</item>
+        <item>masqat</item>
+        <item>masira</item>
+        <item>muqshin</item>
+        <item>manh</item>
+        <item>nafi</item>
+        <item>nakhl</item>
+        <item>nazwaa</item>
+        <item>namur</item>
+        <item>harwell</item>
+        <item>hima</item>
+        <item>wadi_almueul</item>
+        <item>wadi_bani_khalid</item>
+        <item>wadi_haybi</item>
+        <item>yanqul</item>
+    </string-array>
+
+    <string-array name="number_array">
+        <item>أختر</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+    </string-array>
+
+    <string name="noDifferance">لا يوجد فرق</string>
+    <string name="addAday">إضافة يوم</string>
+    <string name="addTwoDay">إضافة يومين</string>
+    <string name="subtractADay">إرجاع يوم</string>
+    <string name="subtractTwoDay">إرجاع يومين</string>
+
+    <string name="hijriSet"> الفرق في التاريخ الهجري</string>
+    <string name="hijriSet1">إضافة عدد أيام ثابتة</string>
+    <string name="iqama_sound_close">التنبيه الصوتي لاغلاق الهاتف</string>
+
+    <string name="corpyright">جميع الحقوق محفوظة© رقم الايداع المحلي 3087</string>
+    <string name="version">Version 1.0</string>
+    <string name="about_app">تطبيق محراب \n
+هو برنامج عماني لعرض مواقيت الصلاة وإدارة الأنشطة الدعوية بالمسجد\n
+من إنتاج مؤسسة إنجاز لنظم التحكم  </string>
+
+
+</resources>

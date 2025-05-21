@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_azkar_show_6"
+    tools:context=".activity.ShowAzkarActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/background_azkar_word_6" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="-140dp"
+            android:layout_marginRight="20dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/azkar_6" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:background="@drawable/background_data_6"
+                android:layout_height="155dp"
+                android:layout_marginBottom="-10dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_marginRight="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tv_data_hajre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/century_gothic_bold"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="20 ذو القعدة"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_data_melade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/century_gothic_bold"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="12 فبراير - "
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="-30dp"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/century_gothic_bold"
+                        android:gravity="center"
+                        android:text="12:25"
+                        android:textColor="#F40906"
+                        android:textSize="65sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_time_sec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="7dp"
+                        android:fontFamily="@font/century_gothic_bold"
+                        android:gravity="bottom|center"
+                        android:text="25"
+                        android:textColor="#F40906"
+                        android:textSize="40sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="180dp"
+                android:background="@drawable/background_pray_6"
+                android:layout_height="100dp"
+                android:layout_marginBottom="-10dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/faje_azkar_6" />
+
+                <TextView
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="-9dp"
+                    android:id="@+id/tv_fajr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/verdana_bold"
+                    android:gravity="center"
+                    android:text="5:12"
+                    android:textColor="#ffcc52"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="180dp"
+                android:background="@drawable/background_pray_6"
+                android:layout_height="100dp"
+                android:layout_marginBottom="-10dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/shroq_azkar_6" />
+
+                <TextView
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="-9dp"
+                    android:id="@+id/tv_sun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/verdana_bold"
+                    android:gravity="center"
+                    android:text="5:12"
+                    android:textColor="#ffcc52"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="180dp"
+                android:background="@drawable/background_pray_6"
+                android:layout_height="100dp"
+                android:layout_marginBottom="-10dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/thahr_azkar_6" />
+
+                <TextView
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="-9dp"
+                    android:id="@+id/tv_thahr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/verdana_bold"
+                    android:gravity="center"
+                    android:text="5:12"
+                    android:textColor="#ffcc52"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="180dp"
+                android:background="@drawable/background_pray_6"
+                android:layout_height="100dp"
+                android:layout_marginBottom="-10dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/asr_azkar_6" />
+
+                <TextView
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="-9dp"
+                    android:id="@+id/tv_asr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/verdana_bold"
+                    android:gravity="center"
+                    android:text="5:12"
+                    android:textColor="#ffcc52"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="180dp"
+                android:background="@drawable/background_pray_6"
+                android:layout_height="100dp"
+                android:layout_marginBottom="-10dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/mgrb_azkar_6" />
+
+                <TextView
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="-9dp"
+                    android:id="@+id/tv_magrb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/verdana_bold"
+                    android:gravity="center"
+                    android:text="5:12"
+                    android:textColor="#ffcc52"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="180dp"
+                android:background="@drawable/background_pray_6"
+                android:layout_height="100dp"
+                android:layout_marginBottom="-10dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/isha_azkar_6" />
+
+                <TextView
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="-9dp"
+                    android:id="@+id/tv_isha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/verdana_bold"
+                    android:gravity="center"
+                    android:text="5:12"
+                    android:textColor="#ffcc52"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:id="@+id/img_bottom"
+            android:layout_width="600dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/background_buttom_main"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+            <!--        <ImageView-->
+            <!--            android:id="@+id/img_bottom"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginLeft="70dp"-->
+            <!--            android:layout_marginRight="70dp"-->
+            <!--            android:adjustViewBounds="true"-->
+            <!--            android:src="@drawable/background_buttom_main" />-->
+
+            <TextView
+                android:id="@+id/tv_masged_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/al_hurra_txtreg_bold"
+                android:gravity="center"
+                android:text="اسم المسجد "
+                android:textColor="#5B3104"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/background_day"
+        android:fontFamily="@font/khalid_art_bold"
+        android:gravity="center"
+        android:text="الأربعاء"
+        android:textColor="#213F19"
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

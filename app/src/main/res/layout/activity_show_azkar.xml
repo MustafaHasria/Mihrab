@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_azkar_show"
+    tools:context=".activity.ShowAzkarActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/background_day"
+                android:fontFamily="@font/khalid_art_bold"
+                android:gravity="center"
+                android:text="الأربعاء"
+                android:textColor="#213F19"
+                android:textSize="60sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:background="@drawable/background_time"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/century_gothic_bold"
+                    android:gravity="center"
+                    android:text="12:25"
+                    android:textColor="#C8E27F"
+                    android:textSize="95sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_time_sec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="7sp"
+                    android:fontFamily="@font/century_gothic_bold"
+                    android:gravity="bottom|center"
+                    android:text="25"
+                    android:textColor="#E0F9F3"
+                    android:textSize="55sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_data_hajre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_data"
+                    android:fontFamily="@font/century_gothic_bold"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:padding="3sp"
+                    android:singleLine="true"
+                    android:text="20 ذو القعدة 1440"
+                    android:textColor="@color/black"
+                    android:textSize="21sp" />
+
+                <TextView
+                    android:id="@+id/tv_data_melade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_data"
+                    android:fontFamily="@font/century_gothic_bold"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:padding="3sp"
+                    android:singleLine="true"
+                    android:text="12 فبراير 2020"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_pray_background"
+            android:layout_width="match_parent"
+            android:layout_height="250sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="20sp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/background_pray"
+                android:gravity="center|bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_isha_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:fontFamily="@font/khalid_art_bold"
+                    android:gravity="bottom|center"
+                    android:padding="5sp"
+                    android:text="العشاء"
+                    android:textColor="#1D4017"
+                    android:textSize="@dimen/azan_name_size_1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_isha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:fontFamily="@font/century_gothic_bold"
+                    android:gravity="bottom|center"
+                    android:padding="5sp"
+                    android:text="5:12"
+                    android:textColor="#0B1A02"
+                    android:textSize="@dimen/azan_name_size_1"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/background_pray"
+                android:gravity="center|bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_magrb_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:fontFamily="@font/khalid_art_bold"
+                    android:gravity="bottom|center"
+                    android:padding="5sp"
+                    android:text="المغرب"
+                    android:textColor="#1D4017"
+                    android:textSize="@dimen/azan_name_size_1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_magrb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:fontFamily="@font/century_gothic_bold"
+                    android:gravity="bottom|center"
+                    android:padding="5sp"
+                    android:text="5:12"
+                    android:textColor="#0B1A02"
+                    android:textSize="@dimen/azan_name_size_1"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/background_pray"
+                android:gravity="center|bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_asr_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:fontFamily="@font/khalid_art_bold"
+                    android:gravity="bottom|center"
+                    android:padding="5sp"
+                    android:text="العصر"
+                    android:textColor="#1D4017"
+                    android:textSize="@dimen/azan_name_size_1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_asr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:fontFamily="@font/century_gothic_bold"
+                    android:gravity="bottom|center"
+                    android:padding="5sp"
+                    android:text="5:12"
+                    android:textColor="#0B1A02"
+                    android:textSize="@dimen/azan_name_size_1"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/background_pray"
+                android:gravity="center|bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_thahr_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:fontFamily="@font/khalid_art_bold"
+                    android:gravity="bottom|center"
+                    android:padding="5sp"
+                    android:text="الظهر"
+                    android:textColor="#1D4017"
+                    android:textSize="@dimen/azan_name_size_1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_thahr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:fontFamily="@font/century_gothic_bold"
+                    android:gravity="bottom|center"
+                    android:padding="5sp"
+                    android:text="5:12"
+                    android:textColor="#0B1A02"
+                    android:textSize="@dimen/azan_name_size_1"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/background_pray"
+                android:gravity="center|bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_sun_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:fontFamily="@font/khalid_art_bold"
+                    android:gravity="bottom|center"
+                    android:padding="5sp"
+                    android:text="الشروق"
+                    android:textColor="#1D4017"
+                    android:textSize="@dimen/azan_name_size_1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_sun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:fontFamily="@font/century_gothic_bold"
+                    android:gravity="bottom|center"
+                    android:padding="5sp"
+                    android:text="5:12"
+                    android:textColor="#0B1A02"
+                    android:textSize="@dimen/azan_name_size_1"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/background_pray"
+                android:gravity="center|bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_fajet_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:fontFamily="@font/khalid_art_bold"
+                    android:gravity="bottom|center"
+                    android:padding="5sp"
+                    android:text="الفجر"
+                    android:textColor="#1D4017"
+                    android:textSize="@dimen/azan_name_size_1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_fajr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:fontFamily="@font/century_gothic_bold"
+                    android:gravity="bottom|center"
+                    android:padding="5sp"
+                    android:text="5:12"
+                    android:textColor="#0B1A02"
+                    android:textSize="@dimen/azan_name_size_1"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="170sp"
+            android:layout_marginTop="-10sp"
+            android:layout_marginRight="170sp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/background_azkar_word" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="75sp"
+            android:src="@drawable/azkar" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="15sp"-->
+<!--            android:layout_marginTop="15sp"-->
+<!--            android:layout_marginRight="15sp"-->
+<!--            android:fontFamily="@font/al_hurra_txtreg_bold"-->
+<!--            android:gravity="center"-->
+<!--            android:text="-->
+<!--أستغفر الله,أستغفر الله,أستغفر الله\n-->
+<!--اللهم أنت السلام ومنك السلام,تباركت يا ذا الجلال والإكرام-->
+<!--"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="450sp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:src="@drawable/azkar_fasl" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="15sp"-->
+<!--            android:layout_marginRight="15sp"-->
+<!--            android:fontFamily="@font/al_hurra_txtreg_bold"-->
+<!--            android:gravity="center"-->
+<!--            android:text="لا إله إلا الله وحده لا شريك له له الملك وله الحمد وهو على كل شيء قدير\n-->
+<!--اللهم لا مانع لما أعطيت ولا معطي لما منعت ولا ينفع ذا الجد منك الجد-->
+<!--"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="450sp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:src="@drawable/azkar_fasl" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_3"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="15sp"-->
+<!--            android:layout_marginRight="15sp"-->
+<!--            android:fontFamily="@font/al_hurra_txtreg_bold"-->
+<!--            android:gravity="center"-->
+<!--            android:text="لا حول ولا قوة إلا بالله,لا إله إلا الله, ولا نعبد إلا إياه, له النعمة وله الفضل\n-->
+<!--وله الثناء الحسن, لا إله إلا الله مخلصين له الدين ولو كره الكافرون"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="450sp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:src="@drawable/azkar_fasl" />-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginLeft="15sp"-->
+<!--            android:layout_marginRight="15sp"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_4"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/century_gothic_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:text=" ,[33] "-->
+<!--                android:textColor="@color/azkar_color_naumber"-->
+<!--                android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_5"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/al_hurra_txtreg_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:text="والله أكبر"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_6"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/century_gothic_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:text=" ,[33] "-->
+<!--                android:textColor="@color/azkar_color_naumber"-->
+<!--                android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_7"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/al_hurra_txtreg_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:text="والحمد لله"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_8"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/century_gothic_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:text=" ,[33] "-->
+<!--                android:textColor="@color/azkar_color_naumber"-->
+<!--                android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_9"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/al_hurra_txtreg_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:text="سبحان الله"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginLeft="15sp"-->
+<!--            android:layout_marginRight="15sp"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_10"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/al_hurra_txtreg_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:text="لا إله إلا الله وحده لا شريك له, له الملك وله الحمد"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_11"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/al_hurra_txtreg_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:text="يحيى ويميت وهو على كل شيئ قدير"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="@dimen/azkar_show_text_size" />-->
+
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_12"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/century_gothic_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:text=" ,[عشر مرات بعد صلاة المفرب والصبح]"-->
+<!--                android:textColor="@color/azkar_color_naumber"-->
+<!--                android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="450sp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:src="@drawable/azkar_fasl" />-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginLeft="15sp"-->
+<!--            android:layout_marginRight="15sp"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_13"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/al_hurra_txtreg_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:text="ثم يقرأ آية الكرسي (الله لا إله إلا هو الحي القيوم)"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal">-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_14"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/century_gothic_bold"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text=" [255"-->
+<!--                    android:textColor="@color/azkar_color_naumber"-->
+<!--                    android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_15"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/al_hurra_txtreg_bold"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="البقرة - "-->
+<!--                    android:textColor="@color/azkar_color_naumber"-->
+<!--                    android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_16"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/century_gothic_bold"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="]"-->
+<!--                    android:textColor="@color/azkar_color_naumber"-->
+<!--                    android:textSize="@dimen/azkar_show_text_size" />-->
+
+
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="450sp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:src="@drawable/azkar_fasl" />-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginLeft="15sp"-->
+<!--            android:layout_marginRight="15sp"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_17"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/al_hurra_txtreg_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:text="يقرأ سورة إلاخلاص والفلق والناس مرة واحدة"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_18"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/al_hurra_txtreg_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:text="عدا صلاتي الفجر والمفرب ثلاث مرات"-->
+<!--                android:textColor="@color/azkar_color_naumber"-->
+<!--                android:textSize="@dimen/azkar_show_text_size" />-->
+
+<!--        </LinearLayout>-->
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_masged_name"
+        android:layout_width="wrap_content"
+        android:layout_height="70sp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="100sp"
+        android:layout_marginRight="100sp"
+        android:layout_marginBottom="10sp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/background_masgd_name"
+        android:fontFamily="@font/khalid_art_bold"
+        android:gravity="center"
+        android:paddingTop="5sp"
+        android:text="@string/app_name"
+        android:textColor="#ffffff"
+        android:textSize="45sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

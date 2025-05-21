@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background_thme_10_v"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:keepScreenOn="true"
+    android:screenOrientation="landscape">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="270dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_alkhushue_aza_10">
+
+                <ImageView
+                    android:id="@+id/img_phone_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:adjustViewBounds="true"
+                    android:padding="5dp"
+                    android:src="@drawable/img_azan_1_8"
+                    app:tint="#D4E0E1" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="50dp"
+                    android:fontFamily="@font/al_hurra_txtreg_bold"
+                    android:gravity="center"
+                    android:text="تليها محاضرة"
+                    android:textColor="#1F4851"
+                    android:textSize="65sp" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="500dp"
+                android:layout_height="120dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/ic_time_theme_10"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:paddingTop="12dp"
+                android:paddingRight="40dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/img_time_hour_1"
+                    android:layout_width="70sp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_number_time_thme_8_1" />
+
+                <ImageView
+                    android:id="@+id/img_time_hour_2"
+                    android:layout_width="70sp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_number_time_thme_8_0" />
+
+                <ImageView
+                    android:layout_width="35sp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_number_time_thme_8__"
+                    android:tint="#FFFFFF"
+                    tools:ignore="UseAppTint" />
+
+                <ImageView
+                    android:id="@+id/img_time_mint_1"
+                    android:layout_width="70sp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_number_time_thme_8_5" />
+
+                <ImageView
+                    android:id="@+id/img_time_mint_2"
+                    android:layout_width="70sp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_number_time_thme_8_2" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="55dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="-5dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/img_time_sec_1"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_number_time_thme_8_3" />
+
+                    <ImageView
+                        android:id="@+id/img_time_sec_2"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_number_time_thme_8_1" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_date_day"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="70dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/icon_sun_8" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginLeft="80dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:id="@+id/linear_date1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="50dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/img_date_years_h_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true" />
+
+                    <ImageView
+                        android:id="@+id/img_date_years_h_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true" />
+
+                    <ImageView
+                        android:id="@+id/img_date_years_h_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true" />
+
+                    <ImageView
+                        android:id="@+id/img_date_years_h_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true" />
+
+                    <ImageView
+                        android:id="@+id/img_date_month_h"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true" />
+
+                    <ImageView
+                        android:id="@+id/img_date_month_h_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true" />
+
+                    <ImageView
+                        android:id="@+id/img_date_month_h_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_date2"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:id="@+id/img_date_years_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" />
+
+                <ImageView
+                    android:id="@+id/img_date_years_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" />
+
+                <ImageView
+                    android:id="@+id/img_date_years_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" />
+
+                <ImageView
+                    android:id="@+id/img_date_years_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" />
+
+                <ImageView
+                    android:id="@+id/img_date_month_m"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" />
+
+                <ImageView
+                    android:id="@+id/img_date_month_m_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" />
+
+                <ImageView
+                    android:id="@+id/img_date_month_m_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" />
+
+
+                <!--            <ImageView-->
+                <!--                android:id="@+id/img_date_day"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginLeft="5dp"-->
+                <!--                android:adjustViewBounds="true" />-->
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_fasel_theme_8"
+                app:tint="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/lay_sin"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center|right"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_internal_heat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginRight="25dp"
+                    android:gravity="center"
+                    android:text="--"
+                    android:textColor="#D61919"
+                    android:textSize="60sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_sinser_7" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:id="@+id/img_bottom"
+                    android:layout_width="450dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/background_buttom_main_10"
+                    android:gravity="right"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+                    <!--        <ImageView-->
+                    <!--            android:id="@+id/img_bottom"-->
+                    <!--            android:layout_width="wrap_content"-->
+                    <!--            android:layout_height="wrap_content"-->
+                    <!--            android:layout_marginLeft="70dp"-->
+                    <!--            android:layout_marginRight="70dp"-->
+                    <!--            android:adjustViewBounds="true"-->
+                    <!--            android:src="@drawable/background_buttom_main" />-->
+
+                    <TextView
+                        android:id="@+id/tv_masged_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="13dp"
+                        android:fontFamily="@font/khalid_art_bold"
+                        android:gravity="center"
+                        android:text="اسم المسجد "
+                        android:textColor="#233038"
+                        android:textSize="34sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

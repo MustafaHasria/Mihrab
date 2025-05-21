@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:layoutDirection="rtl"
+    android:orientation="vertical"
+    android:padding="@dimen/padding"
+    android:textDirection="rtl">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_start"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="تاريخ الجمعة"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/et_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:drawableRight="@drawable/ic_date_range_black_24dp"
+                    android:drawablePadding="5dp"
+                    android:focusable="false"
+                    android:hint="ادخل التاريخ"
+                    android:inputType="date"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/lb_grey"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_tittle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="عنوان الخطبة"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/et_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="ادخل العنوان"
+                    android:padding="10dp"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/lb_grey"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="نص الخطبة"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/et_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:visibility="gone"
+                    android:hint="ادخل النص"
+                    android:padding="10dp"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/lb_grey"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="أدخل مدة ظهور شاشة الخطبة"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/et_show_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ادخل عدد الدقائق"
+                    android:padding="10dp"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/lb_grey"
+                    android:inputType="number"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="رابط لغة الاشارة"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/adan_soundF"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="اختر فيديو من ملف التحميلات"
+                        android:textSize="@dimen/spinner_text_size"/>
+
+                    <CheckBox
+                        android:id="@+id/cb_chose_video"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|right" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/et_video_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="ادخل الرابط"
+                    android:padding="10dp"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/lb_grey"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="ادخل وقت مزامة الترجمة في الظهور لكل سطرين"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+            <EditText
+                android:id="@+id/et_text_show_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ادخل عدد الثواني"
+                android:padding="10dp"
+                android:textColor="@color/black_light"
+                android:textColorHint="@color/lb_grey"
+                android:inputType="number"
+                android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="ترجمة إنجليزية"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="عنوان الخطبة"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/et_title3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="ادخل العنوان"
+                    android:padding="10dp"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/lb_grey"
+                    android:textSize="@dimen/spinner_text_size"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="نص الخطبة"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/et_body3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="ادخل النص"
+                    android:padding="10dp"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/lb_grey"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text=" ترجمة أوردو "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="عنوان الخطبة"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/et_title1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="ادخل العنوان"
+                    android:padding="10dp"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/lb_grey"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="نص الخطبة"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/et_body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="ادخل النص"
+                    android:padding="10dp"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/lb_grey"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="ترجمة بنغالي "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="عنوان الخطبة"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/et_title2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="ادخل العنوان"
+                    android:padding="10dp"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/lb_grey"
+                    android:textSize="@dimen/spinner_text_size"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="نص الخطبة"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/et_body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="ادخل النص"
+                    android:padding="10dp"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/lb_grey"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_add"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/back_text"
+                    android:text="@string/add"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/spinner_text_size" />
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/back_text"
+                    android:text="@string/cancel_delete"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/spinner_text_size" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

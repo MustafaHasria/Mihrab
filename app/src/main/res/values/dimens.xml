@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="row_margin_top">2dp</dimen>
+
+    <dimen name="spinner_text_size">22sp</dimen>
+    <dimen name="azkar_text_size">28sp</dimen>
+    <dimen name="azkar_pray_size">150dp</dimen>
+    <dimen name="padding">10dp</dimen>
+    <dimen name="textSize">22dp</dimen>
+    <dimen name="azan_name_size_1">40sp</dimen>
+    <dimen name="smallPadding">15dp</dimen>
+    <dimen name="height_media">400dp</dimen>
+    <dimen name="small_font_size">18sp</dimen>
+    <dimen name="azkar_show_text_size">27sp</dimen>
+    <dimen name="margin_top">5dp</dimen>
+    <dimen name="pading_number_text">8dp</dimen>
+    <dimen name="pading_name_text">-10dp</dimen>
+    <dimen name="fasel_size">40dp</dimen>
+    <dimen name="margin_azan_number">55dp</dimen>
+    <dimen name="pading_number_time">4dp</dimen>
+    <dimen name="card_size_azan_1">190dp</dimen>
+    <dimen name="time_box_2">120dp</dimen>
+
+
+</resources>

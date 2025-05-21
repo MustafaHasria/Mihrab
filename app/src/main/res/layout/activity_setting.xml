@@ -1,0 +1,873 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_betarry"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:id="@+id/tv_battery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_battery"
+                android:gravity="center"
+                android:text="اختر المدينة لتحديد اوقات الصلاة"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/azkar_text_size"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_sinser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/adan_soundF"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/light_black"
+                    android:gravity="center_vertical"
+                    android:text="اظهار درجة الحرارة واخفاء وقت صلاة الجمعة"
+                    android:textSize="@dimen/spinner_text_size" />
+
+                <CheckBox
+                    android:id="@+id/cb_sinser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_them"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:entries="@array/city_them"
+                    android:gravity="center"
+                    android:spinnerMode="dialog"
+                    android:textColor="@color/light_black"
+                    android:theme="@style/mySpinnerItemStyle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="اختر التصميم المطلوب"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_city"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:entries="@array/city_name"
+                    android:gravity="center"
+                    android:spinnerMode="dialog"
+                    android:textColor="@color/light_black"
+                    android:theme="@style/mySpinnerItemStyle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="اختر المدينة لتحديد اوقات الصلاة"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_save_masged"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="حفظ"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size" />
+
+                <EditText
+                    android:id="@+id/et_masged_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:hint="ادخل اسم المسجد"
+                    android:maxLines="1"
+                    android:textSize="@dimen/spinner_text_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:text="اسم المسجد : "
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:layout_margin="8dp"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content">-->
+
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/ll_azkar"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:clickable="true"-->
+        <!--                android:orientation="vertical"-->
+        <!--                android:padding="10dp">-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tvAzkar"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_gravity="center_vertical"-->
+        <!--                    android:layout_marginLeft="20dp"-->
+        <!--                    android:layout_marginRight="20dp"-->
+        <!--                    android:text="@string/azkar"-->
+        <!--                    android:textColor="@color/light_black"-->
+        <!--                    android:textSize="@dimen/spinner_text_size" />-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tvAzkarHint"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginLeft="20dp"-->
+        <!--                    android:layout_marginRight="20dp"-->
+        <!--                    android:text="@string/azkar_settings"-->
+        <!--                    android:textColor="#c0c0c0"-->
+        <!--                    android:textSize="@dimen/spinner_text_size" />-->
+        <!--            </LinearLayout>-->
+
+        <!--        </androidx.cardview.widget.CardView>-->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_iqama_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:id="@+id/tvIqamaSet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="right"
+                android:padding="15dp"
+                android:text="تحديد زمن الإقامات "
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/spinner_text_size" />
+
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:orientation="vertical">-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="horizontal">-->
+
+            <!--                    <android.support.v7.widget.AppCompatSpinner-->
+            <!--                        android:id="@+id/spinner_number_fajr"-->
+            <!--                        style="@style/Widget.AppCompat.Spinner.Underlined"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:entries="@array/number_array"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:spinnerMode="dialog"-->
+            <!--                        android:textSize="40dp"-->
+            <!--                        android:theme="@style/mySpinnerItemStyle" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:layout_weight="1"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:text="أختر فترة اقامة صلاة الفجر"-->
+            <!--                        android:textSize="@dimen/spinner_text_size"-->
+            <!--                        android:textStyle="bold" />-->
+
+            <!--                </LinearLayout>-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="horizontal">-->
+
+            <!--                    <android.support.v7.widget.AppCompatSpinner-->
+            <!--                        android:id="@+id/spinner_number_sunrise"-->
+            <!--                        style="@style/Widget.AppCompat.Spinner.Underlined"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:entries="@array/number_array"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:spinnerMode="dialog"-->
+            <!--                        android:theme="@style/mySpinnerItemStyle" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:layout_weight="1"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:text="أختر فترة اقامة صلاة الضحى"-->
+            <!--                        android:textSize="@dimen/spinner_text_size"-->
+            <!--                        android:textStyle="bold" />-->
+
+            <!--                </LinearLayout>-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="horizontal">-->
+
+            <!--                    <android.support.v7.widget.AppCompatSpinner-->
+            <!--                        android:id="@+id/spinner_number_dhohr"-->
+            <!--                        style="@style/Widget.AppCompat.Spinner.Underlined"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:entries="@array/number_array"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:spinnerMode="dialog"-->
+            <!--                        android:theme="@style/mySpinnerItemStyle" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:layout_weight="1"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:text="أختر فترة اقامة صلاة الظهر"-->
+            <!--                        android:textSize="@dimen/spinner_text_size"-->
+            <!--                        android:textStyle="bold" />-->
+
+            <!--                </LinearLayout>-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="horizontal">-->
+
+            <!--                    <android.support.v7.widget.AppCompatSpinner-->
+            <!--                        android:id="@+id/spinner_number_asr"-->
+            <!--                        style="@style/Widget.AppCompat.Spinner.Underlined"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:entries="@array/number_array"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:spinnerMode="dialog"-->
+            <!--                        android:theme="@style/mySpinnerItemStyle" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:layout_weight="1"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:text="أختر فترة اقامة صلاة العصر"-->
+            <!--                        android:textSize="@dimen/spinner_text_size"-->
+            <!--                        android:textStyle="bold" />-->
+
+            <!--                </LinearLayout>-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="horizontal">-->
+
+            <!--                    <android.support.v7.widget.AppCompatSpinner-->
+            <!--                        android:id="@+id/spinner_number_maghrib"-->
+            <!--                        style="@style/Widget.AppCompat.Spinner.Underlined"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:entries="@array/number_array"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:spinnerMode="dialog"-->
+            <!--                        android:theme="@style/mySpinnerItemStyle" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:layout_weight="1"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:text="أختر فترة اقامة صلاة المغرب"-->
+            <!--                        android:textSize="@dimen/spinner_text_size"-->
+            <!--                        android:textStyle="bold" />-->
+
+            <!--                </LinearLayout>-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="horizontal">-->
+
+            <!--                    <android.support.v7.widget.AppCompatSpinner-->
+            <!--                        android:id="@+id/spinner_number_isha"-->
+            <!--                        style="@style/Widget.AppCompat.Spinner.Underlined"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:entries="@array/number_array"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:spinnerMode="dialog"-->
+            <!--                        android:theme="@style/mySpinnerItemStyle" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:layout_weight="1"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:text="أختر فترة اقامة صلاة العشاء"-->
+            <!--                        android:textSize="@dimen/spinner_text_size"-->
+            <!--                        android:textStyle="bold" />-->
+
+            <!--                </LinearLayout>-->
+
+            <!--            </LinearLayout>-->
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_NewAds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tvNewAds"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/advertisement"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size" />
+
+                <TextView
+                    android:id="@+id/tvNewAdsHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/NewAds_settings"
+                    android:textColor="#c0c0c0"
+                    android:textSize="@dimen/spinner_text_size" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_close_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tvClosePhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/text_close_phone"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_adv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tvNews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/adv"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size" />
+
+                <TextView
+                    android:id="@+id/tv7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/adv_settings"
+                    android:textColor="#c0c0c0"
+                    android:textSize="@dimen/spinner_text_size" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_kateb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tv_kateb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/kateb_setting_1"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_kateb_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tv_kateb_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/kateb_setting"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_alkhushue_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tv_alkhushue_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/alkhushue_settings"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_azkar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tvAzkar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="اعدادات شاشة الاذكار"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_sound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/sound_settings"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvHijriSet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="@string/hijriSet"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toLeftOf="@+id/tvHijriSet"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:id="@+id/edHijriSet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/iv"
+                            android:focusable="false"
+                            android:gravity="center"
+                            android:minWidth="100dp"
+                            android:padding="15dp"
+                            android:singleLine="true"
+                            android:text="لا يوجد فرق"
+                            android:textColor="@color/black_light"
+                            android:textColorHint="@color/lb_grey"
+                            android:textSize="@dimen/spinner_text_size" />
+
+                        <ImageView
+                            android:id="@+id/iv"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_arrow_drop_down_black_24dp" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:background="@color/lb_grey" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvHijriSet1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="@string/hijriSet1"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/spinner_text_size" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toLeftOf="@+id/tvHijriSet1"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <EditText
+                            android:id="@+id/edHijriSet1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:hint="اضافت عدد ايام ثابتة على الشهر"
+                            android:minWidth="100dp"
+                            android:padding="15dp"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:textColor="@color/black_light"
+                            android:textColorHint="@color/lb_grey"
+                            android:textSize="@dimen/spinner_text_size" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:background="@color/lb_grey" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnSaveHijri"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/back_text"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textSize="17dp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:padding="10dp"
+            android:layout_marginEnd="20sp"
+            android:layout_marginStart="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="تفعيل احجام شاشات box 2"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/spinner_text_size"
+            android:checked="false"
+            android:textColor="@color/light_black"
+            android:id="@+id/box_2" />
+
+        <androidx.cardview.widget.CardView
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/card_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="عن التطبيق"
+                    android:textColor="@color/light_black"
+                    android:textSize="22sp" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/card_sing_out"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="تسجيل الخروج"
+                    android:textColor="@color/light_black"
+                    android:textSize="22sp" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -2,13 +2,14 @@
 buildscript {
     repositories {
         google()
-       // jcenter()
+        // jcenter()
         mavenLocal()
         mavenCentral()
         maven {
             url 'https://maven.google.com/'
             name 'Google'
         }
+        maven { url 'https://jitpack.io' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.2.1'
@@ -20,20 +21,20 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        jcenter()
-        maven {
-            url "https://jitpack.io"
-        }
-        mavenLocal()
-        mavenCentral()
-        maven {
-            url 'https://maven.google.com/'
-            name 'Google'
-        }
-    }
-}
+//allprojects {
+//    repositories {
+//        jcenter()
+//        maven {
+//            url "https://jitpack.io"
+//        }
+//        mavenLocal()
+//        mavenCentral()
+//        maven {
+//            url 'https://maven.google.com/'
+//            name 'Google'
+//        }
+//    }
+//}
 
 task clean(type: Delete) {
     delete rootProject.buildDir

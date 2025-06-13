@@ -197,6 +197,7 @@ public class SplashActivity extends AppCompatActivity {
 
                     boolean check = Pref.getValue(SplashActivity.this,Constants.PREF_IS_USER_LOGIN, false);
                     Intent intent;
+                    check = true;
                     if (check) {
                         intent = new Intent(SplashActivity.this, MainActivity.class);
                     } else {

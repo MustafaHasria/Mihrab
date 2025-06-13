@@ -108,13 +108,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void login() {
         progress.setVisibility(View.VISIBLE);
         layout.setVisibility(View.GONE);
-        mAuth.signInWithEmailAndPassword(edUserName.getText().toString().trim(),
-                edPassword.getText().toString().trim())
+        String email = edUserName.getText().toString().trim();
+        String password = edPassword.getText().toString().trim();
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+                            // Sign in success, update UI with the signed-in
+                            //
+                            // user's information
                             Log.d("XXX", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 

@@ -1,8 +1,9 @@
 {
   "project_info": {
     "project_number": "630884120123",
+    "firebase_url": "https://mihrab-259e4-default-rtdb.firebaseio.com",
     "project_id": "mihrab-259e4",
-    "storage_bucket": "mihrab-259e4.appspot.com"
+    "storage_bucket": "mihrab-259e4.firebasestorage.app"
   },
   "client": [
     {
@@ -12,12 +13,7 @@
           "package_name": "com.izzedineeita.mihrab"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "630884120123-c88ichbh77dipd0990t3p5ric2cbn63c.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
           "current_key": "AIzaSyDUBqx5hu_KmLbkRj-iznBmP3BD02YzJGs"
@@ -25,12 +21,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "630884120123-c88ichbh77dipd0990t3p5ric2cbn63c.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

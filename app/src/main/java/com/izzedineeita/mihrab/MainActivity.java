@@ -531,7 +531,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     startActivity(new Intent(MainActivity.this, SettingActivity.class));
                 } catch (Exception e) {
-                    Log.e("XXX2", e.getMessage());
+
                 }
             }
         });
@@ -698,10 +698,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 tv.setText(text);
                 isTextNewsShow = true;
-                Log.e("XXXyy", "true");
+
             } else {
 
-                Log.e("XXXyy", "false");
+
             }
         } else {
             img_bottom.setVisibility(View.VISIBLE);
@@ -997,7 +997,7 @@ public class MainActivity extends AppCompatActivity {
                 d1 = h_mm_a.parse(date2323);
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.e("XXX", e.getLocalizedMessage());
+
             }
             thuhr = getMilliseconds((hh_mm_ss.format(d1)));
 
@@ -1133,7 +1133,6 @@ public class MainActivity extends AppCompatActivity {
             } else {
 
 
-                Log.e("XXX11", "" + theme);
                 switch (theme) {
 
                     case 3:
@@ -1566,7 +1565,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 } catch (Exception e) {
-                    Log.e("XXX4", e.getLocalizedMessage());
+
                 }
             }
         }
@@ -1583,7 +1582,7 @@ public class MainActivity extends AppCompatActivity {
             String dateString = formatter.format(new Date(timeInMilliseconds + minutes));
             return dateString;
         } catch (ParseException e) {
-            Log.e("XXX5", e.getLocalizedMessage());
+
 
             e.printStackTrace();
             return null;
@@ -1597,7 +1596,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             mDate = formatter.parse(String.valueOf(azanTime));
         } catch (ParseException e) {
-            Log.e("XXX6", e.getLocalizedMessage());
+
             e.printStackTrace();
         }
         return mDate.getTime();
@@ -1614,7 +1613,7 @@ public class MainActivity extends AppCompatActivity {
             mDate = formatter.parse(String.valueOf(azanTime));
             mDate1 = formatter1.parse(String.valueOf(iqamhTIme));
         } catch (ParseException e) {
-            Log.e("XXX7", e.getLocalizedMessage());
+
             e.printStackTrace();
         }
         return mDate1.getTime() - mDate.getTime();
@@ -1692,7 +1691,7 @@ public class MainActivity extends AppCompatActivity {
         if (s.equals("0") && s0.equals("0") && s1.equals("0") && s2.equals("1") && s3.equals("0") && s4.equals("0")) {
             switch (check) {
                 case 1:
-                    Log.e("ZXZXZ", "FFFF");
+
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_AZAN, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_AZAN_PATH, null) != null) {
                             if (!mp.isPlaying()) {
@@ -1704,7 +1703,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case 3:
-                    Log.e("ZXZXZ", "ththth");
+
 
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_AZAN, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_AZAN_PATH, null) != null) {
@@ -1720,7 +1719,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case 4:
-                    Log.e("ZXZXZ", "ASR");
+
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_AZAN, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_AZAN_PATH, null) != null) {
                             if (!mp.isPlaying()) {
@@ -1732,7 +1731,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case 5:
-                    Log.e("ZXZXZ", "MG");
+
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_AZAN, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_AZAN_PATH, null) != null) {
                             if (!mp.isPlaying()) {
@@ -1744,7 +1743,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case 6:
-                    Log.e("ZXZXZ", "IS");
+
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_AZAN, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_AZAN_PATH, null) != null) {
                             if (!mp.isPlaying()) {
@@ -1766,7 +1765,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (seconds == millis1) {
                 if (Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true)) {
-                    Log.e("XXX13", "true !!!!" + check);
+
                     if (!isOpenClosePhone) {
                         Intent intent = new Intent(MainActivity.this, ShowClosePhoneActivity.class);
                         intent.putExtra("PRAY", check);
@@ -1775,7 +1774,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             } else {
-                Log.e("XXX13", "not !!!!" + check);
+
 
             }
         }
@@ -1951,7 +1950,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(cp);
                     isOpenKhotabActivity = true;
                 } else {
-                    Log.e("SSS", "else");
+
                 }
             }
         } else {
@@ -1964,21 +1963,21 @@ public class MainActivity extends AppCompatActivity {
 
 
             if (seconds >= millis1) {
-                Log.e("XXX14", "true !!!!" + check);
+
 
                 if (Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true)) {
-                    Log.e("XXX13", "true !!!!" + check);
+
                     if (!isOpenClosePhone) {
-                        Log.e("XXX14", "true !!!!" + check);
+
                         Intent intent = new Intent(MainActivity.this, ShowClosePhoneActivity.class);
                         intent.putExtra("PRAY", check);
                         startActivity(intent);
                         isOpenClosePhone = true;
-                        Log.e("PRAY1", "true !!!!" + check);
+
                     }
                 }
             } else {
-                Log.e("XXX13", "xxx !!!!" + check);
+
 
             }
 
@@ -1991,26 +1990,26 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (millis1 <= 1000) {
-            Log.e("XXX1", "true !!!!" + check);
+
             if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY && check != 3) {
-                Log.e("XXX2", "true !!!!" + check);
+
                 boolean b = checkStartAlkhushue(check);
-                Log.e("XXXXX", "" + Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true));
+
                 if (!Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true)) {
-                    Log.e("XXX3", "true !!!!" + check);
+
 
                     if (b) {
-                        Log.e("XXX4", "true !!!!" + check);
+
                         if (!isOpenAlkhushuePhone) {
-                            Log.e("XXX5", "true !!!!" + check);
+
                             Intent intent = new Intent(MainActivity.this, ShowAlkhushueActivity.class);
                             intent.putExtra("PRAY", check);
                             startActivity(intent);
-                            Log.e("PRAY1", "true !!!!" + check);
+
                             isOpenAlkhushuePhone = true;
                         }
                     } else {
-                        Log.e("XXX6", "true !!!!" + check);
+
                         if (!isOpenAzkarPhone) {
                             startAzkarScreen(check);
                             isOpenAzkarPhone = true;
@@ -2022,7 +2021,6 @@ public class MainActivity extends AppCompatActivity {
 
             switch (check) {
                 case 1:
-                    Log.e("ZXZXZ", "ASAS");
 
 
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_IQAMAH, false)) {
@@ -2040,7 +2038,6 @@ public class MainActivity extends AppCompatActivity {
                 case 3:
 
 
-                    Log.e("ZXZXZ", "ASAS4");
                     if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY && check != 3) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_IQAMAH, false)) {
                             if (Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_IQAMAH_PATH, null) != null) {
@@ -2056,7 +2053,6 @@ public class MainActivity extends AppCompatActivity {
                 case 4:
 
 
-                    Log.e("ZXZXZ", "ASAS1");
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH_PATH, null) != null) {
                             if (!mp.isPlaying()) {
@@ -2070,7 +2066,6 @@ public class MainActivity extends AppCompatActivity {
                 case 5:
 
 
-                    Log.e("ZXZXZ", "ASAS2");
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH_PATH, null) != null) {
                             if (!mp.isPlaying()) {
@@ -2084,7 +2079,6 @@ public class MainActivity extends AppCompatActivity {
                 case 6:
 
 
-                    Log.e("ZXZXZ", "ASAS3");
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_IQAMAH, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_IQAMAH_PATH, null) != null) {
                             if (!mp.isPlaying()) {
@@ -2177,7 +2171,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
             System.out.println("FRIDAY!");
-            Log.e("XXX", "FRIDAY!!");
+
         }
 
 
@@ -2198,7 +2192,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void play(String path) {
-        Log.e("ZXZXZ", "play");
 
 
         if (path.startsWith("/document/raw:")) {
@@ -2217,19 +2210,19 @@ public class MainActivity extends AppCompatActivity {
         } catch (IllegalArgumentException e) {
 
             e.printStackTrace();
-            Log.e("XXX4", e.getLocalizedMessage());
+
         } catch (SecurityException e) {
 
             e.printStackTrace();
-            Log.e("XXX4", e.getLocalizedMessage());
+
         } catch (IllegalStateException e) {
 
             e.printStackTrace();
-            Log.e("XXX4", e.getLocalizedMessage());
+
         } catch (IOException e) {
 
             e.printStackTrace();
-            Log.e("XXX4", e.getLocalizedMessage());
+
         }
     }
 
@@ -2293,7 +2286,6 @@ public class MainActivity extends AppCompatActivity {
         mMtCentralManager.setMTCentralManagerListener(new MTCentralManagerListener() {
             @Override
             public void onScanedPeripheral(final List<MTPeripheral> peripherals) {
-                Log.e("demo11", "scan size is: " + peripherals.size());
 
 
                 for (MTPeripheral mtPeripheral : peripherals) {
@@ -2376,54 +2368,54 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     switch (connectionStatus) {
                         case CONNECTING:
-                            Log.e("tag", "CONNECTING");
+
                             Toast.makeText(MainActivity.this, "CONNECTING", Toast.LENGTH_SHORT).show();
                             break;
                         case CONNECTED:
-                            Log.e("tag", "CONNECTED");
+
                             Toast.makeText(MainActivity.this, "CONNECTED", Toast.LENGTH_SHORT).show();
                             break;
                         case READINGINFO:
-                            Log.e("tag", "READINGINFO");
+
                             Toast.makeText(MainActivity.this, "READINGINFO", Toast.LENGTH_SHORT).show();
                             break;
                         case DEVICEVALIDATING:
-                            Log.e("tag", "DEVICEVALIDATING");
+
                             Toast.makeText(MainActivity.this, "DEVICEVALIDATING", Toast.LENGTH_SHORT).show();
                             break;
                         case PASSWORDVALIDATING:
-                            Log.e("tag", "PASSWORDVALIDATING");
+
                             Toast.makeText(MainActivity.this, "PASSWORDVALIDATING", Toast.LENGTH_SHORT).show();
                             String password = "minew123";
                             getPasswordListener.getPassword(password);
                             break;
                         case SYNCHRONIZINGTIME:
-                            Log.e("tag", "SYNCHRONIZINGTIME");
+
                             Toast.makeText(MainActivity.this, "SYNCHRONIZINGTIME", Toast.LENGTH_SHORT).show();
                             break;
                         case READINGCONNECTABLE:
-                            Log.e("tag", "READINGCONNECTABLE");
+
                             Toast.makeText(MainActivity.this, "READINGCONNECTABLE", Toast.LENGTH_SHORT).show();
                             break;
                         case READINGFEATURE:
-                            Log.e("tag", "READINGFEATURE");
+
                             Toast.makeText(MainActivity.this, "READINGFEATURE", Toast.LENGTH_SHORT).show();
                             break;
                         case READINGFRAMES:
-                            Log.e("tag", "READINGFRAMES");
+
                             Toast.makeText(MainActivity.this, "READINGFRAMES", Toast.LENGTH_SHORT).show();
                             break;
                         case READINGTRIGGERS:
-                            Log.e("tag", "READINGTRIGGERS");
+
                             Toast.makeText(MainActivity.this, "READINGTRIGGERS", Toast.LENGTH_SHORT).show();
                             break;
                         case COMPLETED:
-                            Log.e("tag", "COMPLETED");
+
                             Toast.makeText(MainActivity.this, "COMPLETED", Toast.LENGTH_SHORT).show();
                             break;
                         case CONNECTFAILED:
                         case DISCONNECTED:
-                            Log.e("tag", "DISCONNECTED");
+
                             Toast.makeText(MainActivity.this, "DISCONNECTED", Toast.LENGTH_SHORT).show();
                             break;
                     }
@@ -2434,7 +2426,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onError(MTException e) {
-            Log.e("tag", e.getMessage());
+
         }
     };
 
@@ -2446,13 +2438,13 @@ public class MainActivity extends AppCompatActivity {
         BluetoothState bluetoothState = mMtCentralManager.getBluetoothState(this);
         switch (bluetoothState) {
             case BluetoothStateNotSupported:
-                Log.e("tag", "BluetoothStateNotSupported");
+
                 break;
             case BluetoothStatePowerOff:
-                Log.e("tag", "BluetoothStatePowerOff");
+
                 break;
             case BluetoothStatePowerOn:
-                Log.e("tag", "BluetoothStatePowerOn");
+
                 break;
         }
 
@@ -2461,13 +2453,8 @@ public class MainActivity extends AppCompatActivity {
             public void onStateChanged(BluetoothState state) {
                 switch (state) {
                     case BluetoothStateNotSupported:
-                        Log.e("tag", "BluetoothStateNotSupported");
-                        break;
                     case BluetoothStatePowerOff:
-                        Log.e("tag", "BluetoothStatePowerOff");
-                        break;
                     case BluetoothStatePowerOn:
-                        Log.e("tag", "BluetoothStatePowerOn");
                         break;
                 }
             }

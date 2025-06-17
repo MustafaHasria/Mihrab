@@ -258,21 +258,6 @@ public class ClosePhoneSettingActivity extends AppCompatActivity implements View
         });
 
         //  Notification Screen Settings
-//        llCloseNotifScreen.setOnClickListener(v -> {
-//            if (cbCloseNotifScreen.isChecked()) {
-//                Pref.setValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SCREEN, false);
-//                Pref.setValue(activity, "close_voice", false);
-//                view.setVisibility(View.GONE);
-//                cbCloseNotifSound.setChecked(false);
-//                llCloseNotifSound.setVisibility(View.GONE);
-//                cbCloseNotifScreen.setChecked(false);
-//            } else {
-//                cbCloseNotifScreen.setChecked(true);
-//                view.setVisibility(View.VISIBLE);
-//                llCloseNotifSound.setVisibility(View.VISIBLE);
-//                Pref.setValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true);
-//            }
-//        });
         cbCloseNotifScreen.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (cbCloseNotifScreen.isChecked()) {
                 Pref.setValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true);
@@ -284,11 +269,8 @@ public class ClosePhoneSettingActivity extends AppCompatActivity implements View
                 cbCloseNotifSound.setChecked(false);
                 llCloseNotifSound.setVisibility(View.GONE);
                 view.setVisibility(View.GONE);
-
             }
         });
-
-
     }
 
     private void fillData() {
@@ -348,21 +330,6 @@ public class ClosePhoneSettingActivity extends AppCompatActivity implements View
     @Override
     public void onClick(View v) {
         if (v == btnSave) {
-            // Handle clicks for btnSave
-//            settings.setPhoneAlertsArabic(TextUtils.isEmpty(edArNotif.getText().toString().trim()) ? settings.getPhoneAlertsArabic()
-//                    : (edArNotif.getText().toString().trim()));
-//            settings.setPhoneAlertsEnglish(TextUtils.isEmpty(edEnNotif.getText().toString().trim()) ? settings.getPhoneAlertsEnglish()
-//                    : (edEnNotif.getText().toString().trim()));
-//            settings.setPhoneAlertsUrdu(TextUtils.isEmpty(edUrNotif.getText().toString().trim()) ? settings.getPhoneAlertsUrdu()
-//                    : (edUrNotif.getText().toString().trim()));
-//
-//
-//            settings.setPhoneShowAlertsBeforEkama(TextUtils.isEmpty(edNotifTimer.getText().toString().trim()) ? settings.getPhoneShowAlertsBeforEkama()
-//                    : Integer.parseInt(edNotifTimer.getText().toString().trim()));
-//
-//            settings.setPhoneStatusAlerts(cbCloseNotifScreen.isChecked());
-//            settings.setPhoneStatusVoice(cbCloseNotifSound.isChecked());
-
             Pref.setValue(activity, Constants.PREF_CLOSE_PHONE_ALERT_ARABIC, edArNotif.getText().toString().trim());
             Pref.setValue(activity, Constants.PREF_CLOSE_PHONE_ALERT_ENGLISH, edEnNotif.getText().toString().trim());
             Pref.setValue(activity, Constants.PREF_CLOSE_PHONE_ALERT_URDU, edUrNotif.getText().toString().trim());
@@ -374,7 +341,6 @@ public class ClosePhoneSettingActivity extends AppCompatActivity implements View
             notifTimer = Pref.getValue(activity, Constants.PREF_CLOSE_PHONE_ALERT_SHOW_BEFORE_IQAMH, edNotifTimer.getText().toString().trim());
 
             Utils.showCustomToast(activity, getString(R.string.success_edit));
-
         } else if (v == ivBack) {
             onBackPressed();
         }

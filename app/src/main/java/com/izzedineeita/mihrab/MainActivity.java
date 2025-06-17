@@ -11,40 +11,28 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.content.res.AssetFileDescriptor;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
-import android.text.format.DateUtils;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.WindowMetrics;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -52,7 +40,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
@@ -64,7 +51,6 @@ import com.izzedineeita.mihrab.activity.ShowAzkarActivity;
 import com.izzedineeita.mihrab.activity.ShowClosePhoneActivity;
 import com.izzedineeita.mihrab.activity.ShowKatebActivity;
 import com.izzedineeita.mihrab.activity.ShowKhotabActivity;
-import com.izzedineeita.mihrab.activity.SplashActivity;
 import com.izzedineeita.mihrab.constants.Constants;
 import com.izzedineeita.mihrab.constants.DateHigri;
 import com.izzedineeita.mihrab.database.DataBaseHelper;
@@ -96,9 +82,7 @@ import com.minew.beaconplus.sdk.interfaces.GetPasswordListener;
 import com.minew.beaconplus.sdk.interfaces.MTCentralManagerListener;
 import com.minew.beaconplus.sdk.interfaces.OnBluetoothStateChangedListener;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -113,8 +97,8 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity {
 
 
+    //region Variables
     private ImageView img_time_hour_1, img_time_hour_2, img_time_mint_1, img_time_sec_2, img_time_sec_1, img_date_day, img_date_month_m_2, img_date_month_m_1, img_date_month_m, img_date_years_4, img_date_years_3, img_date_years_2, img_date_years_1, img_date_month_h_2, img_date_month_h_1, img_date_month_h, img_date_years_h_4, img_date_years_h_3, img_date_years_h_2, img_date_years_h_1, img_time_mint_2;
-
     private ImageView img_fjr_azan_h_1, img_fjr_azan_h_2, img_fjr_azan_m_1, img_fjr_azan_m_2;
     private ImageView img_shroq_azan_h_1, img_shroq_azan_h_2, img_shroq_azan_m_1, img_shroq_azan_m_2;
     private ImageView img_dahr_azan_h_1, img_dahr_azan_h_2, img_dahr_azan_m_1, img_dahr_azan_m_2;
@@ -132,9 +116,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView img_iqamh_time_left_m_1, img_iqamh_time_left_m_2, img_iqamh_time_left_s_1, img_iqamh_time_left_s_2;
     private ImageView img_azan_jm3a_time_h_1, img_azan_jm3a_time_h_2, img_azan_jm3a_time_m_1, img_azan_jm3a_time_m_2;
     private ImageView img_next_azan1;
-    private LinearLayout lay_img_azan_time_left, lay_img_iqamh_time_left, lay_sin, lay_friday;
-
-    private TextView tv_masged_name, tv_internal_heat, tv_battery;
+    private LinearLayout lay_img_azan_time_left;
+    private LinearLayout lay_img_iqamh_time_left;
+    private TextView tv_masged_name, tv_internal_heat;
     private String[] date;
     public Thread myThread = null;
 
@@ -152,9 +136,7 @@ public class MainActivity extends AppCompatActivity {
     public static int[] timeNumberAzan;
     public static int[] timeNumberIqamh;
     public static int[] timeNumberSec;
-
     private String[] friady;
-
     private LinearLayout img_bottom;
 
     private MediaPlayer mp = new MediaPlayer();
@@ -175,23 +157,21 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv;
     public static Activity activity;
     int theme;
+    //endregion
 
-
+    //region Life cycle
     @Override
     protected void onStart() {
         super.onStart();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setLocale("en");
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-
         theme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 0);
-
 
         switch (theme) {
             case 1:
@@ -380,52 +360,38 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-
         activity = MainActivity.this;
 
         DateHigri hd = new DateHigri();
         date = Utils.writeIslamicDate(MainActivity.this, hd);
 
-
         db = new DataBaseHelper(getApplicationContext());
-
 
         tv.setSelected(true);
 
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter != null) {
-
             if (!isBLEEnabled()) {
                 showBLEDialog();
             }
         }
 
-
         initManager();
         getRequiredPermissions();
         initListener();
-
-        getRequiredPermissions();
         init();
-
         setDataToImage();
 
         Runnable runnable = new CountDownRunner();
-        myThread = new
-
-                Thread(runnable);
+        myThread = new Thread(runnable);
         myThread.start();
-
-
     }
 
     @Override
     public void onBackPressed() {
-
         if (myThread.isAlive()) {
             myThread.interrupt();
         }
-
         super.onBackPressed();
     }
 
@@ -433,27 +399,17 @@ public class MainActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-
-        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-
-
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         tv_masged_name.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
-
-
     }
 
     @Override
     protected void onStop() {
-
         super.onStop();
     }
 
@@ -466,13 +422,11 @@ public class MainActivity extends AppCompatActivity {
             mp.stop();
         }
         mMtCentralManager.stopService();
-
         super.onDestroy();
     }
 
-
     @Override
-    public void onRequestPermissionsResult(int code, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int code, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(code, permissions, grantResults);
         if (code == PERMISSION_COARSE_LOCATION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -494,26 +448,21 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    //endregion
 
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     protected boolean isBLEEnabled() {
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         final BluetoothAdapter adapter = bluetoothManager.getAdapter();
         return adapter != null && adapter.isEnabled();
     }
 
-    @SuppressLint("MissingPermission")
     private void showBLEDialog() {
         final Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-
-
             return;
         }
         startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
     }
-
 
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
@@ -524,28 +473,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-
-        findViewById(R.id.img_settings).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    startActivity(new Intent(MainActivity.this, SettingActivity.class));
-                } catch (Exception e) {
-
-                }
+        findViewById(R.id.img_settings).setOnClickListener(v -> {
+            try {
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+            } catch (Exception ignored) {
             }
         });
 
         img_bottom = findViewById(R.id.img_bottom);
-
         tv_masged_name = findViewById(R.id.tv_masged_name);
-
         tv_internal_heat = findViewById(R.id.tv_internal_heat);
-        tv_battery = findViewById(R.id.tv_battery);
 
-        lay_sin = findViewById(R.id.lay_sin);
-        lay_friday = findViewById(R.id.lay_friday);
-
+        LinearLayout lay_sin = findViewById(R.id.lay_sin);
+        LinearLayout lay_friday = findViewById(R.id.lay_friday);
 
         if (Pref.getValue(getApplicationContext(), Constants.PREF_SINSER_SHOW, false)) {
             lay_sin.setVisibility(View.VISIBLE);
@@ -555,10 +495,8 @@ public class MainActivity extends AppCompatActivity {
             lay_friday.setVisibility(View.VISIBLE);
         }
 
-
         tv_masged_name.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
 
-        /* init date images */
         img_time_hour_1 = findViewById(R.id.img_time_hour_1);
         img_time_hour_2 = findViewById(R.id.img_time_hour_2);
         img_time_mint_1 = findViewById(R.id.img_time_mint_1);
@@ -581,40 +519,33 @@ public class MainActivity extends AppCompatActivity {
         img_date_years_h_2 = findViewById(R.id.img_date_years_h_2);
         img_date_years_h_1 = findViewById(R.id.img_date_years_h_1);
 
-
         img_next_azan = findViewById(R.id.img_next_azan);
 
-        /* init azan fajr images */
         img_fjr_azan_h_1 = findViewById(R.id.img_fjr_azan_h_1);
         img_fjr_azan_h_2 = findViewById(R.id.img_fjr_azan_h_2);
         img_fjr_azan_m_1 = findViewById(R.id.img_fjr_azan_m_1);
         img_fjr_azan_m_2 = findViewById(R.id.img_fjr_azan_m_2);
 
-        /* init azan shroq images */
         img_shroq_azan_h_1 = findViewById(R.id.img_shroq_azan_h_1);
         img_shroq_azan_h_2 = findViewById(R.id.img_shroq_azan_h_2);
         img_shroq_azan_m_1 = findViewById(R.id.img_shroq_azan_m_1);
         img_shroq_azan_m_2 = findViewById(R.id.img_shroq_azan_m_2);
 
-        /* init azan dahr images */
         img_dahr_azan_h_1 = findViewById(R.id.img_daheq_azan_h_1);
         img_dahr_azan_h_2 = findViewById(R.id.img_daheq_azan_h_2);
         img_dahr_azan_m_1 = findViewById(R.id.img_daheq_azan_m_1);
         img_dahr_azan_m_2 = findViewById(R.id.img_daheq_azan_m_2);
 
-        /* init azan asr images */
         img_asr_azan_h_1 = findViewById(R.id.img_asr_azan_h_1);
         img_asr_azan_h_2 = findViewById(R.id.img_asr_azan_h_2);
         img_asr_azan_m_1 = findViewById(R.id.img_asr_azan_m_1);
         img_asr_azan_m_2 = findViewById(R.id.img_asr_azan_m_2);
 
-        /* init azan mgrb images */
         img_mgrb_azan_h_1 = findViewById(R.id.img_mgrb_azan_h_1);
         img_mgrb_azan_h_2 = findViewById(R.id.img_mgrb_azan_h_2);
         img_mgrb_azan_m_1 = findViewById(R.id.img_mgrb_azan_m_1);
         img_mgrb_azan_m_2 = findViewById(R.id.img_mgrb_azan_m_2);
 
-        /* init azan isha images */
         img_isha_azan_h_1 = findViewById(R.id.img_isha_azan_h_1);
         img_isha_azan_h_2 = findViewById(R.id.img_isha_azan_h_2);
         img_isha_azan_m_1 = findViewById(R.id.img_isha_azan_m_1);
@@ -679,12 +610,9 @@ public class MainActivity extends AppCompatActivity {
         img_azan_jm3a_time_h_2 = findViewById(R.id.img_azan_jm3a_time_h_2);
         img_azan_jm3a_time_m_1 = findViewById(R.id.img_azan_jm3a_time_m_1);
         img_azan_jm3a_time_m_2 = findViewById(R.id.img_azan_jm3a_time_m_2);
-
-
     }
 
     private void setDataToImage() {
-
         tv.setSelected(true);
 
         String text = db.getNews(Utils.getFormattedCurrentDate());
@@ -698,10 +626,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 tv.setText(text);
                 isTextNewsShow = true;
-
-            } else {
-
-
             }
         } else {
             img_bottom.setVisibility(View.VISIBLE);
@@ -709,14 +633,10 @@ public class MainActivity extends AppCompatActivity {
             isTextNewsShow = false;
         }
 
-
         Calendar today1 = Calendar.getInstance();
 
-
-        SimpleDateFormat format = new SimpleDateFormat("M/d/yy", Locale.ENGLISH);
         SimpleDateFormat format2 = new SimpleDateFormat("M/d", Locale.ENGLISH);
         SimpleDateFormat format1 = new SimpleDateFormat("yy", Locale.ENGLISH);
-
 
         db = new DataBaseHelper(getApplicationContext());
         String[] cityEn = getResources().getStringArray(R.array.city_name_en);
@@ -726,7 +646,7 @@ public class MainActivity extends AppCompatActivity {
             d = db.getPrayerTimes(cityEn[cityChose], format2.format(today1.getTime()) + "/" + getYears(Integer.parseInt(format1.format(today1.getTime()))));
         }
 
-
+        assert d != null;
         cfajr1 = d[1];
         csunrise1 = d[2];
         cdhohr1 = d[3];
@@ -741,21 +661,26 @@ public class MainActivity extends AppCompatActivity {
         cmaghrib = d[5];
         cisha = d[6];
 
-
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mmaa", Locale.ENGLISH);
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("hh:mm", Locale.ENGLISH);
         try {
             Date date = dateFormat2.parse(cfajr1);
+            assert date != null;
             cfajr1 = dateFormat.format(date);
             Date date1 = dateFormat2.parse(csunrise1);
+            assert date1 != null;
             csunrise1 = dateFormat.format(date1);
             Date date2 = dateFormat2.parse(cdhohr1);
+            assert date2 != null;
             cdhohr1 = dateFormat.format(date2);
             Date date3 = dateFormat2.parse(casr1);
+            assert date3 != null;
             casr1 = dateFormat.format(date3);
             Date date4 = dateFormat2.parse(cmaghrib1);
+            assert date4 != null;
             cmaghrib1 = dateFormat.format(date4);
             Date date5 = dateFormat2.parse(cisha1);
+            assert date5 != null;
             cisha1 = dateFormat.format(date5);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -1532,24 +1457,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doWork() {
-        runOnUiThread(new Runnable() {
-            public void run() {
+        runOnUiThread(() -> {
+            setDataToImage();
+            setNextAzan();
+            checkAds();
+            DateFormat timeNow = new SimpleDateFormat("hh:mmass", Locale.ENGLISH);
+            Calendar c = Calendar.getInstance();
+            String timeText = timeNow.format(c.getTime());
+            img_time_hour_1.setImageResource(timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(0)))]);
 
-                setDataToImage();
-                setNextAzan();
-                checkAds();
-                DateFormat timeNow = new SimpleDateFormat("hh:mmass", Locale.ENGLISH);
-                Calendar c = Calendar.getInstance();
-                String timeText = timeNow.format(c.getTime());
-                img_time_hour_1.setImageResource(timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(0)))]);
-                img_time_hour_2.setImageResource(timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(1)))]);
-                img_time_mint_1.setImageResource(timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(3)))]);
-                img_time_mint_2.setImageResource(timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(4)))]);
-                img_time_sec_1.setImageResource(timeNumberSec[Integer.parseInt(String.valueOf(timeText.charAt(7)))]);
-                img_time_sec_2.setImageResource(timeNumberSec[Integer.parseInt(String.valueOf(timeText.charAt(8)))]);
+            img_time_hour_2.setImageResource(timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(1)))]);
+            img_time_mint_1.setImageResource(timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(3)))]);
+            img_time_mint_2.setImageResource(timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(4)))]);
+            img_time_sec_1.setImageResource(timeNumberSec[Integer.parseInt(String.valueOf(timeText.charAt(7)))]);
+            img_time_sec_2.setImageResource(timeNumberSec[Integer.parseInt(String.valueOf(timeText.charAt(8)))]);
 
 
-            }
         });
     }
 
@@ -1558,8 +1481,6 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
-
-
                     doWork();
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -1788,10 +1709,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getTimeLeftForIqamh(String time, long iqmahTime, int check) {
-        long minutes = 0;
-        long millis = 0;
-        Calendar c = null;
-        Calendar c1 = null;
+        long minutes;
+        long millis;
+        Calendar c;
+        Calendar c1;
         long millis1 = 0;
         String s = null;
         switch (check) {
@@ -1914,11 +1835,8 @@ public class MainActivity extends AppCompatActivity {
                     millis1 = c.getTimeInMillis() - c1.getTimeInMillis() + 43200000;
                 }
                 s = String.format("%1$tM:%1$tS", millis1);
-
-
                 break;
         }
-
 
         Calendar calendar = Calendar.getInstance();
 
@@ -2097,29 +2015,22 @@ public class MainActivity extends AppCompatActivity {
         boolean check = false;
         switch (pray) {
             case 1:
-                if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJR_SHOW_ALKHUSHUE, true)) check = true;
-                else check = false;
-
+                check = Pref.getValue(getApplicationContext(), Constants.PREF_FAJR_SHOW_ALKHUSHUE, true);
                 break;
             case 2:
-                if (Pref.getValue(getApplicationContext(), Constants.PREF_SUNRISE_SHOW_ALKHUSHUE, true)) check = true;
-                else check = false;
+                check = Pref.getValue(getApplicationContext(), Constants.PREF_SUNRISE_SHOW_ALKHUSHUE, true);
                 break;
             case 3:
-                if (Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SHOW_ALKHUSHUE, true)) check = true;
-                else check = false;
+                check = Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SHOW_ALKHUSHUE, true);
                 break;
             case 4:
-                if (Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SHOW_ALKHUSHUE, true)) check = true;
-                else check = false;
+                check = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SHOW_ALKHUSHUE, true);
                 break;
             case 5:
-                if (Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SHOW_ALKHUSHUE, true)) check = true;
-                else check = false;
+                check = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SHOW_ALKHUSHUE, true);
                 break;
             case 6:
-                if (Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SHOW_ALKHUSHUE, true)) check = true;
-                else check = false;
+                check = Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SHOW_ALKHUSHUE, true);
                 break;
         }
         return check;
@@ -2163,7 +2074,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private void getFridayTime() {
         SimpleDateFormat format2 = new SimpleDateFormat("M/d", Locale.ENGLISH);
         SimpleDateFormat format1 = new SimpleDateFormat("yy", Locale.ENGLISH);
@@ -2189,7 +2099,6 @@ public class MainActivity extends AppCompatActivity {
             friady = db.getPrayerTimesFriday("masqat", format2.format(calendar.getTime()) + "/" + getYears(Integer.parseInt(format1.format(calendar.getTime()))));
         }
     }
-
 
     private void play(String path) {
 
@@ -2280,7 +2189,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
     private void initListener() {
 
         mMtCentralManager.setMTCentralManagerListener(new MTCentralManagerListener() {
@@ -2360,7 +2268,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private ConnectionStatueListener connectionStatueListener = new ConnectionStatueListener() {
+    private final ConnectionStatueListener connectionStatueListener = new ConnectionStatueListener() {
         @Override
         public void onUpdateConnectionStatus(final ConnectionStatus connectionStatus, final GetPasswordListener getPasswordListener) {
             runOnUiThread(new Runnable() {
@@ -2430,7 +2338,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-
     private void initManager() {
         mMtCentralManager = MTCentralManager.getInstance(this);
 
@@ -2478,34 +2385,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private BroadcastReceiver networkReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver networkReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
                 NetworkInfo networkInfo = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
                 if (networkInfo != null && networkInfo.getDetailedState() == NetworkInfo.DetailedState.CONNECTED) {
-                    Log.d("LOG_TAG", "We have internet connection. Good to go.");
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
                     FirebaseUser currentUser = mAuth.getCurrentUser();
-                    currentUser.reload().addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            if (e instanceof FirebaseAuthInvalidUserException) {
-                                Log.d("LOG_TAG", "user doesn't exist anymore");
+                    currentUser.reload().addOnFailureListener(e -> {
+                        if (e instanceof FirebaseAuthInvalidUserException) {
+                            Log.d("LOG_TAG", "user doesn't exist anymore");
 
-                                Pref.setValue(MainActivity.this, Constants.PREF_IS_USER_LOGIN, false);
-                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
+                            Pref.setValue(MainActivity.this, Constants.PREF_IS_USER_LOGIN, false);
+                            Intent intent1 = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent1);
+                            finish();
                         }
                     });
                 } else if (networkInfo != null && networkInfo.getDetailedState() == NetworkInfo.DetailedState.DISCONNECTED) {
-                    Log.d("LOG_TAG", "We have lost internet connection");
                 }
             }
         }
     };
-
-
 }

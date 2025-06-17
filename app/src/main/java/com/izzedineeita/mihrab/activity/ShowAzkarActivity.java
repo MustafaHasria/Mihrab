@@ -44,34 +44,12 @@ public class ShowAzkarActivity extends AppCompatActivity {
             tv_day, tv_time, tv_time_sec, tv_data_hajre, tv_data_melade,
             tv_fajet_name, tv_sun_name, tv_thahr_name, tv_asr_name, tv_magrb_name, tv_isha_name;
     private LinearLayout linear_pray_background;
-    //    private DataBaseHelper db;
-//    public String cfajr, csunrise, cdhohr, casr, cmaghrib, cisha;
-//    public String cfajr1, csunrise1, cdhohr1, casr1, cmaghrib1, cisha1;
     private String dateM, dateH;
     private Activity activity;
 
     private Runnable adsRunnable;
     private Handler AdsHandler = new Handler();
     public Thread myThread = null;
-
-//    TextView textView1;
-//    TextView textView2;
-//    TextView textView3;
-//    TextView textView4;
-//    TextView textView5;
-//    TextView textView6;
-//    TextView textView7;
-//    TextView textView8;
-//    TextView textView9;
-//    TextView textView10;
-//    TextView textView11;
-//    TextView textView12;
-//    TextView textView13;
-//    TextView textView14;
-//    TextView textView15;
-//    TextView textView16;
-//    TextView textView17;
-//    TextView textView18;
 
     int theme = 5;
     LinearLayout.LayoutParams lp;
@@ -80,7 +58,6 @@ public class ShowAzkarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // setContentView(R.layout.activity_show_azkar);
         theme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 0);
         boolean b = Pref.getValue(getApplicationContext(), Constants.PREF_CHECK_BOX_2, false);
 
@@ -134,12 +111,6 @@ public class ShowAzkarActivity extends AppCompatActivity {
         activity = ShowAzkarActivity.this;
 
         int pray = 1;
-//        if (savedInstanceState == null) {
-//            Bundle extras = getIntent().getExtras();
-//            pray = extras.getInt("PRAY");
-//        } else {
-//            pray = (int) savedInstanceState.getSerializable("PRAY");
-//        }
 
         Runnable runnable = new ShowAzkarActivity.CountDownRunner();
         myThread = new Thread(runnable);
@@ -159,8 +130,6 @@ public class ShowAzkarActivity extends AppCompatActivity {
 
         init();
         setData();
-
-    //    setTextSize();
 
         checkPray(pray);
     }
@@ -232,158 +201,9 @@ public class ShowAzkarActivity extends AppCompatActivity {
 
     }
 
-//    private void setTextSize() {
-//        tv_day.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDialog(tv_day, null);
-//            }
-//        });
-//        tv_time.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDialog(tv_time, null);
-//            }
-//        });
-//        tv_time_sec.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDialog(tv_time_sec, null);
-//            }
-//        });
-//        tv_fajr.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDialog(tv_fajr, null);
-//            }
-//        });
-//        tv_fajet_name.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDialog(tv_fajet_name, null);
-//            }
-//        });
-//        linear_pray_background.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDialog(null, linear_pray_background);
-//            }
-//        });
-//        tv_data_hajre.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDialog(tv_data_hajre, null);
-//            }
-//        });
-//        tv_data_melade.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDialog(tv_data_melade, null);
-//            }
-//        });
-//        tv_data_melade.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDialog(tv_data_melade, null);
-//            }
-//        });
-//        tv_masged_name.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDialog(tv_masged_name, null);
-//            }
-//        });
-//
-////        textView1 = findViewById(R.id.tv_1);
-////        textView2 = findViewById(R.id.tv_2);
-////        textView3 = findViewById(R.id.tv_3);
-////        textView4 = findViewById(R.id.tv_4);
-////        textView5 = findViewById(R.id.tv_5);
-////        textView6 = findViewById(R.id.tv_6);
-////        textView7 = findViewById(R.id.tv_7);
-////        textView8 = findViewById(R.id.tv_8);
-////        textView9 = findViewById(R.id.tv_9);
-////        textView10 = findViewById(R.id.tv_10);
-////        textView11 = findViewById(R.id.tv_11);
-////        textView12 = findViewById(R.id.tv_12);
-////        textView13 = findViewById(R.id.tv_13);
-////        textView14 = findViewById(R.id.tv_14);
-////        textView15 = findViewById(R.id.tv_15);
-////        textView16 = findViewById(R.id.tv_16);
-////        textView17 = findViewById(R.id.tv_17);
-////        textView18 = findViewById(R.id.tv_18);
-////
-////        textView1.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-////                showDialog(null, null);
-////            }
-////        });
-//    }
-
     private void setData() {
 
         tv_masged_name.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
-
-//        Calendar today1 = Calendar.getInstance();
-//        SimpleDateFormat format = new SimpleDateFormat("M/d/yy", Locale.ENGLISH);
-
-//        db = new DataBaseHelper(getApplicationContext());
-//        String[] cityEn = getResources().getStringArray(R.array.city_name_en);
-//        String[] d = null;
-//        int cityChose = Pref.getValue(getApplicationContext(), Constants.PREF_CITY_POSITION_SELECTED, 0);
-//
-//        Log.e("XXX", "" + today1.getTime());
-//        if (cityChose != 0) {
-//            d = db.getPrayerTimes(cityEn[cityChose], format.format(today1.getTime()));
-//        } else {
-//            d = db.getPrayerTimes("masqat", format.format(today1.getTime()));
-//        }
-//
-//        cfajr = d[1];
-//        csunrise = d[2];
-//        cdhohr = d[3];
-//        casr = d[4];
-//        cmaghrib = d[5];
-//        cisha = d[6];
-//
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm", Locale.ENGLISH);
-//        SimpleDateFormat dateFormat2 = new SimpleDateFormat("hh:mm", Locale.ENGLISH);
-//        try {
-//            Date date = dateFormat2.parse(cfajr);
-//            cfajr = dateFormat.format(date);
-//            Date date1 = dateFormat2.parse(csunrise);
-//            csunrise = dateFormat.format(date1);
-//            Date date2 = dateFormat2.parse(cdhohr);
-//            cdhohr = dateFormat.format(date2);
-//            Date date3 = dateFormat2.parse(casr);
-//            casr = dateFormat.format(date3);
-//            Date date4 = dateFormat2.parse(cmaghrib);
-//            cmaghrib = dateFormat.format(date4);
-//            Date date5 = dateFormat2.parse(cisha);
-//            cisha = dateFormat.format(date5);
-//            //Log.e("Time", cfajr);
-//        } catch (ParseException e) {
-//        }
-//
-//        if (cfajr.length() == 4) {
-//            cfajr = "0" + cfajr;
-//        }
-//        if (csunrise.length() == 4) {
-//            csunrise = "0" + csunrise;
-//        }
-//        if (cdhohr.length() == 4) {
-//            cdhohr = "0" + cdhohr;
-//        }
-//        if (casr.length() == 4) {
-//            casr = "0" + casr;
-//        }
-//        if (cmaghrib.length() == 4) {
-//            cmaghrib = "0" + cmaghrib;
-//        }
-//        if (cisha.length() == 4) {
-//            cisha = "0" + cisha;
-//        }
 
         String f = Pref.getValue(activity, Constants.PREF_FAJR_TIME, "");
         String f1;
@@ -492,27 +312,6 @@ public class ShowAzkarActivity extends AppCompatActivity {
                                     linearLayout1.setLayoutParams(lp);
                                 }
 
-//                                if (textView == null && linearLayout1 == null) {
-//                                    textView1.setTextSize(aNumberPicker.getValue());
-//                                    textView2.setTextSize(aNumberPicker.getValue());
-//                                    textView3.setTextSize(aNumberPicker.getValue());
-//                                    textView4.setTextSize(aNumberPicker.getValue());
-//                                    textView5.setTextSize(aNumberPicker.getValue());
-//                                    textView6.setTextSize(aNumberPicker.getValue());
-//                                    textView7.setTextSize(aNumberPicker.getValue());
-//                                    textView8.setTextSize(aNumberPicker.getValue());
-//                                    textView9.setTextSize(aNumberPicker.getValue());
-//                                    textView10.setTextSize(aNumberPicker.getValue());
-//                                    textView11.setTextSize(aNumberPicker.getValue());
-//                                    textView12.setTextSize(aNumberPicker.getValue());
-//                                    textView13.setTextSize(aNumberPicker.getValue());
-//                                    textView14.setTextSize(aNumberPicker.getValue());
-//                                    textView15.setTextSize(aNumberPicker.getValue());
-//                                    textView16.setTextSize(aNumberPicker.getValue());
-//                                    textView17.setTextSize(aNumberPicker.getValue());
-//                                    textView18.setTextSize(aNumberPicker.getValue());
-//                                }
-
                             }
                         })
                 .setNegativeButton("Cancel",
@@ -546,7 +345,6 @@ public class ShowAzkarActivity extends AppCompatActivity {
     }
 
     class CountDownRunner implements Runnable {
-        // @Override
         public void run() {
             while (!Thread.currentThread().isInterrupted()) {
                 try {

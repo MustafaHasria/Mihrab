@@ -376,12 +376,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        initManager();
-        getRequiredPermissions();
-        initListener();
-        init();
-        setDataToImage();
-
+        initializeViewsAndListeners();
+        requestLocationPermissions();
+        updatePrayerAndDateDisplays();
         Runnable runnable = new CountDownRunner();
         myThread = new Thread(runnable);
         myThread.start();
@@ -472,7 +469,7 @@ public class MainActivity extends AppCompatActivity {
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
     }
 
-    private void init() {
+    private void initializeViewsAndListeners() {
         findViewById(R.id.img_settings).setOnClickListener(v -> {
             try {
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));
@@ -612,7 +609,7 @@ public class MainActivity extends AppCompatActivity {
         img_azan_jm3a_time_m_2 = findViewById(R.id.img_azan_jm3a_time_m_2);
     }
 
-    private void setDataToImage() {
+    private void updatePrayerAndDateDisplays() {
         tv.setSelected(true);
 
         String text = db.getNews(Utils.getFormattedCurrentDate());
@@ -882,7 +879,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setNextAzan() {
+    private void updateNextPrayerIndicator() {
 
 
         long fajr = 0, sunrise = 0, thuhr = 0, assr = 0, maghrib = 0, ishaa = 0, fajrIqamh = 0, sunriseIqamh = 0, thuhrIqamh = 0, assrIqamh = 0, maghribIqamh = 0, ishaaIqamh = 0;
@@ -1456,10 +1453,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void doWork() {
+    private void refreshUIEverySecond() {
         runOnUiThread(() -> {
-            setDataToImage();
-            setNextAzan();
+            updatePrayerAndDateDisplays();
+            updateNextPrayerIndicator();
             checkAds();
             DateFormat timeNow = new SimpleDateFormat("hh:mmass", Locale.ENGLISH);
             Calendar c = Calendar.getInstance();
@@ -1481,7 +1478,7 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
-                    doWork();
+                    refreshUIEverySecond();
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
@@ -1911,7 +1908,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY && check != 3) {
 
-                boolean b = checkStartAlkhushue(check);
+                boolean b = shouldShowAlkhushueScreen(check);
 
                 if (!Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true)) {
 
@@ -1929,7 +1926,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
 
                         if (!isOpenAzkarPhone) {
-                            startAzkarScreen(check);
+                            scheduleAzkarScreen(check);
                             isOpenAzkarPhone = true;
                         }
                     }
@@ -2011,7 +2008,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkStartAlkhushue(int pray) {
+    private boolean shouldShowAlkhushueScreen(int pray) {
         boolean check = false;
         switch (pray) {
             case 1:
@@ -2036,7 +2033,7 @@ public class MainActivity extends AppCompatActivity {
         return check;
     }
 
-    private void startAzkarScreen(int pray) {
+    private void scheduleAzkarScreen(int pray) {
         int mint = 1;
         switch (pray) {
             case 1:
@@ -2181,7 +2178,7 @@ public class MainActivity extends AppCompatActivity {
         return returnYear;
     }
 
-    private boolean ensureBleExists() {
+    private boolean isBleFeatureAvailable() {
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, "Phone does not support BLE", Toast.LENGTH_LONG).show();
             return false;
@@ -2189,7 +2186,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void initListener() {
+    private void initializeBluetoothListener() {
 
         mMtCentralManager.setMTCentralManagerListener(new MTCentralManagerListener() {
             @Override
@@ -2338,7 +2335,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private void initManager() {
+    private void initializeBluetoothManager() {
         mMtCentralManager = MTCentralManager.getInstance(this);
 
         mMtCentralManager.startService();
@@ -2368,7 +2365,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void getRequiredPermissions() {
+    private void requestLocationPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_COARSE_LOCATION);
         } else {

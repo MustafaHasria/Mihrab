@@ -47,9 +47,6 @@ import java.util.Objects;
 public class SettingActivity extends AppCompatActivity {
 
     private Spinner spinnerCity, spinner_them;
-//    , spinner_number_fajr, spinner_number_sunrise, spinner_number_dhohr,
-//            spinner_number_asr, spinner_number_maghrib, spinner_number_isha;
-
     private EditText editTextMasegdName, edHijriSet1;
     private TextView tv_battery, edHijriSet;
     private CardView card_betarry, card_sinser;
@@ -60,13 +57,6 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-//        String[] city = getResources().getStringArray(R.array.city_name);
-//        String[] cityEn = getResources().getStringArray(R.array.city_name_en);
-
-
-
         int theme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 0);
         switch (theme) {
             case 5:

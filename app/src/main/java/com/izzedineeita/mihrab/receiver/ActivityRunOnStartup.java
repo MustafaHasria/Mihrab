@@ -9,7 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.Log;
 
-import com.izzedineeita.mihrab.activity.SplashActivity;
+import com.izzedineeita.mihrab.MainActivity;
 
 public class ActivityRunOnStartup extends BroadcastReceiver {
     @Override
@@ -17,7 +17,7 @@ public class ActivityRunOnStartup extends BroadcastReceiver {
         Log.e("XXX1", "11111");
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             Log.e("XXX2", "11111");
-            Intent activityIntent = new Intent(context, SplashActivity.class);
+            Intent activityIntent = new Intent(context, MainActivity.class);
             activityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(activityIntent);
         }

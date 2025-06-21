@@ -97,8 +97,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-
-
     //region Variables
     // Time display ImageViews
     private ImageView timeHourTensDigit, timeHourOnesDigit, timeMinuteTensDigit, timeMinuteOnesDigit, 
@@ -198,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_COARSE_LOCATION = 2;
     public static float CURRENT_TEMPERATURE = 0;
     //endregion
-
     /**
      * Theme configuration data class to hold theme-specific settings
      * Optimized for memory efficiency with primitive types and minimal object overhead
@@ -244,13 +241,11 @@ public class MainActivity extends AppCompatActivity {
             this.hasNextPrayerIndicatorSecondary = (byte) (hasNextPrayerIndicatorSecondary ? 1 : 0);
         }
     }
-
     /**
      * Theme configurations map for easy lookup
      * Using lazy initialization for better startup performance
      */
     private static volatile Map<Integer, ThemeConfiguration> THEME_CONFIGURATIONS;
-
     /**
      * Thread-safe lazy initialization of theme configurations
      * This improves app startup time by deferring configuration creation
@@ -266,7 +261,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return THEME_CONFIGURATIONS;
     }
-
     /**
      * Initialize theme configurations - called only once when first needed
      */
@@ -471,7 +465,22 @@ public class MainActivity extends AppCompatActivity {
             true
         ));
     }
+    class CountDownRunner implements Runnable {
 
+        public void run() {
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    refreshUIEverySecond();
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } catch (Exception e) {
+
+                }
+            }
+        }
+
+    }
     //region Life cycle
     @Override
     protected void onStart() {
@@ -592,13 +601,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     //endregion
-
     protected boolean isBLEEnabled() {
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         final BluetoothAdapter adapter = bluetoothManager.getAdapter();
         return adapter != null && adapter.isEnabled();
     }
-
     private void showBLEDialog() {
         final Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
@@ -606,7 +613,6 @@ public class MainActivity extends AppCompatActivity {
         }
         startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
     }
-
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
@@ -614,7 +620,6 @@ public class MainActivity extends AppCompatActivity {
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
     }
-
     private void initializeViewsAndListeners() {
         findViewById(R.id.img_settings).setOnClickListener(v -> {
             try {
@@ -754,7 +759,6 @@ public class MainActivity extends AppCompatActivity {
         fridayAzanMinuteTensDigit = findViewById(R.id.img_azan_jm3a_time_m_1);
         fridayAzanMinuteOnesDigit = findViewById(R.id.img_azan_jm3a_time_m_2);
     }
-
     private void updatePrayerAndDateDisplays() {
         try {
             // Check if views are initialized
@@ -1087,7 +1091,6 @@ public class MainActivity extends AppCompatActivity {
             Log.e("MainActivity", "Error in updatePrayerAndDateDisplays: " + e.getMessage(), e);
         }
     }
-
     private void updateNextPrayerIndicator() {
 
 
@@ -1661,7 +1664,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
     private void refreshUIEverySecond() {
         runOnUiThread(() -> {
             updatePrayerAndDateDisplays();
@@ -1681,24 +1683,6 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
-
-    class CountDownRunner implements Runnable {
-
-        public void run() {
-            while (!Thread.currentThread().isInterrupted()) {
-                try {
-                    refreshUIEverySecond();
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                } catch (Exception e) {
-
-                }
-            }
-        }
-
-    }
-
     private String getIqamh(String azanTime, long aqamhTime) {
         SimpleDateFormat formatter = new SimpleDateFormat("hh:mmaa", Locale.ENGLISH);
         try {
@@ -1715,7 +1699,6 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-
     private long getMilliseconds(String azanTime) {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
@@ -1729,7 +1712,6 @@ public class MainActivity extends AppCompatActivity {
         return mDate.getTime();
 
     }
-
     private long getMilliseconds1(String azanTime, String iqamhTIme) {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         SimpleDateFormat formatter1 = new SimpleDateFormat("hh:mmaa", Locale.ENGLISH);
@@ -1746,7 +1728,6 @@ public class MainActivity extends AppCompatActivity {
         return mDate1.getTime() - mDate.getTime();
 
     }
-
     private void getTimeLeftForAzan(String time, int check) {
         Calendar c = Calendar.getInstance();
         Calendar c1 = Calendar.getInstance();
@@ -1913,7 +1894,6 @@ public class MainActivity extends AppCompatActivity {
         azanCountdownSecondTensDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(s11.charAt(6)))]);
         azanCountdownSecondOnesDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(s11.charAt(7)))]);
     }
-
     private void getTimeLeftForIqamh(String time, long iqmahTime, int check) {
         long minutes;
         long millis;
@@ -2216,7 +2196,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
     private boolean shouldShowAlkhushueScreen(int pray) {
         boolean check = false;
         switch (pray) {
@@ -2241,7 +2220,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return check;
     }
-
     private void scheduleAzkarScreen(int pray) {
         int mint = 1;
         switch (pray) {
@@ -2279,7 +2257,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
     private void fetchFridayPrayerTimes() {
         SimpleDateFormat format2 = new SimpleDateFormat("M/d", Locale.ENGLISH);
         SimpleDateFormat format1 = new SimpleDateFormat("yy", Locale.ENGLISH);
@@ -2308,7 +2285,6 @@ public class MainActivity extends AppCompatActivity {
             fridayPrayerTimes = new String[]{"", "", "", "12:30", "", ""};
         }
     }
-
     private void showAdsIfScheduled() {
         SimpleDateFormat df = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         SimpleDateFormat dfDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -2340,7 +2316,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
     private int getYears(int year) {
         int returnYear = 0;
         if (year == 18 || year == 22 || year == 26 || year == 30 || year == 34 || year == 38 || year == 42 || year == 46 || year == 50 || year == 54 || year == 58 || year == 62 || year == 66 || year == 70 || year == 74 || year == 78 || year == 82 || year == 86 || year == 90 || year == 94 || year == 98 || year == 2 || year == 6 || year == 10 || year == 14) {
@@ -2354,7 +2329,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return returnYear;
     }
-
     private void initializeBluetoothListener() {
 
         bluetoothCentralManager.setMTCentralManagerListener(new MTCentralManagerListener() {
@@ -2433,7 +2407,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
     private final ConnectionStatueListener connectionStatueListener = new ConnectionStatueListener() {
         @Override
         public void onUpdateConnectionStatus(final ConnectionStatus connectionStatus, final GetPasswordListener getPasswordListener) {
@@ -2503,7 +2476,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
-
     private void initializeBluetoothManager() {
         bluetoothCentralManager = MTCentralManager.getInstance(this);
 
@@ -2533,7 +2505,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void requestLocationPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_COARSE_LOCATION);
@@ -2541,7 +2512,6 @@ public class MainActivity extends AppCompatActivity {
             initData();
         }
     }
-
     private void initData() {
 
         try {
@@ -2550,7 +2520,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Phone does not have Bluetooth!!", Toast.LENGTH_LONG).show();
         }
     }
-
     private void playAudioFromPath(String path) {
 
 
@@ -2585,7 +2554,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
     /**
      * Reset all activity flags for testing purposes
      */
@@ -2601,7 +2569,6 @@ public class MainActivity extends AppCompatActivity {
         isAlkhushueScreenOpen = false;
         isKhotabScreenOpen = false;
     }
-
     private void openClosePhoneActivity() {
         if (!isOpenClosePhone) {
             Intent intent = new Intent(MainActivity.this, ShowClosePhoneActivity.class);
@@ -2610,7 +2577,6 @@ public class MainActivity extends AppCompatActivity {
             isOpenClosePhone = true;
         }
     }
-
     /**
      * Apply theme configuration based on selected theme
      * @param themeId The theme ID to apply

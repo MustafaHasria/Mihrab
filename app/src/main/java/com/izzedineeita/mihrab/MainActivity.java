@@ -93,6 +93,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -182,10 +184,8 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isOpenAlkhushuePhone = false;
     public static boolean isOpenAzkarPhone = false;
     public static boolean isOpenAds = false;
-    String currentTimeString;
     RelativeLayout mainLayout;
     String[] date = new String[7];
-    String[] friady = new String[6];
     int theme;
     float TEMPERATURE;
     public static int BATTERY;
@@ -197,8 +197,280 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_ENABLE_BT = 3;
     private static final int PERMISSION_COARSE_LOCATION = 2;
     public static float CURRENT_TEMPERATURE = 0;
-    public static int BATTERY_LEVEL = 0;
     //endregion
+
+    /**
+     * Theme configuration data class to hold theme-specific settings
+     * Optimized for memory efficiency with primitive types and minimal object overhead
+     */
+    private static class ThemeConfiguration {
+        final int layoutResId;
+        final int orientation;
+        final int backgroundResId;
+        final String newsTextColor;
+        final int[] dayImages;
+        final int[] monthImages;
+        final int[] hijriMonthImages;
+        final int[] digitImages;
+        final int[] timeDigitImages;
+        final int[] azanTimeDigitImages;
+        final int[] iqamahTimeDigitImages;
+        final int[] iqamahCountdownDigitImages;
+        final int[] azanCountdownDigitImages;
+        final int[] secondDigitImages;
+        final byte hasNextPrayerIndicator; // Using byte instead of boolean for memory efficiency
+        final byte hasNextPrayerIndicatorSecondary;
+
+        ThemeConfiguration(int layoutResId, int orientation, int backgroundResId, String newsTextColor,
+                         int[] dayImages, int[] monthImages, int[] hijriMonthImages, int[] digitImages,
+                         int[] timeDigitImages, int[] azanTimeDigitImages, int[] iqamahTimeDigitImages,
+                         int[] iqamahCountdownDigitImages, int[] azanCountdownDigitImages, int[] secondDigitImages,
+                         boolean hasNextPrayerIndicator, boolean hasNextPrayerIndicatorSecondary) {
+            this.layoutResId = layoutResId;
+            this.orientation = orientation;
+            this.backgroundResId = backgroundResId;
+            this.newsTextColor = newsTextColor;
+            this.dayImages = dayImages;
+            this.monthImages = monthImages;
+            this.hijriMonthImages = hijriMonthImages;
+            this.digitImages = digitImages;
+            this.timeDigitImages = timeDigitImages;
+            this.azanTimeDigitImages = azanTimeDigitImages;
+            this.iqamahTimeDigitImages = iqamahTimeDigitImages;
+            this.iqamahCountdownDigitImages = iqamahCountdownDigitImages;
+            this.azanCountdownDigitImages = azanCountdownDigitImages;
+            this.secondDigitImages = secondDigitImages;
+            this.hasNextPrayerIndicator = (byte) (hasNextPrayerIndicator ? 1 : 0);
+            this.hasNextPrayerIndicatorSecondary = (byte) (hasNextPrayerIndicatorSecondary ? 1 : 0);
+        }
+    }
+
+    /**
+     * Theme configurations map for easy lookup
+     * Using lazy initialization for better startup performance
+     */
+    private static volatile Map<Integer, ThemeConfiguration> THEME_CONFIGURATIONS;
+
+    /**
+     * Thread-safe lazy initialization of theme configurations
+     * This improves app startup time by deferring configuration creation
+     */
+    private static Map<Integer, ThemeConfiguration> getThemeConfigurations() {
+        if (THEME_CONFIGURATIONS == null) {
+            synchronized (MainActivity.class) {
+                if (THEME_CONFIGURATIONS == null) {
+                    THEME_CONFIGURATIONS = new HashMap<>();
+                    initializeThemeConfigurations();
+                }
+            }
+        }
+        return THEME_CONFIGURATIONS;
+    }
+
+    /**
+     * Initialize theme configurations - called only once when first needed
+     */
+    private static void initializeThemeConfigurations() {
+        // Theme 0 (default)
+        THEME_CONFIGURATIONS.put(0, new ThemeConfiguration(
+            R.layout.activity_main,
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+            R.drawable.background_main,
+            null,
+            ImagesArrays.daysImageTheme1,
+            ImagesArrays.monthImageTheme1,
+            ImagesArrays.monthImageHijriTheme1,
+            ImagesArrays.dateNumberTheme1,
+            ImagesArrays.timeNumberTheme1,
+            ImagesArrays.timeNumberAzanTheme1,
+            ImagesArrays.timeNumberIqamhTheme1,
+            ImagesArrays.timeNumberTheme1,
+            ImagesArrays.timeNumberTheme1,
+            ImagesArrays.timeNumberTheme1,
+            false,
+            true
+        ));
+
+        // Theme 1
+        THEME_CONFIGURATIONS.put(1, new ThemeConfiguration(
+            R.layout.activity_main,
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+            R.drawable.background_main_them_1,
+            "#ED0606",
+            ImagesArrays.daysImageTheme1,
+            ImagesArrays.monthImageTheme1,
+            ImagesArrays.monthImageHijriTheme1,
+            ImagesArrays.dateNumberTheme1,
+            ImagesArrays.timeNumberTheme1,
+            ImagesArrays.timeNumberAzanTheme1,
+            ImagesArrays.timeNumberIqamhTheme1,
+            ImagesArrays.timeNumberTheme1,
+            ImagesArrays.timeNumberTheme1,
+            ImagesArrays.timeNumberTheme1,
+            false,
+            false
+        ));
+
+        // Theme 2
+        THEME_CONFIGURATIONS.put(2, new ThemeConfiguration(
+            R.layout.activity_main,
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+            R.drawable.background_main_them_2,
+            "#ED0606",
+            ImagesArrays.daysImageTheme1,
+            ImagesArrays.monthImageTheme1,
+            ImagesArrays.monthImageHijriTheme1,
+            ImagesArrays.dateNumberTheme1,
+            ImagesArrays.timeNumberTheme1,
+            ImagesArrays.timeNumberAzanTheme1,
+            ImagesArrays.timeNumberIqamhTheme1,
+            ImagesArrays.timeNumberTheme1,
+            ImagesArrays.timeNumberTheme1,
+            ImagesArrays.timeNumberTheme1,
+            false,
+            false
+        ));
+
+        // Theme 3
+        THEME_CONFIGURATIONS.put(3, new ThemeConfiguration(
+            R.layout.activity_main_4,
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+            0, // No background drawable
+            null,
+            ImagesArrays.daysImageTheme4,
+            ImagesArrays.monthImageTheme4,
+            ImagesArrays.monthImageHijriTheme4,
+            ImagesArrays.timeNumberTheme4,
+            ImagesArrays.timeNumberTheme4,
+            ImagesArrays.timeNumberIqamhTheme4,
+            ImagesArrays.timeNumberIqamhTheme4,
+            ImagesArrays.timeNumberIqamhLeft4,
+            ImagesArrays.timeNumberIqamhLeft4,
+            ImagesArrays.timeNumberIqamhTheme4,
+            true,
+            false
+        ));
+
+        // Theme 4
+        THEME_CONFIGURATIONS.put(4, new ThemeConfiguration(
+            R.layout.activity_main_5,
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+            0, // No background drawable
+            null,
+            ImagesArrays.daysImageTheme4,
+            ImagesArrays.monthImageTheme5,
+            ImagesArrays.monthImageHijriTheme5,
+            ImagesArrays.timeNumberTheme5,
+            ImagesArrays.timeNumberTheme5,
+            ImagesArrays.timeNumberIqamhTheme4,
+            ImagesArrays.timeNumberIqamhTheme4,
+            ImagesArrays.timeNumberIqamhLeft4,
+            ImagesArrays.timeNumberIqamhLeft4,
+            ImagesArrays.timeNumberIqamhTheme4,
+            false,
+            false
+        ));
+
+        // Theme 5
+        THEME_CONFIGURATIONS.put(5, new ThemeConfiguration(
+            R.layout.activity_main_6,
+            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
+            0, // No background drawable
+            null,
+            ImagesArrays.daysImageTheme6,
+            ImagesArrays.monthImageTheme6,
+            ImagesArrays.monthImageHijriTheme6,
+            ImagesArrays.timeNumberIqamhLeft4,
+            ImagesArrays.timeNumberTheme6,
+            ImagesArrays.timeNumberAzanTheme6,
+            ImagesArrays.timeNumberIqama6,
+            ImagesArrays.timeNumberTheme6,
+            ImagesArrays.timeNumberTheme6,
+            ImagesArrays.timeNumberTheme6,
+            false,
+            false
+        ));
+
+        // Theme 6
+        THEME_CONFIGURATIONS.put(6, new ThemeConfiguration(
+            R.layout.activity_main_7,
+            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
+            0, // No background drawable
+            null,
+            ImagesArrays.daysImageTheme1,
+            ImagesArrays.monthImageTheme1,
+            ImagesArrays.monthImageHijriTheme1,
+            ImagesArrays.dateNumberTheme1,
+            ImagesArrays.timeNumberIqamhLeft7,
+            ImagesArrays.timeNumberAzanTheme6,
+            ImagesArrays.timeNumberIqama6,
+            ImagesArrays.timeNumberIqamhLeft7,
+            ImagesArrays.timeNumberIqamhLeft7,
+            ImagesArrays.timeNumberIqamhLeft7,
+            true,
+            false
+        ));
+
+        // Theme 7
+        THEME_CONFIGURATIONS.put(7, new ThemeConfiguration(
+            R.layout.activity_main_8,
+            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
+            0, // No background drawable
+            null,
+            ImagesArrays.daysImageTheme8,
+            ImagesArrays.monthImageTheme8,
+            ImagesArrays.monthImageHijriTheme8,
+            ImagesArrays.timeNumberDate8,
+            ImagesArrays.timeNumberTime8,
+            ImagesArrays.timeNumberAzIq8,
+            ImagesArrays.timeNumberAzIq8,
+            ImagesArrays.timeNumberTime8,
+            ImagesArrays.timeNumberTime8,
+            ImagesArrays.timeNumberTime8,
+            true,
+            false
+        ));
+
+        // Theme 8
+        THEME_CONFIGURATIONS.put(8, new ThemeConfiguration(
+            R.layout.activity_main_9,
+            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
+            0, // No background drawable
+            null,
+            ImagesArrays.daysImageTheme1,
+            ImagesArrays.monthImageTheme1,
+            ImagesArrays.monthImageHijriTheme1,
+            ImagesArrays.dateNumberTheme1,
+            ImagesArrays.timeNumberTheme6,
+            ImagesArrays.timeNumberAzanTheme6,
+            ImagesArrays.timeNumberIqama6,
+            ImagesArrays.timeNumberTheme6,
+            ImagesArrays.timeNumberTheme6,
+            ImagesArrays.timeNumberTheme6,
+            false,
+            false
+        ));
+
+        // Theme 9
+        THEME_CONFIGURATIONS.put(9, new ThemeConfiguration(
+            R.layout.activity_main_10,
+            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
+            0, // No background drawable
+            null,
+            ImagesArrays.daysImageTheme10,
+            ImagesArrays.monthImageTheme10,
+            ImagesArrays.monthImageHijriTheme10,
+            ImagesArrays.timeNumberDate10,
+            ImagesArrays.timeNumberIqamhLeft4,
+            ImagesArrays.timeNumberAzIq8,
+            ImagesArrays.timeNumberAzIq8,
+            ImagesArrays.timeNumberIqamhLeft4,
+            ImagesArrays.timeNumberIqamhLeft4,
+            ImagesArrays.timeNumberDate10,
+            false,
+            true
+        ));
+    }
 
     //region Life cycle
     @Override
@@ -212,193 +484,15 @@ public class MainActivity extends AppCompatActivity {
         setLocale("en");
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        // Reset flags for testing
+        resetActivityFlags();
+
+        // Force open close phone activity for testing
+
         selectedTheme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 0);
 
-        switch (selectedTheme) {
-            case 1:
-                setContentView(R.layout.activity_main);
-                Resources res = getResources();
-
-                newsTextView = findViewById(R.id.textviewNews);
-                newsTextView.setTextColor(Color.parseColor("#ED0606"));
-                mainLayout = findViewById(R.id.relativeLayout);
-
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-                Drawable drawable1 = res.getDrawable(R.drawable.background_main_them_1);
-                mainLayout.setBackground(drawable1);
-
-                dayImages = ImagesArrays.daysImageTheme1;
-                monthImages = ImagesArrays.monthImageTheme1;
-                hijriMonthImages = ImagesArrays.monthImageHijriTheme1;
-                digitImages = ImagesArrays.dateNumberTheme1;
-                timeDigitImages = ImagesArrays.timeNumberTheme1;
-                azanTimeDigitImages = ImagesArrays.timeNumberAzanTheme1;
-                iqamahTimeDigitImages = ImagesArrays.timeNumberIqamhTheme1;
-                iqamahCountdownDigitImages = ImagesArrays.timeNumberTheme1;
-                azanCountdownDigitImages = ImagesArrays.timeNumberTheme1;
-                secondDigitImages = ImagesArrays.timeNumberTheme1;
-                break;
-            case 2:
-                setContentView(R.layout.activity_main);
-                Resources res1 = getResources();
-                mainLayout = findViewById(R.id.relativeLayout);
-
-                newsTextView = findViewById(R.id.textviewNews);
-                newsTextView.setTextColor(Color.parseColor("#ED0606"));
-
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-                Drawable drawable2 = res1.getDrawable(R.drawable.background_main_them_2);
-                mainLayout.setBackground(drawable2);
-                dayImages = ImagesArrays.daysImageTheme1;
-                monthImages = ImagesArrays.monthImageTheme1;
-                hijriMonthImages = ImagesArrays.monthImageHijriTheme1;
-                digitImages = ImagesArrays.dateNumberTheme1;
-                timeDigitImages = ImagesArrays.timeNumberTheme1;
-                azanTimeDigitImages = ImagesArrays.timeNumberAzanTheme1;
-                iqamahTimeDigitImages = ImagesArrays.timeNumberIqamhTheme1;
-                iqamahCountdownDigitImages = ImagesArrays.timeNumberTheme1;
-                azanCountdownDigitImages = ImagesArrays.timeNumberTheme1;
-                secondDigitImages = ImagesArrays.timeNumberTheme1;
-                break;
-            case 3:
-                setContentView(R.layout.activity_main_4);
-                newsTextView = findViewById(R.id.textviewNews);
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-                nextPrayerIndicator = findViewById(R.id.img_next_azan1);
-                dayImages = ImagesArrays.daysImageTheme4;
-                monthImages = ImagesArrays.monthImageTheme4;
-                hijriMonthImages = ImagesArrays.monthImageHijriTheme4;
-                digitImages = ImagesArrays.timeNumberTheme4;
-                timeDigitImages = ImagesArrays.timeNumberTheme4;
-                azanTimeDigitImages = ImagesArrays.timeNumberIqamhTheme4;
-                iqamahTimeDigitImages = ImagesArrays.timeNumberIqamhTheme4;
-                iqamahCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft4;
-                azanCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft4;
-                secondDigitImages = ImagesArrays.timeNumberIqamhTheme4;
-                break;
-            case 4:
-                setContentView(R.layout.activity_main_5);
-                newsTextView = findViewById(R.id.textviewNews);
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-                dayImages = ImagesArrays.daysImageTheme4;
-                monthImages = ImagesArrays.monthImageTheme5;
-                hijriMonthImages = ImagesArrays.monthImageHijriTheme5;
-                digitImages = ImagesArrays.timeNumberTheme5;
-                timeDigitImages = ImagesArrays.timeNumberTheme5;
-                azanTimeDigitImages = ImagesArrays.timeNumberIqamhTheme4;
-                iqamahTimeDigitImages = ImagesArrays.timeNumberIqamhTheme4;
-                iqamahCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft4;
-                azanCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft4;
-                secondDigitImages = ImagesArrays.timeNumberIqamhTheme4;
-                break;
-            case 5:
-                setContentView(R.layout.activity_main_6);
-                newsTextView = findViewById(R.id.textviewNews);
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-
-                dayImages = ImagesArrays.daysImageTheme6;
-                monthImages = ImagesArrays.monthImageTheme6;
-                hijriMonthImages = ImagesArrays.monthImageHijriTheme6;
-                digitImages = ImagesArrays.timeNumberIqamhLeft4;
-                timeDigitImages = ImagesArrays.timeNumberTheme6;
-                azanTimeDigitImages = ImagesArrays.timeNumberAzanTheme6;
-                iqamahTimeDigitImages = ImagesArrays.timeNumberIqama6;
-                iqamahCountdownDigitImages = ImagesArrays.timeNumberTheme6;
-                secondDigitImages = ImagesArrays.timeNumberTheme6;
-                break;
-            case 6:
-                setContentView(R.layout.activity_main_7);
-                newsTextView = findViewById(R.id.textviewNews);
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-                nextPrayerIndicator = findViewById(R.id.img_next_azan1);
-
-                dayImages = ImagesArrays.daysImageTheme1;
-                monthImages = ImagesArrays.monthImageTheme1;
-                hijriMonthImages = ImagesArrays.monthImageHijriTheme1;
-                digitImages = ImagesArrays.dateNumberTheme1;
-                timeDigitImages = ImagesArrays.timeNumberIqamhLeft7;
-                azanTimeDigitImages = ImagesArrays.timeNumberAzanTheme6;
-                iqamahTimeDigitImages = ImagesArrays.timeNumberIqama6;
-                iqamahCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft7;
-                azanCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft7;
-                secondDigitImages = ImagesArrays.timeNumberIqamhLeft7;
-
-                break;
-            case 7:
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-                setContentView(R.layout.activity_main_8);
-                newsTextView = findViewById(R.id.textviewNews);
-                nextPrayerIndicator = findViewById(R.id.img_next_azan1);
-
-                dayImages = ImagesArrays.daysImageTheme8;
-                monthImages = ImagesArrays.monthImageTheme8;
-                hijriMonthImages = ImagesArrays.monthImageHijriTheme8;
-                digitImages = ImagesArrays.timeNumberDate8;
-                timeDigitImages = ImagesArrays.timeNumberTime8;
-                azanTimeDigitImages = ImagesArrays.timeNumberAzIq8;
-                iqamahTimeDigitImages = ImagesArrays.timeNumberAzIq8;
-                iqamahCountdownDigitImages = ImagesArrays.timeNumberTime8;
-                azanCountdownDigitImages = ImagesArrays.timeNumberTime8;
-                secondDigitImages = ImagesArrays.timeNumberTime8;
-                break;
-            case 8:
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-                setContentView(R.layout.activity_main_9);
-                newsTextView = findViewById(R.id.textviewNews);
-                dayImages = ImagesArrays.daysImageTheme1;
-                monthImages = ImagesArrays.monthImageTheme1;
-                hijriMonthImages = ImagesArrays.monthImageHijriTheme1;
-                digitImages = ImagesArrays.dateNumberTheme1;
-                timeDigitImages = ImagesArrays.timeNumberTheme6;
-                azanTimeDigitImages = ImagesArrays.timeNumberAzanTheme6;
-                iqamahTimeDigitImages = ImagesArrays.timeNumberIqama6;
-                iqamahCountdownDigitImages = ImagesArrays.timeNumberTheme6;
-                azanCountdownDigitImages = ImagesArrays.timeNumberTheme6;
-                secondDigitImages = ImagesArrays.timeNumberTheme6;
-                break;
-            case 9:
-                setContentView(R.layout.activity_main_10);
-                newsTextView = findViewById(R.id.textviewNews);
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-                nextPrayerIndicatorSecondary = findViewById(R.id.img_next_azan1);
-                dayImages = ImagesArrays.daysImageTheme10;
-                monthImages = ImagesArrays.monthImageTheme10;
-                hijriMonthImages = ImagesArrays.monthImageHijriTheme10;
-                digitImages = ImagesArrays.timeNumberDate10;
-                timeDigitImages = ImagesArrays.timeNumberIqamhLeft4;
-                azanTimeDigitImages = ImagesArrays.timeNumberAzIq8;
-                iqamahTimeDigitImages = ImagesArrays.timeNumberAzIq8;
-                iqamahCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft4;
-                azanCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft4;
-                secondDigitImages = ImagesArrays.timeNumberDate10;
-                break;
-            default:
-                setContentView(R.layout.activity_main);
-                Resources res4 = getResources();
-                mainLayout = findViewById(R.id.relativeLayout);
-                newsTextView = findViewById(R.id.textviewNews);
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-                Drawable drawable0 = res4.getDrawable(R.drawable.background_main);
-                mainLayout.setBackground(drawable0);
-                nextPrayerIndicatorSecondary = findViewById(R.id.img_next_azan1);
-
-                dayImages = ImagesArrays.daysImageTheme1;
-                monthImages = ImagesArrays.monthImageTheme1;
-                hijriMonthImages = ImagesArrays.monthImageHijriTheme1;
-                digitImages = ImagesArrays.dateNumberTheme1;
-                timeDigitImages = ImagesArrays.timeNumberTheme1;
-                azanTimeDigitImages = ImagesArrays.timeNumberAzanTheme1;
-                iqamahTimeDigitImages = ImagesArrays.timeNumberIqamhTheme1;
-                iqamahCountdownDigitImages = ImagesArrays.timeNumberTheme1;
-                azanCountdownDigitImages = ImagesArrays.timeNumberTheme1;
-                secondDigitImages = ImagesArrays.timeNumberTheme1;
-                break;
-        }
+        // Apply theme configuration
+        applyThemeConfiguration(selectedTheme);
 
         currentActivity = MainActivity.this;
 
@@ -1952,7 +2046,7 @@ public class MainActivity extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
 
-        if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY && check == 3) {
+        if (check == 3) { // Removed Friday check to allow testing on any day during Dhuhr prayer
             iqamahCountdownMinuteTensDigit.setVisibility(View.GONE);
             iqamahCountdownMinuteOnesDigit.setVisibility(View.GONE);
             iqamahCountdownSecondTensDigit.setVisibility(View.GONE);
@@ -2261,14 +2355,6 @@ public class MainActivity extends AppCompatActivity {
         return returnYear;
     }
 
-    private boolean isBleFeatureAvailable() {
-        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-            Toast.makeText(this, "Phone does not support BLE", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
-    }
-
     private void initializeBluetoothListener() {
 
         bluetoothCentralManager.setMTCentralManagerListener(new MTCentralManagerListener() {
@@ -2465,30 +2551,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private final BroadcastReceiver networkReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                NetworkInfo networkInfo = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
-                if (networkInfo != null && networkInfo.getDetailedState() == NetworkInfo.DetailedState.CONNECTED) {
-                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                    FirebaseUser currentUser = mAuth.getCurrentUser();
-                    currentUser.reload().addOnFailureListener(e -> {
-                        if (e instanceof FirebaseAuthInvalidUserException) {
-                            Log.d("LOG_TAG", "user doesn't exist anymore");
-
-                            Pref.setValue(MainActivity.this, Constants.PREF_IS_USER_LOGIN, false);
-                            Intent intent1 = new Intent(MainActivity.this, LoginActivity.class);
-                            startActivity(intent1);
-                            finish();
-                        }
-                    });
-                } else if (networkInfo != null && networkInfo.getDetailedState() == NetworkInfo.DetailedState.DISCONNECTED) {
-                }
-            }
-        }
-    };
-
     private void playAudioFromPath(String path) {
 
 
@@ -2522,5 +2584,84 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
 
         }
+    }
+
+    /**
+     * Reset all activity flags for testing purposes
+     */
+    private void resetActivityFlags() {
+        isOpenKhotabActivity = false;
+        isOpenClosePhone = false;
+        isOpenAlkhushuePhone = false;
+        isOpenAzkarPhone = false;
+        isOpenAds = false;
+        isAdsScreenOpen = false;
+        isClosePhoneScreenOpen = false;
+        isAzkarScreenOpen = false;
+        isAlkhushueScreenOpen = false;
+        isKhotabScreenOpen = false;
+    }
+
+    private void openClosePhoneActivity() {
+        if (!isOpenClosePhone) {
+            Intent intent = new Intent(MainActivity.this, ShowClosePhoneActivity.class);
+            intent.putExtra("PRAY", 1);
+            startActivity(intent);
+            isOpenClosePhone = true;
+        }
+    }
+
+    /**
+     * Apply theme configuration based on selected theme
+     * @param themeId The theme ID to apply
+     */
+    private void applyThemeConfiguration(int themeId) {
+        ThemeConfiguration config = getThemeConfigurations().get(themeId);
+        if (config == null) {
+            // Fallback to default theme (0)
+            config = getThemeConfigurations().get(0);
+        }
+
+        // Set content view
+        setContentView(config.layoutResId);
+
+        // Set orientation
+        setRequestedOrientation(config.orientation);
+
+        // Initialize common views
+        newsTextView = findViewById(R.id.textviewNews);
+        mainLayout = findViewById(R.id.relativeLayout);
+
+        // Apply background if specified
+        if (config.backgroundResId != 0 && mainLayout != null) {
+            Resources res = getResources();
+            Drawable background = res.getDrawable(config.backgroundResId);
+            mainLayout.setBackground(background);
+        }
+
+        // Apply news text color if specified
+        if (config.newsTextColor != null && newsTextView != null) {
+            newsTextView.setTextColor(Color.parseColor(config.newsTextColor));
+        }
+
+        // Initialize prayer indicator views if needed
+        if (config.hasNextPrayerIndicator != 0) {
+            nextPrayerIndicator = findViewById(R.id.img_next_azan1);
+        }
+        if (config.hasNextPrayerIndicatorSecondary != 0) {
+            nextPrayerIndicatorSecondary = findViewById(R.id.img_next_azan1);
+        }
+
+        // Apply image arrays
+        dayImages = config.dayImages;
+        monthImages = config.monthImages;
+        hijriMonthImages = config.hijriMonthImages;
+        digitImages = config.digitImages;
+        timeDigitImages = config.timeDigitImages;
+        azanTimeDigitImages = config.azanTimeDigitImages;
+        iqamahTimeDigitImages = config.iqamahTimeDigitImages;
+        iqamahCountdownDigitImages = config.iqamahCountdownDigitImages;
+        azanCountdownDigitImages = config.azanCountdownDigitImages;
+        secondDigitImages = config.secondDigitImages;
     }
 }

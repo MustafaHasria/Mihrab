@@ -359,8 +359,7 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                 } else {
                     pray = (int) savedInstanceState.getSerializable("PRAY");
                 }
-             //  pray = 2;
-                Log.e("CCCC", "pray !!!!" + pray);
+
                 checkPlaySound(pray);
                 Runnable runnable = new CountDownRunner();
                 myThread = new
@@ -375,10 +374,10 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                 try {
                     millis = Integer.parseInt(showTime) * 1000;
                 } catch (Exception e) {
-                    Log.e("XXX1", e.getLocalizedMessage());
+
                 }
-                //Log.e("XXX","" + showTime);
-                Log.e("XXX", "" + millis);
+                //
+
 
 
                 new CountDownTimer(millis, 1000) {
@@ -432,12 +431,12 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                                 intent.putExtra("PRAY", pray);
                                 startActivity(intent);
                             } catch (Exception e) {
-                                Log.e("XXX1", "fff " + e.getLocalizedMessage());
+
                             }
-                            Log.e("XXX1", "startActivity " + "ShowAlkhushueActivity");
+
 
                         } else {
-                            Log.e("XXX1", "startActivity " + "ShowAlkhushueActivity false");
+
                         }
 
                     }
@@ -447,11 +446,11 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
 //                  Calendar c = Calendar.getInstance();
 //                  String timeText1 = timeNow.format(c.getTime());
 //                  int t = Integer.parseInt(timeText1);
-//                  Log.e("timeText1" , "" + timeText1);
+//
 //                  int i = t -60;
 //                  int i1 = 60 - t;
-//                  Log.e("XXX" , "" + i);
-//                  Log.e("XXX" , "" + i1);
+//
+//
 //
 //                  String timeText = String.valueOf(i1);
 //                  if (timeText.length() == 2) {
@@ -467,7 +466,7 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
 
                 }.start();
             } catch (Exception e) {
-                Log.e("XXX2", "" + e.getMessage());
+
             }
 
         }
@@ -660,10 +659,8 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                         String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_CLOSE_PHONE_PATH, null);
                         if (uriSound != null) {
                             if (!mp.isPlaying()) play(uriSound);
-                            Log.e("CCCC", "uriSound !!!!" + uriSound);
                         } else {
                             if (!mp.isPlaying()) play();
-                            Log.e("CCCC", "uriSound !!!!");
                         }
 
                     }
@@ -676,10 +673,10 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                         String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_CLOSE_PHONE_PATH, null);
                         if (uriSound != null) {
                             if (!mp.isPlaying()) play(uriSound);
-                            Log.e("CCCC", "uriSound !!!!" + uriSound);
+
                         } else {
                             if (!mp.isPlaying()) play();
-                            Log.e("CCCC", "uriSound !!!!");
+
                         }
                     }
                 }
@@ -691,10 +688,10 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                         String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_CLOSE_PHONE_PATH, null);
                         if (uriSound != null) {
                             if (!mp.isPlaying()) play(uriSound);
-                            Log.e("CCCC", "uriSound !!!!" + uriSound);
+
                         } else {
                             if (!mp.isPlaying()) play();
-                            Log.e("CCCC", "uriSound !!!!");
+
                         }
                     }
                 }
@@ -706,10 +703,10 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                         String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_CLOSE_PHONE_PATH, null);
                         if (uriSound != null) {
                             if (!mp.isPlaying()) play(uriSound);
-                            Log.e("CCCC", "uriSound !!!!" + uriSound);
+
                         } else {
                             if (!mp.isPlaying()) play();
-                            Log.e("CCCC", "uriSound !!!!");
+
                         }
                     }
                 }
@@ -721,10 +718,10 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                         String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_CLOSE_PHONE_PATH, null);
                         if (uriSound != null) {
                             if (!mp.isPlaying()) play(uriSound);
-                            Log.e("CCCC", "uriSound !!!!" + uriSound);
+
                         } else {
                             if (!mp.isPlaying()) play();
-                            Log.e("CCCC", "uriSound !!!!");
+
                         }
                     }
                 }
@@ -742,7 +739,7 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 } catch (Exception e) {
-                    Log.e("XXX", e.getLocalizedMessage());
+
                 }
             }
         }
@@ -767,11 +764,11 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                     //Calendar c = Calendar.getInstance();
                     String timeText1 = timeNow1.format(c.getTime());
                     int t = Integer.parseInt(timeText1);
-                    Log.e("timeText1", "" + timeText1);
+
                     int i = t - 60;
                     int i1 = 60 - t;
-                    Log.e("XXX", "" + i);
-                    Log.e("XXX", "" + i1);
+
+
 
 
 
@@ -819,7 +816,7 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
 //                    img_iqamh_time_left_m_1.setImageResource(ImagesArrays.timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(7)))]);
 //                    img_iqamh_time_left_m_2.setImageResource(ImagesArrays.timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(8)))]);
                 } catch (Exception e) {
-                    Log.e("XXX", e.getLocalizedMessage());
+
                 }
             }
         });
@@ -937,7 +934,7 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            Log.e("XXX4", e.getLocalizedMessage());
+
             if (!mp.isPlaying()) play();
         }
     }
@@ -974,19 +971,19 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
         } catch (IllegalArgumentException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            Log.e("XXX4", e.getLocalizedMessage());
+
         } catch (SecurityException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            Log.e("XXX4", e.getLocalizedMessage());
+
         } catch (IllegalStateException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            Log.e("XXX4", e.getLocalizedMessage());
+
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            Log.e("XXX4", e.getLocalizedMessage());
+
         }
     }
 

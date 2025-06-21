@@ -428,7 +428,7 @@ public class SettingActivity extends AppCompatActivity {
                           setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                           break;
                   }
-                  MainActivity.activity.recreate();
+                  MainActivity.currentActivity.recreate();
               } catch (Exception e) {
                   Toast.makeText(SettingActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
               }

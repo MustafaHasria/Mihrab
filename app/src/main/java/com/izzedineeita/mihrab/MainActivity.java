@@ -98,65 +98,106 @@ public class MainActivity extends AppCompatActivity {
 
 
     //region Variables
-    private ImageView img_time_hour_1, img_time_hour_2, img_time_mint_1, img_time_sec_2, img_time_sec_1, img_date_day, img_date_month_m_2, img_date_month_m_1, img_date_month_m, img_date_years_4, img_date_years_3, img_date_years_2, img_date_years_1, img_date_month_h_2, img_date_month_h_1, img_date_month_h, img_date_years_h_4, img_date_years_h_3, img_date_years_h_2, img_date_years_h_1, img_time_mint_2;
-    private ImageView img_fjr_azan_h_1, img_fjr_azan_h_2, img_fjr_azan_m_1, img_fjr_azan_m_2;
-    private ImageView img_shroq_azan_h_1, img_shroq_azan_h_2, img_shroq_azan_m_1, img_shroq_azan_m_2;
-    private ImageView img_dahr_azan_h_1, img_dahr_azan_h_2, img_dahr_azan_m_1, img_dahr_azan_m_2;
-    private ImageView img_asr_azan_h_1, img_asr_azan_h_2, img_asr_azan_m_1, img_asr_azan_m_2;
-    private ImageView img_mgrb_azan_h_1, img_mgrb_azan_h_2, img_mgrb_azan_m_1, img_mgrb_azan_m_2;
-    private ImageView img_isha_azan_h_1, img_isha_azan_h_2, img_isha_azan_m_1, img_isha_azan_m_2;
-    private ImageView img_fjr_iqamh_h_1, img_fjr_iqamh_h_2, img_fjr_iqamh_m_1, img_fjr_iqamh_m_2;
-    private ImageView img_shroq_iqamh_h_1, img_shroq_iqamh_h_2, img_shroq_iqamh_m_1, img_shroq_iqamh_m_2;
-    private ImageView img_dahr_iqamg_h_1, img_dahr_iqamg_h_2, img_dahr_iqamg_m_1, img_dahr_iqamg_m_2;
-    private ImageView img_asr_iqamg_h_1, img_asr_iqamg_h_2, img_asr_iqamg_m_1, img_asr_iqamg_m_2;
-    private ImageView img_mgrb_iqamg_h_1, img_mgrb_iqamg_h_2, img_mgrb_iqamg_m_1, img_mgrb_iqamg_m_2;
-    private ImageView img_isha_iqamh_h_1, img_isha_iqamh_h_2, img_isha_iqamh_m_1, img_isha_iqamh_m_2;
-    private ImageView img_time_left_h_1, img_time_left_h_2, img_time_left_m_1, img_time_left_m_2, img_time_left_s_1, img_time_left_s_2;
-    private ImageView img_next_azan;
-    private ImageView img_iqamh_time_left_m_1, img_iqamh_time_left_m_2, img_iqamh_time_left_s_1, img_iqamh_time_left_s_2;
-    private ImageView img_azan_jm3a_time_h_1, img_azan_jm3a_time_h_2, img_azan_jm3a_time_m_1, img_azan_jm3a_time_m_2;
-    private ImageView img_next_azan1;
-    private LinearLayout lay_img_azan_time_left;
-    private LinearLayout lay_img_iqamh_time_left;
-    private TextView tv_masged_name, tv_internal_heat;
-    private String[] date;
-    public Thread myThread = null;
+    // Time display ImageViews
+    private ImageView timeHourTensDigit, timeHourOnesDigit, timeMinuteTensDigit, timeMinuteOnesDigit, 
+                     timeSecondTensDigit, timeSecondOnesDigit;
+    
+    // Date display ImageViews
+    private ImageView dateDayImage, dateMonthTensDigit, dateMonthOnesDigit, dateMonthImage,
+                     dateYearThousandsDigit, dateYearHundredsDigit, dateYearTensDigit, dateYearOnesDigit;
+    
+    // Hijri date display ImageViews
+    private ImageView hijriMonthTensDigit, hijriMonthOnesDigit, hijriMonthImage,
+                     hijriYearThousandsDigit, hijriYearHundredsDigit, hijriYearTensDigit, hijriYearOnesDigit;
+    
+    // Fajr prayer time ImageViews
+    private ImageView fajrAzanHourTensDigit, fajrAzanHourOnesDigit, fajrAzanMinuteTensDigit, fajrAzanMinuteOnesDigit;
+    private ImageView fajrIqamahHourTensDigit, fajrIqamahHourOnesDigit, fajrIqamahMinuteTensDigit, fajrIqamahMinuteOnesDigit;
+    
+    // Sunrise prayer time ImageViews
+    private ImageView sunriseAzanHourTensDigit, sunriseAzanHourOnesDigit, sunriseAzanMinuteTensDigit, sunriseAzanMinuteOnesDigit;
+    private ImageView sunriseIqamahHourTensDigit, sunriseIqamahHourOnesDigit, sunriseIqamahMinuteTensDigit, sunriseIqamahMinuteOnesDigit;
+    
+    // Dhuhr prayer time ImageViews
+    private ImageView dhuhrAzanHourTensDigit, dhuhrAzanHourOnesDigit, dhuhrAzanMinuteTensDigit, dhuhrAzanMinuteOnesDigit;
+    private ImageView dhuhrIqamahHourTensDigit, dhuhrIqamahHourOnesDigit, dhuhrIqamahMinuteTensDigit, dhuhrIqamahMinuteOnesDigit;
+    
+    // Asr prayer time ImageViews
+    private ImageView asrAzanHourTensDigit, asrAzanHourOnesDigit, asrAzanMinuteTensDigit, asrAzanMinuteOnesDigit;
+    private ImageView asrIqamahHourTensDigit, asrIqamahHourOnesDigit, asrIqamahMinuteTensDigit, asrIqamahMinuteOnesDigit;
+    
+    // Maghrib prayer time ImageViews
+    private ImageView maghribAzanHourTensDigit, maghribAzanHourOnesDigit, maghribAzanMinuteTensDigit, maghribAzanMinuteOnesDigit;
+    private ImageView maghribIqamahHourTensDigit, maghribIqamahHourOnesDigit, maghribIqamahMinuteTensDigit, maghribIqamahMinuteOnesDigit;
+    
+    // Isha prayer time ImageViews
+    private ImageView ishaAzanHourTensDigit, ishaAzanHourOnesDigit, ishaAzanMinuteTensDigit, ishaAzanMinuteOnesDigit;
+    private ImageView ishaIqamahHourTensDigit, ishaIqamahHourOnesDigit, ishaIqamahMinuteTensDigit, ishaIqamahMinuteOnesDigit;
+    
+    // Countdown timer ImageViews
+    private ImageView azanCountdownHourTensDigit, azanCountdownHourOnesDigit, azanCountdownMinuteTensDigit, 
+                     azanCountdownMinuteOnesDigit, azanCountdownSecondTensDigit, azanCountdownSecondOnesDigit;
+    private ImageView iqamahCountdownMinuteTensDigit, iqamahCountdownMinuteOnesDigit, 
+                     iqamahCountdownSecondTensDigit, iqamahCountdownSecondOnesDigit;
+    
+    // Friday prayer time ImageViews
+    private ImageView fridayAzanHourTensDigit, fridayAzanHourOnesDigit, fridayAzanMinuteTensDigit, fridayAzanMinuteOnesDigit;
+    
+    // Next prayer indicator ImageViews
+    private ImageView nextPrayerIndicator, nextPrayerIndicatorSecondary;
+    
+    // Layout containers
+    private LinearLayout azanCountdownContainer, iqamahCountdownContainer;
+    private TextView mosqueNameTextView, temperatureTextView;
+    public Thread updateThread = null;
 
-    public String cfajr, csunrise, cdhohr, casr, cmaghrib, cisha;
-    public String cfajr1, csunrise1, cdhohr1, casr1, cmaghrib1, cisha1;
+    // Prayer times (24-hour format)
+    public String fajrTime24h, sunriseTime24h, dhuhrTime24h, asrTime24h, maghribTime24h, ishaTime24h;
+    // Prayer times (12-hour format with AM/PM)
+    public String fajrTime12h, sunriseTime12h, dhuhrTime12h, asrTime12h, maghribTime12h, ishaTime12h;
 
-    private DataBaseHelper db;
-    public static int[] daysImage;
-    public static int[] monthImage;
-    public static int[] monthImageHijri;
-    public static int[] dateNumber;
-    public static int[] timeNumber;
-    public static int[] timeNumberIqamhLeft;
-    public static int[] timeNumberAzanLeft;
-    public static int[] timeNumberAzan;
-    public static int[] timeNumberIqamh;
-    public static int[] timeNumberSec;
-    private String[] friady;
-    private LinearLayout img_bottom;
+    private DataBaseHelper databaseHelper;
+    public static int[] dayImages = new int[8];
+    public static int[] monthImages = new int[13];
+    public static int[] hijriMonthImages = new int[13];
+    public static int[] digitImages = new int[10];
+    public static int[] timeDigitImages = new int[10];
+    public static int[] iqamahCountdownDigitImages = new int[10];
+    public static int[] azanCountdownDigitImages = new int[10];
+    public static int[] azanTimeDigitImages = new int[10];
+    public static int[] iqamahTimeDigitImages = new int[10];
+    public static int[] secondDigitImages = new int[10];
+    private String[] fridayPrayerTimes = new String[6];
+    private LinearLayout bottomLayout;
 
-    private MediaPlayer mp = new MediaPlayer();
-    public static boolean isOpenAds = false;
+    private MediaPlayer mediaPlayer = new MediaPlayer();
+    public static boolean isAdsScreenOpen = false;
+    public static boolean isClosePhoneScreenOpen = false;
+    public static boolean isAzkarScreenOpen = false;
+    public static boolean isAlkhushueScreenOpen = false;
+    public static boolean isKhotabScreenOpen = false;
+    public boolean isNewsTextDisplayed = false;
     public static boolean isOpenClosePhone = false;
-    public static boolean isOpenAzkarPhone = false;
-    public static boolean isOpenAlkhushuePhone = false;
     public static boolean isOpenKhotabActivity = false;
-    public boolean isTextNewsShow = false;
-    String timeNow1;
-    RelativeLayout relativeLayout;
-
+    public static boolean isOpenAlkhushuePhone = false;
+    public static boolean isOpenAzkarPhone = false;
+    public static boolean isOpenAds = false;
+    String currentTimeString;
+    RelativeLayout mainLayout;
+    String[] date = new String[7];
+    String[] friady = new String[6];
+    int theme;
+    float TEMPERATURE;
+    public static int BATTERY;
+    private MTCentralManager bluetoothCentralManager;
+    private TextView newsTextView;
+    public static Activity currentActivity;
+    int selectedTheme;
+    
     private static final int REQUEST_ENABLE_BT = 3;
     private static final int PERMISSION_COARSE_LOCATION = 2;
-    public static float TEMPERATURE = 0;
-    public static int BATTERY = 0;
-    private MTCentralManager mMtCentralManager;
-    private TextView tv;
-    public static Activity activity;
-    int theme;
+    public static float CURRENT_TEMPERATURE = 0;
+    public static int BATTERY_LEVEL = 0;
     //endregion
 
     //region Life cycle
@@ -171,203 +212,211 @@ public class MainActivity extends AppCompatActivity {
         setLocale("en");
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        theme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 0);
+        selectedTheme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 0);
 
-        switch (theme) {
+        switch (selectedTheme) {
             case 1:
                 setContentView(R.layout.activity_main);
                 Resources res = getResources();
 
-                tv = findViewById(R.id.textviewNews);
-                tv.setTextColor(Color.parseColor("#ED0606"));
-                relativeLayout = findViewById(R.id.relativeLayout);
+                newsTextView = findViewById(R.id.textviewNews);
+                newsTextView.setTextColor(Color.parseColor("#ED0606"));
+                mainLayout = findViewById(R.id.relativeLayout);
 
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
                 Drawable drawable1 = res.getDrawable(R.drawable.background_main_them_1);
-                relativeLayout.setBackground(drawable1);
+                mainLayout.setBackground(drawable1);
 
-                daysImage = ImagesArrays.daysImageTheme1;
-                monthImage = ImagesArrays.monthImageTheme1;
-                monthImageHijri = ImagesArrays.monthImageHijriTheme1;
-                dateNumber = ImagesArrays.dateNumberTheme1;
-                timeNumber = ImagesArrays.timeNumberTheme1;
-                timeNumberAzan = ImagesArrays.timeNumberAzanTheme1;
-                timeNumberIqamh = ImagesArrays.timeNumberIqamhTheme1;
-                timeNumberIqamhLeft = ImagesArrays.timeNumberTheme1;
-                timeNumberAzanLeft = ImagesArrays.timeNumberTheme1;
-                timeNumberSec = ImagesArrays.timeNumberTheme1;
+                dayImages = ImagesArrays.daysImageTheme1;
+                monthImages = ImagesArrays.monthImageTheme1;
+                hijriMonthImages = ImagesArrays.monthImageHijriTheme1;
+                digitImages = ImagesArrays.dateNumberTheme1;
+                timeDigitImages = ImagesArrays.timeNumberTheme1;
+                azanTimeDigitImages = ImagesArrays.timeNumberAzanTheme1;
+                iqamahTimeDigitImages = ImagesArrays.timeNumberIqamhTheme1;
+                iqamahCountdownDigitImages = ImagesArrays.timeNumberTheme1;
+                azanCountdownDigitImages = ImagesArrays.timeNumberTheme1;
+                secondDigitImages = ImagesArrays.timeNumberTheme1;
                 break;
             case 2:
                 setContentView(R.layout.activity_main);
                 Resources res1 = getResources();
-                relativeLayout = findViewById(R.id.relativeLayout);
+                mainLayout = findViewById(R.id.relativeLayout);
 
-                tv = findViewById(R.id.textviewNews);
-                tv.setTextColor(Color.parseColor("#ED0606"));
+                newsTextView = findViewById(R.id.textviewNews);
+                newsTextView.setTextColor(Color.parseColor("#ED0606"));
 
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
                 Drawable drawable2 = res1.getDrawable(R.drawable.background_main_them_2);
-                relativeLayout.setBackground(drawable2);
-                daysImage = ImagesArrays.daysImageTheme1;
-                monthImage = ImagesArrays.monthImageTheme1;
-                monthImageHijri = ImagesArrays.monthImageHijriTheme1;
-                dateNumber = ImagesArrays.dateNumberTheme1;
-                timeNumber = ImagesArrays.timeNumberTheme1;
-                timeNumberAzan = ImagesArrays.timeNumberAzanTheme1;
-                timeNumberIqamh = ImagesArrays.timeNumberIqamhTheme1;
-                timeNumberIqamhLeft = ImagesArrays.timeNumberTheme1;
-                timeNumberAzanLeft = ImagesArrays.timeNumberTheme1;
-                timeNumberSec = ImagesArrays.timeNumberTheme1;
+                mainLayout.setBackground(drawable2);
+                dayImages = ImagesArrays.daysImageTheme1;
+                monthImages = ImagesArrays.monthImageTheme1;
+                hijriMonthImages = ImagesArrays.monthImageHijriTheme1;
+                digitImages = ImagesArrays.dateNumberTheme1;
+                timeDigitImages = ImagesArrays.timeNumberTheme1;
+                azanTimeDigitImages = ImagesArrays.timeNumberAzanTheme1;
+                iqamahTimeDigitImages = ImagesArrays.timeNumberIqamhTheme1;
+                iqamahCountdownDigitImages = ImagesArrays.timeNumberTheme1;
+                azanCountdownDigitImages = ImagesArrays.timeNumberTheme1;
+                secondDigitImages = ImagesArrays.timeNumberTheme1;
                 break;
             case 3:
                 setContentView(R.layout.activity_main_4);
-                tv = findViewById(R.id.textviewNews);
+                newsTextView = findViewById(R.id.textviewNews);
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-                img_next_azan1 = findViewById(R.id.img_next_azan1);
-                daysImage = ImagesArrays.daysImageTheme4;
-                monthImage = ImagesArrays.monthImageTheme4;
-                monthImageHijri = ImagesArrays.monthImageHijriTheme4;
-                dateNumber = ImagesArrays.timeNumberTheme4;
-                timeNumber = ImagesArrays.timeNumberTheme4;
-                timeNumberAzan = ImagesArrays.timeNumberIqamhTheme4;
-                timeNumberIqamh = ImagesArrays.timeNumberIqamhTheme4;
-                timeNumberIqamhLeft = ImagesArrays.timeNumberIqamhLeft4;
-                timeNumberAzanLeft = ImagesArrays.timeNumberIqamhLeft4;
-                timeNumberSec = ImagesArrays.timeNumberIqamhTheme4;
+                nextPrayerIndicator = findViewById(R.id.img_next_azan1);
+                dayImages = ImagesArrays.daysImageTheme4;
+                monthImages = ImagesArrays.monthImageTheme4;
+                hijriMonthImages = ImagesArrays.monthImageHijriTheme4;
+                digitImages = ImagesArrays.timeNumberTheme4;
+                timeDigitImages = ImagesArrays.timeNumberTheme4;
+                azanTimeDigitImages = ImagesArrays.timeNumberIqamhTheme4;
+                iqamahTimeDigitImages = ImagesArrays.timeNumberIqamhTheme4;
+                iqamahCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft4;
+                azanCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft4;
+                secondDigitImages = ImagesArrays.timeNumberIqamhTheme4;
                 break;
             case 4:
                 setContentView(R.layout.activity_main_5);
-                tv = findViewById(R.id.textviewNews);
+                newsTextView = findViewById(R.id.textviewNews);
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-                daysImage = ImagesArrays.daysImageTheme4;
-                monthImage = ImagesArrays.monthImageTheme5;
-                monthImageHijri = ImagesArrays.monthImageHijriTheme5;
-                dateNumber = ImagesArrays.timeNumberTheme5;
-                timeNumber = ImagesArrays.timeNumberTheme5;
-                timeNumberAzan = ImagesArrays.timeNumberIqamhTheme4;
-                timeNumberIqamh = ImagesArrays.timeNumberIqamhTheme4;
-                timeNumberIqamhLeft = ImagesArrays.timeNumberIqamhLeft4;
-                timeNumberAzanLeft = ImagesArrays.timeNumberIqamhLeft4;
-                timeNumberSec = ImagesArrays.timeNumberIqamhTheme4;
+                dayImages = ImagesArrays.daysImageTheme4;
+                monthImages = ImagesArrays.monthImageTheme5;
+                hijriMonthImages = ImagesArrays.monthImageHijriTheme5;
+                digitImages = ImagesArrays.timeNumberTheme5;
+                timeDigitImages = ImagesArrays.timeNumberTheme5;
+                azanTimeDigitImages = ImagesArrays.timeNumberIqamhTheme4;
+                iqamahTimeDigitImages = ImagesArrays.timeNumberIqamhTheme4;
+                iqamahCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft4;
+                azanCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft4;
+                secondDigitImages = ImagesArrays.timeNumberIqamhTheme4;
                 break;
             case 5:
                 setContentView(R.layout.activity_main_6);
-                tv = findViewById(R.id.textviewNews);
+                newsTextView = findViewById(R.id.textviewNews);
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
-                daysImage = ImagesArrays.daysImageTheme6;
-                monthImage = ImagesArrays.monthImageTheme6;
-                monthImageHijri = ImagesArrays.monthImageHijriTheme6;
-                dateNumber = ImagesArrays.timeNumberIqamhLeft4;
-                timeNumber = ImagesArrays.timeNumberTheme6;
-                timeNumberAzan = ImagesArrays.timeNumberAzanTheme6;
-                timeNumberIqamh = ImagesArrays.timeNumberIqama6;
-                timeNumberIqamhLeft = ImagesArrays.timeNumberTheme6;
-                timeNumberAzanLeft = ImagesArrays.timeNumberTheme6;
-                timeNumberSec = ImagesArrays.timeNumberTheme6;
+                dayImages = ImagesArrays.daysImageTheme6;
+                monthImages = ImagesArrays.monthImageTheme6;
+                hijriMonthImages = ImagesArrays.monthImageHijriTheme6;
+                digitImages = ImagesArrays.timeNumberIqamhLeft4;
+                timeDigitImages = ImagesArrays.timeNumberTheme6;
+                azanTimeDigitImages = ImagesArrays.timeNumberAzanTheme6;
+                iqamahTimeDigitImages = ImagesArrays.timeNumberIqama6;
+                iqamahCountdownDigitImages = ImagesArrays.timeNumberTheme6;
+                secondDigitImages = ImagesArrays.timeNumberTheme6;
                 break;
             case 6:
                 setContentView(R.layout.activity_main_7);
-                tv = findViewById(R.id.textviewNews);
+                newsTextView = findViewById(R.id.textviewNews);
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-                img_next_azan1 = findViewById(R.id.img_next_azan1);
+                nextPrayerIndicator = findViewById(R.id.img_next_azan1);
 
-                daysImage = ImagesArrays.daysImageTheme1;
-                monthImage = ImagesArrays.monthImageTheme1;
-                monthImageHijri = ImagesArrays.monthImageHijriTheme1;
-                dateNumber = ImagesArrays.dateNumberTheme1;
-                timeNumber = ImagesArrays.timeNumberIqamhLeft7;
-                timeNumberAzan = ImagesArrays.timeNumberAzanTheme6;
-                timeNumberIqamh = ImagesArrays.timeNumberIqama6;
-                timeNumberIqamhLeft = ImagesArrays.timeNumberIqamhLeft7;
-                timeNumberAzanLeft = ImagesArrays.timeNumberIqamhLeft7;
-                timeNumberSec = ImagesArrays.timeNumberIqamhLeft7;
+                dayImages = ImagesArrays.daysImageTheme1;
+                monthImages = ImagesArrays.monthImageTheme1;
+                hijriMonthImages = ImagesArrays.monthImageHijriTheme1;
+                digitImages = ImagesArrays.dateNumberTheme1;
+                timeDigitImages = ImagesArrays.timeNumberIqamhLeft7;
+                azanTimeDigitImages = ImagesArrays.timeNumberAzanTheme6;
+                iqamahTimeDigitImages = ImagesArrays.timeNumberIqama6;
+                iqamahCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft7;
+                azanCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft7;
+                secondDigitImages = ImagesArrays.timeNumberIqamhLeft7;
 
                 break;
             case 7:
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
                 setContentView(R.layout.activity_main_8);
-                tv = findViewById(R.id.textviewNews);
-                img_next_azan1 = findViewById(R.id.img_next_azan1);
+                newsTextView = findViewById(R.id.textviewNews);
+                nextPrayerIndicator = findViewById(R.id.img_next_azan1);
 
-                daysImage = ImagesArrays.daysImageTheme8;
-                monthImage = ImagesArrays.monthImageTheme8;
-                monthImageHijri = ImagesArrays.monthImageHijriTheme8;
-                dateNumber = ImagesArrays.timeNumberDate8;
-                timeNumber = ImagesArrays.timeNumberTime8;
-                timeNumberAzan = ImagesArrays.timeNumberAzIq8;
-                timeNumberIqamh = ImagesArrays.timeNumberAzIq8;
-                timeNumberIqamhLeft = ImagesArrays.timeNumberTime8;
-                timeNumberAzanLeft = ImagesArrays.timeNumberTime8;
-                timeNumberSec = ImagesArrays.timeNumberTime8;
+                dayImages = ImagesArrays.daysImageTheme8;
+                monthImages = ImagesArrays.monthImageTheme8;
+                hijriMonthImages = ImagesArrays.monthImageHijriTheme8;
+                digitImages = ImagesArrays.timeNumberDate8;
+                timeDigitImages = ImagesArrays.timeNumberTime8;
+                azanTimeDigitImages = ImagesArrays.timeNumberAzIq8;
+                iqamahTimeDigitImages = ImagesArrays.timeNumberAzIq8;
+                iqamahCountdownDigitImages = ImagesArrays.timeNumberTime8;
+                azanCountdownDigitImages = ImagesArrays.timeNumberTime8;
+                secondDigitImages = ImagesArrays.timeNumberTime8;
                 break;
             case 8:
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
                 setContentView(R.layout.activity_main_9);
-                tv = findViewById(R.id.textviewNews);
-                daysImage = ImagesArrays.daysImageTheme1;
-                monthImage = ImagesArrays.monthImageTheme1;
-                monthImageHijri = ImagesArrays.monthImageHijriTheme1;
-                dateNumber = ImagesArrays.dateNumberTheme1;
-                timeNumber = ImagesArrays.timeNumberTheme6;
-                timeNumberAzan = ImagesArrays.timeNumberAzanTheme6;
-                timeNumberIqamh = ImagesArrays.timeNumberIqama6;
-                timeNumberIqamhLeft = ImagesArrays.timeNumberTheme6;
-                timeNumberAzanLeft = ImagesArrays.timeNumberTheme6;
-                timeNumberSec = ImagesArrays.timeNumberTheme6;
+                newsTextView = findViewById(R.id.textviewNews);
+                dayImages = ImagesArrays.daysImageTheme1;
+                monthImages = ImagesArrays.monthImageTheme1;
+                hijriMonthImages = ImagesArrays.monthImageHijriTheme1;
+                digitImages = ImagesArrays.dateNumberTheme1;
+                timeDigitImages = ImagesArrays.timeNumberTheme6;
+                azanTimeDigitImages = ImagesArrays.timeNumberAzanTheme6;
+                iqamahTimeDigitImages = ImagesArrays.timeNumberIqama6;
+                iqamahCountdownDigitImages = ImagesArrays.timeNumberTheme6;
+                azanCountdownDigitImages = ImagesArrays.timeNumberTheme6;
+                secondDigitImages = ImagesArrays.timeNumberTheme6;
                 break;
             case 9:
                 setContentView(R.layout.activity_main_10);
-                tv = findViewById(R.id.textviewNews);
+                newsTextView = findViewById(R.id.textviewNews);
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-                img_next_azan1 = findViewById(R.id.img_next_azan1);
-                daysImage = ImagesArrays.daysImageTheme10;
-                monthImage = ImagesArrays.monthImageTheme10;
-                monthImageHijri = ImagesArrays.monthImageHijriTheme10;
-                dateNumber = ImagesArrays.timeNumberDate10;
-                timeNumber = ImagesArrays.timeNumberIqamhLeft4;
-                timeNumberAzan = ImagesArrays.timeNumberAzIq8;
-                timeNumberIqamh = ImagesArrays.timeNumberAzIq8;
-                timeNumberIqamhLeft = ImagesArrays.timeNumberIqamhLeft4;
-                timeNumberAzanLeft = ImagesArrays.timeNumberIqamhLeft4;
-                timeNumberSec = ImagesArrays.timeNumberDate10;
+                nextPrayerIndicatorSecondary = findViewById(R.id.img_next_azan1);
+                dayImages = ImagesArrays.daysImageTheme10;
+                monthImages = ImagesArrays.monthImageTheme10;
+                hijriMonthImages = ImagesArrays.monthImageHijriTheme10;
+                digitImages = ImagesArrays.timeNumberDate10;
+                timeDigitImages = ImagesArrays.timeNumberIqamhLeft4;
+                azanTimeDigitImages = ImagesArrays.timeNumberAzIq8;
+                iqamahTimeDigitImages = ImagesArrays.timeNumberAzIq8;
+                iqamahCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft4;
+                azanCountdownDigitImages = ImagesArrays.timeNumberIqamhLeft4;
+                secondDigitImages = ImagesArrays.timeNumberDate10;
                 break;
             default:
                 setContentView(R.layout.activity_main);
                 Resources res4 = getResources();
-                relativeLayout = findViewById(R.id.relativeLayout);
-                tv = findViewById(R.id.textviewNews);
+                mainLayout = findViewById(R.id.relativeLayout);
+                newsTextView = findViewById(R.id.textviewNews);
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
                 Drawable drawable0 = res4.getDrawable(R.drawable.background_main);
-                relativeLayout.setBackground(drawable0);
-                img_next_azan1 = findViewById(R.id.img_next_azan1);
+                mainLayout.setBackground(drawable0);
+                nextPrayerIndicatorSecondary = findViewById(R.id.img_next_azan1);
 
-                daysImage = ImagesArrays.daysImageTheme1;
-                monthImage = ImagesArrays.monthImageTheme1;
-                monthImageHijri = ImagesArrays.monthImageHijriTheme1;
-                dateNumber = ImagesArrays.dateNumberTheme1;
-                timeNumber = ImagesArrays.timeNumberTheme1;
-                timeNumberAzan = ImagesArrays.timeNumberAzanTheme1;
-                timeNumberIqamh = ImagesArrays.timeNumberIqamhTheme1;
-                timeNumberIqamhLeft = ImagesArrays.timeNumberTheme1;
-                timeNumberAzanLeft = ImagesArrays.timeNumberTheme1;
-                timeNumberSec = ImagesArrays.timeNumberTheme1;
+                dayImages = ImagesArrays.daysImageTheme1;
+                monthImages = ImagesArrays.monthImageTheme1;
+                hijriMonthImages = ImagesArrays.monthImageHijriTheme1;
+                digitImages = ImagesArrays.dateNumberTheme1;
+                timeDigitImages = ImagesArrays.timeNumberTheme1;
+                azanTimeDigitImages = ImagesArrays.timeNumberAzanTheme1;
+                iqamahTimeDigitImages = ImagesArrays.timeNumberIqamhTheme1;
+                iqamahCountdownDigitImages = ImagesArrays.timeNumberTheme1;
+                azanCountdownDigitImages = ImagesArrays.timeNumberTheme1;
+                secondDigitImages = ImagesArrays.timeNumberTheme1;
                 break;
         }
 
-        activity = MainActivity.this;
+        currentActivity = MainActivity.this;
 
         DateHigri hd = new DateHigri();
         date = Utils.writeIslamicDate(MainActivity.this, hd);
 
-        db = new DataBaseHelper(getApplicationContext());
+        // Add null check for date array
+        if (date == null || date.length < 7) {
+            date = new String[]{"1", "1", "1", "2024", "1", "1", "2024"};
+        }
 
-        tv.setSelected(true);
+        int hijriDiff1 = Pref.getValue(MainActivity.this, Constants.PREF_HEJRY_INT1, 0);
+        int iii = Integer.parseInt(date[4]);
+        date[4] = String.valueOf(iii + hijriDiff1);
+
+        databaseHelper = new DataBaseHelper(getApplicationContext());
+
+        newsTextView.setSelected(true);
 
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter != null) {
@@ -376,18 +425,21 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        initializeViewsAndListeners();
+        initializeBluetoothManager();
         requestLocationPermissions();
+        initializeBluetoothListener();
+        initializeViewsAndListeners();
         updatePrayerAndDateDisplays();
+
         Runnable runnable = new CountDownRunner();
-        myThread = new Thread(runnable);
-        myThread.start();
+        updateThread = new Thread(runnable);
+        updateThread.start();
     }
 
     @Override
     public void onBackPressed() {
-        if (myThread.isAlive()) {
-            myThread.interrupt();
+        if (updateThread.isAlive()) {
+            updateThread.interrupt();
         }
         super.onBackPressed();
     }
@@ -402,7 +454,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        tv_masged_name.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
+        mosqueNameTextView.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
     }
 
     @Override
@@ -412,13 +464,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if (myThread.isAlive()) {
-            myThread.interrupt();
+        if (updateThread.isAlive()) {
+            updateThread.interrupt();
         }
-        if (mp.isPlaying()) {
-            mp.stop();
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
         }
-        mMtCentralManager.stopService();
+        bluetoothCentralManager.stopService();
         super.onDestroy();
     }
 
@@ -477,9 +529,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        img_bottom = findViewById(R.id.img_bottom);
-        tv_masged_name = findViewById(R.id.tv_masged_name);
-        tv_internal_heat = findViewById(R.id.tv_internal_heat);
+        bottomLayout = findViewById(R.id.img_bottom);
+        mosqueNameTextView = findViewById(R.id.tv_masged_name);
+        temperatureTextView = findViewById(R.id.tv_internal_heat);
 
         LinearLayout lay_sin = findViewById(R.id.lay_sin);
         LinearLayout lay_friday = findViewById(R.id.lay_friday);
@@ -492,391 +544,454 @@ public class MainActivity extends AppCompatActivity {
             lay_friday.setVisibility(View.VISIBLE);
         }
 
-        tv_masged_name.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
+        mosqueNameTextView.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
 
-        img_time_hour_1 = findViewById(R.id.img_time_hour_1);
-        img_time_hour_2 = findViewById(R.id.img_time_hour_2);
-        img_time_mint_1 = findViewById(R.id.img_time_mint_1);
-        img_time_mint_2 = findViewById(R.id.img_time_mint_2);
-        img_time_sec_2 = findViewById(R.id.img_time_sec_2);
-        img_time_sec_1 = findViewById(R.id.img_time_sec_1);
-        img_date_day = findViewById(R.id.img_date_day);
-        img_date_month_m_2 = findViewById(R.id.img_date_month_m_2);
-        img_date_month_m_1 = findViewById(R.id.img_date_month_m_1);
-        img_date_month_m = findViewById(R.id.img_date_month_m);
-        img_date_years_4 = findViewById(R.id.img_date_years_4);
-        img_date_years_3 = findViewById(R.id.img_date_years_3);
-        img_date_years_2 = findViewById(R.id.img_date_years_2);
-        img_date_years_1 = findViewById(R.id.img_date_years_1);
-        img_date_month_h_2 = findViewById(R.id.img_date_month_h_2);
-        img_date_month_h_1 = findViewById(R.id.img_date_month_h_1);
-        img_date_month_h = findViewById(R.id.img_date_month_h);
-        img_date_years_h_4 = findViewById(R.id.img_date_years_h_4);
-        img_date_years_h_3 = findViewById(R.id.img_date_years_h_3);
-        img_date_years_h_2 = findViewById(R.id.img_date_years_h_2);
-        img_date_years_h_1 = findViewById(R.id.img_date_years_h_1);
+        timeHourTensDigit = findViewById(R.id.img_time_hour_1);
+        timeHourOnesDigit = findViewById(R.id.img_time_hour_2);
+        timeMinuteTensDigit = findViewById(R.id.img_time_mint_1);
+        timeMinuteOnesDigit = findViewById(R.id.img_time_mint_2);
+        timeSecondTensDigit = findViewById(R.id.img_time_sec_2);
+        timeSecondOnesDigit = findViewById(R.id.img_time_sec_1);
+        dateDayImage = findViewById(R.id.img_date_day);
+        dateMonthTensDigit = findViewById(R.id.img_date_month_m_2);
+        dateMonthOnesDigit = findViewById(R.id.img_date_month_m_1);
+        dateMonthImage = findViewById(R.id.img_date_month_m);
+        dateYearThousandsDigit = findViewById(R.id.img_date_years_4);
+        dateYearHundredsDigit = findViewById(R.id.img_date_years_3);
+        dateYearTensDigit = findViewById(R.id.img_date_years_2);
+        dateYearOnesDigit = findViewById(R.id.img_date_years_1);
+        hijriMonthTensDigit = findViewById(R.id.img_date_month_h_2);
+        hijriMonthOnesDigit = findViewById(R.id.img_date_month_h_1);
+        hijriMonthImage = findViewById(R.id.img_date_month_h);
+        hijriYearThousandsDigit = findViewById(R.id.img_date_years_h_4);
+        hijriYearHundredsDigit = findViewById(R.id.img_date_years_h_3);
+        hijriYearTensDigit = findViewById(R.id.img_date_years_h_2);
+        hijriYearOnesDigit = findViewById(R.id.img_date_years_h_1);
 
-        img_next_azan = findViewById(R.id.img_next_azan);
+        nextPrayerIndicator = findViewById(R.id.img_next_azan);
 
-        img_fjr_azan_h_1 = findViewById(R.id.img_fjr_azan_h_1);
-        img_fjr_azan_h_2 = findViewById(R.id.img_fjr_azan_h_2);
-        img_fjr_azan_m_1 = findViewById(R.id.img_fjr_azan_m_1);
-        img_fjr_azan_m_2 = findViewById(R.id.img_fjr_azan_m_2);
+        fajrAzanHourTensDigit = findViewById(R.id.img_fjr_azan_h_1);
+        fajrAzanHourOnesDigit = findViewById(R.id.img_fjr_azan_h_2);
+        fajrAzanMinuteTensDigit = findViewById(R.id.img_fjr_azan_m_1);
+        fajrAzanMinuteOnesDigit = findViewById(R.id.img_fjr_azan_m_2);
 
-        img_shroq_azan_h_1 = findViewById(R.id.img_shroq_azan_h_1);
-        img_shroq_azan_h_2 = findViewById(R.id.img_shroq_azan_h_2);
-        img_shroq_azan_m_1 = findViewById(R.id.img_shroq_azan_m_1);
-        img_shroq_azan_m_2 = findViewById(R.id.img_shroq_azan_m_2);
+        sunriseAzanHourTensDigit = findViewById(R.id.img_shroq_azan_h_1);
+        sunriseAzanHourOnesDigit = findViewById(R.id.img_shroq_azan_h_2);
+        sunriseAzanMinuteTensDigit = findViewById(R.id.img_shroq_azan_m_1);
+        sunriseAzanMinuteOnesDigit = findViewById(R.id.img_shroq_azan_m_2);
 
-        img_dahr_azan_h_1 = findViewById(R.id.img_daheq_azan_h_1);
-        img_dahr_azan_h_2 = findViewById(R.id.img_daheq_azan_h_2);
-        img_dahr_azan_m_1 = findViewById(R.id.img_daheq_azan_m_1);
-        img_dahr_azan_m_2 = findViewById(R.id.img_daheq_azan_m_2);
+        dhuhrAzanHourTensDigit = findViewById(R.id.img_daheq_azan_h_1);
+        dhuhrAzanHourOnesDigit = findViewById(R.id.img_daheq_azan_h_2);
+        dhuhrAzanMinuteTensDigit = findViewById(R.id.img_daheq_azan_m_1);
+        dhuhrAzanMinuteOnesDigit = findViewById(R.id.img_daheq_azan_m_2);
 
-        img_asr_azan_h_1 = findViewById(R.id.img_asr_azan_h_1);
-        img_asr_azan_h_2 = findViewById(R.id.img_asr_azan_h_2);
-        img_asr_azan_m_1 = findViewById(R.id.img_asr_azan_m_1);
-        img_asr_azan_m_2 = findViewById(R.id.img_asr_azan_m_2);
+        asrAzanHourTensDigit = findViewById(R.id.img_asr_azan_h_1);
+        asrAzanHourOnesDigit = findViewById(R.id.img_asr_azan_h_2);
+        asrAzanMinuteTensDigit = findViewById(R.id.img_asr_azan_m_1);
+        asrAzanMinuteOnesDigit = findViewById(R.id.img_asr_azan_m_2);
 
-        img_mgrb_azan_h_1 = findViewById(R.id.img_mgrb_azan_h_1);
-        img_mgrb_azan_h_2 = findViewById(R.id.img_mgrb_azan_h_2);
-        img_mgrb_azan_m_1 = findViewById(R.id.img_mgrb_azan_m_1);
-        img_mgrb_azan_m_2 = findViewById(R.id.img_mgrb_azan_m_2);
+        maghribAzanHourTensDigit = findViewById(R.id.img_mgrb_azan_h_1);
+        maghribAzanHourOnesDigit = findViewById(R.id.img_mgrb_azan_h_2);
+        maghribAzanMinuteTensDigit = findViewById(R.id.img_mgrb_azan_m_1);
+        maghribAzanMinuteOnesDigit = findViewById(R.id.img_mgrb_azan_m_2);
 
-        img_isha_azan_h_1 = findViewById(R.id.img_isha_azan_h_1);
-        img_isha_azan_h_2 = findViewById(R.id.img_isha_azan_h_2);
-        img_isha_azan_m_1 = findViewById(R.id.img_isha_azan_m_1);
-        img_isha_azan_m_2 = findViewById(R.id.img_isha_azan_m_2);
+        ishaAzanHourTensDigit = findViewById(R.id.img_isha_azan_h_1);
+        ishaAzanHourOnesDigit = findViewById(R.id.img_isha_azan_h_2);
+        ishaAzanMinuteTensDigit = findViewById(R.id.img_isha_azan_m_1);
+        ishaAzanMinuteOnesDigit = findViewById(R.id.img_isha_azan_m_2);
 
         /* init fjr iqamh images */
-        img_fjr_iqamh_h_1 = findViewById(R.id.img_fjr_iqamh_h_1);
-        img_fjr_iqamh_h_2 = findViewById(R.id.img_fjr_iqamh_h_2);
-        img_fjr_iqamh_m_1 = findViewById(R.id.img_fjr_iqamh_m_1);
-        img_fjr_iqamh_m_2 = findViewById(R.id.img_fjr_iqamh_m_2);
+        fajrIqamahHourTensDigit = findViewById(R.id.img_fjr_iqamh_h_1);
+        fajrIqamahHourOnesDigit = findViewById(R.id.img_fjr_iqamh_h_2);
+        fajrIqamahMinuteTensDigit = findViewById(R.id.img_fjr_iqamh_m_1);
+        fajrIqamahMinuteOnesDigit = findViewById(R.id.img_fjr_iqamh_m_2);
 
         /* init shroq iqamh images */
-        img_shroq_iqamh_h_1 = findViewById(R.id.img_shroq_iqamh_h_1);
-        img_shroq_iqamh_h_2 = findViewById(R.id.img_shroq_iqamh_h_2);
-        img_shroq_iqamh_m_1 = findViewById(R.id.img_shroq_iqamh_m_1);
-        img_shroq_iqamh_m_2 = findViewById(R.id.img_shroq_iqamh_m_2);
+        sunriseIqamahHourTensDigit = findViewById(R.id.img_shroq_iqamh_h_1);
+        sunriseIqamahHourOnesDigit = findViewById(R.id.img_shroq_iqamh_h_2);
+        sunriseIqamahMinuteTensDigit = findViewById(R.id.img_shroq_iqamh_m_1);
+        sunriseIqamahMinuteOnesDigit = findViewById(R.id.img_shroq_iqamh_m_2);
 
         /* init dahr iqamg images */
-        img_dahr_iqamg_h_1 = findViewById(R.id.img_daheq_iqamg_h_1);
-        img_dahr_iqamg_h_2 = findViewById(R.id.img_daheq_iqamg_h_2);
-        img_dahr_iqamg_m_1 = findViewById(R.id.img_daheq_iqamg_m_1);
-        img_dahr_iqamg_m_2 = findViewById(R.id.img_daheq_iqamg_m_2);
+        dhuhrIqamahHourTensDigit = findViewById(R.id.img_daheq_iqamg_h_1);
+        dhuhrIqamahHourOnesDigit = findViewById(R.id.img_daheq_iqamg_h_2);
+        dhuhrIqamahMinuteTensDigit = findViewById(R.id.img_daheq_iqamg_m_1);
+        dhuhrIqamahMinuteOnesDigit = findViewById(R.id.img_daheq_iqamg_m_2);
 
         /* init asr iqamg images */
-        img_asr_iqamg_h_1 = findViewById(R.id.img_asr_iqamg_h_1);
-        img_asr_iqamg_h_2 = findViewById(R.id.img_asr_iqamg_h_2);
-        img_asr_iqamg_m_1 = findViewById(R.id.img_asr_iqamg_m_1);
-        img_asr_iqamg_m_2 = findViewById(R.id.img_asr_iqamg_m_2);
+        asrIqamahHourTensDigit = findViewById(R.id.img_asr_iqamg_h_1);
+        asrIqamahHourOnesDigit = findViewById(R.id.img_asr_iqamg_h_2);
+        asrIqamahMinuteTensDigit = findViewById(R.id.img_asr_iqamg_m_1);
+        asrIqamahMinuteOnesDigit = findViewById(R.id.img_asr_iqamg_m_2);
 
         /* init mgrb iqamg images */
-        img_mgrb_iqamg_h_1 = findViewById(R.id.img_mgrb_iqamg_h_1);
-        img_mgrb_iqamg_h_2 = findViewById(R.id.img_mgrb_iqamg_h_2);
-        img_mgrb_iqamg_m_1 = findViewById(R.id.img_mgrb_iqamg_m_1);
-        img_mgrb_iqamg_m_2 = findViewById(R.id.img_mgrb_iqamg_m_2);
+        maghribIqamahHourTensDigit = findViewById(R.id.img_mgrb_iqamg_h_1);
+        maghribIqamahHourOnesDigit = findViewById(R.id.img_mgrb_iqamg_h_2);
+        maghribIqamahMinuteTensDigit = findViewById(R.id.img_mgrb_iqamg_m_1);
+        maghribIqamahMinuteOnesDigit = findViewById(R.id.img_mgrb_iqamg_m_2);
 
         /* init isha iqamg images */
-        img_isha_iqamh_h_1 = findViewById(R.id.img_isha_iqamh_h_1);
-        img_isha_iqamh_h_2 = findViewById(R.id.img_isha_iqamh_h_2);
-        img_isha_iqamh_m_1 = findViewById(R.id.img_isha_iqamh_m_1);
-        img_isha_iqamh_m_2 = findViewById(R.id.img_isha_iqamh_m_2);
+        ishaIqamahHourTensDigit = findViewById(R.id.img_isha_iqamh_h_1);
+        ishaIqamahHourOnesDigit = findViewById(R.id.img_isha_iqamh_h_2);
+        ishaIqamahMinuteTensDigit = findViewById(R.id.img_isha_iqamh_m_1);
+        ishaIqamahMinuteOnesDigit = findViewById(R.id.img_isha_iqamh_m_2);
 
         /* init azan time left image */
-        img_time_left_h_1 = findViewById(R.id.img_time_left_h_1);
-        img_time_left_h_2 = findViewById(R.id.img_time_left_h_2);
-        img_time_left_m_1 = findViewById(R.id.img_time_left_m_1);
-        img_time_left_m_2 = findViewById(R.id.img_time_left_m_2);
-        img_time_left_s_1 = findViewById(R.id.img_time_left_s_1);
-        img_time_left_s_2 = findViewById(R.id.img_time_left_s_2);
+        azanCountdownHourTensDigit = findViewById(R.id.img_time_left_h_1);
+        azanCountdownHourOnesDigit = findViewById(R.id.img_time_left_h_2);
+        azanCountdownMinuteTensDigit = findViewById(R.id.img_time_left_m_1);
+        azanCountdownMinuteOnesDigit = findViewById(R.id.img_time_left_m_2);
+        azanCountdownSecondTensDigit = findViewById(R.id.img_time_left_s_1);
+        azanCountdownSecondOnesDigit = findViewById(R.id.img_time_left_s_2);
 
         /* init iqamh time left image */
-        img_iqamh_time_left_m_1 = findViewById(R.id.img_iqamh_time_left_m_1);
-        img_iqamh_time_left_m_2 = findViewById(R.id.img_iqamh_time_left_m_2);
-        img_iqamh_time_left_s_1 = findViewById(R.id.img_iqamh_time_left_s_1);
-        img_iqamh_time_left_s_2 = findViewById(R.id.img_iqamh_time_left_s_2);
+        iqamahCountdownMinuteTensDigit = findViewById(R.id.img_iqamh_time_left_m_1);
+        iqamahCountdownMinuteOnesDigit = findViewById(R.id.img_iqamh_time_left_m_2);
+        iqamahCountdownSecondTensDigit = findViewById(R.id.img_iqamh_time_left_s_1);
+        iqamahCountdownSecondOnesDigit = findViewById(R.id.img_iqamh_time_left_s_2);
 
         /* init LinearLayout left */
-        lay_img_azan_time_left = findViewById(R.id.lay_img_azan_time_left);
-        lay_img_iqamh_time_left = findViewById(R.id.lay_img_iqamh_time_left);
+        azanCountdownContainer = findViewById(R.id.lay_img_azan_time_left);
+        iqamahCountdownContainer = findViewById(R.id.lay_img_iqamh_time_left);
 
         /* next azan jm3a    */
-        img_azan_jm3a_time_h_1 = findViewById(R.id.img_azan_jm3a_time_h_1);
-        img_azan_jm3a_time_h_2 = findViewById(R.id.img_azan_jm3a_time_h_2);
-        img_azan_jm3a_time_m_1 = findViewById(R.id.img_azan_jm3a_time_m_1);
-        img_azan_jm3a_time_m_2 = findViewById(R.id.img_azan_jm3a_time_m_2);
+        fridayAzanHourTensDigit = findViewById(R.id.img_azan_jm3a_time_h_1);
+        fridayAzanHourOnesDigit = findViewById(R.id.img_azan_jm3a_time_h_2);
+        fridayAzanMinuteTensDigit = findViewById(R.id.img_azan_jm3a_time_m_1);
+        fridayAzanMinuteOnesDigit = findViewById(R.id.img_azan_jm3a_time_m_2);
     }
 
     private void updatePrayerAndDateDisplays() {
-        tv.setSelected(true);
-
-        String text = db.getNews(Utils.getFormattedCurrentDate());
-
-        if (text != null) {
-            img_bottom.setVisibility(View.GONE);
-            tv.setVisibility(View.VISIBLE);
-            if (!isTextNewsShow) {
-                if (text.length() <= 50) {
-                    text = "                                            " + text;
-                }
-                tv.setText(text);
-                isTextNewsShow = true;
-            }
-        } else {
-            img_bottom.setVisibility(View.VISIBLE);
-            tv.setVisibility(View.GONE);
-            isTextNewsShow = false;
-        }
-
-        Calendar today1 = Calendar.getInstance();
-
-        SimpleDateFormat format2 = new SimpleDateFormat("M/d", Locale.ENGLISH);
-        SimpleDateFormat format1 = new SimpleDateFormat("yy", Locale.ENGLISH);
-
-        db = new DataBaseHelper(getApplicationContext());
-        String[] cityEn = getResources().getStringArray(R.array.city_name_en);
-        String[] d = null;
-        int cityChose = Pref.getValue(getApplicationContext(), Constants.PREF_CITY_POSITION_SELECTED, 90);
-        if (cityChose != 0) {
-            d = db.getPrayerTimes(cityEn[cityChose], format2.format(today1.getTime()) + "/" + getYears(Integer.parseInt(format1.format(today1.getTime()))));
-        }
-
-        assert d != null;
-        cfajr1 = d[1];
-        csunrise1 = d[2];
-        cdhohr1 = d[3];
-        casr1 = d[4];
-        cmaghrib1 = d[5];
-        cisha1 = d[6];
-
-        cfajr = d[1];
-        csunrise = d[2];
-        cdhohr = d[3];
-        casr = d[4];
-        cmaghrib = d[5];
-        cisha = d[6];
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mmaa", Locale.ENGLISH);
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("hh:mm", Locale.ENGLISH);
         try {
-            Date date = dateFormat2.parse(cfajr1);
-            assert date != null;
-            cfajr1 = dateFormat.format(date);
-            Date date1 = dateFormat2.parse(csunrise1);
-            assert date1 != null;
-            csunrise1 = dateFormat.format(date1);
-            Date date2 = dateFormat2.parse(cdhohr1);
-            assert date2 != null;
-            cdhohr1 = dateFormat.format(date2);
-            Date date3 = dateFormat2.parse(casr1);
-            assert date3 != null;
-            casr1 = dateFormat.format(date3);
-            Date date4 = dateFormat2.parse(cmaghrib1);
-            assert date4 != null;
-            cmaghrib1 = dateFormat.format(date4);
-            Date date5 = dateFormat2.parse(cisha1);
-            assert date5 != null;
-            cisha1 = dateFormat.format(date5);
-        } catch (ParseException e) {
-            e.printStackTrace();
+            // Check if views are initialized
+            if (newsTextView == null || bottomLayout == null) {
+                return;
+            }
+            
+            newsTextView.setSelected(true);
+
+            // Initialize databaseHelper if null
+            if (databaseHelper == null) {
+                databaseHelper = new DataBaseHelper(getApplicationContext());
+            }
+
+            String text = databaseHelper.getNews(Utils.getFormattedCurrentDate());
+
+            if (text != null) {
+                bottomLayout.setVisibility(View.GONE);
+                newsTextView.setVisibility(View.VISIBLE);
+                if (!isNewsTextDisplayed) {
+                    if (text.length() <= 50) {
+                        text = "                                            " + text;
+                    }
+                    newsTextView.setText(text);
+                    isNewsTextDisplayed = true;
+                }
+            } else {
+                bottomLayout.setVisibility(View.VISIBLE);
+                newsTextView.setVisibility(View.GONE);
+                isNewsTextDisplayed = false;
+            }
+
+            Calendar today1 = Calendar.getInstance();
+
+            SimpleDateFormat format2 = new SimpleDateFormat("M/d", Locale.ENGLISH);
+            SimpleDateFormat format1 = new SimpleDateFormat("yy", Locale.ENGLISH);
+
+            databaseHelper = new DataBaseHelper(getApplicationContext());
+            String[] cityEn = getResources().getStringArray(R.array.city_name_en);
+            String[] d = null;
+            int cityChose = Pref.getValue(getApplicationContext(), Constants.PREF_CITY_POSITION_SELECTED, 90);
+            if (cityChose != 0) {
+                d = databaseHelper.getPrayerTimes(cityEn[cityChose], format2.format(today1.getTime()) + "/" + getYears(Integer.parseInt(format1.format(today1.getTime()))));
+            }
+
+            // Add null check for prayer times
+            if (d == null || d.length < 7) {
+                // Set default prayer times if database returns null
+                d = new String[]{"", "05:30", "06:30", "12:30", "15:30", "18:30", "20:30"};
+            }
+
+            fajrTime12h = d[1];
+            sunriseTime12h = d[2];
+            dhuhrTime12h = d[3];
+            asrTime12h = d[4];
+            maghribTime12h = d[5];
+            ishaTime12h = d[6];
+
+            fajrTime24h = d[1];
+            sunriseTime24h = d[2];
+            dhuhrTime24h = d[3];
+            asrTime24h = d[4];
+            maghribTime24h = d[5];
+            ishaTime24h = d[6];
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mmaa", Locale.ENGLISH);
+            SimpleDateFormat dateFormat2 = new SimpleDateFormat("hh:mm", Locale.ENGLISH);
+            try {
+                Date date = dateFormat2.parse(fajrTime12h);
+                assert date != null;
+                fajrTime12h = dateFormat.format(date);
+                Date date1 = dateFormat2.parse(sunriseTime12h);
+                assert date1 != null;
+                sunriseTime12h = dateFormat.format(date1);
+                Date date2 = dateFormat2.parse(dhuhrTime12h);
+                assert date2 != null;
+                dhuhrTime12h = dateFormat.format(date2);
+                Date date3 = dateFormat2.parse(asrTime12h);
+                assert date3 != null;
+                asrTime12h = dateFormat.format(date3);
+                Date date4 = dateFormat2.parse(maghribTime12h);
+                assert date4 != null;
+                maghribTime12h = dateFormat.format(date4);
+                Date date5 = dateFormat2.parse(ishaTime12h);
+                assert date5 != null;
+                ishaTime12h = dateFormat.format(date5);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            Pref.setValue(getApplicationContext(), Constants.PREF_FAJR_TIME_24, fajrTime24h);
+            Pref.setValue(getApplicationContext(), Constants.PREF_FAJR_TIME, fajrTime12h);
+            Pref.setValue(getApplicationContext(), Constants.PREF_SUNRISE_TIME_24, sunriseTime24h);
+            Pref.setValue(getApplicationContext(), Constants.PREF_SUNRISE_TIME, sunriseTime12h);
+            Pref.setValue(getApplicationContext(), Constants.PREF_DHOHR_TIME_24, dhuhrTime24h);
+            Pref.setValue(getApplicationContext(), Constants.PREF_DHOHR_TIME, dhuhrTime12h);
+            Pref.setValue(getApplicationContext(), Constants.PREF_ASR_TIME_24, asrTime24h);
+            Pref.setValue(getApplicationContext(), Constants.PREF_ASR_TIME, asrTime12h);
+            Pref.setValue(getApplicationContext(), Constants.PREF_MAGHRIB_TIME_24, maghribTime24h);
+            Pref.setValue(getApplicationContext(), Constants.PREF_MAGHRIB_TIME, maghribTime12h);
+            Pref.setValue(getApplicationContext(), Constants.PREF_ISHA_TIME_24, ishaTime24h);
+            Pref.setValue(getApplicationContext(), Constants.PREF_ISHA_TIME, ishaTime12h);
+
+            if (fajrTime24h.length() == 4) {
+                fajrTime24h = "0" + fajrTime24h;
+            }
+            if (sunriseTime24h.length() == 4) {
+                sunriseTime24h = "0" + sunriseTime24h;
+            }
+            if (dhuhrTime24h.length() == 4) {
+                dhuhrTime24h = "0" + dhuhrTime24h;
+            }
+            if (asrTime24h.length() == 4) {
+                asrTime24h = "0" + asrTime24h;
+            }
+            if (maghribTime24h.length() == 4) {
+                maghribTime24h = "0" + maghribTime24h;
+            }
+            if (ishaTime24h.length() == 4) {
+                ishaTime24h = "0" + ishaTime24h;
+            }
+
+
+            DateHigri hd = new DateHigri();
+            date = Utils.writeIslamicDate(MainActivity.this, hd);
+
+            // Add null check for date array
+            if (date == null || date.length < 7) {
+                date = new String[]{"1", "1", "1", "2024", "1", "1", "2024"};
+            }
+
+            int hijriDiff1 = Pref.getValue(MainActivity.this, Constants.PREF_HEJRY_INT1, 0);
+            int iii = Integer.parseInt(date[4]);
+            date[4] = String.valueOf(iii + hijriDiff1);
+
+
+            /* set images date */
+            if (dayImages != null && date != null && date.length > 0 && dateDayImage != null) {
+                dateDayImage.setImageResource(dayImages[Integer.parseInt(date[0])]);
+            }
+            if (digitImages != null && date != null && date.length > 1 && dateMonthTensDigit != null) {
+                dateMonthTensDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[1].charAt(0)))]);
+                if (date[1].length() != 1 && dateMonthOnesDigit != null) {
+                    dateMonthOnesDigit.setVisibility(View.VISIBLE);
+                    dateMonthOnesDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[1].charAt(1)))]);
+                } else if (dateMonthOnesDigit != null) {
+                    dateMonthOnesDigit.setVisibility(View.GONE);
+                }
+            }
+            if (monthImages != null && date != null && date.length > 2 && dateMonthImage != null) {
+                dateMonthImage.setImageResource(monthImages[Integer.parseInt(date[2])]);
+            }
+            if (digitImages != null && date != null && date.length > 3 && dateYearThousandsDigit != null && dateYearHundredsDigit != null && dateYearTensDigit != null && dateYearOnesDigit != null) {
+                dateYearThousandsDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[3].charAt(0)))]);
+                dateYearHundredsDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[3].charAt(1)))]);
+                dateYearTensDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[3].charAt(2)))]);
+                dateYearOnesDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[3].charAt(3)))]);
+            }
+            if (digitImages != null && date != null && date.length > 4 && hijriMonthTensDigit != null) {
+                hijriMonthTensDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[4].charAt(0)))]);
+                if (date[4].length() != 1 && hijriMonthOnesDigit != null) {
+                    hijriMonthOnesDigit.setVisibility(View.VISIBLE);
+                    hijriMonthOnesDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[4].charAt(1)))]);
+                } else if (hijriMonthOnesDigit != null) {
+                    hijriMonthOnesDigit.setVisibility(View.GONE);
+                }
+            }
+            if (hijriMonthImages != null && date != null && date.length > 5 && hijriMonthImage != null) {
+                hijriMonthImage.setImageResource(hijriMonthImages[Integer.parseInt(date[5]) - 1]);
+            }
+            if (digitImages != null && date != null && date.length > 6 && hijriYearThousandsDigit != null && hijriYearHundredsDigit != null && hijriYearTensDigit != null && hijriYearOnesDigit != null) {
+                hijriYearThousandsDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[6].charAt(0)))]);
+                hijriYearHundredsDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[6].charAt(1)))]);
+                hijriYearTensDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[6].charAt(2)))]);
+                hijriYearOnesDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[6].charAt(3)))]);
+            }
+
+            /* set images azan fajr */
+            if (azanTimeDigitImages != null && fajrTime12h != null && fajrTime12h.length() >= 5 && fajrAzanHourTensDigit != null && fajrAzanHourOnesDigit != null && fajrAzanMinuteTensDigit != null && fajrAzanMinuteOnesDigit != null) {
+                fajrAzanHourTensDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(fajrTime12h.charAt(0)))]);
+                fajrAzanHourOnesDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(fajrTime12h.charAt(1)))]);
+
+                fajrAzanMinuteTensDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(fajrTime12h.charAt(3)))]);
+                fajrAzanMinuteOnesDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(fajrTime12h.charAt(4)))]);
+            }
+
+            /* set images azan shroq */
+            if (azanTimeDigitImages != null && sunriseTime12h != null && sunriseTime12h.length() >= 5 && sunriseAzanHourTensDigit != null && sunriseAzanHourOnesDigit != null && sunriseAzanMinuteTensDigit != null && sunriseAzanMinuteOnesDigit != null) {
+                sunriseAzanHourTensDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(sunriseTime12h.charAt(0)))]);
+                sunriseAzanHourOnesDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(sunriseTime12h.charAt(1)))]);
+
+                sunriseAzanMinuteTensDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(sunriseTime12h.charAt(3)))]);
+                sunriseAzanMinuteOnesDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(sunriseTime12h.charAt(4)))]);
+            }
+
+
+            /* set images azan dahr */
+            if (azanTimeDigitImages != null && dhuhrTime12h != null && dhuhrTime12h.length() >= 5 && dhuhrAzanHourTensDigit != null && dhuhrAzanHourOnesDigit != null && dhuhrAzanMinuteTensDigit != null && dhuhrAzanMinuteOnesDigit != null) {
+                dhuhrAzanHourTensDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(dhuhrTime12h.charAt(0)))]);
+                dhuhrAzanHourOnesDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(dhuhrTime12h.charAt(1)))]);
+
+                dhuhrAzanMinuteTensDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(dhuhrTime12h.charAt(3)))]);
+                dhuhrAzanMinuteOnesDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(dhuhrTime12h.charAt(4)))]);
+            }
+
+            /* set images azan asr */
+            if (azanTimeDigitImages != null && asrTime12h != null && asrTime12h.length() >= 5) {
+                asrAzanHourTensDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(asrTime12h.charAt(0)))]);
+                asrAzanHourOnesDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(asrTime12h.charAt(1)))]);
+
+                asrAzanMinuteTensDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(asrTime12h.charAt(3)))]);
+                asrAzanMinuteOnesDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(asrTime12h.charAt(4)))]);
+            }
+
+            /* set images azan mgrb */
+            if (azanTimeDigitImages != null && maghribTime12h != null && maghribTime12h.length() >= 5) {
+                maghribAzanHourTensDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(maghribTime12h.charAt(0)))]);
+                maghribAzanHourOnesDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(maghribTime12h.charAt(1)))]);
+
+                maghribAzanMinuteTensDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(maghribTime12h.charAt(3)))]);
+                maghribAzanMinuteOnesDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(maghribTime12h.charAt(4)))]);
+            }
+
+            /* set images azan isha */
+            if (azanTimeDigitImages != null && ishaTime12h != null && ishaTime12h.length() >= 5) {
+                ishaAzanHourTensDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(ishaTime12h.charAt(0)))]);
+                ishaAzanHourOnesDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(ishaTime12h.charAt(1)))]);
+
+                ishaAzanMinuteTensDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(ishaTime12h.charAt(3)))]);
+                ishaAzanMinuteOnesDigit.setImageResource(azanTimeDigitImages[Integer.parseInt(String.valueOf(ishaTime12h.charAt(4)))]);
+            }
+
+            long fajrIqamh, fajrSun, thuhrIqamh, assrIqamh, maghribIqamh, ishaaIqamh;
+            String iqamhFjrTime, iqamhShroqTime, iqamhDahrTime, iqamhAsrTime, iqamhMgrmTime, iqamhIshaTime;
+            if (!Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_RELATIVE, false)) {
+                fajrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_RELATIVE_TIME_SELECTED, 25);
+                iqamhFjrTime = getIqamh(String.valueOf(fajrTime12h), fajrIqamh);
+            } else {
+                iqamhFjrTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_CONSTANT_TIME_SELECTED, "20:20");
+            }
+            if (!Pref.getValue(getApplicationContext(), Constants.PREF_SUNRISE_RELATIVE, false)) {
+                fajrSun = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_SUNRISE_RELATIVE_TIME_SELECTED, 20);
+                iqamhShroqTime = getIqamh(String.valueOf(sunriseTime12h), fajrSun);
+            } else {
+                iqamhShroqTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_SUNRISE_CONSTANT_TIME_SELECTED, "20:20");
+            }
+            if (!Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_RELATIVE, false)) {
+                thuhrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_RELATIVE_TIME_SELECTED, 20);
+                iqamhDahrTime = getIqamh(String.valueOf(dhuhrTime12h), thuhrIqamh);
+            } else {
+                iqamhDahrTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_CONSTANT_TIME_SELECTED, "20:20");
+            }
+            if (!Pref.getValue(getApplicationContext(), Constants.PREF_ASR_RELATIVE, false)) {
+                assrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_RELATIVE_TIME_SELECTED, 20);
+                iqamhAsrTime = getIqamh(String.valueOf(asrTime12h), assrIqamh);
+            } else {
+                iqamhAsrTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_CONSTANT_TIME_SELECTED, "20:20");
+            }
+            if (!Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_RELATIVE, false)) {
+                maghribIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_MAGHRIB_RELATIVE_TIME_SELECTED, 10);
+                iqamhMgrmTime = getIqamh(String.valueOf(maghribTime12h), maghribIqamh);
+            } else {
+                iqamhMgrmTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_MAGHRIB_CONSTANT_TIME_SELECTED, "20:20");
+            }
+            if (!Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_RELATIVE, false)) {
+                ishaaIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ISHA_RELATIVE_TIME_SELECTED, 20);
+                iqamhIshaTime = getIqamh(String.valueOf(ishaTime12h), ishaaIqamh);
+            } else {
+                iqamhIshaTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ISHA_CONSTANT_TIME_SELECTED, "20:20");
+            }
+
+            /* set iqamh fjr */
+            if (iqamahTimeDigitImages != null && iqamhFjrTime != null && iqamhFjrTime.length() >= 5 && fajrIqamahHourTensDigit != null && fajrIqamahHourOnesDigit != null && fajrIqamahMinuteTensDigit != null && fajrIqamahMinuteOnesDigit != null) {
+                fajrIqamahHourTensDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhFjrTime.charAt(0)))]);
+                fajrIqamahHourOnesDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhFjrTime.charAt(1)))]);
+                fajrIqamahMinuteTensDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhFjrTime.charAt(3)))]);
+                fajrIqamahMinuteOnesDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhFjrTime.charAt(4)))]);
+            }
+
+            /* set iqamh shroq */
+            if (iqamahTimeDigitImages != null && iqamhShroqTime != null && iqamhShroqTime.length() >= 5 && sunriseIqamahHourTensDigit != null && sunriseIqamahHourOnesDigit != null && sunriseIqamahMinuteTensDigit != null && sunriseIqamahMinuteOnesDigit != null) {
+                sunriseIqamahHourTensDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhShroqTime.charAt(0)))]);
+                sunriseIqamahHourOnesDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhShroqTime.charAt(1)))]);
+                sunriseIqamahMinuteTensDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhShroqTime.charAt(3)))]);
+                sunriseIqamahMinuteOnesDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhShroqTime.charAt(4)))]);
+            }
+
+            /* set dahr iqamg */
+            if (iqamahTimeDigitImages != null && iqamhDahrTime != null && iqamhDahrTime.length() >= 5 && dhuhrIqamahHourTensDigit != null && dhuhrIqamahHourOnesDigit != null && dhuhrIqamahMinuteTensDigit != null && dhuhrIqamahMinuteOnesDigit != null) {
+                dhuhrIqamahHourTensDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhDahrTime.charAt(0)))]);
+                dhuhrIqamahHourOnesDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhDahrTime.charAt(1)))]);
+                dhuhrIqamahMinuteTensDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhDahrTime.charAt(3)))]);
+                dhuhrIqamahMinuteOnesDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhDahrTime.charAt(4)))]);
+            }
+
+            /* set asr iqamg */
+            if (iqamahTimeDigitImages != null && iqamhAsrTime != null && iqamhAsrTime.length() >= 5 && asrIqamahHourTensDigit != null && asrIqamahHourOnesDigit != null && asrIqamahMinuteTensDigit != null && asrIqamahMinuteOnesDigit != null) {
+                asrIqamahHourTensDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhAsrTime.charAt(0)))]);
+                asrIqamahHourOnesDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhAsrTime.charAt(1)))]);
+                asrIqamahMinuteTensDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhAsrTime.charAt(3)))]);
+                asrIqamahMinuteOnesDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhAsrTime.charAt(4)))]);
+            }
+
+            /* set mgrb iqamg */
+            if (iqamahTimeDigitImages != null && iqamhMgrmTime != null && iqamhMgrmTime.length() >= 5 && maghribIqamahHourTensDigit != null && maghribIqamahHourOnesDigit != null && maghribIqamahMinuteTensDigit != null && maghribIqamahMinuteOnesDigit != null) {
+                maghribIqamahHourTensDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhMgrmTime.charAt(0)))]);
+                maghribIqamahHourOnesDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhMgrmTime.charAt(1)))]);
+                maghribIqamahMinuteTensDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhMgrmTime.charAt(3)))]);
+                maghribIqamahMinuteOnesDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhMgrmTime.charAt(4)))]);
+            }
+
+            /* set isha iqamg */
+            if (iqamahTimeDigitImages != null && iqamhIshaTime != null && iqamhIshaTime.length() >= 5 && ishaIqamahHourTensDigit != null && ishaIqamahHourOnesDigit != null && ishaIqamahMinuteTensDigit != null && ishaIqamahMinuteOnesDigit != null) {
+                ishaIqamahHourTensDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhIshaTime.charAt(0)))]);
+                ishaIqamahHourOnesDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhIshaTime.charAt(1)))]);
+                ishaIqamahMinuteTensDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhIshaTime.charAt(3)))]);
+                ishaIqamahMinuteOnesDigit.setImageResource(iqamahTimeDigitImages[Integer.parseInt(String.valueOf(iqamhIshaTime.charAt(4)))]);
+            }
+
+
+            fetchFridayPrayerTimes();
+            if (azanCountdownDigitImages != null && fridayPrayerTimes != null && fridayPrayerTimes.length > 3 && fridayPrayerTimes[3] != null && fridayPrayerTimes[3].length() >= 5 && fridayAzanHourTensDigit != null && fridayAzanHourOnesDigit != null && fridayAzanMinuteTensDigit != null && fridayAzanMinuteOnesDigit != null) {
+                fridayAzanHourTensDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(0)))]);
+                fridayAzanHourOnesDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(1)))]);
+                fridayAzanMinuteTensDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(3)))]);
+                fridayAzanMinuteOnesDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(4)))]);
+            }
+
+        } catch (Exception e) {
+            Log.e("MainActivity", "Error in updatePrayerAndDateDisplays: " + e.getMessage(), e);
         }
-
-        Pref.setValue(getApplicationContext(), Constants.PREF_FAJR_TIME_24, cfajr);
-        Pref.setValue(getApplicationContext(), Constants.PREF_FAJR_TIME, cfajr1);
-        Pref.setValue(getApplicationContext(), Constants.PREF_SUNRISE_TIME_24, csunrise);
-        Pref.setValue(getApplicationContext(), Constants.PREF_SUNRISE_TIME, csunrise1);
-        Pref.setValue(getApplicationContext(), Constants.PREF_DHOHR_TIME_24, cdhohr);
-        Pref.setValue(getApplicationContext(), Constants.PREF_DHOHR_TIME, cdhohr1);
-        Pref.setValue(getApplicationContext(), Constants.PREF_ASR_TIME_24, casr);
-        Pref.setValue(getApplicationContext(), Constants.PREF_ASR_TIME, casr1);
-        Pref.setValue(getApplicationContext(), Constants.PREF_MAGHRIB_TIME_24, cmaghrib);
-        Pref.setValue(getApplicationContext(), Constants.PREF_MAGHRIB_TIME, cmaghrib1);
-        Pref.setValue(getApplicationContext(), Constants.PREF_ISHA_TIME_24, cisha);
-        Pref.setValue(getApplicationContext(), Constants.PREF_ISHA_TIME, cisha1);
-
-        if (cfajr.length() == 4) {
-            cfajr = "0" + cfajr;
-        }
-        if (csunrise.length() == 4) {
-            csunrise = "0" + csunrise;
-        }
-        if (cdhohr.length() == 4) {
-            cdhohr = "0" + cdhohr;
-        }
-        if (casr.length() == 4) {
-            casr = "0" + casr;
-        }
-        if (cmaghrib.length() == 4) {
-            cmaghrib = "0" + cmaghrib;
-        }
-        if (cisha.length() == 4) {
-            cisha = "0" + cisha;
-        }
-
-
-        DateHigri hd = new DateHigri();
-        date = Utils.writeIslamicDate(MainActivity.this, hd);
-
-        int hijriDiff1 = Pref.getValue(MainActivity.this, Constants.PREF_HEJRY_INT1, 0);
-        int iii = Integer.parseInt(date[4]);
-        date[4] = String.valueOf(iii + hijriDiff1);
-
-
-        /* set images date */
-        img_date_day.setImageResource(daysImage[Integer.parseInt(date[0])]);
-        img_date_month_m_1.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[1].charAt(0)))]);
-        if (date[1].length() != 1) {
-            img_date_month_m_2.setVisibility(View.VISIBLE);
-            img_date_month_m_2.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[1].charAt(1)))]);
-        } else {
-            img_date_month_m_2.setVisibility(View.GONE);
-        }
-        img_date_month_m.setImageResource(monthImage[Integer.parseInt(date[2])]);
-        img_date_years_1.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[3].charAt(0)))]);
-        img_date_years_2.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[3].charAt(1)))]);
-        img_date_years_3.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[3].charAt(2)))]);
-        img_date_years_4.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[3].charAt(3)))]);
-        img_date_month_h_1.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[4].charAt(0)))]);
-        if (date[4].length() != 1) {
-            img_date_month_h_2.setVisibility(View.VISIBLE);
-            img_date_month_h_2.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[4].charAt(1)))]);
-        } else {
-            img_date_month_h_2.setVisibility(View.GONE);
-        }
-        img_date_month_h.setImageResource(monthImageHijri[Integer.parseInt(date[5]) - 1]);
-        img_date_years_h_1.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[6].charAt(0)))]);
-        img_date_years_h_2.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[6].charAt(1)))]);
-        img_date_years_h_3.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[6].charAt(2)))]);
-        img_date_years_h_4.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[6].charAt(3)))]);
-
-        /* set images azan fajr */
-        img_fjr_azan_h_1.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cfajr1.charAt(0)))]);
-        img_fjr_azan_h_2.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cfajr1.charAt(1)))]);
-
-        img_fjr_azan_m_1.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cfajr1.charAt(3)))]);
-        img_fjr_azan_m_2.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cfajr1.charAt(4)))]);
-
-        /* set images azan shroq */
-        img_shroq_azan_h_1.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(csunrise1.charAt(0)))]);
-        img_shroq_azan_h_2.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(csunrise1.charAt(1)))]);
-
-        img_shroq_azan_m_1.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(csunrise1.charAt(3)))]);
-        img_shroq_azan_m_2.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(csunrise1.charAt(4)))]);
-
-
-        /* set images azan dahr */
-        img_dahr_azan_h_1.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cdhohr1.charAt(0)))]);
-        img_dahr_azan_h_2.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cdhohr1.charAt(1)))]);
-
-        img_dahr_azan_m_1.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cdhohr1.charAt(3)))]);
-        img_dahr_azan_m_2.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cdhohr1.charAt(4)))]);
-
-        /* set images azan asr */
-        img_asr_azan_h_1.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(casr1.charAt(0)))]);
-        img_asr_azan_h_2.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(casr1.charAt(1)))]);
-
-        img_asr_azan_m_1.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(casr1.charAt(3)))]);
-        img_asr_azan_m_2.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(casr1.charAt(4)))]);
-
-        /* set images azan mgrb */
-        img_mgrb_azan_h_1.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cmaghrib1.charAt(0)))]);
-        img_mgrb_azan_h_2.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cmaghrib1.charAt(1)))]);
-
-        img_mgrb_azan_m_1.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cmaghrib1.charAt(3)))]);
-        img_mgrb_azan_m_2.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cmaghrib1.charAt(4)))]);
-
-        /* set images azan isha */
-        img_isha_azan_h_1.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cisha1.charAt(0)))]);
-        img_isha_azan_h_2.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cisha1.charAt(1)))]);
-
-        img_isha_azan_m_1.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cisha1.charAt(3)))]);
-        img_isha_azan_m_2.setImageResource(timeNumberAzan[Integer.parseInt(String.valueOf(cisha1.charAt(4)))]);
-
-        long fajrIqamh, fajrSun, thuhrIqamh, assrIqamh, maghribIqamh, ishaaIqamh;
-        String iqamhFjrTime, iqamhShroqTime, iqamhDahrTime, iqamhAsrTime, iqamhMgrmTime, iqamhIshaTime;
-        if (!Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_RELATIVE, false)) {
-            fajrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_RELATIVE_TIME_SELECTED, 25);
-            iqamhFjrTime = getIqamh(String.valueOf(cfajr), fajrIqamh);
-        } else {
-            iqamhFjrTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_CONSTANT_TIME_SELECTED, "20:20");
-        }
-        if (!Pref.getValue(getApplicationContext(), Constants.PREF_SUNRISE_RELATIVE, false)) {
-            fajrSun = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_SUNRISE_RELATIVE_TIME_SELECTED, 20);
-            iqamhShroqTime = getIqamh(String.valueOf(csunrise), fajrSun);
-        } else {
-            iqamhShroqTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_SUNRISE_CONSTANT_TIME_SELECTED, "20:20");
-        }
-        if (!Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_RELATIVE, false)) {
-            thuhrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_RELATIVE_TIME_SELECTED, 20);
-            iqamhDahrTime = getIqamh(String.valueOf(cdhohr), thuhrIqamh);
-        } else {
-            iqamhDahrTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_CONSTANT_TIME_SELECTED, "20:20");
-        }
-        if (!Pref.getValue(getApplicationContext(), Constants.PREF_ASR_RELATIVE, false)) {
-            assrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_RELATIVE_TIME_SELECTED, 20);
-            iqamhAsrTime = getIqamh(String.valueOf(casr), assrIqamh);
-        } else {
-            iqamhAsrTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_CONSTANT_TIME_SELECTED, "20:20");
-        }
-        if (!Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_RELATIVE, false)) {
-            maghribIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_MAGHRIB_RELATIVE_TIME_SELECTED, 10);
-            iqamhMgrmTime = getIqamh(String.valueOf(cmaghrib), maghribIqamh);
-        } else {
-            iqamhMgrmTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_MAGHRIB_CONSTANT_TIME_SELECTED, "20:20");
-        }
-        if (!Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_RELATIVE, false)) {
-            ishaaIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ISHA_RELATIVE_TIME_SELECTED, 20);
-            iqamhIshaTime = getIqamh(String.valueOf(cisha), ishaaIqamh);
-        } else {
-            iqamhIshaTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ISHA_CONSTANT_TIME_SELECTED, "20:20");
-        }
-
-        /* set iqamh fjr */
-        img_fjr_iqamh_h_1.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhFjrTime.charAt(0)))]);
-        img_fjr_iqamh_h_2.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhFjrTime.charAt(1)))]);
-        img_fjr_iqamh_m_1.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhFjrTime.charAt(3)))]);
-        img_fjr_iqamh_m_2.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhFjrTime.charAt(4)))]);
-
-        /* set iqamh shroq */
-        img_shroq_iqamh_h_1.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhShroqTime.charAt(0)))]);
-        img_shroq_iqamh_h_2.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhShroqTime.charAt(1)))]);
-        img_shroq_iqamh_m_1.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhShroqTime.charAt(3)))]);
-        img_shroq_iqamh_m_2.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhShroqTime.charAt(4)))]);
-
-        /* set dahr iqamg */
-        img_dahr_iqamg_h_1.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhDahrTime.charAt(0)))]);
-        img_dahr_iqamg_h_2.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhDahrTime.charAt(1)))]);
-        img_dahr_iqamg_m_1.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhDahrTime.charAt(3)))]);
-        img_dahr_iqamg_m_2.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhDahrTime.charAt(4)))]);
-
-        /* set asr iqamg */
-        img_asr_iqamg_h_1.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhAsrTime.charAt(0)))]);
-        img_asr_iqamg_h_2.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhAsrTime.charAt(1)))]);
-        img_asr_iqamg_m_1.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhAsrTime.charAt(3)))]);
-        img_asr_iqamg_m_2.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhAsrTime.charAt(4)))]);
-
-        /* set mgrb iqamg */
-        img_mgrb_iqamg_h_1.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhMgrmTime.charAt(0)))]);
-        img_mgrb_iqamg_h_2.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhMgrmTime.charAt(1)))]);
-        img_mgrb_iqamg_m_1.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhMgrmTime.charAt(3)))]);
-        img_mgrb_iqamg_m_2.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhMgrmTime.charAt(4)))]);
-
-        /* set isha iqamg */
-        img_isha_iqamh_h_1.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhIshaTime.charAt(0)))]);
-        img_isha_iqamh_h_2.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhIshaTime.charAt(1)))]);
-        img_isha_iqamh_m_1.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhIshaTime.charAt(3)))]);
-        img_isha_iqamh_m_2.setImageResource(timeNumberIqamh[Integer.parseInt(String.valueOf(iqamhIshaTime.charAt(4)))]);
-
-
-        getFridayTime();
-        img_azan_jm3a_time_h_1.setImageResource(timeNumberAzanLeft[Integer.parseInt(String.valueOf(friady[3].charAt(0)))]);
-        img_azan_jm3a_time_h_2.setImageResource(timeNumberAzanLeft[Integer.parseInt(String.valueOf(friady[3].charAt(1)))]);
-        img_azan_jm3a_time_m_1.setImageResource(timeNumberAzanLeft[Integer.parseInt(String.valueOf(friady[3].charAt(3)))]);
-        img_azan_jm3a_time_m_2.setImageResource(timeNumberAzanLeft[Integer.parseInt(String.valueOf(friady[3].charAt(4)))]);
-
-
     }
 
     private void updateNextPrayerIndicator() {
@@ -890,7 +1005,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_RELATIVE, false)) {
             fajrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_RELATIVE_TIME_SELECTED, 25);
-            fajr = getMilliseconds(String.valueOf(cfajr)) + fajrIqamh * 60000;
+            fajr = getMilliseconds(String.valueOf(fajrTime12h)) + fajrIqamh * 60000;
         } else {
 
 
@@ -905,13 +1020,13 @@ public class MainActivity extends AppCompatActivity {
         }
         if (!Pref.getValue(getApplicationContext(), Constants.PREF_SUNRISE_RELATIVE, false)) {
             sunriseIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_SUNRISE_RELATIVE_TIME_SELECTED, 20);
-            sunrise = getMilliseconds(String.valueOf(csunrise)) + sunriseIqamh * 60000;
+            sunrise = getMilliseconds(String.valueOf(sunriseTime12h)) + sunriseIqamh * 60000;
         } else {
-            sunrise = getMilliseconds1(String.valueOf(csunrise), String.valueOf(Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_SUNRISE_CONSTANT_TIME_SELECTED, "20:20am")));
+            sunrise = getMilliseconds1(String.valueOf(sunriseTime12h), String.valueOf(Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_SUNRISE_CONSTANT_TIME_SELECTED, "20:20am")));
         }
         if (!Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_RELATIVE, false)) {
             thuhrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_RELATIVE_TIME_SELECTED, 20);
-            thuhr = getMilliseconds(String.valueOf(cdhohr)) + thuhrIqamh * 60000;
+            thuhr = getMilliseconds(String.valueOf(dhuhrTime12h)) + thuhrIqamh * 60000;
         } else {
             String date2323 = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_CONSTANT_TIME_SELECTED, "20:20am");
             Date d1 = null;
@@ -926,7 +1041,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (!Pref.getValue(getApplicationContext(), Constants.PREF_ASR_RELATIVE, false)) {
             assrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_RELATIVE_TIME_SELECTED, 20);
-            assr = getMilliseconds(String.valueOf(casr)) + assrIqamh * 60000;
+            assr = getMilliseconds(String.valueOf(asrTime12h)) + assrIqamh * 60000;
 
         } else {
 
@@ -942,7 +1057,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (!Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_RELATIVE, false)) {
             maghribIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_MAGHRIB_RELATIVE_TIME_SELECTED, 20);
-            maghrib = getMilliseconds(String.valueOf(cmaghrib)) + maghribIqamh * 60000;
+            maghrib = getMilliseconds(String.valueOf(maghribTime12h)) + maghribIqamh * 60000;
         } else {
 
 
@@ -958,7 +1073,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (!Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_RELATIVE, false)) {
             ishaaIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ISHA_RELATIVE_TIME_SELECTED, 20);
-            ishaa = getMilliseconds(String.valueOf(cisha)) + ishaaIqamh * 60000;
+            ishaa = getMilliseconds(String.valueOf(ishaTime12h)) + ishaaIqamh * 60000;
         } else {
 
 
@@ -977,77 +1092,77 @@ public class MainActivity extends AppCompatActivity {
         ViewGroup.MarginLayoutParams marginParams;
 
 
-        if (getMilliseconds(time) >= getMilliseconds(String.valueOf(cfajr)) && getMilliseconds(time) < fajr) {
+        if (getMilliseconds(time) >= getMilliseconds(String.valueOf(fajrTime12h)) && getMilliseconds(time) < fajr) {
 
 
-            switch (theme) {
+            switch (selectedTheme) {
                 case 3:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) img_next_azan.getLayoutParams();
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
+                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 0, marginParams.bottomMargin);
                     break;
                 case 4:
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh_5);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_5);
                     break;
                 case 5:
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh6);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh6);
                     break;
                 case 6:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh7);
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh7);
                     break;
                 case 7:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh8);
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh8);
                     break;
                 case 9:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh10);
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh10);
                     break;
                 default:
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh);
                     break;
             }
-            getTimeLeftForIqamh(cfajr, fajrIqamh, 1);
+            getTimeLeftForIqamh(fajrTime12h, fajrIqamh, 1);
 
-            lay_img_azan_time_left.setVisibility(View.GONE);
-            lay_img_iqamh_time_left.setVisibility(View.VISIBLE);
-        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(cfajr)) && getMilliseconds(time) < getMilliseconds(String.valueOf(cdhohr))) {
+            azanCountdownContainer.setVisibility(View.GONE);
+            iqamahCountdownContainer.setVisibility(View.VISIBLE);
+        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(fajrTime12h)) && getMilliseconds(time) < getMilliseconds(String.valueOf(dhuhrTime12h))) {
 
-            getTimeLeftForAzan(cdhohr, 3);
+            getTimeLeftForAzan(dhuhrTime12h, 3);
 
             Calendar calendar = Calendar.getInstance();
             if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
                 System.out.println("FRIDAY!");
 
-                switch (theme) {
+                switch (selectedTheme) {
                     case 3:
-                        img_next_azan1.setVisibility(View.VISIBLE);
-                        img_next_azan.setImageResource(R.drawable.icon_next_azan_freday_4);
-                        marginParams = (ViewGroup.MarginLayoutParams) img_next_azan.getLayoutParams();
+                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_freday_4);
+                        marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                         marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
                         break;
                     case 4:
-                        img_next_azan.setImageResource(R.drawable.icon_fri_1_theme_5_1);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_fri_1_theme_5_1);
                         break;
                     case 5:
-                        img_next_azan.setImageResource(R.drawable.icon_fri_1_theme_6);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_fri_1_theme_6);
                         break;
                     case 6:
-                        img_next_azan1.setVisibility(View.VISIBLE);
-                        img_next_azan.setImageResource(R.drawable.icon_next_azan_freday_7);
+                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_freday_7);
                         break;
                     case 7:
-                        img_next_azan1.setVisibility(View.VISIBLE);
-                        img_next_azan.setImageResource(R.drawable.icon_next_azan_freday_8);
+                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_freday_8);
                         break;
                     case 9:
-                        img_next_azan1.setVisibility(View.VISIBLE);
-                        img_next_azan.setImageResource(R.drawable.icon_next_azan_freday_10);
+                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_freday_10);
                         break;
                     default:
-                        img_next_azan.setImageResource(R.drawable.icon_next_azan_freday);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_freday);
 
 
                         break;
@@ -1055,399 +1170,399 @@ public class MainActivity extends AppCompatActivity {
             } else {
 
 
-                switch (theme) {
+                switch (selectedTheme) {
 
                     case 3:
-                        img_next_azan1.setVisibility(View.VISIBLE);
-                        img_next_azan.setImageResource(R.drawable.icon_next_azan_2_4);
+                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_2_4);
                         break;
                     case 4:
-                        img_next_azan.setImageResource(R.drawable.icon_next_azan_2_5);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_2_5);
                         break;
                     case 5:
-                        img_next_azan.setImageResource(R.drawable.icon_next_azan_2_6);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_2_6);
                         break;
                     case 6:
-                        img_next_azan1.setVisibility(View.VISIBLE);
-                        img_next_azan.setImageResource(R.drawable.icon_next_azan_2_7);
+                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_2_7);
                         break;
                     case 7:
-                        img_next_azan1.setVisibility(View.VISIBLE);
-                        img_next_azan.setImageResource(R.drawable.icon_next_azan_2_8);
+                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_2_8);
                         break;
                     case 9:
-                        img_next_azan1.setVisibility(View.VISIBLE);
-                        img_next_azan.setImageResource(R.drawable.icon_next_azan_2_10);
+                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_2_10);
                         break;
                     default:
-                        img_next_azan.setImageResource(R.drawable.icon_next_azan_2);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_2);
                         break;
                 }
             }
 
-            lay_img_azan_time_left.setVisibility(View.VISIBLE);
-            lay_img_iqamh_time_left.setVisibility(View.GONE);
-        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(cdhohr)) && getMilliseconds(time) < thuhr) {
+            azanCountdownContainer.setVisibility(View.VISIBLE);
+            iqamahCountdownContainer.setVisibility(View.GONE);
+        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(dhuhrTime12h)) && getMilliseconds(time) < thuhr) {
 
             Calendar calendar = Calendar.getInstance();
             if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
                 System.out.println("FRIDAY!");
 
 
-                switch (theme) {
+                switch (selectedTheme) {
                     case 3:
-                        img_next_azan1.setVisibility(View.GONE);
-                        img_next_azan.setImageResource(R.drawable.icon_fri_1_theme_4);
-                        marginParams = (ViewGroup.MarginLayoutParams) img_next_azan.getLayoutParams();
+                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_fri_1_theme_4);
+                        marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                         marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 30, marginParams.bottomMargin);
                         break;
                     case 4:
-                        img_next_azan.setImageResource(R.drawable.icon_fri_1_theme_5);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_fri_1_theme_5);
                         break;
                     case 5:
-                        img_next_azan.setImageResource(R.drawable.ic_pray_friday3);
+                        nextPrayerIndicator.setImageResource(R.drawable.ic_pray_friday3);
                         break;
                     case 6:
 
-                        img_next_azan1.setVisibility(View.GONE);
-                        img_next_azan.setImageResource(R.drawable.ic_pray_friday3);
+                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        nextPrayerIndicator.setImageResource(R.drawable.ic_pray_friday3);
                         break;
                     case 8:
 
-                        marginParams = (ViewGroup.MarginLayoutParams) img_next_azan.getLayoutParams();
+                        marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                         marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 10, marginParams.bottomMargin);
-                        img_next_azan.setImageResource(R.drawable.ic_pray_friday);
+                        nextPrayerIndicator.setImageResource(R.drawable.ic_pray_friday);
                         break;
                     case 7:
 
 
-                        img_next_azan1.setVisibility(View.GONE);
-                        img_next_azan.setImageResource(R.drawable.icon_fri_1_theme_5);
+                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        nextPrayerIndicator.setImageResource(R.drawable.icon_fri_1_theme_5);
                         break;
                     case 9:
 
 
-                        img_next_azan1.setVisibility(View.GONE);
-                        img_next_azan.setImageResource(R.drawable.ic_pray_friday3);
+                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        nextPrayerIndicator.setImageResource(R.drawable.ic_pray_friday3);
                         break;
                     default:
-                        img_next_azan.setImageResource(R.drawable.ic_pray_friday);
+                        nextPrayerIndicator.setImageResource(R.drawable.ic_pray_friday);
 
 
                         break;
                 }
             } else {
-                switch (theme) {
+                switch (selectedTheme) {
                     case 3:
-                        img_next_azan1.setVisibility(View.GONE);
-                        img_next_azan.setImageResource(R.drawable.img_to_iqamh_4);
-                        marginParams = (ViewGroup.MarginLayoutParams) img_next_azan.getLayoutParams();
+                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
+                        marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                         marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 0, marginParams.bottomMargin);
                         break;
                     case 4:
-                        img_next_azan.setImageResource(R.drawable.img_to_iqamh_5);
+                        nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_5);
                         break;
                     case 5:
-                        img_next_azan.setImageResource(R.drawable.img_to_iqamh6);
+                        nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh6);
                         break;
                     case 6:
-                        img_next_azan1.setVisibility(View.GONE);
-                        img_next_azan.setImageResource(R.drawable.img_to_iqamh7);
+                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh7);
                         break;
                     case 7:
-                        img_next_azan1.setVisibility(View.GONE);
-                        img_next_azan.setImageResource(R.drawable.img_to_iqamh8);
+                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh8);
                         break;
                     case 9:
-                        img_next_azan1.setVisibility(View.GONE);
-                        img_next_azan.setImageResource(R.drawable.img_to_iqamh10);
+                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh10);
                         break;
                     default:
-                        img_next_azan.setImageResource(R.drawable.img_to_iqamh);
+                        nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh);
                         break;
                 }
             }
 
-            getTimeLeftForIqamh(cdhohr, thuhrIqamh, 3);
+            getTimeLeftForIqamh(dhuhrTime12h, thuhrIqamh, 3);
 
-            lay_img_azan_time_left.setVisibility(View.GONE);
-            lay_img_iqamh_time_left.setVisibility(View.VISIBLE);
-        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(cdhohr)) && getMilliseconds(time) < getMilliseconds(String.valueOf(casr))) {
+            azanCountdownContainer.setVisibility(View.GONE);
+            iqamahCountdownContainer.setVisibility(View.VISIBLE);
+        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(dhuhrTime12h)) && getMilliseconds(time) < getMilliseconds(String.valueOf(asrTime12h))) {
 
 
-            switch (theme) {
+            switch (selectedTheme) {
                 case 3:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_3_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) img_next_azan.getLayoutParams();
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_4);
+                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
                     break;
                 case 4:
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_3_5);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_5);
                     break;
                 case 5:
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_3_6);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_6);
                     break;
                 case 6:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_3_7);
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_7);
                     break;
                 case 7:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_3_8);
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_8);
                     break;
                 case 9:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_3_10);
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_10);
                     break;
                 default:
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_3);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3);
                     break;
             }
 
 
-            getTimeLeftForAzan(casr1, 4);
+            getTimeLeftForAzan(asrTime12h, 4);
 
-            lay_img_azan_time_left.setVisibility(View.VISIBLE);
-            lay_img_iqamh_time_left.setVisibility(View.GONE);
-        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(casr)) && getMilliseconds(time) < assr) {
+            azanCountdownContainer.setVisibility(View.VISIBLE);
+            iqamahCountdownContainer.setVisibility(View.GONE);
+        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(asrTime12h)) && getMilliseconds(time) < assr) {
 
 
-            switch (theme) {
+            switch (selectedTheme) {
                 case 3:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) img_next_azan.getLayoutParams();
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
+                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -0, marginParams.bottomMargin);
                     break;
                 case 4:
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh_5);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_5);
                     break;
                 case 5:
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh6);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh6);
                     break;
                 case 6:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh7);
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh7);
                     break;
                 case 7:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh8);
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh8);
                     break;
                 case 9:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh10);
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh10);
                     break;
                 default:
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh);
                     break;
             }
 
-            getTimeLeftForIqamh(casr, assrIqamh, 4);
+            getTimeLeftForIqamh(asrTime12h, assrIqamh, 4);
 
-            lay_img_azan_time_left.setVisibility(View.GONE);
-            lay_img_iqamh_time_left.setVisibility(View.VISIBLE);
-        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(casr)) && getMilliseconds(time) < getMilliseconds(String.valueOf(cmaghrib))) {
+            azanCountdownContainer.setVisibility(View.GONE);
+            iqamahCountdownContainer.setVisibility(View.VISIBLE);
+        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(asrTime12h)) && getMilliseconds(time) < getMilliseconds(String.valueOf(maghribTime12h))) {
 
 
-            switch (theme) {
+            switch (selectedTheme) {
                 case 3:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_4_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) img_next_azan.getLayoutParams();
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_4);
+                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
                     break;
                 case 4:
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_4_5);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_5);
                     break;
                 case 5:
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_4_6);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_6);
                     break;
                 case 6:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_4_7);
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_7);
                     break;
                 case 7:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_4_8);
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_8);
                     break;
                 case 9:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_4_10);
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_10);
                     break;
                 default:
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_4);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4);
                     break;
             }
 
 
-            getTimeLeftForAzan(cmaghrib1, 5);
+            getTimeLeftForAzan(maghribTime12h, 5);
 
-            lay_img_azan_time_left.setVisibility(View.VISIBLE);
-            lay_img_iqamh_time_left.setVisibility(View.GONE);
-        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(cmaghrib)) && getMilliseconds(time) < maghrib) {
+            azanCountdownContainer.setVisibility(View.VISIBLE);
+            iqamahCountdownContainer.setVisibility(View.GONE);
+        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(maghribTime12h)) && getMilliseconds(time) < maghrib) {
 
 
-            switch (theme) {
+            switch (selectedTheme) {
                 case 3:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) img_next_azan.getLayoutParams();
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
+                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 0, marginParams.bottomMargin);
                     break;
                 case 4:
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh_5);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_5);
                     break;
                 case 5:
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh6);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh6);
                     break;
                 case 6:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh7);
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh7);
                     break;
                 case 7:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh8);
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh8);
                     break;
                 case 9:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh10);
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh10);
                     break;
                 default:
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh);
                     break;
             }
 
 
-            getTimeLeftForIqamh(cmaghrib, maghribIqamh, 5);
+            getTimeLeftForIqamh(maghribTime12h, maghribIqamh, 5);
 
-            lay_img_azan_time_left.setVisibility(View.GONE);
-            lay_img_iqamh_time_left.setVisibility(View.VISIBLE);
-        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(cmaghrib)) && getMilliseconds(time) < getMilliseconds(String.valueOf(cisha))) {
+            azanCountdownContainer.setVisibility(View.GONE);
+            iqamahCountdownContainer.setVisibility(View.VISIBLE);
+        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(maghribTime12h)) && getMilliseconds(time) < getMilliseconds(String.valueOf(ishaTime12h))) {
 
 
-            switch (theme) {
+            switch (selectedTheme) {
                 case 3:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_5_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) img_next_azan.getLayoutParams();
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_4);
+                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
                     break;
                 case 4:
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_5_5);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_5);
                     break;
                 case 5:
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_5_6);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_6);
                     break;
                 case 6:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_5_7);
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_7);
                     break;
                 case 7:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_5_8);
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_8);
                     break;
                 case 9:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_5_10);
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_10);
                     break;
                 default:
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_5);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5);
                     break;
             }
 
 
-            getTimeLeftForAzan(cisha1, 6);
+            getTimeLeftForAzan(ishaTime12h, 6);
 
-            lay_img_azan_time_left.setVisibility(View.VISIBLE);
-            lay_img_iqamh_time_left.setVisibility(View.GONE);
-        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(cisha)) && getMilliseconds(time) < ishaa) {
+            azanCountdownContainer.setVisibility(View.VISIBLE);
+            iqamahCountdownContainer.setVisibility(View.GONE);
+        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(ishaTime12h)) && getMilliseconds(time) < ishaa) {
 
 
-            switch (theme) {
+            switch (selectedTheme) {
                 case 3:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) img_next_azan.getLayoutParams();
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
+                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 0, marginParams.bottomMargin);
                     break;
                 case 4:
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh_5);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_5);
                     break;
                 case 5:
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh6);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh6);
                     break;
                 case 6:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh7);
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh7);
                     break;
                 case 7:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh8);
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh8);
                     break;
                 case 9:
-                    img_next_azan1.setVisibility(View.GONE);
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh10);
+                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh10);
                     break;
                 default:
-                    img_next_azan.setImageResource(R.drawable.img_to_iqamh);
+                    nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh);
                     break;
             }
 
 
-            getTimeLeftForIqamh(cisha, ishaaIqamh, 6);
+            getTimeLeftForIqamh(ishaTime12h, ishaaIqamh, 6);
 
-            lay_img_azan_time_left.setVisibility(View.GONE);
-            lay_img_iqamh_time_left.setVisibility(View.VISIBLE);
-        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(cfajr)) || getMilliseconds(time) < getMilliseconds(String.valueOf(cfajr))) {
+            azanCountdownContainer.setVisibility(View.GONE);
+            iqamahCountdownContainer.setVisibility(View.VISIBLE);
+        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(fajrTime12h)) || getMilliseconds(time) < getMilliseconds(String.valueOf(fajrTime12h))) {
 
 
-            switch (theme) {
+            switch (selectedTheme) {
                 case 3:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_1_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) img_next_azan.getLayoutParams();
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_4);
+                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
                     break;
                 case 4:
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_1_5);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_5);
                     break;
                 case 5:
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_1_6);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_6);
                     break;
                 case 6:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_1_7);
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_7);
                     break;
                 case 7:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_1_8);
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_8);
                     break;
                 case 9:
-                    img_next_azan1.setVisibility(View.VISIBLE);
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_1_10);
+                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_10);
                     break;
                 default:
-                    img_next_azan.setImageResource(R.drawable.icon_next_azan_1);
+                    nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1);
                     break;
             }
 
-            getTimeLeftForAzan(cfajr1, 1);
+            getTimeLeftForAzan(fajrTime12h, 1);
 
-            lay_img_azan_time_left.setVisibility(View.VISIBLE);
-            lay_img_iqamh_time_left.setVisibility(View.GONE);
+            azanCountdownContainer.setVisibility(View.VISIBLE);
+            iqamahCountdownContainer.setVisibility(View.GONE);
         } else {
-            img_iqamh_time_left_m_1.setImageResource(timeNumber[0]);
-            img_iqamh_time_left_m_2.setImageResource(timeNumber[0]);
-            img_iqamh_time_left_s_1.setImageResource(timeNumber[0]);
-            img_iqamh_time_left_s_2.setImageResource(timeNumber[0]);
+            iqamahCountdownMinuteTensDigit.setImageResource(timeDigitImages[0]);
+            iqamahCountdownMinuteOnesDigit.setImageResource(timeDigitImages[0]);
+            iqamahCountdownSecondTensDigit.setImageResource(timeDigitImages[0]);
+            iqamahCountdownSecondOnesDigit.setImageResource(timeDigitImages[0]);
 
-            img_time_left_h_1.setImageResource(timeNumber[0]);
-            img_time_left_h_2.setImageResource(timeNumber[0]);
-            img_time_left_m_1.setImageResource(timeNumber[0]);
-            img_time_left_m_2.setImageResource(timeNumber[0]);
-            img_time_left_s_1.setImageResource(timeNumber[0]);
-            img_time_left_s_2.setImageResource(timeNumber[0]);
+            azanCountdownHourTensDigit.setImageResource(timeDigitImages[0]);
+            azanCountdownHourOnesDigit.setImageResource(timeDigitImages[0]);
+            azanCountdownMinuteTensDigit.setImageResource(timeDigitImages[0]);
+            azanCountdownMinuteOnesDigit.setImageResource(timeDigitImages[0]);
+            azanCountdownSecondTensDigit.setImageResource(timeDigitImages[0]);
+            azanCountdownSecondOnesDigit.setImageResource(timeDigitImages[0]);
         }
 
 
@@ -1457,17 +1572,17 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(() -> {
             updatePrayerAndDateDisplays();
             updateNextPrayerIndicator();
-            checkAds();
+            showAdsIfScheduled();
             DateFormat timeNow = new SimpleDateFormat("hh:mmass", Locale.ENGLISH);
             Calendar c = Calendar.getInstance();
             String timeText = timeNow.format(c.getTime());
-            img_time_hour_1.setImageResource(timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(0)))]);
+            timeHourTensDigit.setImageResource(timeDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(0)))]);
 
-            img_time_hour_2.setImageResource(timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(1)))]);
-            img_time_mint_1.setImageResource(timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(3)))]);
-            img_time_mint_2.setImageResource(timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(4)))]);
-            img_time_sec_1.setImageResource(timeNumberSec[Integer.parseInt(String.valueOf(timeText.charAt(7)))]);
-            img_time_sec_2.setImageResource(timeNumberSec[Integer.parseInt(String.valueOf(timeText.charAt(8)))]);
+            timeHourOnesDigit.setImageResource(timeDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(1)))]);
+            timeMinuteTensDigit.setImageResource(timeDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(3)))]);
+            timeMinuteOnesDigit.setImageResource(timeDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(4)))]);
+            timeSecondOnesDigit.setImageResource(secondDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(7)))]);
+            timeSecondTensDigit.setImageResource(secondDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(8)))]);
 
 
         });
@@ -1612,10 +1727,10 @@ public class MainActivity extends AppCompatActivity {
 
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_AZAN, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_AZAN_PATH, null) != null) {
-                            if (!mp.isPlaying()) {
-                                mp = new MediaPlayer();
+                            if (!mediaPlayer.isPlaying()) {
+                                mediaPlayer = new MediaPlayer();
                                 String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_AZAN_PATH, null);
-                                if (!mp.isPlaying()) play(uriSound);
+                                if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
                             }
                         }
                     }
@@ -1625,12 +1740,12 @@ public class MainActivity extends AppCompatActivity {
 
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_AZAN, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_AZAN_PATH, null) != null) {
-                            if (!mp.isPlaying()) {
+                            if (!mediaPlayer.isPlaying()) {
                                 Calendar calendar = Calendar.getInstance();
                                 if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY) {
-                                    mp = new MediaPlayer();
+                                    mediaPlayer = new MediaPlayer();
                                     String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_AZAN_PATH, null);
-                                    if (!mp.isPlaying()) play(uriSound);
+                                    if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
                                 }
                             }
                         }
@@ -1640,10 +1755,10 @@ public class MainActivity extends AppCompatActivity {
 
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_AZAN, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_AZAN_PATH, null) != null) {
-                            if (!mp.isPlaying()) {
-                                mp = new MediaPlayer();
+                            if (!mediaPlayer.isPlaying()) {
+                                mediaPlayer = new MediaPlayer();
                                 String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_AZAN_PATH, null);
-                                if (!mp.isPlaying()) play(uriSound);
+                                if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
                             }
                         }
                     }
@@ -1652,10 +1767,10 @@ public class MainActivity extends AppCompatActivity {
 
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_AZAN, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_AZAN_PATH, null) != null) {
-                            if (!mp.isPlaying()) {
-                                mp = new MediaPlayer();
+                            if (!mediaPlayer.isPlaying()) {
+                                mediaPlayer = new MediaPlayer();
                                 String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_AZAN_PATH, null);
-                                if (!mp.isPlaying()) play(uriSound);
+                                if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
                             }
                         }
                     }
@@ -1664,10 +1779,10 @@ public class MainActivity extends AppCompatActivity {
 
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_AZAN, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_AZAN_PATH, null) != null) {
-                            if (!mp.isPlaying()) {
-                                mp = new MediaPlayer();
+                            if (!mediaPlayer.isPlaying()) {
+                                mediaPlayer = new MediaPlayer();
                                 String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_AZAN_PATH, null);
-                                if (!mp.isPlaying()) play(uriSound);
+                                if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
                             }
                         }
                     }
@@ -1697,12 +1812,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        img_time_left_h_1.setImageResource(timeNumberAzanLeft[Integer.parseInt(String.valueOf(s11.charAt(0)))]);
-        img_time_left_h_2.setImageResource(timeNumberAzanLeft[Integer.parseInt(String.valueOf(s11.charAt(1)))]);
-        img_time_left_m_1.setImageResource(timeNumberAzanLeft[Integer.parseInt(String.valueOf(s11.charAt(3)))]);
-        img_time_left_m_2.setImageResource(timeNumberAzanLeft[Integer.parseInt(String.valueOf(s11.charAt(4)))]);
-        img_time_left_s_1.setImageResource(timeNumberAzanLeft[Integer.parseInt(String.valueOf(s11.charAt(6)))]);
-        img_time_left_s_2.setImageResource(timeNumberAzanLeft[Integer.parseInt(String.valueOf(s11.charAt(7)))]);
+        azanCountdownHourTensDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(s11.charAt(0)))]);
+        azanCountdownHourOnesDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(s11.charAt(1)))]);
+        azanCountdownMinuteTensDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(s11.charAt(3)))]);
+        azanCountdownMinuteOnesDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(s11.charAt(4)))]);
+        azanCountdownSecondTensDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(s11.charAt(6)))]);
+        azanCountdownSecondOnesDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(s11.charAt(7)))]);
     }
 
     private void getTimeLeftForIqamh(String time, long iqmahTime, int check) {
@@ -1838,10 +1953,10 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
 
         if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY && check == 3) {
-            img_iqamh_time_left_m_1.setVisibility(View.GONE);
-            img_iqamh_time_left_m_2.setVisibility(View.GONE);
-            img_iqamh_time_left_s_1.setVisibility(View.GONE);
-            img_iqamh_time_left_s_2.setVisibility(View.GONE);
+            iqamahCountdownMinuteTensDigit.setVisibility(View.GONE);
+            iqamahCountdownMinuteOnesDigit.setVisibility(View.GONE);
+            iqamahCountdownSecondTensDigit.setVisibility(View.GONE);
+            iqamahCountdownSecondOnesDigit.setVisibility(View.GONE);
 
 
             if (!isOpenKhotabActivity) {
@@ -1849,9 +1964,9 @@ public class MainActivity extends AppCompatActivity {
                 SimpleDateFormat format2 = new SimpleDateFormat("yyyy/M/d", Locale.ENGLISH);
                 Calendar today1 = Calendar.getInstance();
 
-                db.openDataBase();
-                final Khotab khotba = db.getKhotba(format2.format(today1.getTime()));
-                db.close();
+                databaseHelper.openDataBase();
+                final Khotab khotba = databaseHelper.getKhotba(format2.format(today1.getTime()));
+                databaseHelper.close();
 
                 if (khotba != null) {
                     if (khotba.getIsException() == 0) {
@@ -1869,10 +1984,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         } else {
-            img_iqamh_time_left_m_1.setVisibility(View.VISIBLE);
-            img_iqamh_time_left_m_2.setVisibility(View.VISIBLE);
-            img_iqamh_time_left_s_1.setVisibility(View.VISIBLE);
-            img_iqamh_time_left_s_2.setVisibility(View.VISIBLE);
+            iqamahCountdownMinuteTensDigit.setVisibility(View.VISIBLE);
+            iqamahCountdownMinuteOnesDigit.setVisibility(View.VISIBLE);
+            iqamahCountdownSecondTensDigit.setVisibility(View.VISIBLE);
+            iqamahCountdownSecondOnesDigit.setVisibility(View.VISIBLE);
 
             long seconds = 60 * 1000;
 
@@ -1898,10 +2013,10 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        img_iqamh_time_left_m_1.setImageResource(timeNumberIqamhLeft[Integer.parseInt(String.valueOf(s.charAt(0)))]);
-        img_iqamh_time_left_m_2.setImageResource(timeNumberIqamhLeft[Integer.parseInt(String.valueOf(s.charAt(1)))]);
-        img_iqamh_time_left_s_1.setImageResource(timeNumberIqamhLeft[Integer.parseInt(String.valueOf(s.charAt(3)))]);
-        img_iqamh_time_left_s_2.setImageResource(timeNumberIqamhLeft[Integer.parseInt(String.valueOf(s.charAt(4)))]);
+        iqamahCountdownMinuteTensDigit.setImageResource(iqamahCountdownDigitImages[Integer.parseInt(String.valueOf(s.charAt(0)))]);
+        iqamahCountdownMinuteOnesDigit.setImageResource(iqamahCountdownDigitImages[Integer.parseInt(String.valueOf(s.charAt(1)))]);
+        iqamahCountdownSecondTensDigit.setImageResource(iqamahCountdownDigitImages[Integer.parseInt(String.valueOf(s.charAt(3)))]);
+        iqamahCountdownSecondOnesDigit.setImageResource(iqamahCountdownDigitImages[Integer.parseInt(String.valueOf(s.charAt(4)))]);
 
 
         if (millis1 <= 1000) {
@@ -1940,10 +2055,10 @@ public class MainActivity extends AppCompatActivity {
 
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_IQAMAH, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_IQAMAH_PATH, null) != null) {
-                            if (!mp.isPlaying()) {
-                                mp = new MediaPlayer();
+                            if (!mediaPlayer.isPlaying()) {
+                                mediaPlayer = new MediaPlayer();
                                 String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_IQAMAH_PATH, null);
-                                if (!mp.isPlaying()) play(uriSound);
+                                if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
 
                             }
                         }
@@ -1956,10 +2071,10 @@ public class MainActivity extends AppCompatActivity {
                     if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY && check != 3) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_IQAMAH, false)) {
                             if (Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_IQAMAH_PATH, null) != null) {
-                                if (!mp.isPlaying()) {
-                                    mp = new MediaPlayer();
+                                if (!mediaPlayer.isPlaying()) {
+                                    mediaPlayer = new MediaPlayer();
                                     String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_IQAMAH_PATH, null);
-                                    if (!mp.isPlaying()) play(uriSound);
+                                    if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
                                 }
                             }
                         }
@@ -1970,10 +2085,10 @@ public class MainActivity extends AppCompatActivity {
 
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH_PATH, null) != null) {
-                            if (!mp.isPlaying()) {
-                                mp = new MediaPlayer();
+                            if (!mediaPlayer.isPlaying()) {
+                                mediaPlayer = new MediaPlayer();
                                 String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH_PATH, null);
-                                if (!mp.isPlaying()) play(uriSound);
+                                if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
                             }
                         }
                     }
@@ -1983,10 +2098,10 @@ public class MainActivity extends AppCompatActivity {
 
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH_PATH, null) != null) {
-                            if (!mp.isPlaying()) {
-                                mp = new MediaPlayer();
+                            if (!mediaPlayer.isPlaying()) {
+                                mediaPlayer = new MediaPlayer();
                                 String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH_PATH, null);
-                                if (!mp.isPlaying()) play(uriSound);
+                                if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
                             }
                         }
                     }
@@ -1996,10 +2111,10 @@ public class MainActivity extends AppCompatActivity {
 
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_IQAMAH, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_IQAMAH_PATH, null) != null) {
-                            if (!mp.isPlaying()) {
-                                mp = new MediaPlayer();
+                            if (!mediaPlayer.isPlaying()) {
+                                mediaPlayer = new MediaPlayer();
                                 String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_IQAMAH_PATH, null);
-                                if (!mp.isPlaying()) play(uriSound);
+                                if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
                             }
                         }
                     }
@@ -2071,16 +2186,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void getFridayTime() {
+    private void fetchFridayPrayerTimes() {
         SimpleDateFormat format2 = new SimpleDateFormat("M/d", Locale.ENGLISH);
         SimpleDateFormat format1 = new SimpleDateFormat("yy", Locale.ENGLISH);
         Calendar calendar = Calendar.getInstance();
 
         if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
             System.out.println("FRIDAY!");
-
         }
-
 
         int weekday = calendar.get(Calendar.DAY_OF_WEEK);
         int days = Calendar.FRIDAY - weekday;
@@ -2091,53 +2204,23 @@ public class MainActivity extends AppCompatActivity {
         String[] cityEn = getResources().getStringArray(R.array.city_name_en);
         int cityChose = Pref.getValue(getApplicationContext(), Constants.PREF_CITY_POSITION_SELECTED, 0);
         if (cityChose != 0) {
-            friady = db.getPrayerTimesFriday(cityEn[cityChose], format2.format(calendar.getTime()) + "/" + getYears(Integer.parseInt(format1.format(calendar.getTime()))));
+            fridayPrayerTimes = databaseHelper.getPrayerTimesFriday(cityEn[cityChose], format2.format(calendar.getTime()) + "/" + getYears(Integer.parseInt(format1.format(calendar.getTime()))));
         } else {
-            friady = db.getPrayerTimesFriday("masqat", format2.format(calendar.getTime()) + "/" + getYears(Integer.parseInt(format1.format(calendar.getTime()))));
+            fridayPrayerTimes = databaseHelper.getPrayerTimesFriday("masqat", format2.format(calendar.getTime()) + "/" + getYears(Integer.parseInt(format1.format(calendar.getTime()))));
+        }
+        
+        // Add null check for Friday prayer times
+        if (fridayPrayerTimes == null || fridayPrayerTimes.length < 4) {
+            fridayPrayerTimes = new String[]{"", "", "", "12:30", "", ""};
         }
     }
 
-    private void play(String path) {
-
-
-        if (path.startsWith("/document/raw:")) {
-            path = path.replaceFirst("/document/raw:", "");
-        }
-
-        try {
-            mp.setDataSource(path);
-            mp.prepareAsync();
-            mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp) {
-                    mp.start();
-                }
-            });
-        } catch (IllegalArgumentException e) {
-
-            e.printStackTrace();
-
-        } catch (SecurityException e) {
-
-            e.printStackTrace();
-
-        } catch (IllegalStateException e) {
-
-            e.printStackTrace();
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-
-        }
-    }
-
-    private void checkAds() {
+    private void showAdsIfScheduled() {
         SimpleDateFormat df = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         SimpleDateFormat dfDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        Date date = new Date();
-        String currentTime = df.format(date);
-        String currentDate = dfDate.format(date);
+        Date currentDate = new Date();
+        String currentTime = df.format(currentDate);
+        String currentDateString = dfDate.format(currentDate);
         int day = 0;
         if (Utils.isSaturday()) day = 1;
         if (Utils.isSunday()) day = 2;
@@ -2147,9 +2230,9 @@ public class MainActivity extends AppCompatActivity {
         if (Utils.isThursday()) day = 6;
         if (Utils.isFriday()) day = 7;
 
-        db.openDataBase();
-        ArrayList<Ads> adsList = db.getAdsByDate(-1, currentDate, currentTime, day);
-        db.close();
+        databaseHelper.openDataBase();
+        ArrayList<Ads> adsList = databaseHelper.getAdsByDate(-1, currentDateString, currentTime, day);
+        databaseHelper.close();
         if (adsList.size() > 0) {
             for (int i = 0; i < adsList.size(); i++) {
                 Ads ads = adsList.get(i);
@@ -2188,7 +2271,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeBluetoothListener() {
 
-        mMtCentralManager.setMTCentralManagerListener(new MTCentralManagerListener() {
+        bluetoothCentralManager.setMTCentralManagerListener(new MTCentralManagerListener() {
             @Override
             public void onScanedPeripheral(final List<MTPeripheral> peripherals) {
 
@@ -2246,7 +2329,7 @@ public class MainActivity extends AppCompatActivity {
                                 TEMPERATURE = temperatureFrame.getValue();
                                 NumberFormat.getInstance(Locale.ENGLISH).format(TEMPERATURE);
 
-                                tv_internal_heat.setText(String.format("%.1f", TEMPERATURE));
+                                temperatureTextView.setText(String.format("%.1f", TEMPERATURE));
                                 BATTERY = temperatureFrame.getBattery();
                                 break;
                             case FrameTVOCSensor:
@@ -2336,10 +2419,10 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void initializeBluetoothManager() {
-        mMtCentralManager = MTCentralManager.getInstance(this);
+        bluetoothCentralManager = MTCentralManager.getInstance(this);
 
-        mMtCentralManager.startService();
-        BluetoothState bluetoothState = mMtCentralManager.getBluetoothState(this);
+        bluetoothCentralManager.startService();
+        BluetoothState bluetoothState = bluetoothCentralManager.getBluetoothState(this);
         switch (bluetoothState) {
             case BluetoothStateNotSupported:
 
@@ -2352,7 +2435,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-        mMtCentralManager.setBluetoothChangedListener(new OnBluetoothStateChangedListener() {
+        bluetoothCentralManager.setBluetoothChangedListener(new OnBluetoothStateChangedListener() {
             @Override
             public void onStateChanged(BluetoothState state) {
                 switch (state) {
@@ -2376,7 +2459,7 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
 
         try {
-            mMtCentralManager.startScan();
+            bluetoothCentralManager.startScan();
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Phone does not have Bluetooth!!", Toast.LENGTH_LONG).show();
         }
@@ -2405,4 +2488,39 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    private void playAudioFromPath(String path) {
+
+
+        if (path.startsWith("/document/raw:")) {
+            path = path.replaceFirst("/document/raw:", "");
+        }
+
+        try {
+            mediaPlayer.setDataSource(path);
+            mediaPlayer.prepareAsync();
+            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mediaPlayer.start();
+                }
+            });
+        } catch (IllegalArgumentException e) {
+
+            e.printStackTrace();
+
+        } catch (SecurityException e) {
+
+            e.printStackTrace();
+
+        } catch (IllegalStateException e) {
+
+            e.printStackTrace();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+    }
 }

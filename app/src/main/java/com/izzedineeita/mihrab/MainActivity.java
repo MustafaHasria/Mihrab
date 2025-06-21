@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     // Time display ImageViews
     private ImageView timeHourTensDigit, timeHourOnesDigit, timeMinuteTensDigit, timeMinuteOnesDigit, 
                      timeSecondTensDigit, timeSecondOnesDigit;
-    
+
     // Date display ImageViews
     private ImageView dateDayImage, dateMonthTensDigit, dateMonthOnesDigit, dateMonthImage,
                      dateYearThousandsDigit, dateYearHundredsDigit, dateYearTensDigit, dateYearOnesDigit;
@@ -486,7 +486,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -534,49 +533,117 @@ public class MainActivity extends AppCompatActivity {
         initializeViewsAndListeners();
         updatePrayerAndDateDisplays();
 
+        // Set up back button handling using the modern approach
+        getOnBackPressedDispatcher().addCallback(this, new androidx.activity.OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Show confirmation dialog for app exit
+                new android.app.AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Exit App")
+                    .setMessage("Do you want to exit the app?")
+                    .setPositiveButton("Exit", (dialog, which) -> {
+                        // Properly clean up resources before finishing
+                        cleanupAndExit();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+            }
+        });
+
         Runnable runnable = new CountDownRunner();
         updateThread = new Thread(runnable);
         updateThread.start();
     }
-
-    @Override
-    public void onBackPressed() {
-        if (updateThread.isAlive()) {
+    
+    // Note: onBackPressed() is deprecated. Using OnBackPressedDispatcher in onCreate() instead.
+    
+    /**
+     * Clean up all resources and exit the app
+     */
+    private void cleanupAndExit() {
+        // Clean up the update thread
+        if (updateThread != null && updateThread.isAlive()) {
             updateThread.interrupt();
+            try {
+                updateThread.join(1000); // Wait up to 1 second for thread to finish
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
-        super.onBackPressed();
+        
+        // Stop media player if playing
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+        
+        // Stop bluetooth service
+        if (bluetoothCentralManager != null) {
+            bluetoothCentralManager.stopService();
+        }
+        
+        // Reset static flags to prevent issues with new instances
+        resetActivityFlags();
+        
+        // Clear current activity reference
+        currentActivity = null;
+        
+        // Finish the activity properly
+        finish();
+        
+        // Force close the app
+        System.exit(0);
     }
-
     @Override
     public void onPause() {
         super.onPause();
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mosqueNameTextView.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
     }
-
     @Override
     protected void onStop() {
         super.onStop();
     }
-
     @Override
     protected void onDestroy() {
-        if (updateThread.isAlive()) {
+        // Clean up the update thread
+        if (updateThread != null && updateThread.isAlive()) {
             updateThread.interrupt();
+            try {
+                updateThread.join(1000); // Wait up to 1 second for thread to finish
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.stop();
+        
+        // Clean up media player
+        if (mediaPlayer != null) {
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+            }
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
-        bluetoothCentralManager.stopService();
+        
+        // Stop bluetooth service
+        if (bluetoothCentralManager != null) {
+            bluetoothCentralManager.stopService();
+            bluetoothCentralManager = null;
+        }
+        
+        // Reset static flags
+        resetActivityFlags();
+        
+        // Clear current activity reference
+        currentActivity = null;
+        
         super.onDestroy();
     }
-
     @Override
     public void onRequestPermissionsResult(int code, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(code, permissions, grantResults);
@@ -588,7 +655,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -613,7 +679,7 @@ public class MainActivity extends AppCompatActivity {
         }
         startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
     }
-    public void setLocale(String lang) {
+    private void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
         Configuration config = new Configuration();

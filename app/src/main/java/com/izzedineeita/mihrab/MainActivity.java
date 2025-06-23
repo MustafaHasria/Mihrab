@@ -464,6 +464,24 @@ public class MainActivity extends AppCompatActivity {
             false,
             true
         ));
+        THEME_CONFIGURATIONS.put(10, new ThemeConfiguration(
+                R.layout.activity_main_new_theme_1,
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+                0, // No background drawable
+                null,
+                ImagesArrays.daysImageTheme10,
+                ImagesArrays.monthImageTheme10,
+                ImagesArrays.monthImageHijriTheme10,
+                ImagesArrays.timeNumberDate10,
+                ImagesArrays.timeNumberIqamhLeft4,
+                ImagesArrays.timeNumberAzIq8,
+                ImagesArrays.timeNumberAzIq8,
+                ImagesArrays.timeNumberIqamhLeft4,
+                ImagesArrays.timeNumberIqamhLeft4,
+                ImagesArrays.timeNumberDate10,
+                false,
+                true
+        ));
     }
     class CountDownRunner implements Runnable {
 
@@ -2648,13 +2666,14 @@ public class MainActivity extends AppCompatActivity {
      * @param themeId The theme ID to apply
      */
     private void applyThemeConfiguration(int themeId) {
-        ThemeConfiguration config = getThemeConfigurations().get(themeId);
+        ThemeConfiguration config = getThemeConfigurations().get(10);
         if (config == null) {
             // Fallback to default theme (0)
             config = getThemeConfigurations().get(0);
         }
 
         // Set content view
+        assert config != null;
         setContentView(config.layoutResId);
 
         // Set orientation

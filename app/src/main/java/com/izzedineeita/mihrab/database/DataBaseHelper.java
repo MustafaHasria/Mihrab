@@ -566,9 +566,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public ArrayList<AdsPeriods> getAdvPeriods(int advId) {
         ArrayList<AdsPeriods> list = new ArrayList<>();
         String selectQuery = "SELECT * FROM AdsPeriods WHERE AdvId=" + advId + "";
-      //  Log.i("Query", selectQuery);
+        //  Log.i("Query", selectQuery);
         Cursor cursor = mDataBase.rawQuery(selectQuery, null);
-       // Log.i("Qu dataBase", "" + cursor.getCount());
+        // Log.i("Qu dataBase", "" + cursor.getCount());
         if (cursor.moveToFirst()) {
             do {
                 AdsPeriods object = new AdsPeriods();
@@ -613,7 +613,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put("ImageSec", object.getImageSec());
 
         rowId = db.insert("Advertisement", null, values);
-      //  Log.d("Sync service", "# of set inserted in Advertisement: " + count);
+        //  Log.d("Sync service", "# of set inserted in Advertisement: " + count);
         db.setTransactionSuccessful();
         db.endTransaction();
         db.close();
@@ -632,7 +632,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + " and  (AdsPeriods.day =" + day + ")"
                 + " and ( strftime('%H:%M', AdsPeriods.StartTime) =  strftime('%H:%M','" + time +
                 "')) LIMIT 1";
-       // Log.i("Query", selectQuery);
+        // Log.i("Query", selectQuery);
         Cursor cursor = mDataBase.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
@@ -681,7 +681,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 count++;
             }
         }
-     //   Log.d("Sync service", "# of New Khotab inserted : " + count);
+        //   Log.d("Sync service", "# of New Khotab inserted : " + count);
 
         db.setTransactionSuccessful();
         db.endTransaction();
@@ -731,10 +731,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public ArrayList<Khotab> getAllKhotab() {
         ArrayList<Khotab> khotab = new ArrayList<>();
         String selectQuery = "SELECT * FROM Khotab";
-      //  Log.i("Query", selectQuery);
+        //  Log.i("Query", selectQuery);
 
         Cursor cursor = mDataBase.rawQuery(selectQuery, null);
-      //  Log.i("Khotab", "getAllKhotab Count:" + cursor.getCount());
+        //  Log.i("Khotab", "getAllKhotab Count:" + cursor.getCount());
         if (cursor.moveToFirst()) {
             do {
                 Khotab khotba = new Khotab();
@@ -831,22 +831,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public String getNews(String date) {
-       String newsList = null;
+        String newsList = null;
         mDataBase = this.getWritableDatabase();
 
 
-
-                mDataBase = this.getReadableDatabase();
+        mDataBase = this.getReadableDatabase();
         String selectQuery = "SELECT * FROM News where FromDate <='" + date + "' and ToDate >='" + date
                 + "' and isDeleted=0  ORDER BY sort ASC";
-    //    Log.d("Sync: Query", selectQuery);
+        //    Log.d("Sync: Query", selectQuery);
         Cursor cursor = mDataBase.rawQuery(selectQuery, null);
         Log.d("Sync:count news ", "" + cursor.getCount());
         if (cursor.moveToFirst()) {
             do {
                 String TextAds = cursor.getString(cursor.getColumnIndex("TextAds"));
                 newsList = "";
-                newsList =  newsList + TextAds;
+                newsList = newsList + TextAds;
                 Log.d("Sync:TextAds: ", TextAds);
                 Log.i("dataBase TextAds", "" + TextAds);
             } while (cursor.moveToNext());

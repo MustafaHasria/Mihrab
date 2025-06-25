@@ -1,14 +1,11 @@
 package com.izzedineeita.mihrab;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -16,14 +13,10 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -39,11 +32,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.auth.FirebaseUser;
-import com.izzedineeita.mihrab.activity.LoginActivity;
 import com.izzedineeita.mihrab.activity.SettingActivity;
 import com.izzedineeita.mihrab.activity.ShowAdsActivity;
 import com.izzedineeita.mihrab.activity.ShowAlkhushueActivity;
@@ -99,53 +87,53 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     //region Variables
     // Time display ImageViews
-    private ImageView timeHourTensDigit, timeHourOnesDigit, timeMinuteTensDigit, timeMinuteOnesDigit, 
-                     timeSecondTensDigit, timeSecondOnesDigit;
+    private ImageView timeHourTensDigit, timeHourOnesDigit, timeMinuteTensDigit, timeMinuteOnesDigit,
+            timeSecondTensDigit, timeSecondOnesDigit;
 
     // Date display ImageViews
     private ImageView dateDayImage, dateMonthTensDigit, dateMonthOnesDigit, dateMonthImage,
-                     dateYearThousandsDigit, dateYearHundredsDigit, dateYearTensDigit, dateYearOnesDigit;
-    
+            dateYearThousandsDigit, dateYearHundredsDigit, dateYearTensDigit, dateYearOnesDigit;
+
     // Hijri date display ImageViews
     private ImageView hijriMonthTensDigit, hijriMonthOnesDigit, hijriMonthImage,
-                     hijriYearThousandsDigit, hijriYearHundredsDigit, hijriYearTensDigit, hijriYearOnesDigit;
-    
+            hijriYearThousandsDigit, hijriYearHundredsDigit, hijriYearTensDigit, hijriYearOnesDigit;
+
     // Fajr prayer time ImageViews
     private ImageView fajrAzanHourTensDigit, fajrAzanHourOnesDigit, fajrAzanMinuteTensDigit, fajrAzanMinuteOnesDigit;
     private ImageView fajrIqamahHourTensDigit, fajrIqamahHourOnesDigit, fajrIqamahMinuteTensDigit, fajrIqamahMinuteOnesDigit;
-    
+
     // Sunrise prayer time ImageViews
     private ImageView sunriseAzanHourTensDigit, sunriseAzanHourOnesDigit, sunriseAzanMinuteTensDigit, sunriseAzanMinuteOnesDigit;
     private ImageView sunriseIqamahHourTensDigit, sunriseIqamahHourOnesDigit, sunriseIqamahMinuteTensDigit, sunriseIqamahMinuteOnesDigit;
-    
+
     // Dhuhr prayer time ImageViews
     private ImageView dhuhrAzanHourTensDigit, dhuhrAzanHourOnesDigit, dhuhrAzanMinuteTensDigit, dhuhrAzanMinuteOnesDigit;
     private ImageView dhuhrIqamahHourTensDigit, dhuhrIqamahHourOnesDigit, dhuhrIqamahMinuteTensDigit, dhuhrIqamahMinuteOnesDigit;
-    
+
     // Asr prayer time ImageViews
     private ImageView asrAzanHourTensDigit, asrAzanHourOnesDigit, asrAzanMinuteTensDigit, asrAzanMinuteOnesDigit;
     private ImageView asrIqamahHourTensDigit, asrIqamahHourOnesDigit, asrIqamahMinuteTensDigit, asrIqamahMinuteOnesDigit;
-    
+
     // Maghrib prayer time ImageViews
     private ImageView maghribAzanHourTensDigit, maghribAzanHourOnesDigit, maghribAzanMinuteTensDigit, maghribAzanMinuteOnesDigit;
     private ImageView maghribIqamahHourTensDigit, maghribIqamahHourOnesDigit, maghribIqamahMinuteTensDigit, maghribIqamahMinuteOnesDigit;
-    
+
     // Isha prayer time ImageViews
     private ImageView ishaAzanHourTensDigit, ishaAzanHourOnesDigit, ishaAzanMinuteTensDigit, ishaAzanMinuteOnesDigit;
     private ImageView ishaIqamahHourTensDigit, ishaIqamahHourOnesDigit, ishaIqamahMinuteTensDigit, ishaIqamahMinuteOnesDigit;
-    
+
     // Countdown timer ImageViews
-    private ImageView azanCountdownHourTensDigit, azanCountdownHourOnesDigit, azanCountdownMinuteTensDigit, 
-                     azanCountdownMinuteOnesDigit, azanCountdownSecondTensDigit, azanCountdownSecondOnesDigit;
-    private ImageView iqamahCountdownMinuteTensDigit, iqamahCountdownMinuteOnesDigit, 
-                     iqamahCountdownSecondTensDigit, iqamahCountdownSecondOnesDigit;
-    
+    private ImageView azanCountdownHourTensDigit, azanCountdownHourOnesDigit, azanCountdownMinuteTensDigit,
+            azanCountdownMinuteOnesDigit, azanCountdownSecondTensDigit, azanCountdownSecondOnesDigit;
+    private ImageView iqamahCountdownMinuteTensDigit, iqamahCountdownMinuteOnesDigit,
+            iqamahCountdownSecondTensDigit, iqamahCountdownSecondOnesDigit;
+
     // Friday prayer time ImageViews
     private ImageView fridayAzanHourTensDigit, fridayAzanHourOnesDigit, fridayAzanMinuteTensDigit, fridayAzanMinuteOnesDigit;
-    
+
     // Next prayer indicator ImageViews
     private ImageView nextPrayerIndicator, nextPrayerIndicatorSecondary;
-    
+
     // Layout containers
     private LinearLayout azanCountdownContainer, iqamahCountdownContainer;
     private TextView mosqueNameTextView, temperatureTextView;
@@ -191,11 +179,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView newsTextView;
     public static Activity currentActivity;
     int selectedTheme;
-    
+
     private static final int REQUEST_ENABLE_BT = 3;
     private static final int PERMISSION_COARSE_LOCATION = 2;
     public static float CURRENT_TEMPERATURE = 0;
     //endregion
+
     /**
      * Theme configuration data class to hold theme-specific settings
      * Optimized for memory efficiency with primitive types and minimal object overhead
@@ -219,10 +208,10 @@ public class MainActivity extends AppCompatActivity {
         final byte hasNextPrayerIndicatorSecondary;
 
         ThemeConfiguration(int layoutResId, int orientation, int backgroundResId, String newsTextColor,
-                         int[] dayImages, int[] monthImages, int[] hijriMonthImages, int[] digitImages,
-                         int[] timeDigitImages, int[] azanTimeDigitImages, int[] iqamahTimeDigitImages,
-                         int[] iqamahCountdownDigitImages, int[] azanCountdownDigitImages, int[] secondDigitImages,
-                         boolean hasNextPrayerIndicator, boolean hasNextPrayerIndicatorSecondary) {
+                           int[] dayImages, int[] monthImages, int[] hijriMonthImages, int[] digitImages,
+                           int[] timeDigitImages, int[] azanTimeDigitImages, int[] iqamahTimeDigitImages,
+                           int[] iqamahCountdownDigitImages, int[] azanCountdownDigitImages, int[] secondDigitImages,
+                           boolean hasNextPrayerIndicator, boolean hasNextPrayerIndicatorSecondary) {
             this.layoutResId = layoutResId;
             this.orientation = orientation;
             this.backgroundResId = backgroundResId;
@@ -241,11 +230,13 @@ public class MainActivity extends AppCompatActivity {
             this.hasNextPrayerIndicatorSecondary = (byte) (hasNextPrayerIndicatorSecondary ? 1 : 0);
         }
     }
+
     /**
      * Theme configurations map for easy lookup
      * Using lazy initialization for better startup performance
      */
     private static volatile Map<Integer, ThemeConfiguration> THEME_CONFIGURATIONS;
+
     /**
      * Thread-safe lazy initialization of theme configurations
      * This improves app startup time by deferring configuration creation
@@ -261,211 +252,212 @@ public class MainActivity extends AppCompatActivity {
         }
         return THEME_CONFIGURATIONS;
     }
+
     /**
      * Initialize theme configurations - called only once when first needed
      */
     private static void initializeThemeConfigurations() {
         // Theme 0 (default)
         THEME_CONFIGURATIONS.put(0, new ThemeConfiguration(
-            R.layout.activity_main,
-            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
-            R.drawable.background_main,
-            null,
-            ImagesArrays.daysImageTheme1,
-            ImagesArrays.monthImageTheme1,
-            ImagesArrays.monthImageHijriTheme1,
-            ImagesArrays.dateNumberTheme1,
-            ImagesArrays.timeNumberTheme1,
-            ImagesArrays.timeNumberAzanTheme1,
-            ImagesArrays.timeNumberIqamhTheme1,
-            ImagesArrays.timeNumberTheme1,
-            ImagesArrays.timeNumberTheme1,
-            ImagesArrays.timeNumberTheme1,
-            false,
-            true
+                R.layout.activity_main,
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+                R.drawable.background_main,
+                null,
+                ImagesArrays.daysImageTheme1,
+                ImagesArrays.monthImageTheme1,
+                ImagesArrays.monthImageHijriTheme1,
+                ImagesArrays.dateNumberTheme1,
+                ImagesArrays.timeNumberTheme1,
+                ImagesArrays.timeNumberAzanTheme1,
+                ImagesArrays.timeNumberIqamhTheme1,
+                ImagesArrays.timeNumberTheme1,
+                ImagesArrays.timeNumberTheme1,
+                ImagesArrays.timeNumberTheme1,
+                false,
+                true
         ));
 
         // Theme 1
         THEME_CONFIGURATIONS.put(1, new ThemeConfiguration(
-            R.layout.activity_main,
-            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
-            R.drawable.background_main_them_1,
-            "#ED0606",
-            ImagesArrays.daysImageTheme1,
-            ImagesArrays.monthImageTheme1,
-            ImagesArrays.monthImageHijriTheme1,
-            ImagesArrays.dateNumberTheme1,
-            ImagesArrays.timeNumberTheme1,
-            ImagesArrays.timeNumberAzanTheme1,
-            ImagesArrays.timeNumberIqamhTheme1,
-            ImagesArrays.timeNumberTheme1,
-            ImagesArrays.timeNumberTheme1,
-            ImagesArrays.timeNumberTheme1,
-            false,
-            false
+                R.layout.activity_main,
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+                R.drawable.background_main_them_1,
+                "#ED0606",
+                ImagesArrays.daysImageTheme1,
+                ImagesArrays.monthImageTheme1,
+                ImagesArrays.monthImageHijriTheme1,
+                ImagesArrays.dateNumberTheme1,
+                ImagesArrays.timeNumberTheme1,
+                ImagesArrays.timeNumberAzanTheme1,
+                ImagesArrays.timeNumberIqamhTheme1,
+                ImagesArrays.timeNumberTheme1,
+                ImagesArrays.timeNumberTheme1,
+                ImagesArrays.timeNumberTheme1,
+                false,
+                false
         ));
 
         // Theme 2
         THEME_CONFIGURATIONS.put(2, new ThemeConfiguration(
-            R.layout.activity_main,
-            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
-            R.drawable.background_main_them_2,
-            "#ED0606",
-            ImagesArrays.daysImageTheme1,
-            ImagesArrays.monthImageTheme1,
-            ImagesArrays.monthImageHijriTheme1,
-            ImagesArrays.dateNumberTheme1,
-            ImagesArrays.timeNumberTheme1,
-            ImagesArrays.timeNumberAzanTheme1,
-            ImagesArrays.timeNumberIqamhTheme1,
-            ImagesArrays.timeNumberTheme1,
-            ImagesArrays.timeNumberTheme1,
-            ImagesArrays.timeNumberTheme1,
-            false,
-            false
+                R.layout.activity_main,
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+                R.drawable.background_main_them_2,
+                "#ED0606",
+                ImagesArrays.daysImageTheme1,
+                ImagesArrays.monthImageTheme1,
+                ImagesArrays.monthImageHijriTheme1,
+                ImagesArrays.dateNumberTheme1,
+                ImagesArrays.timeNumberTheme1,
+                ImagesArrays.timeNumberAzanTheme1,
+                ImagesArrays.timeNumberIqamhTheme1,
+                ImagesArrays.timeNumberTheme1,
+                ImagesArrays.timeNumberTheme1,
+                ImagesArrays.timeNumberTheme1,
+                false,
+                false
         ));
 
         // Theme 3
         THEME_CONFIGURATIONS.put(3, new ThemeConfiguration(
-            R.layout.activity_main_4,
-            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
-            0, // No background drawable
-            null,
-            ImagesArrays.daysImageTheme4,
-            ImagesArrays.monthImageTheme4,
-            ImagesArrays.monthImageHijriTheme4,
-            ImagesArrays.timeNumberTheme4,
-            ImagesArrays.timeNumberTheme4,
-            ImagesArrays.timeNumberIqamhTheme4,
-            ImagesArrays.timeNumberIqamhTheme4,
-            ImagesArrays.timeNumberIqamhLeft4,
-            ImagesArrays.timeNumberIqamhLeft4,
-            ImagesArrays.timeNumberIqamhTheme4,
-            true,
-            false
+                R.layout.activity_main_4,
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+                0, // No background drawable
+                null,
+                ImagesArrays.daysImageTheme4,
+                ImagesArrays.monthImageTheme4,
+                ImagesArrays.monthImageHijriTheme4,
+                ImagesArrays.timeNumberTheme4,
+                ImagesArrays.timeNumberTheme4,
+                ImagesArrays.timeNumberIqamhTheme4,
+                ImagesArrays.timeNumberIqamhTheme4,
+                ImagesArrays.timeNumberIqamhLeft4,
+                ImagesArrays.timeNumberIqamhLeft4,
+                ImagesArrays.timeNumberIqamhTheme4,
+                true,
+                false
         ));
 
         // Theme 4
         THEME_CONFIGURATIONS.put(4, new ThemeConfiguration(
-            R.layout.activity_main_5,
-            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
-            0, // No background drawable
-            null,
-            ImagesArrays.daysImageTheme4,
-            ImagesArrays.monthImageTheme5,
-            ImagesArrays.monthImageHijriTheme5,
-            ImagesArrays.timeNumberTheme5,
-            ImagesArrays.timeNumberTheme5,
-            ImagesArrays.timeNumberIqamhTheme4,
-            ImagesArrays.timeNumberIqamhTheme4,
-            ImagesArrays.timeNumberIqamhLeft4,
-            ImagesArrays.timeNumberIqamhLeft4,
-            ImagesArrays.timeNumberIqamhTheme4,
-            false,
-            false
+                R.layout.activity_main_5,
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+                0, // No background drawable
+                null,
+                ImagesArrays.daysImageTheme4,
+                ImagesArrays.monthImageTheme5,
+                ImagesArrays.monthImageHijriTheme5,
+                ImagesArrays.timeNumberTheme5,
+                ImagesArrays.timeNumberTheme5,
+                ImagesArrays.timeNumberIqamhTheme4,
+                ImagesArrays.timeNumberIqamhTheme4,
+                ImagesArrays.timeNumberIqamhLeft4,
+                ImagesArrays.timeNumberIqamhLeft4,
+                ImagesArrays.timeNumberIqamhTheme4,
+                false,
+                false
         ));
 
         // Theme 5
         THEME_CONFIGURATIONS.put(5, new ThemeConfiguration(
-            R.layout.activity_main_6,
-            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
-            0, // No background drawable
-            null,
-            ImagesArrays.daysImageTheme6,
-            ImagesArrays.monthImageTheme6,
-            ImagesArrays.monthImageHijriTheme6,
-            ImagesArrays.timeNumberIqamhLeft4,
-            ImagesArrays.timeNumberTheme6,
-            ImagesArrays.timeNumberAzanTheme6,
-            ImagesArrays.timeNumberIqama6,
-            ImagesArrays.timeNumberTheme6,
-            ImagesArrays.timeNumberTheme6,
-            ImagesArrays.timeNumberTheme6,
-            false,
-            false
+                R.layout.activity_main_6,
+                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
+                0, // No background drawable
+                null,
+                ImagesArrays.daysImageTheme6,
+                ImagesArrays.monthImageTheme6,
+                ImagesArrays.monthImageHijriTheme6,
+                ImagesArrays.timeNumberIqamhLeft4,
+                ImagesArrays.timeNumberTheme6,
+                ImagesArrays.timeNumberAzanTheme6,
+                ImagesArrays.timeNumberIqama6,
+                ImagesArrays.timeNumberTheme6,
+                ImagesArrays.timeNumberTheme6,
+                ImagesArrays.timeNumberTheme6,
+                false,
+                false
         ));
 
         // Theme 6
         THEME_CONFIGURATIONS.put(6, new ThemeConfiguration(
-            R.layout.activity_main_7,
-            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
-            0, // No background drawable
-            null,
-            ImagesArrays.daysImageTheme1,
-            ImagesArrays.monthImageTheme1,
-            ImagesArrays.monthImageHijriTheme1,
-            ImagesArrays.dateNumberTheme1,
-            ImagesArrays.timeNumberIqamhLeft7,
-            ImagesArrays.timeNumberAzanTheme6,
-            ImagesArrays.timeNumberIqama6,
-            ImagesArrays.timeNumberIqamhLeft7,
-            ImagesArrays.timeNumberIqamhLeft7,
-            ImagesArrays.timeNumberIqamhLeft7,
-            true,
-            false
+                R.layout.activity_main_7,
+                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
+                0, // No background drawable
+                null,
+                ImagesArrays.daysImageTheme1,
+                ImagesArrays.monthImageTheme1,
+                ImagesArrays.monthImageHijriTheme1,
+                ImagesArrays.dateNumberTheme1,
+                ImagesArrays.timeNumberIqamhLeft7,
+                ImagesArrays.timeNumberAzanTheme6,
+                ImagesArrays.timeNumberIqama6,
+                ImagesArrays.timeNumberIqamhLeft7,
+                ImagesArrays.timeNumberIqamhLeft7,
+                ImagesArrays.timeNumberIqamhLeft7,
+                true,
+                false
         ));
 
         // Theme 7
         THEME_CONFIGURATIONS.put(7, new ThemeConfiguration(
-            R.layout.activity_main_8,
-            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
-            0, // No background drawable
-            null,
-            ImagesArrays.daysImageTheme8,
-            ImagesArrays.monthImageTheme8,
-            ImagesArrays.monthImageHijriTheme8,
-            ImagesArrays.timeNumberDate8,
-            ImagesArrays.timeNumberTime8,
-            ImagesArrays.timeNumberAzIq8,
-            ImagesArrays.timeNumberAzIq8,
-            ImagesArrays.timeNumberTime8,
-            ImagesArrays.timeNumberTime8,
-            ImagesArrays.timeNumberTime8,
-            true,
-            false
+                R.layout.activity_main_8,
+                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
+                0, // No background drawable
+                null,
+                ImagesArrays.daysImageTheme8,
+                ImagesArrays.monthImageTheme8,
+                ImagesArrays.monthImageHijriTheme8,
+                ImagesArrays.timeNumberDate8,
+                ImagesArrays.timeNumberTime8,
+                ImagesArrays.timeNumberAzIq8,
+                ImagesArrays.timeNumberAzIq8,
+                ImagesArrays.timeNumberTime8,
+                ImagesArrays.timeNumberTime8,
+                ImagesArrays.timeNumberTime8,
+                true,
+                false
         ));
 
         // Theme 8
         THEME_CONFIGURATIONS.put(8, new ThemeConfiguration(
-            R.layout.activity_main_9,
-            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
-            0, // No background drawable
-            null,
-            ImagesArrays.daysImageTheme1,
-            ImagesArrays.monthImageTheme1,
-            ImagesArrays.monthImageHijriTheme1,
-            ImagesArrays.dateNumberTheme1,
-            ImagesArrays.timeNumberTheme6,
-            ImagesArrays.timeNumberAzanTheme6,
-            ImagesArrays.timeNumberIqama6,
-            ImagesArrays.timeNumberTheme6,
-            ImagesArrays.timeNumberTheme6,
-            ImagesArrays.timeNumberTheme6,
-            false,
-            false
+                R.layout.activity_main_9,
+                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
+                0, // No background drawable
+                null,
+                ImagesArrays.daysImageTheme1,
+                ImagesArrays.monthImageTheme1,
+                ImagesArrays.monthImageHijriTheme1,
+                ImagesArrays.dateNumberTheme1,
+                ImagesArrays.timeNumberTheme6,
+                ImagesArrays.timeNumberAzanTheme6,
+                ImagesArrays.timeNumberIqama6,
+                ImagesArrays.timeNumberTheme6,
+                ImagesArrays.timeNumberTheme6,
+                ImagesArrays.timeNumberTheme6,
+                false,
+                false
         ));
 
         // Theme 9
         THEME_CONFIGURATIONS.put(9, new ThemeConfiguration(
-            R.layout.activity_main_10,
-            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
-            0, // No background drawable
-            null,
-            ImagesArrays.daysImageTheme10,
-            ImagesArrays.monthImageTheme10,
-            ImagesArrays.monthImageHijriTheme10,
-            ImagesArrays.timeNumberDate10,
-            ImagesArrays.timeNumberIqamhLeft4,
-            ImagesArrays.timeNumberAzIq8,
-            ImagesArrays.timeNumberAzIq8,
-            ImagesArrays.timeNumberIqamhLeft4,
-            ImagesArrays.timeNumberIqamhLeft4,
-            ImagesArrays.timeNumberDate10,
-            false,
-            true
+                R.layout.activity_main_10,
+                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
+                0, // No background drawable
+                null,
+                ImagesArrays.daysImageTheme10,
+                ImagesArrays.monthImageTheme10,
+                ImagesArrays.monthImageHijriTheme10,
+                ImagesArrays.timeNumberDate10,
+                ImagesArrays.timeNumberIqamhLeft4,
+                ImagesArrays.timeNumberAzIq8,
+                ImagesArrays.timeNumberAzIq8,
+                ImagesArrays.timeNumberIqamhLeft4,
+                ImagesArrays.timeNumberIqamhLeft4,
+                ImagesArrays.timeNumberDate10,
+                false,
+                true
         ));
         THEME_CONFIGURATIONS.put(10, new ThemeConfiguration(
-                R.layout.activity_main_new_theme_1,
+                R.layout.activity_main_new_theme_11,
                 ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
                 0, // No background drawable
                 null,
@@ -483,6 +475,7 @@ public class MainActivity extends AppCompatActivity {
                 true
         ));
     }
+
     class CountDownRunner implements Runnable {
 
         public void run() {
@@ -499,11 +492,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     //region Life cycle
     @Override
     protected void onStart() {
         super.onStart();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -515,10 +510,20 @@ public class MainActivity extends AppCompatActivity {
 
         // Force open close phone activity for testing
 
-        selectedTheme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 0);
+        selectedTheme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 11);
+        selectedTheme = 6;
 
-        // Apply theme configuration
-        applyThemeConfiguration(selectedTheme);
+        // Apply theme configuration only if not theme 11
+        if (selectedTheme != 11) {
+            applyThemeConfiguration(selectedTheme);
+        } else {
+            // For theme 11, set up the layout directly without theme configuration
+            setContentView(R.layout.activity_main_new_theme_11);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            
+            // Initialize common views for theme 11
+            newsTextView = findViewById(R.id.activity_main_new_theme_11_text_view_news);
+        }
 
         currentActivity = MainActivity.this;
 
@@ -557,14 +562,14 @@ public class MainActivity extends AppCompatActivity {
             public void handleOnBackPressed() {
                 // Show confirmation dialog for app exit
                 new android.app.AlertDialog.Builder(MainActivity.this)
-                    .setTitle("Exit App")
-                    .setMessage("Do you want to exit the app?")
-                    .setPositiveButton("Exit", (dialog, which) -> {
-                        // Properly clean up resources before finishing
-                        cleanupAndExit();
-                    })
-                    .setNegativeButton("Cancel", null)
-                    .show();
+                        .setTitle("Exit App")
+                        .setMessage("Do you want to exit the app?")
+                        .setPositiveButton("Exit", (dialog, which) -> {
+                            // Properly clean up resources before finishing
+                            cleanupAndExit();
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
             }
         });
 
@@ -572,9 +577,9 @@ public class MainActivity extends AppCompatActivity {
         updateThread = new Thread(runnable);
         updateThread.start();
     }
-    
+
     // Note: onBackPressed() is deprecated. Using OnBackPressedDispatcher in onCreate() instead.
-    
+
     /**
      * Clean up all resources and exit the app
      */
@@ -588,45 +593,49 @@ public class MainActivity extends AppCompatActivity {
                 Thread.currentThread().interrupt();
             }
         }
-        
+
         // Stop media player if playing
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
             mediaPlayer.release();
         }
-        
+
         // Stop bluetooth service
         if (bluetoothCentralManager != null) {
             bluetoothCentralManager.stopService();
         }
-        
+
         // Reset static flags to prevent issues with new instances
         resetActivityFlags();
-        
+
         // Clear current activity reference
         currentActivity = null;
-        
+
         // Finish the activity properly
         finish();
-        
+
         // Force close the app
         System.exit(0);
     }
+
     @Override
     public void onPause() {
         super.onPause();
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mosqueNameTextView.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
     }
+
     @Override
     protected void onStop() {
         super.onStop();
     }
+
     @Override
     protected void onDestroy() {
         // Clean up the update thread
@@ -638,7 +647,7 @@ public class MainActivity extends AppCompatActivity {
                 Thread.currentThread().interrupt();
             }
         }
-        
+
         // Clean up media player
         if (mediaPlayer != null) {
             if (mediaPlayer.isPlaying()) {
@@ -647,21 +656,22 @@ public class MainActivity extends AppCompatActivity {
             mediaPlayer.release();
             mediaPlayer = null;
         }
-        
+
         // Stop bluetooth service
         if (bluetoothCentralManager != null) {
             bluetoothCentralManager.stopService();
             bluetoothCentralManager = null;
         }
-        
+
         // Reset static flags
         resetActivityFlags();
-        
+
         // Clear current activity reference
         currentActivity = null;
-        
+
         super.onDestroy();
     }
+
     @Override
     public void onRequestPermissionsResult(int code, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(code, permissions, grantResults);
@@ -673,6 +683,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -684,12 +695,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     //endregion
     protected boolean isBLEEnabled() {
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         final BluetoothAdapter adapter = bluetoothManager.getAdapter();
         return adapter != null && adapter.isEnabled();
     }
+
     private void showBLEDialog() {
         final Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
@@ -697,6 +710,7 @@ public class MainActivity extends AppCompatActivity {
         }
         startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
     }
+
     private void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
@@ -704,6 +718,7 @@ public class MainActivity extends AppCompatActivity {
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
     }
+
     private void initializeViewsAndListeners() {
         findViewById(R.id.img_settings).setOnClickListener(v -> {
             try {
@@ -843,13 +858,14 @@ public class MainActivity extends AppCompatActivity {
         fridayAzanMinuteTensDigit = findViewById(R.id.img_azan_jm3a_time_m_1);
         fridayAzanMinuteOnesDigit = findViewById(R.id.img_azan_jm3a_time_m_2);
     }
+
     private void updatePrayerAndDateDisplays() {
         try {
             // Check if views are initialized
             if (newsTextView == null || bottomLayout == null) {
                 return;
             }
-            
+
             newsTextView.setSelected(true);
 
             // Initialize databaseHelper if null
@@ -1175,6 +1191,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e("MainActivity", "Error in updatePrayerAndDateDisplays: " + e.getMessage(), e);
         }
     }
+
     private void updateNextPrayerIndicator() {
 
 
@@ -1748,6 +1765,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     private void refreshUIEverySecond() {
         runOnUiThread(() -> {
             updatePrayerAndDateDisplays();
@@ -1767,6 +1785,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
     private String getIqamh(String azanTime, long aqamhTime) {
         SimpleDateFormat formatter = new SimpleDateFormat("hh:mmaa", Locale.ENGLISH);
         try {
@@ -1783,6 +1802,7 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
+
     private long getMilliseconds(String azanTime) {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
@@ -1796,6 +1816,7 @@ public class MainActivity extends AppCompatActivity {
         return mDate.getTime();
 
     }
+
     private long getMilliseconds1(String azanTime, String iqamhTIme) {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         SimpleDateFormat formatter1 = new SimpleDateFormat("hh:mmaa", Locale.ENGLISH);
@@ -1812,6 +1833,7 @@ public class MainActivity extends AppCompatActivity {
         return mDate1.getTime() - mDate.getTime();
 
     }
+
     private void getTimeLeftForAzan(String time, int check) {
         Calendar c = Calendar.getInstance();
         Calendar c1 = Calendar.getInstance();
@@ -1978,6 +2000,7 @@ public class MainActivity extends AppCompatActivity {
         azanCountdownSecondTensDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(s11.charAt(6)))]);
         azanCountdownSecondOnesDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(s11.charAt(7)))]);
     }
+
     private void getTimeLeftForIqamh(String time, long iqmahTime, int check) {
         long minutes;
         long millis;
@@ -2280,6 +2303,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     private boolean shouldShowAlkhushueScreen(int pray) {
         boolean check = false;
         switch (pray) {
@@ -2304,6 +2328,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return check;
     }
+
     private void scheduleAzkarScreen(int pray) {
         int mint = 1;
         switch (pray) {
@@ -2341,6 +2366,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     private void fetchFridayPrayerTimes() {
         SimpleDateFormat format2 = new SimpleDateFormat("M/d", Locale.ENGLISH);
         SimpleDateFormat format1 = new SimpleDateFormat("yy", Locale.ENGLISH);
@@ -2363,12 +2389,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             fridayPrayerTimes = databaseHelper.getPrayerTimesFriday("masqat", format2.format(calendar.getTime()) + "/" + getYears(Integer.parseInt(format1.format(calendar.getTime()))));
         }
-        
+
         // Add null check for Friday prayer times
         if (fridayPrayerTimes == null || fridayPrayerTimes.length < 4) {
             fridayPrayerTimes = new String[]{"", "", "", "12:30", "", ""};
         }
     }
+
     private void showAdsIfScheduled() {
         SimpleDateFormat df = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         SimpleDateFormat dfDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -2400,6 +2427,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     private int getYears(int year) {
         int returnYear = 0;
         if (year == 18 || year == 22 || year == 26 || year == 30 || year == 34 || year == 38 || year == 42 || year == 46 || year == 50 || year == 54 || year == 58 || year == 62 || year == 66 || year == 70 || year == 74 || year == 78 || year == 82 || year == 86 || year == 90 || year == 94 || year == 98 || year == 2 || year == 6 || year == 10 || year == 14) {
@@ -2413,6 +2441,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return returnYear;
     }
+
     private void initializeBluetoothListener() {
 
         bluetoothCentralManager.setMTCentralManagerListener(new MTCentralManagerListener() {
@@ -2491,6 +2520,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     private final ConnectionStatueListener connectionStatueListener = new ConnectionStatueListener() {
         @Override
         public void onUpdateConnectionStatus(final ConnectionStatus connectionStatus, final GetPasswordListener getPasswordListener) {
@@ -2560,6 +2590,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
     private void initializeBluetoothManager() {
         bluetoothCentralManager = MTCentralManager.getInstance(this);
 
@@ -2589,6 +2620,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void requestLocationPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_COARSE_LOCATION);
@@ -2596,6 +2628,7 @@ public class MainActivity extends AppCompatActivity {
             initData();
         }
     }
+
     private void initData() {
 
         try {
@@ -2604,6 +2637,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Phone does not have Bluetooth!!", Toast.LENGTH_LONG).show();
         }
     }
+
     private void playAudioFromPath(String path) {
 
 
@@ -2638,6 +2672,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
     /**
      * Reset all activity flags for testing purposes
      */
@@ -2653,6 +2688,7 @@ public class MainActivity extends AppCompatActivity {
         isAlkhushueScreenOpen = false;
         isKhotabScreenOpen = false;
     }
+
     private void openClosePhoneActivity() {
         if (!isOpenClosePhone) {
             Intent intent = new Intent(MainActivity.this, ShowClosePhoneActivity.class);
@@ -2661,12 +2697,14 @@ public class MainActivity extends AppCompatActivity {
             isOpenClosePhone = true;
         }
     }
+
     /**
      * Apply theme configuration based on selected theme
+     *
      * @param themeId The theme ID to apply
      */
     private void applyThemeConfiguration(int themeId) {
-        ThemeConfiguration config = getThemeConfigurations().get(10);
+        ThemeConfiguration config = getThemeConfigurations().get(11);
         if (config == null) {
             // Fallback to default theme (0)
             config = getThemeConfigurations().get(0);
@@ -2681,13 +2719,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize common views
         newsTextView = findViewById(R.id.textviewNews);
-        mainLayout = findViewById(R.id.relativeLayout);
 
-        // Apply background if specified
-        if (config.backgroundResId != 0 && mainLayout != null) {
-            Resources res = getResources();
-            Drawable background = res.getDrawable(config.backgroundResId);
-            mainLayout.setBackground(background);
+        if (themeId != 10) {
+            mainLayout = findViewById(R.id.relativeLayout);
+            // Apply background if specified
+            if (config.backgroundResId != 0 && mainLayout != null) {
+                Resources res = getResources();
+                Drawable background = res.getDrawable(config.backgroundResId);
+                mainLayout.setBackground(background);
+            }
         }
 
         // Apply news text color if specified

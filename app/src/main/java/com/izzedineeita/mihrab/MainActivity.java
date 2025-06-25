@@ -511,7 +511,6 @@ public class MainActivity extends AppCompatActivity {
         // Force open close phone activity for testing
 
         selectedTheme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 11);
-        selectedTheme = 6;
 
         // Apply theme configuration only if not theme 11
         if (selectedTheme != 11) {
@@ -1192,8 +1191,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void updateNextPrayerIndicator() {
+    /**
+     * Safely set visibility for nextPrayerIndicatorSecondary
+     */
+    private void setNextPrayerIndicatorSecondaryVisibility(int visibility) {
+        if (nextPrayerIndicatorSecondary != null) {
+            nextPrayerIndicatorSecondary.setVisibility(visibility);
+        }
+    }
 
+    private void updateNextPrayerIndicator() {
+        // Add null checks at the beginning
+        if (nextPrayerIndicator == null) {
+            return; // Exit early if nextPrayerIndicator is null
+        }
 
         long fajr = 0, sunrise = 0, thuhr = 0, assr = 0, maghrib = 0, ishaa = 0, fajrIqamh = 0, sunriseIqamh = 0, thuhrIqamh = 0, assrIqamh = 0, maghribIqamh = 0, ishaaIqamh = 0;
 
@@ -1295,7 +1306,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (selectedTheme) {
                 case 3:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
                     marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 0, marginParams.bottomMargin);
@@ -1307,15 +1318,15 @@ public class MainActivity extends AppCompatActivity {
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh6);
                     break;
                 case 6:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh7);
                     break;
                 case 7:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh8);
                     break;
                 case 9:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh10);
                     break;
                 default:
@@ -1336,7 +1347,7 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (selectedTheme) {
                     case 3:
-                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                         nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_freday_4);
                         marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                         marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
@@ -1348,15 +1359,15 @@ public class MainActivity extends AppCompatActivity {
                         nextPrayerIndicator.setImageResource(R.drawable.icon_fri_1_theme_6);
                         break;
                     case 6:
-                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                         nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_freday_7);
                         break;
                     case 7:
-                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                         nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_freday_8);
                         break;
                     case 9:
-                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                         nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_freday_10);
                         break;
                     default:
@@ -1371,7 +1382,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (selectedTheme) {
 
                     case 3:
-                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                         nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_2_4);
                         break;
                     case 4:
@@ -1381,15 +1392,15 @@ public class MainActivity extends AppCompatActivity {
                         nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_2_6);
                         break;
                     case 6:
-                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                         nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_2_7);
                         break;
                     case 7:
-                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                         nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_2_8);
                         break;
                     case 9:
-                        nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                         nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_2_10);
                         break;
                     default:
@@ -1409,7 +1420,7 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (selectedTheme) {
                     case 3:
-                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                         nextPrayerIndicator.setImageResource(R.drawable.icon_fri_1_theme_4);
                         marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                         marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 30, marginParams.bottomMargin);
@@ -1422,7 +1433,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 6:
 
-                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                         nextPrayerIndicator.setImageResource(R.drawable.ic_pray_friday3);
                         break;
                     case 8:
@@ -1434,13 +1445,13 @@ public class MainActivity extends AppCompatActivity {
                     case 7:
 
 
-                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                         nextPrayerIndicator.setImageResource(R.drawable.icon_fri_1_theme_5);
                         break;
                     case 9:
 
 
-                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                         nextPrayerIndicator.setImageResource(R.drawable.ic_pray_friday3);
                         break;
                     default:
@@ -1452,7 +1463,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 switch (selectedTheme) {
                     case 3:
-                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                         nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
                         marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                         marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 0, marginParams.bottomMargin);
@@ -1464,15 +1475,15 @@ public class MainActivity extends AppCompatActivity {
                         nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh6);
                         break;
                     case 6:
-                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                         nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh7);
                         break;
                     case 7:
-                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                         nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh8);
                         break;
                     case 9:
-                        nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                        setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                         nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh10);
                         break;
                     default:
@@ -1490,7 +1501,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (selectedTheme) {
                 case 3:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_4);
                     marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
@@ -1502,15 +1513,15 @@ public class MainActivity extends AppCompatActivity {
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_6);
                     break;
                 case 6:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_7);
                     break;
                 case 7:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_8);
                     break;
                 case 9:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_10);
                     break;
                 default:
@@ -1528,7 +1539,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (selectedTheme) {
                 case 3:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
                     marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -0, marginParams.bottomMargin);
@@ -1540,15 +1551,15 @@ public class MainActivity extends AppCompatActivity {
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh6);
                     break;
                 case 6:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh7);
                     break;
                 case 7:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh8);
                     break;
                 case 9:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh10);
                     break;
                 default:
@@ -1565,7 +1576,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (selectedTheme) {
                 case 3:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_4);
                     marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
@@ -1577,15 +1588,15 @@ public class MainActivity extends AppCompatActivity {
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_6);
                     break;
                 case 6:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_7);
                     break;
                 case 7:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_8);
                     break;
                 case 9:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_10);
                     break;
                 default:
@@ -1603,7 +1614,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (selectedTheme) {
                 case 3:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
                     marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 0, marginParams.bottomMargin);
@@ -1615,15 +1626,15 @@ public class MainActivity extends AppCompatActivity {
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh6);
                     break;
                 case 6:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh7);
                     break;
                 case 7:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh8);
                     break;
                 case 9:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh10);
                     break;
                 default:
@@ -1641,7 +1652,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (selectedTheme) {
                 case 3:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_4);
                     marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
@@ -1653,15 +1664,15 @@ public class MainActivity extends AppCompatActivity {
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_6);
                     break;
                 case 6:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_7);
                     break;
                 case 7:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_8);
                     break;
                 case 9:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_10);
                     break;
                 default:
@@ -1679,7 +1690,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (selectedTheme) {
                 case 3:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
                     marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 0, marginParams.bottomMargin);
@@ -1691,15 +1702,15 @@ public class MainActivity extends AppCompatActivity {
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh6);
                     break;
                 case 6:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh7);
                     break;
                 case 7:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh8);
                     break;
                 case 9:
-                    nextPrayerIndicatorSecondary.setVisibility(View.GONE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh10);
                     break;
                 default:
@@ -1717,7 +1728,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (selectedTheme) {
                 case 3:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_4);
                     marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
                     marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
@@ -1729,15 +1740,15 @@ public class MainActivity extends AppCompatActivity {
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_6);
                     break;
                 case 6:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_7);
                     break;
                 case 7:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_8);
                     break;
                 case 9:
-                    nextPrayerIndicatorSecondary.setVisibility(View.VISIBLE);
+                    setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_10);
                     break;
                 default:
@@ -2704,7 +2715,7 @@ public class MainActivity extends AppCompatActivity {
      * @param themeId The theme ID to apply
      */
     private void applyThemeConfiguration(int themeId) {
-        ThemeConfiguration config = getThemeConfigurations().get(11);
+        ThemeConfiguration config = getThemeConfigurations().get(themeId);
         if (config == null) {
             // Fallback to default theme (0)
             config = getThemeConfigurations().get(0);
@@ -2737,7 +2748,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize prayer indicator views if needed
         if (config.hasNextPrayerIndicator != 0) {
-            nextPrayerIndicator = findViewById(R.id.img_next_azan1);
+            nextPrayerIndicator = findViewById(R.id.img_next_azan);
         }
         if (config.hasNextPrayerIndicatorSecondary != 0) {
             nextPrayerIndicatorSecondary = findViewById(R.id.img_next_azan1);

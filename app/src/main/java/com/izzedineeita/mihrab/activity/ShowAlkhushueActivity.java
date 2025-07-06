@@ -4,23 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,7 +26,6 @@ import com.izzedineeita.mihrab.utils.ImagesArrays;
 import com.izzedineeita.mihrab.utils.Pref;
 import com.izzedineeita.mihrab.utils.Utils;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -357,16 +350,16 @@ public class ShowAlkhushueActivity extends AppCompatActivity {
     private void init() {
 
         /* init date images */
-        img_time_hour_1 = findViewById(R.id.img_time_hour_1);
-        img_time_hour_2 = findViewById(R.id.img_time_hour_2);
-        img_time_mint_1 = findViewById(R.id.img_time_mint_1);
-        img_time_mint_2 = findViewById(R.id.img_time_mint_2);
-        img_time_sec_2 = findViewById(R.id.img_time_sec_2);
-        img_time_sec_1 = findViewById(R.id.img_time_sec_1);
-        img_date_day = findViewById(R.id.img_date_day);
-        img_date_month_m_2 = findViewById(R.id.img_date_month_m_2);
-        img_date_month_m_1 = findViewById(R.id.img_date_month_m_1);
-        img_date_month_m = findViewById(R.id.img_date_month_m);
+        img_time_hour_1 = findViewById(R.id.image_current_time_hour_tens);
+        img_time_hour_2 = findViewById(R.id.image_current_time_hour_ones);
+        img_time_mint_1 = findViewById(R.id.image_current_time_minute_tens);
+        img_time_mint_2 = findViewById(R.id.image_current_time_minute_ones);
+        img_time_sec_2 = findViewById(R.id.image_current_time_second_ones);
+        img_time_sec_1 = findViewById(R.id.image_current_time_second_tens);
+        img_date_day = findViewById(R.id.image_current_day);
+        img_date_month_m_2 = findViewById(R.id.image_current_date_month_ones);
+        img_date_month_m_1 = findViewById(R.id.image_current_date_month_tens);
+        img_date_month_m = findViewById(R.id.image_current_date_month);
         img_date_years_4 = findViewById(R.id.img_date_years_4);
         img_date_years_3 = findViewById(R.id.img_date_years_3);
         img_date_years_2 = findViewById(R.id.img_date_years_2);

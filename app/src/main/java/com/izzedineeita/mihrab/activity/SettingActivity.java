@@ -4,11 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -27,6 +22,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -50,7 +49,7 @@ public class SettingActivity extends AppCompatActivity {
     private EditText editTextMasegdName, edHijriSet1;
     private TextView tv_battery, edHijriSet;
     private CardView card_betarry, card_sinser;
-    private CheckBox cb_sinser, box_2;
+    private CheckBox checkBoxSensor, box_2;
     private int hijriDiff;
     private ArrayList<String> list;
 
@@ -211,26 +210,23 @@ public class SettingActivity extends AppCompatActivity {
 
         card_betarry = findViewById(R.id.card_betarry);
         card_sinser = findViewById(R.id.card_sinser);
-        cb_sinser = findViewById(R.id.cb_sinser);
+        checkBoxSensor = findViewById(R.id.check_box_sensor);
 
-        cb_sinser.setChecked(Pref.getValue(getApplicationContext(), Constants.PREF_SINSER_SHOW, false));
-        if (Pref.getValue(getApplicationContext(), Constants.PREF_SINSER_SHOW, false)) {
+        checkBoxSensor.setChecked(Pref.getValue(getApplicationContext(), Constants.PREF_SENSOR_SHOW, false));
+        if (Pref.getValue(getApplicationContext(), Constants.PREF_SENSOR_SHOW, false)) {
             card_betarry.setVisibility(View.VISIBLE);
         } else {
             card_betarry.setVisibility(View.GONE);
         }
-        cb_sinser.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Pref.setValue(getApplicationContext(), Constants.PREF_SINSER_SHOW, true);
-                    card_betarry.setVisibility(View.VISIBLE);
-                } else {
-                    Pref.setValue(getApplicationContext(), Constants.PREF_SINSER_SHOW, false);
-                    card_betarry.setVisibility(View.GONE);
-                    cb_sinser.setChecked(false);
-                }
 
+        checkBoxSensor.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                Pref.setValue(getApplicationContext(), Constants.PREF_SENSOR_SHOW, true);
+                card_betarry.setVisibility(View.VISIBLE);
+            } else {
+                Pref.setValue(getApplicationContext(), Constants.PREF_SENSOR_SHOW, false);
+                card_betarry.setVisibility(View.GONE);
+                checkBoxSensor.setChecked(false);
             }
         });
 

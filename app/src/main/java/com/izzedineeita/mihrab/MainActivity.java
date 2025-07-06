@@ -13,15 +13,9 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +25,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.izzedineeita.mihrab.activity.SettingActivity;
 import com.izzedineeita.mihrab.activity.ShowAdsActivity;
@@ -78,20 +77,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.TimeZone;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
     //region Variables
     // Time display ImageViews
-    private ImageView timeHourTensDigit, timeHourOnesDigit, timeMinuteTensDigit, timeMinuteOnesDigit,
-            timeSecondTensDigit, timeSecondOnesDigit;
+    private ImageView imageCurrentTimeHourTens, imageCurrentTimeHourOnes, imageCurrentTimeMinuteTens, imageCurrentTimeMinuteOnes,
+            imageCurrentTimeSecondOnes, imageCurrentTimeSecondTens;
 
     // Date display ImageViews
-    private ImageView dateDayImage, dateMonthTensDigit, dateMonthOnesDigit, dateMonthImage,
+    private ImageView imageCurrentDay, imageCurrentDateMonthOnes, imageCureentDateMonthTens, imageCurrentDateMonth,
             dateYearThousandsDigit, dateYearHundredsDigit, dateYearTensDigit, dateYearOnesDigit;
 
     // Hijri date display ImageViews
@@ -129,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             iqamahCountdownSecondTensDigit, iqamahCountdownSecondOnesDigit;
 
     // Friday prayer time ImageViews
-    private ImageView fridayAzanHourTensDigit, fridayAzanHourOnesDigit, fridayAzanMinuteTensDigit, fridayAzanMinuteOnesDigit;
+    private ImageView imageAzanFridayTimeHourTens, imageAzanFridayTimeHourOnes, imageAzanFridayTimeMinuteTens, imageAzanFridayTimeMinuteOnes;
 
     // Next prayer indicator ImageViews
     private ImageView nextPrayerIndicator, nextPrayerIndicatorSecondary;
@@ -520,7 +519,7 @@ public class MainActivity extends AppCompatActivity {
             // For theme 11, set up the layout directly without theme configuration
             setContentView(R.layout.activity_main_new_theme_11);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            
+
             // Initialize common views for theme 11
             newsTextView = findViewById(R.id.activity_main_new_theme_11_text_view_news);
         }
@@ -733,33 +732,36 @@ public class MainActivity extends AppCompatActivity {
             mosqueNameTextView = findViewById(R.id.tv_masged_name);
             temperatureTextView = findViewById(R.id.tv_internal_heat);
 
-            LinearLayout lay_sin = findViewById(R.id.lay_sin);
-            LinearLayout lay_friday = findViewById(R.id.lay_friday);
+            LinearLayout linearLayoutShowSensor = findViewById(R.id.linear_layout_show_sensor);
+            LinearLayout linearLayoutShowFridayTime = findViewById(R.id.linear_layout_show_friday_time);
 
-            if (Pref.getValue(getApplicationContext(), Constants.PREF_SINSER_SHOW, false)) {
-                lay_sin.setVisibility(View.VISIBLE);
-                lay_friday.setVisibility(View.GONE);
+            if (Pref.getValue(getApplicationContext(), Constants.PREF_SENSOR_SHOW, false)) {
+                linearLayoutShowSensor.setVisibility(View.VISIBLE);
+                linearLayoutShowFridayTime.setVisibility(View.GONE);
             } else {
-                lay_sin.setVisibility(View.GONE);
-                lay_friday.setVisibility(View.VISIBLE);
+                linearLayoutShowSensor.setVisibility(View.GONE);
+                linearLayoutShowFridayTime.setVisibility(View.VISIBLE);
             }
 
             mosqueNameTextView.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
 
-            timeHourTensDigit = findViewById(R.id.img_time_hour_1);
-            timeHourOnesDigit = findViewById(R.id.img_time_hour_2);
-            timeMinuteTensDigit = findViewById(R.id.img_time_mint_1);
-            timeMinuteOnesDigit = findViewById(R.id.img_time_mint_2);
-            timeSecondTensDigit = findViewById(R.id.img_time_sec_2);
-            timeSecondOnesDigit = findViewById(R.id.img_time_sec_1);
-            dateDayImage = findViewById(R.id.img_date_day);
-            dateMonthTensDigit = findViewById(R.id.img_date_month_m_2);
-            dateMonthOnesDigit = findViewById(R.id.img_date_month_m_1);
-            dateMonthImage = findViewById(R.id.img_date_month_m);
+            imageCurrentTimeHourTens = findViewById(R.id.image_current_time_hour_tens);
+            imageCurrentTimeHourOnes = findViewById(R.id.image_current_time_hour_ones);
+            imageCurrentTimeMinuteTens = findViewById(R.id.image_current_time_minute_tens);
+            imageCurrentTimeMinuteOnes = findViewById(R.id.image_current_time_minute_ones);
+            imageCurrentTimeSecondOnes = findViewById(R.id.image_current_time_second_ones);
+            imageCurrentTimeSecondTens = findViewById(R.id.image_current_time_second_tens);
+
+            imageCurrentDay = findViewById(R.id.image_current_day);
+
+            imageCurrentDateMonthOnes = findViewById(R.id.image_current_date_month_ones);
+            imageCureentDateMonthTens = findViewById(R.id.image_current_date_month_tens);
+            imageCurrentDateMonth = findViewById(R.id.image_current_date_month);
             dateYearThousandsDigit = findViewById(R.id.img_date_years_4);
             dateYearHundredsDigit = findViewById(R.id.img_date_years_3);
             dateYearTensDigit = findViewById(R.id.img_date_years_2);
             dateYearOnesDigit = findViewById(R.id.img_date_years_1);
+
             hijriMonthTensDigit = findViewById(R.id.img_date_month_h_2);
             hijriMonthOnesDigit = findViewById(R.id.img_date_month_h_1);
             hijriMonthImage = findViewById(R.id.img_date_month_h);
@@ -854,16 +856,15 @@ public class MainActivity extends AppCompatActivity {
             azanCountdownContainer = findViewById(R.id.lay_img_azan_time_left);
             iqamahCountdownContainer = findViewById(R.id.lay_img_iqamh_time_left);
 
-            /* next azan jm3a    */
-            fridayAzanHourTensDigit = findViewById(R.id.img_azan_jm3a_time_h_1);
-            fridayAzanHourOnesDigit = findViewById(R.id.img_azan_jm3a_time_h_2);
-            fridayAzanMinuteTensDigit = findViewById(R.id.img_azan_jm3a_time_m_1);
-            fridayAzanMinuteOnesDigit = findViewById(R.id.img_azan_jm3a_time_m_2);
+            imageAzanFridayTimeHourTens = findViewById(R.id.image_azan_friday_time_hour_tens);
+            imageAzanFridayTimeHourOnes = findViewById(R.id.image_azan_friday_time_hour_ones);
+            imageAzanFridayTimeMinuteTens = findViewById(R.id.image_azan_friday_time_minute_tens);
+            imageAzanFridayTimeMinuteOnes = findViewById(R.id.image_azan_friday_time_minute_ones);
         } else {
             // For theme 11, initialize only the views that exist
             mosqueNameTextView = findViewById(R.id.activity_main_new_theme_11_text_view_masjid_name);
             temperatureTextView = findViewById(R.id.tv_internal_heat);
-            
+
             if (mosqueNameTextView != null) {
                 mosqueNameTextView.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
             }
@@ -1017,20 +1018,20 @@ public class MainActivity extends AppCompatActivity {
 
 
             /* set images date */
-            if (dayImages != null && date != null && date.length > 0 && dateDayImage != null) {
-                dateDayImage.setImageResource(dayImages[Integer.parseInt(date[0])]);
+            if (dayImages != null && date != null && date.length > 0 && imageCurrentDay != null) {
+                imageCurrentDay.setImageResource(dayImages[Integer.parseInt(date[0])]);
             }
-            if (digitImages != null && date != null && date.length > 1 && dateMonthTensDigit != null) {
-                dateMonthTensDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[1].charAt(0)))]);
-                if (date[1].length() != 1 && dateMonthOnesDigit != null) {
-                    dateMonthOnesDigit.setVisibility(View.VISIBLE);
-                    dateMonthOnesDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[1].charAt(1)))]);
-                } else if (dateMonthOnesDigit != null) {
-                    dateMonthOnesDigit.setVisibility(View.GONE);
+            if (digitImages != null && date != null && date.length > 1 && imageCurrentDateMonthOnes != null) {
+                imageCurrentDateMonthOnes.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[1].charAt(0)))]);
+                if (date[1].length() != 1 && imageCureentDateMonthTens != null) {
+                    imageCureentDateMonthTens.setVisibility(View.VISIBLE);
+                    imageCureentDateMonthTens.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[1].charAt(1)))]);
+                } else if (imageCureentDateMonthTens != null) {
+                    imageCureentDateMonthTens.setVisibility(View.GONE);
                 }
             }
-            if (monthImages != null && date != null && date.length > 2 && dateMonthImage != null) {
-                dateMonthImage.setImageResource(monthImages[Integer.parseInt(date[2])]);
+            if (monthImages != null && date != null && date.length > 2 && imageCurrentDateMonth != null) {
+                imageCurrentDateMonth.setImageResource(monthImages[Integer.parseInt(date[2])]);
             }
             if (digitImages != null && date != null && date.length > 3 && dateYearThousandsDigit != null && dateYearHundredsDigit != null && dateYearTensDigit != null && dateYearOnesDigit != null) {
                 dateYearThousandsDigit.setImageResource(digitImages[Integer.parseInt(String.valueOf(date[3].charAt(0)))]);
@@ -1201,11 +1202,17 @@ public class MainActivity extends AppCompatActivity {
 
 
             fetchFridayPrayerTimes();
-            if (azanCountdownDigitImages != null && fridayPrayerTimes != null && fridayPrayerTimes.length > 3 && fridayPrayerTimes[3] != null && fridayPrayerTimes[3].length() >= 5 && fridayAzanHourTensDigit != null && fridayAzanHourOnesDigit != null && fridayAzanMinuteTensDigit != null && fridayAzanMinuteOnesDigit != null) {
-                fridayAzanHourTensDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(0)))]);
-                fridayAzanHourOnesDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(1)))]);
-                fridayAzanMinuteTensDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(3)))]);
-                fridayAzanMinuteOnesDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(4)))]);
+            if (azanCountdownDigitImages != null && fridayPrayerTimes != null && fridayPrayerTimes.length > 3 &&
+                    fridayPrayerTimes[3] != null &&
+                    fridayPrayerTimes[3].length() >= 5 &&
+                    imageAzanFridayTimeHourTens != null &&
+                    imageAzanFridayTimeHourOnes != null &&
+                    imageAzanFridayTimeMinuteTens != null &&
+                    imageAzanFridayTimeMinuteOnes != null) {
+                imageAzanFridayTimeHourTens.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(0)))]);
+                imageAzanFridayTimeHourOnes.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(1)))]);
+                imageAzanFridayTimeMinuteTens.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(3)))]);
+                imageAzanFridayTimeMinuteOnes.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(4)))]);
             }
 
         } catch (Exception e) {
@@ -1804,22 +1811,22 @@ public class MainActivity extends AppCompatActivity {
             updatePrayerAndDateDisplays();
             updateNextPrayerIndicator();
             showAdsIfScheduled();
-            
+
             // Skip ImageView updates for theme 11 since it uses TextViews
             if (selectedTheme == 11) {
                 return;
             }
-            
+
             DateFormat timeNow = new SimpleDateFormat("hh:mmass", Locale.ENGLISH);
             Calendar c = Calendar.getInstance();
             String timeText = timeNow.format(c.getTime());
-            timeHourTensDigit.setImageResource(timeDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(0)))]);
+            imageCurrentTimeHourTens.setImageResource(timeDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(0)))]);
 
-            timeHourOnesDigit.setImageResource(timeDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(1)))]);
-            timeMinuteTensDigit.setImageResource(timeDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(3)))]);
-            timeMinuteOnesDigit.setImageResource(timeDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(4)))]);
-            timeSecondOnesDigit.setImageResource(secondDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(7)))]);
-            timeSecondTensDigit.setImageResource(secondDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(8)))]);
+            imageCurrentTimeHourOnes.setImageResource(timeDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(1)))]);
+            imageCurrentTimeMinuteTens.setImageResource(timeDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(3)))]);
+            imageCurrentTimeMinuteOnes.setImageResource(timeDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(4)))]);
+            imageCurrentTimeSecondTens.setImageResource(secondDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(7)))]);
+            imageCurrentTimeSecondOnes.setImageResource(secondDigitImages[Integer.parseInt(String.valueOf(timeText.charAt(8)))]);
 
 
         });
@@ -2007,28 +2014,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     break;
-            }
-        }
-
-
-        Calendar calendar = Calendar.getInstance();
-
-        if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY && check == 3) {
-            long seconds = 60 * 1000;
-
-            if (seconds == millis1) {
-                if (Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true)) {
-
-                    if (!isOpenClosePhone) {
-                        Intent intent = new Intent(MainActivity.this, ShowClosePhoneActivity.class);
-                        intent.putExtra("PRAY", check);
-                        startActivity(intent);
-                        isOpenClosePhone = true;
-                    }
-                }
-            } else {
-
-
             }
         }
 
@@ -2407,20 +2392,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchFridayPrayerTimes() {
-        SimpleDateFormat format2 = new SimpleDateFormat("M/d", Locale.ENGLISH);
-        SimpleDateFormat format1 = new SimpleDateFormat("yy", Locale.ENGLISH);
-        Calendar calendar = Calendar.getInstance();
 
-        if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
-            System.out.println("FRIDAY!");
-        }
+        SimpleDateFormat format1 = new SimpleDateFormat("yy", Locale.ENGLISH);
+        SimpleDateFormat format2 = new SimpleDateFormat("M/d", Locale.ENGLISH);
+        Calendar calendar = Calendar.getInstance();
 
         int weekday = calendar.get(Calendar.DAY_OF_WEEK);
         int days = Calendar.FRIDAY - weekday;
         if (days < 0) {
             days += 7;
         }
+
         calendar.add(Calendar.DAY_OF_YEAR, days);
+
         String[] cityEn = getResources().getStringArray(R.array.city_name_en);
         int cityChose = Pref.getValue(getApplicationContext(), Constants.PREF_CITY_POSITION_SELECTED, 0);
         if (cityChose != 0) {

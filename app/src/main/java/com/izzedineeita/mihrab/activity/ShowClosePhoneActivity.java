@@ -446,16 +446,16 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
     private void init() {
 
         /* init date images */
-        img_time_hour_1 = findViewById(R.id.img_time_hour_1);
-        img_time_hour_2 = findViewById(R.id.img_time_hour_2);
-        img_time_mint_1 = findViewById(R.id.img_time_mint_1);
-        img_time_mint_2 = findViewById(R.id.img_time_mint_2);
-        img_time_sec_2 = findViewById(R.id.img_time_sec_2);
-        img_time_sec_1 = findViewById(R.id.img_time_sec_1);
-        img_date_day = findViewById(R.id.img_date_day);
-        img_date_month_m_2 = findViewById(R.id.img_date_month_m_2);
-        img_date_month_m_1 = findViewById(R.id.img_date_month_m_1);
-        img_date_month_m = findViewById(R.id.img_date_month_m);
+        img_time_hour_1 = findViewById(R.id.image_current_time_hour_tens);
+        img_time_hour_2 = findViewById(R.id.image_current_time_hour_ones);
+        img_time_mint_1 = findViewById(R.id.image_current_time_minute_tens);
+        img_time_mint_2 = findViewById(R.id.image_current_time_minute_ones);
+        img_time_sec_2 = findViewById(R.id.image_current_time_second_ones);
+        img_time_sec_1 = findViewById(R.id.image_current_time_second_tens);
+        img_date_day = findViewById(R.id.image_current_day);
+        img_date_month_m_2 = findViewById(R.id.image_current_date_month_ones);
+        img_date_month_m_1 = findViewById(R.id.image_current_date_month_tens);
+        img_date_month_m = findViewById(R.id.image_current_date_month);
         img_date_years_4 = findViewById(R.id.img_date_years_4);
         img_date_years_3 = findViewById(R.id.img_date_years_3);
         img_date_years_2 = findViewById(R.id.img_date_years_2);

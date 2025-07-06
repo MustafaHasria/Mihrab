@@ -1,12 +1,5 @@
 package com.izzedineeita.mihrab.constants;
 
-/**
- * Created by Izzedine Eita on 28/11/2020.
- * project name : mihrab
- * Email : izzedineeita@gmail.com
- * WebSite : izzedineeita.com & Kotdroid.com
- */
-
 public interface Constants {
 
     String PREF_CITY_POSITION_SELECTED = "PREF_CITY_POSITION_SELECTED";
@@ -166,7 +159,7 @@ public interface Constants {
     String PREF_ISHA_SHOW_AZKAR_TIME = "PREF_ISHA_SHOW_AZKAR_TIME";
 
 
-    String PREF_SINSER_SHOW = "PREF_SINSER_SHOW";
+    String PREF_SENSOR_SHOW = "PREF_SENSOR_SHOW";
     String PREF_HEJRY_INT = "PREF_HEJRY_INT";
     String PREF_HEJRY_INT1 = "PREF_HEJRY_INT1";
 

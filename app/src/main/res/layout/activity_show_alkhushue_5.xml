@@ -48,7 +48,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/img_date_day"
+            android:id="@+id/image_current_day"
             android:layout_width="wrap_content"
             android:layout_height="60sp"
             android:layout_gravity="center"
@@ -67,7 +67,7 @@
             <ImageView
                 android:layout_marginLeft="10sp"
                 android:layout_marginRight="10sp"
-                android:id="@+id/img_time_hour_1"
+                android:id="@+id/image_current_time_hour_tens"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -76,7 +76,7 @@
             <ImageView
                 android:layout_marginLeft="10sp"
                 android:layout_marginRight="10sp"
-                android:id="@+id/img_time_hour_2"
+                android:id="@+id/image_current_time_hour_ones"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -95,7 +95,7 @@
             <ImageView
                 android:layout_marginLeft="10sp"
                 android:layout_marginRight="10sp"
-                android:id="@+id/img_time_mint_1"
+                android:id="@+id/image_current_time_minute_tens"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -104,7 +104,7 @@
             <ImageView
                 android:layout_marginLeft="10sp"
                 android:layout_marginRight="10sp"
-                android:id="@+id/img_time_mint_2"
+                android:id="@+id/image_current_time_minute_ones"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -119,7 +119,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/img_time_sec_1"
+                    android:id="@+id/image_current_time_second_tens"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
@@ -127,7 +127,7 @@
                     android:src="@drawable/ic_number_thme_4_v_azan_3" />
 
                 <ImageView
-                    android:id="@+id/img_time_sec_2"
+                    android:id="@+id/image_current_time_second_ones"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
@@ -253,14 +253,14 @@
                 android:src="@drawable/ic_number_thme_5_v_time_1" />
 
             <ImageView
-                android:id="@+id/img_date_month_m"
+                android:id="@+id/image_current_date_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_moth_jan_5" />
 
             <ImageView
-                android:id="@+id/img_date_month_m_1"
+                android:id="@+id/image_current_date_month_tens"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -268,7 +268,7 @@
                 android:src="@drawable/ic_number_thme_5_v_time_1" />
 
             <ImageView
-                android:id="@+id/img_date_month_m_2"
+                android:id="@+id/image_current_date_month_ones"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"

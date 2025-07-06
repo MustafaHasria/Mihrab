@@ -2,21 +2,15 @@ package com.izzedineeita.mihrab.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
-import android.content.res.Resources;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
@@ -26,16 +20,12 @@ import com.izzedineeita.mihrab.MainActivity;
 import com.izzedineeita.mihrab.R;
 import com.izzedineeita.mihrab.constants.Constants;
 import com.izzedineeita.mihrab.constants.DateHigri;
-import com.izzedineeita.mihrab.database.DataBaseHelper;
-import com.izzedineeita.mihrab.utils.ImagesArrays;
 import com.izzedineeita.mihrab.utils.Pref;
 import com.izzedineeita.mihrab.utils.Utils;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class ShowAzkarActivity extends AppCompatActivity {
@@ -119,12 +109,12 @@ public class ShowAzkarActivity extends AppCompatActivity {
         DateHigri hd = new DateHigri();
         switch (theme) {
             case 5:
-                dateM = Utils.writeMDate1(activity, hd);
-                dateH = Utils.writeHDate1(activity, hd);
+                dateM = Utils.writeMDate1(activity);
+                dateH = Utils.writeHDate1(activity);
                 break;
             default:
-                dateM = Utils.writeMDate(activity, hd);
-                dateH = Utils.writeHDate(activity, hd);
+                dateM = Utils.writeMDate(activity);
+                dateH = Utils.writeHDate(activity);
                 break;
         }
 

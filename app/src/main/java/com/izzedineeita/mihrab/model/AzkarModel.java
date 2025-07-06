@@ -1,7 +1,4 @@
-package com.izzedineeita.mihrab.model;// Created by Izzedine Eita on 1/13/2021.
-
-// Created by Izzedine Eita on 1/13/2021.
-
+package com.izzedineeita.mihrab.model;
 public class AzkarModel {
     private int Id;
     private String TextAzakar;

@@ -8,9 +8,11 @@ import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+
 import androidx.annotation.IdRes;
 import androidx.loader.content.CursorLoader;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -62,7 +64,7 @@ public class IqamaSettingsActivity extends AppCompatActivity {
     private Activity activity;
     private NumberPicker np_fajer, np_fajerِAzkarP, np_fajerِAzkarApp,
             np_sunrise,
-    np_thahr, np_thahrAzkarP, np_thahrAzkarApp,
+            np_thahr, np_thahrAzkarP, np_thahrAzkarApp,
             np_asr, np_asrAzkarP, np_asrAzkarApp,
             np_mg, np_mgAzkarP, np_mgAzkarApp,
             np_ish, np_ishAzkarP, np_ishAzkarApp;
@@ -102,9 +104,6 @@ public class IqamaSettingsActivity extends AppCompatActivity {
         initIsh();
 
 
-
-
-
 //        findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -138,7 +137,7 @@ public class IqamaSettingsActivity extends AppCompatActivity {
         np_fajerِAzkarApp.setMinValue(1);
 
         /* data init Fajer */
-        if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_RELATIVE, false)){
+        if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_RELATIVE, false)) {
             llfRelative.setVisibility(View.GONE);
             llfConstant.setVisibility(View.VISIBLE);
             rbfConstant.setChecked(true);
@@ -150,7 +149,6 @@ public class IqamaSettingsActivity extends AppCompatActivity {
 
         String sIqamhFajer = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_CONSTANT_TIME_SELECTED, "00:00");
         ed_fajerIq.setText(sIqamhFajer);
-
 
 
         np_fajer.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_RELATIVE_TIME_SELECTED, 25));
@@ -317,7 +315,6 @@ public class IqamaSettingsActivity extends AppCompatActivity {
         ed_thahrIq.setText(sIqamhThahr);
 
 
-
         np_thahr.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_RELATIVE_TIME_SELECTED, 20));
         np_thahrAzkarP.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_AZKAR_SHOW_IN, 10));
         np_thahrAzkarApp.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SHOW_ALKHUSHUE_TIME, 5));
@@ -345,7 +342,7 @@ public class IqamaSettingsActivity extends AppCompatActivity {
         llthConstant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   showPicker(ed_thahrIq, Constants.PREF_IQAMH_DHOHR_CONSTANT_TIME_SELECTED);
+                //   showPicker(ed_thahrIq, Constants.PREF_IQAMH_DHOHR_CONSTANT_TIME_SELECTED);
             }
         });
 
@@ -414,7 +411,6 @@ public class IqamaSettingsActivity extends AppCompatActivity {
 
         String sIqamhAsr = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_CONSTANT_TIME_SELECTED, "00:00");
         ed_asrIq.setText(sIqamhAsr);
-
 
 
         np_asr.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_RELATIVE_TIME_SELECTED, 20));
@@ -515,7 +511,6 @@ public class IqamaSettingsActivity extends AppCompatActivity {
         ed_mgIq.setText(sIqamhMg);
 
 
-
         np_mg.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_MAGHRIB_RELATIVE_TIME_SELECTED, 10));
         np_mgAzkarP.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_AZKAR_SHOW_IN, 10));
         np_mgAzkarApp.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SHOW_ALKHUSHUE_TIME, 5));
@@ -614,7 +609,6 @@ public class IqamaSettingsActivity extends AppCompatActivity {
         ed_ishIq.setText(sIqamhIsha);
 
 
-
         np_ish.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ISHA_RELATIVE_TIME_SELECTED, 20));
         np_ishAzkarP.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_AZKAR_SHOW_IN, 10));
         np_ishAzkarApp.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SHOW_ALKHUSHUE_TIME, 5));
@@ -707,7 +701,6 @@ public class IqamaSettingsActivity extends AppCompatActivity {
         formatter = new SimpleDateFormat("hh:mmaa", Locale.ENGLISH);
         return formatter.format(cal.getTime());
     }
-
 
 
 }

@@ -6,23 +6,19 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.camerakit.CameraKitView;
-import com.izzedineeita.mihrab.MainActivity;
 import com.izzedineeita.mihrab.R;
 import com.izzedineeita.mihrab.constants.Constants;
 import com.izzedineeita.mihrab.constants.DateHigri;
-import com.izzedineeita.mihrab.database.DataBaseHelper;
 import com.izzedineeita.mihrab.utils.Pref;
 import com.izzedineeita.mihrab.utils.Utils;
 
@@ -106,12 +102,12 @@ public class ShowKatebActivity extends AppCompatActivity {
         DateHigri hd = new DateHigri();
         switch (theme) {
             case 5:
-                dateM = Utils.writeMDate1(activity, hd);
-                dateH = Utils.writeHDate1(activity, hd);
+                dateM = Utils.writeMDate1(activity);
+                dateH = Utils.writeHDate1(activity);
                 break;
             default:
-                dateM = Utils.writeMDate(activity, hd);
-                dateH = Utils.writeHDate(activity, hd);
+                dateM = Utils.writeMDate(activity);
+                dateH = Utils.writeHDate(activity);
                 break;
         }
 

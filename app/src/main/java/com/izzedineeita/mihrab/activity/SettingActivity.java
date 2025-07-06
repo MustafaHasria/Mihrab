@@ -115,7 +115,7 @@ public class SettingActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task task) {
                                 mAuth.signOut();
-                                Pref.setValue(SettingActivity.this,Constants.PREF_IS_USER_LOGIN, false);
+                                Pref.setValue(SettingActivity.this, Constants.PREF_IS_USER_LOGIN, false);
                                 finishAffinity();
                                 Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -123,7 +123,7 @@ public class SettingActivity extends AppCompatActivity {
                                 //finish();
                             }
                         });
-               // startActivity(new Intent(SettingActivity.this, AboutAppActivity.class));
+                // startActivity(new Intent(SettingActivity.this, AboutAppActivity.class));
             }
         });
 
@@ -254,7 +254,6 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    // startActivity(new Intent(SettingActivity.this, AzkarActivity.class));
                     startActivity(new Intent(SettingActivity.this, AzkarSettingActivity.class));
                 } catch (Exception e) {
                     Log.e("XXX", e.getLocalizedMessage());
@@ -262,14 +261,11 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-        ll_NewAds.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    startActivity(new Intent(SettingActivity.this, AdsActivity.class));
-                } catch (Exception e) {
-                    Log.e("XXX", e.getLocalizedMessage());
-                }
+        ll_NewAds.setOnClickListener(v -> {
+            try {
+                startActivity(new Intent(SettingActivity.this, AdsActivity.class));
+            } catch (Exception e) {
+                Log.e("XXX", e.getLocalizedMessage());
             }
         });
 
@@ -414,24 +410,24 @@ public class SettingActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
 
-              try {
-                  Pref.setValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, position);
-                  switch (position) {
-                      case 5:
-                      case 6:
-                      case 7:
-                      case 8:
-                      case 9:
-                          setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-                          break;
-                      default:
-                          setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                          break;
-                  }
-                  MainActivity.currentActivity.recreate();
-              } catch (Exception e) {
-                  Toast.makeText(SettingActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-              }
+                try {
+                    Pref.setValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, position);
+                    switch (position) {
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+                            break;
+                        default:
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                            break;
+                    }
+                    MainActivity.currentActivity.recreate();
+                } catch (Exception e) {
+                    Toast.makeText(SettingActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override

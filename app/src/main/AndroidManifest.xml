@@ -73,6 +73,9 @@
             android:name=".activity.AddAdsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
+            android:name=".activity.TestAddAdsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
             android:name=".activity.AdsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity

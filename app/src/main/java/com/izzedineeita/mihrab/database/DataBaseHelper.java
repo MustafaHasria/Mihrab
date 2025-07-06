@@ -26,11 +26,32 @@ import java.util.ArrayList;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
+    //region Variables
     private static String TAG = "DataBaseHelper";
     private static String DB_PATH = "";
     private static String DB_NAME = "prayer_times5.db";//
     private SQLiteDatabase mDataBase;
     private final Context mContext;
+    //endregion
+
+    //region Life cycle
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+
+    @Override
+    public synchronized void close() {
+        if (mDataBase != null)
+            mDataBase.close();
+        super.close();
+    }
+    //endregion
 
     public DataBaseHelper(Context context) {
         super(context, DB_NAME, null, 1);
@@ -42,11 +63,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.mContext = context;
 
         try {
+            Log.d(TAG, "Initializing database...");
             createDataBase();
             openDataBase();
             mDataBase = getReadableDatabase();
+            Log.d(TAG, "Database initialized successfully");
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Error creating database: " + e.getMessage(), e);
+            // Don't throw here, let the calling code handle it
+        } catch (SQLException e) {
+            Log.e(TAG, "Error opening database: " + e.getMessage(), e);
+            // Don't throw here, let the calling code handle it
+        } catch (Exception e) {
+            Log.e(TAG, "Unexpected error initializing database: " + e.getMessage(), e);
+            // Don't throw here, let the calling code handle it
         }
     }
 
@@ -89,22 +119,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return mDataBase != null;
     }
 
-    @Override
-    public synchronized void close() {
-        if (mDataBase != null)
-            mDataBase.close();
-        super.close();
+
+
+    /**
+     * Check if the database is properly initialized and available
+     * @return true if database is ready, false otherwise
+     */
+    public boolean isDatabaseReady() {
+        return mDataBase != null && mDataBase.isOpen();
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-
+    /**
+     * Safely open the database if it's not already open
+     * @return true if database is now open, false otherwise
+     */
+    public boolean ensureDatabaseOpen() {
+        try {
+            if (mDataBase == null || !mDataBase.isOpen()) {
+                openDataBase();
+                mDataBase = getReadableDatabase();
+            }
+            return mDataBase != null && mDataBase.isOpen();
+        } catch (Exception e) {
+            Log.e(TAG, "Error ensuring database is open: " + e.getMessage(), e);
+            return false;
+        }
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-    }
 
     public String[] getPrayerTimes(String tableName, String date) {
         String[] data = new String[7];
@@ -200,29 +242,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         mDataBase.execSQL("DELETE  FROM azkar where Id=" + id + "");
     }
-
-//    public ArrayList<AzkarModel> getAzkar() {
-//        ArrayList<AzkarModel> azkars = new ArrayList<>();
-//        String selectQuery = "SELECT * FROM azkar ORDER BY sort ASC ";
-//        Cursor cursor = mDataBase.rawQuery(selectQuery, null);
-//        if (cursor.moveToFirst()) {
-//            do {
-//                AzkarModel object = new AzkarModel();
-//                object.setId(cursor.getInt(cursor.getColumnIndex("Id")));
-//                object.setTextAzakar(cursor.getString(cursor.getColumnIndex("TextAzakar")));
-//                object.setDeleted(cursor.getInt(cursor.getColumnIndex("isDeleted")) == 1);
-//                object.setFajr(cursor.getInt(cursor.getColumnIndex("Fajr")) == 1);
-//                object.setDhuhr(cursor.getInt(cursor.getColumnIndex("Dhuhr")) == 1);
-//                object.setAsr(cursor.getInt(cursor.getColumnIndex("Asr")) == 1);
-//                object.setMagrib(cursor.getInt(cursor.getColumnIndex("Magrib")) == 1);
-//                object.setIsha(cursor.getInt(cursor.getColumnIndex("Isha")) == 1);
-//                object.setSort(cursor.getInt(cursor.getColumnIndex("sort")));
-//                object.setCount(cursor.getInt(cursor.getColumnIndex("Count")));
-//                azkars.add(object);
-//            } while (cursor.moveToNext());
-//        }
-//        return azkars;
-//    }
 
     @SuppressLint("Range")
     public ArrayList<AzkarModel> getAzkar(String tableName) {
@@ -397,7 +416,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return hasConflict;
     }
-
 
     public boolean updateAds(Ads object) {
         SQLiteDatabase db = getWritableDatabase();
@@ -902,7 +920,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void delAds(int id) {
+    public void deleteAdById(int id) {
         Log.d("DBOperations", "table profile data eraser");
 
         mDataBase.execSQL("DELETE  FROM News where Id=" + id + "");

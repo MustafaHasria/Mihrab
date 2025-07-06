@@ -2,18 +2,15 @@ package com.izzedineeita.mihrab.model;
 
 import java.io.Serializable;
 
-/**
- * Created by Izzedine Eita on 1/27/2021
- */
 public class AdsPeriods implements Serializable {
     private int id;
-    private  int day;
-    private  int advId;
+    private int day;
+    private int advId;
     private String StartTime;
     private String EndTime;
     private String periodsId;
     private String days;
-    private  boolean isAdded;
+    private boolean isAdded;
     private String EndDate;
     private String StartDate;
 
@@ -28,14 +25,14 @@ public class AdsPeriods implements Serializable {
 
     public AdsPeriods(int advId, String startTime, String endTime, String startDate, String endDate,
                       String days, String periodsId, boolean added) {
-        this.StartDate=startDate;
-        this.StartTime=startTime;
-        this.EndTime=endTime;
-        this.EndDate=endDate;
-        this.isAdded=added;
-        this.advId=advId;
-        this.days=days;
-        this.periodsId=periodsId;
+        this.StartDate = startDate;
+        this.StartTime = startTime;
+        this.EndTime = endTime;
+        this.EndDate = endDate;
+        this.isAdded = added;
+        this.advId = advId;
+        this.days = days;
+        this.periodsId = periodsId;
     }
 
     public String getDays() {
@@ -45,7 +42,6 @@ public class AdsPeriods implements Serializable {
     public void setDays(String days) {
         this.days = days;
     }
-
 
 
     public boolean isAdded() {
@@ -88,6 +84,7 @@ public class AdsPeriods implements Serializable {
     public void setAdvId(int advId) {
         this.advId = advId;
     }
+
     public AdsPeriods() {
     }
 

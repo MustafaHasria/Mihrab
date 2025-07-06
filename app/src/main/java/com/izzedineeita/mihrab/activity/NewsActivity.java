@@ -1,7 +1,6 @@
 package com.izzedineeita.mihrab.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,11 +9,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.izzedineeita.mihrab.Adapters.NewsAdapter;
-import com.izzedineeita.mihrab.DateTimePicker.CustomDateTimePicker;
 import com.izzedineeita.mihrab.DateTimePicker.CustomDateTimePicker1;
 import com.izzedineeita.mihrab.R;
 import com.izzedineeita.mihrab.constants.Constants;
@@ -36,7 +32,6 @@ import com.izzedineeita.mihrab.utils.Pref;
 import com.izzedineeita.mihrab.utils.Utils;
 
 import java.io.IOException;
-import java.security.PrivateKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -164,16 +159,14 @@ public class NewsActivity extends AppCompatActivity {
 
     private void getNews(final int action) {
 
-                if (action == 0)
-                    Utils.showCustomToast(activity, getString(R.string.success_add));
-                else Utils.showCustomToast(activity, getString(R.string.success_edit));
-                updateAdapter();
-                if (dialog.isShowing()) dialog.dismiss();
-                if (pd.isShowing()) pd.dismiss();
+        if (action == 0) Utils.showCustomToast(activity, getString(R.string.success_add));
+        else Utils.showCustomToast(activity, getString(R.string.success_edit));
+        updateAdapter();
+        if (dialog.isShowing()) dialog.dismiss();
+        if (pd.isShowing()) pd.dismiss();
 
 
-                if (pd.isShowing()) pd.dismiss();
-
+        if (pd.isShowing()) pd.dismiss();
 
 
     }
@@ -187,21 +180,17 @@ public class NewsActivity extends AppCompatActivity {
 
     private void deleteAds(final int position) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
-        alertDialogBuilder.setTitle(getString(R.string.tv_delTitle)).
-                setMessage(getString(R.string.tv_delAttention))
-                .setCancelable(false)
-                .setPositiveButton(R.string.confirm_delete, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                        delete(position);
+        alertDialogBuilder.setTitle(getString(R.string.tv_delTitle)).setMessage(getString(R.string.tv_delAttention)).setCancelable(false).setPositiveButton(R.string.confirm_delete, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                delete(position);
 
-                    }
-                })
-                .setNegativeButton(R.string.cancel_delete, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+            }
+        }).setNegativeButton(R.string.cancel_delete, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
         // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
 
@@ -211,11 +200,11 @@ public class NewsActivity extends AppCompatActivity {
 
     private void delete(final int pos) {
 
-            DBO.openDataBase();
-            DBO.delAds(adsArrayList.get(pos).getId());
-            adsArrayList.remove(pos);
-            newsAdapter.notifyDataSetChanged();
-            DBO.close();
+        DBO.openDataBase();
+        DBO.deleteAdById(adsArrayList.get(pos).getId());
+        adsArrayList.remove(pos);
+        newsAdapter.notifyDataSetChanged();
+        DBO.close();
 
     }
 
@@ -276,7 +265,7 @@ public class NewsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Utils.hideKeyboard(activity);
                 ed_newsText.setError(null);
-               // ed_sort.setError(null);
+                // ed_sort.setError(null);
                 ed_start.setError(null);
                 ed_end.setError(null);
                 if (TextUtils.isEmpty(ed_newsText.getText().toString())) {
@@ -331,8 +320,7 @@ public class NewsActivity extends AppCompatActivity {
                         ArrayList<News> newsList = new ArrayList<>();
                         newsList.add(object);
                         db.insertNews(newsList);
-                        if ((objectNews == null))
-                            Utils.showCustomToast(activity, getString(R.string.success_add));
+                        if ((objectNews == null)) Utils.showCustomToast(activity, getString(R.string.success_add));
                         else Utils.showCustomToast(activity, getString(R.string.success_edit));
 
                         updateAdapter();
@@ -365,14 +353,8 @@ public class NewsActivity extends AppCompatActivity {
         CustomDateTimePicker1 custom = new CustomDateTimePicker1(this, new CustomDateTimePicker1.ICustomDateTimeListener() {
             @SuppressLint("SetTextI18n")
             @Override
-            public void onSet(Dialog dialog, Calendar calendarSelected,
-                              Date dateSelected, int year, String monthFullName,
-                              String monthShortName, int monthNumber, int date,
-                              String weekDayFullName, String weekDayShortName,
-                              int hour24, int hour12, int min, int sec,
-                              String AM_PM) {
-                editText.setText(year + "/" + (monthNumber + 1) + "/" + calendarSelected
-                        .get(Calendar.DAY_OF_MONTH) + " " + hour24 + ":" + min);
+            public void onSet(Dialog dialog, Calendar calendarSelected, Date dateSelected, int year, String monthFullName, String monthShortName, int monthNumber, int date, String weekDayFullName, String weekDayShortName, int hour24, int hour12, int min, int sec, String AM_PM) {
+                editText.setText(year + "/" + (monthNumber + 1) + "/" + calendarSelected.get(Calendar.DAY_OF_MONTH) + " " + hour24 + ":" + min);
             }
 
             @Override

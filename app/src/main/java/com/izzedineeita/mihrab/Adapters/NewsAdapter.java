@@ -23,8 +23,8 @@ import java.util.ArrayList;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.AdsViewHolder> {
     private static final int TYPE_HEADER = 0;
-    private  OnRecycleViewItemClicked listener;
-    private ArrayList<News> adsList;
+    private final OnRecycleViewItemClicked listener;
+    private final ArrayList<News> adsList;
 
 
     public NewsAdapter(Activity activity, ArrayList<News> adsList, OnRecycleViewItemClicked listener) {

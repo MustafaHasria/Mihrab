@@ -135,12 +135,12 @@ public class ShowKhotabActivity extends YouTubeBaseActivity
         DateHigri hd = new DateHigri();
         switch (theme) {
             case 5:
-                dateM = Utils.writeMDate1(activity, hd);
-                dateH = Utils.writeHDate1(activity, hd);
+                dateM = Utils.writeMDate1(activity);
+                dateH = Utils.writeHDate1(activity);
                 break;
             default:
-                dateM = Utils.writeMDate(activity, hd);
-                dateH = Utils.writeHDate(activity, hd);
+                dateM = Utils.writeMDate(activity);
+                dateH = Utils.writeHDate(activity);
                 break;
         }
 

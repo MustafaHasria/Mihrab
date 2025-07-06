@@ -122,46 +122,47 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             progress.setVisibility(View.GONE);
-                           // String isLogin = "0";
+                            // String isLogin = "0";
 
                             assert user != null;
                             DatabaseReference userNameRef = mDatabase.child("Users").child(Objects.requireNonNull(user.getUid()));
                             ValueEventListener eventListener = new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.exists()) {
+                                    if (dataSnapshot.exists()) {
                                         //create new user
-                                        String s =  Objects.requireNonNull(dataSnapshot.getValue()).toString();
-                                      Log.e("ASAS", s);
-                                       if (s.equals("1")) {
-                                           layout.setVisibility(View.VISIBLE);
-                                           Pref.setValue(LoginActivity.this,Constants.PREF_IS_USER_LOGIN, false);
+                                        String s = Objects.requireNonNull(dataSnapshot.getValue()).toString();
+                                        Log.e("ASAS", s);
+                                        if (s.equals("1")) {
+                                            layout.setVisibility(View.VISIBLE);
+                                            Pref.setValue(LoginActivity.this, Constants.PREF_IS_USER_LOGIN, false);
 
-                                           Toast.makeText(LoginActivity.this, "هذا الحساب تم تسجيل الدخول مسبقاً لا يمكن تسجيل الدخول من جديد!",
-                                                   Toast.LENGTH_SHORT).show();
-                                       } else {
-                                           mDatabase.child("Users").child(Objects.requireNonNull(user.getUid()))
-                                                   .setValue("1").addOnCompleteListener(new OnCompleteListener() {
-                                                       @Override
-                                                       public void onComplete(@NonNull Task task) {
-                                                           Pref.setValue(LoginActivity.this,Constants.PREF_IS_USER_LOGIN, true);
-                                                           Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                           startActivity(intent);
-                                                           finish();
-                                                       }
-                                                   });
-                                       }
+                                            Toast.makeText(LoginActivity.this, "هذا الحساب تم تسجيل الدخول مسبقاً لا يمكن تسجيل الدخول من جديد!",
+                                                    Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            mDatabase.child("Users").child(Objects.requireNonNull(user.getUid()))
+                                                    .setValue("1").addOnCompleteListener(new OnCompleteListener() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task task) {
+                                                            Pref.setValue(LoginActivity.this, Constants.PREF_IS_USER_LOGIN, true);
+                                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                            startActivity(intent);
+                                                            finish();
+                                                        }
+                                                    });
+                                        }
                                     } else {
                                         mDatabase.child("Users").child(Objects.requireNonNull(user.getUid()))
                                                 .setValue("1").addOnCompleteListener(new OnCompleteListener() {
                                                     @Override
                                                     public void onComplete(@NonNull Task task) {
-                                                        Pref.setValue(LoginActivity.this,Constants.PREF_IS_USER_LOGIN, true);
+                                                        Pref.setValue(LoginActivity.this, Constants.PREF_IS_USER_LOGIN, true);
                                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                         startActivity(intent);
                                                         finish();
                                                     }
-                                                });                                    }
+                                                });
+                                    }
                                 }
 
                                 @Override
@@ -189,7 +190,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();

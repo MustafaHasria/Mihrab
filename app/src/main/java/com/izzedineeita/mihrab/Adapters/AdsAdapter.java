@@ -2,8 +2,11 @@ package com.izzedineeita.mihrab.Adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +23,9 @@ import com.izzedineeita.mihrab.utils.Utils;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by Izzedine Eita on 1/24/2021
- */
 public class AdsAdapter extends RecyclerView.Adapter<AdsAdapter.AdsViewHolder> {
     private static final int TYPE_HEADER = 0;  // Declaring Variable to Understand which View is being worked on
-    private static final int TYPE_FOOTER = 1;
-    private final DataBaseHelper DBO;
-    private OnRecycleViewItemClicked listener;
-    private final SharedPreferences sp;
-    private final SharedPreferences.Editor spedit;
+    private final OnRecycleViewItemClicked listener;
     Activity activity;
     ArrayList<Ads> adsList;
 
@@ -38,9 +34,8 @@ public class AdsAdapter extends RecyclerView.Adapter<AdsAdapter.AdsViewHolder> {
         this.activity = activity;
         this.adsList = adsList;
         this.listener = listener;
-        sp = activity.getSharedPreferences(Utils.PREFS, activity.MODE_PRIVATE);
-        spedit = sp.edit();
-        DBO = new DataBaseHelper(activity);
+        SharedPreferences sp = activity.getSharedPreferences(Utils.PREFS, Context.MODE_PRIVATE);
+        DataBaseHelper DBO = new DataBaseHelper(activity);
         try {
             DBO.createDataBase();
         } catch (IOException e) {
@@ -63,24 +58,9 @@ public class AdsAdapter extends RecyclerView.Adapter<AdsAdapter.AdsViewHolder> {
         holder.tv_adsDays.setText(days);
         holder.tv_adsText.setText(ads.getTitle());
         holder.tv_adsPeriod.setText("من " + ads.getStartDate() + " إلى " + ads.getEndDate());
-        holder.iv_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onItemClicked(view, i);
-            }
-        });
-        holder.iv_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onItemClick(view, i);
-            }
-        });
-        holder.iv_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onView(view, i);
-            }
-        });
+        holder.iv_delete.setOnClickListener(view -> listener.onItemClicked(view, i));
+        holder.iv_edit.setOnClickListener(view -> listener.onItemClick(view, i));
+        holder.iv_view.setOnClickListener(view -> listener.onView(view, i));
 
     }
 
@@ -106,12 +86,12 @@ public class AdsAdapter extends RecyclerView.Adapter<AdsAdapter.AdsViewHolder> {
             super(itemView);
             this.viewType = viewType;
 
-            tv_adsText = (TextView) itemView.findViewById(R.id.tv_adsText);
-            tv_adsPeriod = (TextView) itemView.findViewById(R.id.tv_adsPeriod);
-            tv_adsDays = (TextView) itemView.findViewById(R.id.tv_adsDays);
-            iv_edit = (ImageView) itemView.findViewById(R.id.iv_edit);
-            iv_delete = (ImageView) itemView.findViewById(R.id.iv_delete);
-            iv_view = (ImageView) itemView.findViewById(R.id.iv_view);
+            tv_adsText = itemView.findViewById(R.id.tv_adsText);
+            tv_adsPeriod = itemView.findViewById(R.id.tv_adsPeriod);
+            tv_adsDays = itemView.findViewById(R.id.tv_adsDays);
+            iv_edit = itemView.findViewById(R.id.iv_edit);
+            iv_delete = itemView.findViewById(R.id.iv_delete);
+            iv_view = itemView.findViewById(R.id.iv_view);
 
 
         }

@@ -3,13 +3,6 @@ package com.izzedineeita.mihrab.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * Created by Izzedine eita on 26/11/2020.
- * project name : mihrab
- * Email : izzedineeita@gmail.com
- * WebSite : izzedineeita.com & Kotdroid.com
- */
-
 public class Pref {
 
     private static final String FILE_NAME = "MIHRAB_DATA";
@@ -19,13 +12,13 @@ public class Pref {
 
     private static void openShare(Context context) {
         sharedPreferences = context.getSharedPreferences
-                (FILE_NAME,Context.MODE_PRIVATE);
+                (FILE_NAME, Context.MODE_PRIVATE);
     }
 
     private static void closeShare() {
         sharedPreferences = null;
     }
-    
+
     public static void setValue(Context context, String key, String value) {
         openShare(context);
         editor = sharedPreferences.edit();

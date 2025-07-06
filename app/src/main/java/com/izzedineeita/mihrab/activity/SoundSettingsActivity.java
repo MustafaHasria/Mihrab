@@ -210,113 +210,95 @@ public class SoundSettingsActivity extends AppCompatActivity {
             }
         });
 
-        img_play_adan_soundAsr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mp.isPlaying()) {
-                    mp = new MediaPlayer();
-                    String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_AZAN_PATH, null);
-                    if (uriSound != null) {
-                        if (!mp.isPlaying()) play(uriSound, img_play_adan_soundAsr);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "No File Selected...!", Toast.LENGTH_LONG).show();
-                    }
+        img_play_adan_soundAsr.setOnClickListener(v -> {
+            if (!mp.isPlaying()) {
+                mp = new MediaPlayer();
+                String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_AZAN_PATH, null);
+                if (uriSound != null) {
+                    if (!mp.isPlaying()) play(uriSound, img_play_adan_soundAsr);
                 } else {
-                    mp.stop();
-                    img_play_adan_soundAsr.setImageResource(R.drawable.ic_baseline_play_arrow_24);
-                    //mp.release();
+                    Toast.makeText(getApplicationContext(), "No File Selected...!", Toast.LENGTH_LONG).show();
                 }
+            } else {
+                mp.stop();
+                img_play_adan_soundAsr.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+                //mp.release();
             }
         });
-        img_play_Iqama_soundAsr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mp.isPlaying()) {
-                    mp = new MediaPlayer();
-                    String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH_PATH, null);
-                    if (uriSound != null) {
-                        if (!mp.isPlaying()) play(uriSound, img_play_Iqama_soundAsr);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "No File Selected...!", Toast.LENGTH_LONG).show();
-                    }
+        img_play_Iqama_soundAsr.setOnClickListener(v -> {
+            if (!mp.isPlaying()) {
+                mp = new MediaPlayer();
+                String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH_PATH, null);
+                if (uriSound != null) {
+                    if (!mp.isPlaying()) play(uriSound, img_play_Iqama_soundAsr);
                 } else {
-                    mp.stop();
-                    img_play_Iqama_soundAsr.setImageResource(R.drawable.ic_baseline_play_arrow_24);
-                    //mp.release();
+                    Toast.makeText(getApplicationContext(), "No File Selected...!", Toast.LENGTH_LONG).show();
                 }
+            } else {
+                mp.stop();
+                img_play_Iqama_soundAsr.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+                //mp.release();
             }
         });
-        img_play_Iqama_soundAsr_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mp.isPlaying()) {
-                    mp = new MediaPlayer();
-                    String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_CLOSE_PHONE_PATH, null);
-                    if (uriSound != null) {
-                        if (!mp.isPlaying()) play(uriSound, img_play_Iqama_soundAsr_close);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "No File Selected...!", Toast.LENGTH_LONG).show();
-                    }
+        img_play_Iqama_soundAsr_close.setOnClickListener(v -> {
+            if (!mp.isPlaying()) {
+                mp = new MediaPlayer();
+                String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_CLOSE_PHONE_PATH, null);
+                if (uriSound != null) {
+                    if (!mp.isPlaying()) play(uriSound, img_play_Iqama_soundAsr_close);
                 } else {
-                    mp.stop();
-                    img_play_Iqama_soundAsr_close.setImageResource(R.drawable.ic_baseline_play_arrow_24);
-                    //mp.release();
+                    Toast.makeText(getApplicationContext(), "No File Selected...!", Toast.LENGTH_LONG).show();
                 }
+            } else {
+                mp.stop();
+                img_play_Iqama_soundAsr_close.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+                //mp.release();
             }
         });
 
-        img_play_adan_soundMg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mp.isPlaying()) {
-                    mp = new MediaPlayer();
-                    String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_AZAN_PATH, null);
-                    if (uriSound != null) {
-                        if (!mp.isPlaying()) play(uriSound, img_play_adan_soundMg);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "No File Selected...!", Toast.LENGTH_LONG).show();
-                    }
+        img_play_adan_soundMg.setOnClickListener(v -> {
+            if (!mp.isPlaying()) {
+                mp = new MediaPlayer();
+                String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_AZAN_PATH, null);
+                if (uriSound != null) {
+                    if (!mp.isPlaying()) play(uriSound, img_play_adan_soundMg);
                 } else {
-                    mp.stop();
-                    img_play_adan_soundMg.setImageResource(R.drawable.ic_baseline_play_arrow_24);
-                    //mp.release();
+                    Toast.makeText(getApplicationContext(), "No File Selected...!", Toast.LENGTH_LONG).show();
                 }
+            } else {
+                mp.stop();
+                img_play_adan_soundMg.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+                //mp.release();
             }
         });
-        img_play_Iqama_soundMg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mp.isPlaying()) {
-                    mp = new MediaPlayer();
-                    String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH_PATH, null);
-                    if (uriSound != null) {
-                        if (!mp.isPlaying()) play(uriSound, img_play_Iqama_soundMg);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "No File Selected...!", Toast.LENGTH_LONG).show();
-                    }
+        img_play_Iqama_soundMg.setOnClickListener(v -> {
+            if (!mp.isPlaying()) {
+                mp = new MediaPlayer();
+                String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH_PATH, null);
+                if (uriSound != null) {
+                    if (!mp.isPlaying()) play(uriSound, img_play_Iqama_soundMg);
                 } else {
-                    mp.stop();
-                    img_play_Iqama_soundMg.setImageResource(R.drawable.ic_baseline_play_arrow_24);
-                    //mp.release();
+                    Toast.makeText(getApplicationContext(), "No File Selected...!", Toast.LENGTH_LONG).show();
                 }
+            } else {
+                mp.stop();
+                img_play_Iqama_soundMg.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+                //mp.release();
             }
         });
-        img_play_Iqama_soundMg_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mp.isPlaying()) {
-                    mp = new MediaPlayer();
-                    String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_CLOSE_PHONE_PATH, null);
-                    if (uriSound != null) {
-                        if (!mp.isPlaying()) play(uriSound, img_play_Iqama_soundMg_close);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "No File Selected...!", Toast.LENGTH_LONG).show();
-                    }
+        img_play_Iqama_soundMg_close.setOnClickListener(v -> {
+            if (!mp.isPlaying()) {
+                mp = new MediaPlayer();
+                String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_CLOSE_PHONE_PATH, null);
+                if (uriSound != null) {
+                    if (!mp.isPlaying()) play(uriSound, img_play_Iqama_soundMg_close);
                 } else {
-                    mp.stop();
-                    img_play_Iqama_soundMg_close.setImageResource(R.drawable.ic_baseline_play_arrow_24);
-                    //mp.release();
+                    Toast.makeText(getApplicationContext(), "No File Selected...!", Toast.LENGTH_LONG).show();
                 }
+            } else {
+                mp.stop();
+                img_play_Iqama_soundMg_close.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+                //mp.release();
             }
         });
 
@@ -530,22 +512,19 @@ public class SoundSettingsActivity extends AppCompatActivity {
 
             }
         });
-        cb_IqamaSoundAsr.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        cb_IqamaSoundAsr.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
-                if (isChecked) {
-                    try {
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("audio/*");
-                        startActivityForResult(intent, 6);
-                    } catch (Exception e) {
-                        Log.e("XXX", e.getLocalizedMessage());
-                    }
-                } else {
-                    Pref.setValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH, false);
-                    cb_IqamaSoundAsr.setChecked(false);
+            if (isChecked) {
+                try {
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("audio/*");
+                    startActivityForResult(intent, 6);
+                } catch (Exception e) {
+                    Log.e("XXX", e.getLocalizedMessage());
                 }
+            } else {
+                Pref.setValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH, false);
+                cb_IqamaSoundAsr.setChecked(false);
             }
         });
         Iqama_soundAsr_close.setOnClickListener(new View.OnClickListener() {
@@ -562,73 +541,60 @@ public class SoundSettingsActivity extends AppCompatActivity {
         });
 
 
-        cb_soundMg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    try {
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("audio/*");
-                        startActivityForResult(intent, 7);
-                    } catch (Exception e) {
-                        Log.e("XXX", e.getLocalizedMessage());
-                    }
-                } else {
-                    Pref.setValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_AZAN, false);
-                    cb_soundMg.setChecked(false);
-                }
-
-            }
-        });
-        cb_IqamaSoundMg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (isChecked) {
-                    try {
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("audio/*");
-                        startActivityForResult(intent, 8);
-                    } catch (Exception e) {
-                        Log.e("XXX", e.getLocalizedMessage());
-                    }
-                } else {
-                    Pref.setValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH, false);
-                    cb_IqamaSoundMg.setChecked(false);
-                }
-            }
-        });
-        Iqama_soundMg_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        cb_soundMg.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
                 try {
                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                     intent.setType("audio/*");
-                    startActivityForResult(intent, 44);
+                    startActivityForResult(intent, 7);
                 } catch (Exception e) {
                     Log.e("XXX", e.getLocalizedMessage());
                 }
+            } else {
+                Pref.setValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_AZAN, false);
+                cb_soundMg.setChecked(false);
+            }
+
+        });
+        cb_IqamaSoundMg.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+            if (isChecked) {
+                try {
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("audio/*");
+                    startActivityForResult(intent, 8);
+                } catch (Exception ignored) {
+                }
+            } else {
+                Pref.setValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH, false);
+                cb_IqamaSoundMg.setChecked(false);
+            }
+        });
+        Iqama_soundMg_close.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("audio/*");
+                startActivityForResult(intent, 44);
+            } catch (Exception e) {
+                Log.e("XXX", e.getLocalizedMessage());
             }
         });
 
 
-        cb_soundIsh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    try {
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("audio/*");
-                        startActivityForResult(intent, 9);
-                    } catch (Exception e) {
-                        Log.e("XXX", e.getLocalizedMessage());
-                    }
-                } else {
-                    Pref.setValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_AZAN, false);
-                    cb_soundIsh.setChecked(false);
+        cb_soundIsh.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                try {
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("audio/*");
+                    startActivityForResult(intent, 9);
+                } catch (Exception e) {
+                    Log.e("XXX", e.getLocalizedMessage());
                 }
-
+            } else {
+                Pref.setValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_AZAN, false);
+                cb_soundIsh.setChecked(false);
             }
+
         });
         cb_IqamaSoundIsh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

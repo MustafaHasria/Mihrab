@@ -133,10 +133,9 @@ public class KhotabSettingActivity extends AppCompatActivity {
         rv_khotab.setLayoutManager(llm);
         try {
             setAdapter(khotabArrayList);
-        } catch (Exception e ) {
+        } catch (Exception e) {
             Log.e("XXX", "" + e.getLocalizedMessage());
         }
-
 
 
     }
@@ -151,9 +150,10 @@ public class KhotabSettingActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
 
-                  addKhotbaDialog(list.get(position));
+                addKhotbaDialog(list.get(position));
 
             }
+
             @Override
             public void onView(View view, int position) {
                 showKhotab(list.get(position));
@@ -310,8 +310,8 @@ public class KhotabSettingActivity extends AppCompatActivity {
             et_body2.setText(objectKhotab.getBody2());
             et_title3.setText(objectKhotab.getTitle3());
             et_body3.setText(objectKhotab.getBody3());
-            et_text_show_time.setText(""+objectKhotab.getTextShowTime());
-            et_show_time.setText(""+objectKhotab.getShowTime());
+            et_text_show_time.setText("" + objectKhotab.getTextShowTime());
+            et_show_time.setText("" + objectKhotab.getShowTime());
         }
 
         et_date.setOnClickListener(view1 -> {
@@ -332,10 +332,10 @@ public class KhotabSettingActivity extends AppCompatActivity {
             else if (TextUtils.isEmpty(et_date.getText().toString())) {
                 et_date.setError(getString(R.string.required));
                 Utils.showCustomToast(activity, getString(R.string.required));
-            }else if (TextUtils.isEmpty(et_text_show_time.getText().toString())) {
+            } else if (TextUtils.isEmpty(et_text_show_time.getText().toString())) {
                 et_text_show_time.setError(getString(R.string.required));
                 Utils.showCustomToast(activity, getString(R.string.required));
-            }else if (TextUtils.isEmpty(et_show_time.getText().toString())) {
+            } else if (TextUtils.isEmpty(et_show_time.getText().toString())) {
                 et_show_time.setError(getString(R.string.required));
                 Utils.showCustomToast(activity, getString(R.string.required));
             } else {
@@ -396,9 +396,9 @@ public class KhotabSettingActivity extends AppCompatActivity {
                 pd.show();
                 pd.setCanceledOnTouchOutside(false);
                 DataBaseHelper db = new DataBaseHelper(activity);
-               // ArrayList<Khotab> khotabList = new ArrayList<>();
+                // ArrayList<Khotab> khotabList = new ArrayList<>();
                 khotabArrayList.add(object);
-               // db.insertAllKhotab(khotabList);
+                // db.insertAllKhotab(khotabList);
                 db.addKhotab(object);
                 if ((objectKhotab == null))
                     Utils.showCustomToast(activity, getString(R.string.success_add));
@@ -489,9 +489,9 @@ public class KhotabSettingActivity extends AppCompatActivity {
                     String line;
                     StringBuilder builder = new StringBuilder();
 
-                    while ((line = reader.readLine()) != null){
+                    while ((line = reader.readLine()) != null) {
                         if (!line.isEmpty())
-                            builder.append(line + " #"+ "\n");
+                            builder.append(line + " #" + "\n");
                         Log.e("XXX3", line);
                     }
                     // Do something with the content in
@@ -514,7 +514,7 @@ public class KhotabSettingActivity extends AppCompatActivity {
                     }
                 }
 
-            } else if (requestCode == PICKFILE_RESULT_CODE_2 && data != null ) {
+            } else if (requestCode == PICKFILE_RESULT_CODE_2 && data != null) {
                 Uri content_describer = data.getData();
                 //get the path
                 Log.d("Path???", content_describer.getPath());
@@ -527,7 +527,7 @@ public class KhotabSettingActivity extends AppCompatActivity {
                     String line;
                     StringBuilder builder = new StringBuilder();
 
-                    while ((line = reader.readLine()) != null){
+                    while ((line = reader.readLine()) != null) {
                         if (!line.isEmpty())
                             builder.append(line + " #" + "\n");
                         Log.e("XXX3", line);
@@ -553,7 +553,7 @@ public class KhotabSettingActivity extends AppCompatActivity {
                 }
 
             }
-        }else if (requestCode == PICKFILE_RESULT_CODE_3 && data != null) {
+        } else if (requestCode == PICKFILE_RESULT_CODE_3 && data != null) {
             Uri content_describer = data.getData();
             //get the path
             Log.d("Path???", content_describer.getPath());
@@ -566,9 +566,9 @@ public class KhotabSettingActivity extends AppCompatActivity {
                 String line;
                 StringBuilder builder = new StringBuilder();
 
-                while ((line = reader.readLine()) != null){
+                while ((line = reader.readLine()) != null) {
                     if (!line.isEmpty())
-                        builder.append(line + " #"+ "\n");
+                        builder.append(line + " #" + "\n");
                     Log.e("XXX3", line);
                 }
                 // Do something with the content in

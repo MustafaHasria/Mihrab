@@ -1,10 +1,7 @@
 package com.izzedineeita.mihrab.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -12,23 +9,20 @@ import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Environment;
-import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.izzedineeita.mihrab.MainActivity;
 import com.izzedineeita.mihrab.R;
@@ -38,37 +32,14 @@ import com.izzedineeita.mihrab.utils.ImagesArrays;
 import com.izzedineeita.mihrab.utils.Pref;
 import com.izzedineeita.mihrab.utils.Utils;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import static java.lang.Integer.getInteger;
-
 public class ShowClosePhoneActivity extends AppCompatActivity {
 
-    private ImageView img_time_hour_1, img_time_hour_2, img_time_mint_1, img_time_sec_2,
-            img_time_sec_1, img_date_day, img_date_month_m_2, img_date_month_m_1,
-            img_date_month_m, img_date_years_4, img_date_years_3, img_date_years_2,
-            img_date_years_1, img_date_month_h_2, img_date_month_h_1, img_date_month_h,
-            img_date_years_h_4, img_date_years_h_3, img_date_years_h_2, img_date_years_h_1,
-            img_time_mint_2, img_iqamh_time_left_m_1, img_iqamh_time_left_m_2;
-    public Thread myThread = null;
-    private String[] date;
-    private Activity activity;
-    private ImageView img_phone_photo,
-            img_ud, img_en, img_ar;
-    private LinearLayout lay_img_iqamh_time_left_m, lay_img_iqamh_time_left_s;
-    Animation animation;
-    private MediaPlayer mp = new MediaPlayer();
-    boolean conEnd = false;
-    boolean conStop = false;
-    //int sec;
-    int pray = 0;
-
-    Animation animFadeIn;
     public static int[] daysImage;
     public static int[] monthImage;
     public static int[] monthImageHijri;
@@ -78,8 +49,25 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
     public static int[] timeNumberAzan;
     public static int[] timeNumberIqamh;
     public static int[] timeNumberSec;
-
-
+    public Thread myThread = null;
+    Animation animation;
+    boolean conEnd = false;
+    boolean conStop = false;
+    //int sec;
+    int pray = 0;
+    Animation animFadeIn;
+    private ImageView img_time_hour_1, img_time_hour_2, img_time_mint_1, img_time_sec_2,
+            img_time_sec_1, img_date_day, img_date_month_m_2, img_date_month_m_1,
+            img_date_month_m, img_date_years_4, img_date_years_3, img_date_years_2,
+            img_date_years_1, img_date_month_h_2, img_date_month_h_1, img_date_month_h,
+            img_date_years_h_4, img_date_years_h_3, img_date_years_h_2, img_date_years_h_1,
+            img_time_mint_2, img_iqamh_time_left_m_1, img_iqamh_time_left_m_2;
+    private String[] date;
+    private Activity activity;
+    private ImageView img_phone_photo,
+            img_ud, img_en, img_ar;
+    private LinearLayout lay_img_iqamh_time_left_m, lay_img_iqamh_time_left_s;
+    private MediaPlayer mp = new MediaPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,7 +204,6 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                     img_ud = findViewById(R.id.img_ud);
                     img_en = findViewById(R.id.img_en);
                     img_ar = findViewById(R.id.img_ar);
-
 
 
                     daysImage = ImagesArrays.daysImageTheme6;
@@ -379,47 +366,28 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                 //
 
 
-
                 new CountDownTimer(millis, 1000) {
                     public void onFinish() {
                         boolean check = false;
                         switch (pray) {
                             case 1:
-                                if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJR_SHOW_ALKHUSHUE, true))
-                                    check = true;
-                                else
-                                    check = false;
+                                check = Pref.getValue(getApplicationContext(), Constants.PREF_FAJR_SHOW_ALKHUSHUE, true);
 
                                 break;
                             case 2:
-                                if (Pref.getValue(getApplicationContext(), Constants.PREF_SUNRISE_SHOW_ALKHUSHUE, true))
-                                    check = true;
-                                else
-                                    check = false;
+                                check = Pref.getValue(getApplicationContext(), Constants.PREF_SUNRISE_SHOW_ALKHUSHUE, true);
                                 break;
                             case 3:
-                                if (Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SHOW_ALKHUSHUE, true))
-                                    check = true;
-                                else
-                                    check = false;
+                                check = Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SHOW_ALKHUSHUE, true);
                                 break;
                             case 4:
-                                if (Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SHOW_ALKHUSHUE, true))
-                                    check = true;
-                                else
-                                    check = false;
+                                check = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SHOW_ALKHUSHUE, true);
                                 break;
                             case 5:
-                                if (Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SHOW_ALKHUSHUE, true))
-                                    check = true;
-                                else
-                                    check = false;
+                                check = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SHOW_ALKHUSHUE, true);
                                 break;
                             case 6:
-                                if (Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SHOW_ALKHUSHUE, true))
-                                    check = true;
-                                else
-                                    check = false;
+                                check = Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SHOW_ALKHUSHUE, true);
                                 break;
                         }
 
@@ -619,8 +587,8 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
 
     private void setDataToImage() {
         /* set images date */
-        int  hijriDiff1 = Pref.getValue(ShowClosePhoneActivity.this, Constants.PREF_HEJRY_INT1, 0);
-        int iii  = Integer.parseInt(date[4]);
+        int hijriDiff1 = Pref.getValue(ShowClosePhoneActivity.this, Constants.PREF_HEJRY_INT1, 0);
+        int iii = Integer.parseInt(date[4]);
         date[4] = String.valueOf(iii + hijriDiff1);
 
         img_date_day.setImageResource(daysImage[Integer.parseInt(date[0])]);
@@ -729,23 +697,6 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
         }
     }
 
-    class CountDownRunner implements Runnable {
-        // @Override
-        public void run() {
-            while (!Thread.currentThread().isInterrupted()) {
-                try {
-                    doWork();
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                } catch (Exception e) {
-
-                }
-            }
-        }
-
-    }
-
     private void doWork() {
         runOnUiThread(new Runnable() {
             public void run() {
@@ -769,9 +720,6 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                     int i1 = 60 - t;
 
 
-
-
-
                     if (i1 == 60) {
                         if (conEnd) {
                             conStop = true;
@@ -779,7 +727,7 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                         img_iqamh_time_left_m_1.setImageResource(timeNumberIqamhLeft[0]);
                         img_iqamh_time_left_m_2.setImageResource(timeNumberIqamhLeft[0]);
                     } else {
-                        if (t > 50){
+                        if (t > 50) {
                             conEnd = true;
                         }
                         if (conEnd && conStop) {
@@ -939,7 +887,6 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
         }
     }
 
-
     private void play() {
 
 //        File path = Environment.getExternalStoragePublicDirectory(
@@ -996,5 +943,22 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
             mp.stop();
         }
         super.onDestroy();
+    }
+
+    class CountDownRunner implements Runnable {
+        // @Override
+        public void run() {
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    doWork();
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } catch (Exception e) {
+
+                }
+            }
+        }
+
     }
 }

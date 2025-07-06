@@ -1,0 +1,12 @@
+1.	Cursor Prediction: The AI agent will predict where to move the cursor based on the state of the UI, such as buttons, text fields, or clickable areas.
+	•	You should define a system where each action (click, hover, scroll) is predicted based on previous actions and the current UI state.
+	2.	Cursor Interaction Simulation: The AI will simulate the cursor’s movement, clicks, and other touch gestures based on the prediction.
+	•	Implement a system where the AI can simulate movements in response to changes in the UI.
+	3.	UI State Representation: The UI should be represented in a format that the AI can understand and interact with, such as defining clickable areas or interaction zones.
+	4.	Learning Algorithm: You need to integrate a learning algorithm (e.g., reinforcement learning or supervised learning) that can improve over time based on feedback from simulated interactions with the UI.
+	•	For instance, the agent should improve its cursor movement strategies by receiving positive or negative feedback from whether the action was correct.
+	5.	Execution Environment: Create a framework where this AI agent interacts with the Android system, potentially using an accessibility service or similar tools to programmatically control the cursor or simulate gestures.
+
+Deliverables:
+	•	A well-defined class or set of classes for the Cursor AI agent, including methods for predicting movements, simulating cursor actions, and learning from feedback.
+	•	An example system that simulates interactions between the AI and a hypothetical Android app’s UI.

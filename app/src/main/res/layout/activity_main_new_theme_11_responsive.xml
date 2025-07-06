@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/new_theme_11_background"
+    android:keepScreenOn="true"
+
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/img_settings"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20sp"
+        android:layout_marginRight="20sp"
+        android:src="@android:drawable/ic_menu_sort_by_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginTop="12dp" />
+
+    <LinearLayout
+        android:id="@+id/activity_main_new_theme_11_linear_layout_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="570dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_marginStart="500dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="520dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="1400dp"
+                    android:layout_height="500dp"
+                    android:src="@drawable/new_theme_11_banner"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/activity_main_new_theme_11_text_view_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:fontFamily="@font/century_gothic_bold"
+                    android:text="12:25"
+                    android:textColor="@color/white"
+                    android:textSize="350sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/activity_main_new_theme_11_text_view_time_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="70dp"
+                    android:fontFamily="@font/century_gothic_bold"
+                    android:text="31"
+                    android:textColor="#f9d79b"
+                    android:textSize="200sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/activity_main_new_theme_11_text_view_time"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fsdafasdfasf"
+                android:layout_width="600dp"
+                android:layout_height="600dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="600dp"
+                    android:layout_height="600dp"
+                    android:src="@drawable/new_theme_11_star"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/activity_main_new_theme_11_text_view_times_iqama_sunrise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/alhurra"
+                    android:text="الأربعاء"
+                    android:textColor="@color/white"
+                    android:textSize="150sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_main_new_theme_11_linear_layout_iqama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:paddingStart="205dp"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_new_theme_11_linear_layout_date">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="فبراير 2019 م"
+            android:textColor="#4e4e58"
+            android:textSize="140sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="31dp"
+            android:text="30"
+            android:textColor="@color/white"
+            android:textSize="140sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="185dp"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="ذو القعدة 1440 ه"
+            android:textColor="#4e4e58"
+            android:textSize="140sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:text="30"
+            android:textColor="@color/white"
+            android:textSize="140sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/activity_main_new_theme_11_card_times_iqama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="170dp"
+        app:cardBackgroundColor="@android:color/darker_gray"
+        app:cardCornerRadius="30dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_main_new_theme_11_linear_layout_iqama">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="50dp">
+
+            <TextView
+                android:id="@+id/activity_main_new_theme_11_text_view_times_iqamah_fajr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/century_gothic_bold"
+                android:text="12:25"
+                android:textColor="@color/white"
+                android:textSize="250sp" />
+
+            <TextView
+                android:id="@+id/activity_main_new_theme_11_text_view_times_iqamah_sunrise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/century_gothic_bold"
+                android:text="12:25"
+                android:textColor="@color/white"
+                android:textSize="250sp" />
+
+            <TextView
+                android:id="@+id/activity_main_new_theme_11_text_view_times_iqamah_dhuhr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/century_gothic_bold"
+                android:text="12:25"
+                android:textColor="@color/white"
+                android:textSize="250sp" />
+
+            <TextView
+                android:id="@+id/activity_main_new_theme_11_text_view_times_iqamah_asr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/century_gothic_bold"
+                android:text="12:25"
+                android:textColor="@color/white"
+                android:textSize="250sp" />
+
+            <TextView
+                android:id="@+id/activity_main_new_theme_11_text_view_times_iqamah_maghrib"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/century_gothic_bold"
+                android:text="12:25"
+                android:textColor="@color/white"
+                android:textSize="250sp" />
+
+            <TextView
+                android:id="@+id/activity_main_new_theme_11_text_view_times_iqamah_isha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/century_gothic_bold"
+                android:text="12:25"
+                android:textColor="@color/white"
+                android:textSize="250sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/activity_main_new_theme_11_linear_layout_name_of_prayer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="170dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/activity_main_new_theme_11_linear_layout_times_azan"
+        app:layout_constraintStart_toEndOf="@id/activity_main_new_theme_11_card_times_iqama"
+        app:layout_constraintTop_toBottomOf="@id/activity_main_new_theme_11_linear_layout_iqama">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="الفجر"
+            android:textColor="@color/white"
+            android:textSize="200sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/century_gothic_bold"
+            android:gravity="center"
+            android:lineSpacingExtra="-100dp"
+            android:text="الشروق \n -الضحى-"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="150sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="الظهر"
+            android:textColor="@color/white"
+            android:textSize="200sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="العصر"
+            android:textColor="@color/white"
+            android:textSize="200sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="المغرب"
+            android:textColor="@color/white"
+            android:textSize="200sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="العشاء"
+            android:textColor="@color/white"
+            android:textSize="200sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_main_new_theme_11_linear_layout_times_azan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="170dp"
+        android:paddingEnd="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_main_new_theme_11_linear_layout_iqama">
+
+        <TextView
+            android:id="@+id/activity_main_new_theme_11_text_view_times_azan_fajr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="12:25"
+            android:textColor="@color/white"
+            android:textSize="250sp" />
+
+        <TextView
+            android:id="@+id/activity_main_new_theme_11_text_view_times_azan_sunrise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="12:25"
+            android:textColor="@color/white"
+            android:textSize="250sp" />
+
+        <TextView
+            android:id="@+id/activity_main_new_theme_11_text_view_times_azan_dhuhr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="12:25"
+            android:textColor="@color/white"
+            android:textSize="250sp" />
+
+        <TextView
+            android:id="@+id/activity_main_new_theme_11_text_view_times_azan_asr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="12:25"
+            android:textColor="@color/white"
+            android:textSize="250sp" />
+
+        <TextView
+            android:id="@+id/activity_main_new_theme_11_text_view_times_azan_maghrib"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="12:25"
+            android:textColor="@color/white"
+            android:textSize="250sp" />
+
+        <TextView
+            android:id="@+id/activity_main_new_theme_11_text_view_times_azan_isha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="12:25"
+            android:textColor="@color/white"
+            android:textSize="250sp" />
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_main_new_theme_11_card_times_iqama">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_main_new_theme_11_card_times_iqama">
+
+            <TextView
+                android:id="@+id/tv_external_heat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="130dp"
+                android:fontFamily="@font/century_gothic_bold"
+                android:text="45"
+                android:textColor="@color/white"
+                android:textSize="70sp" />
+
+            <TextView
+                android:id="@+id/tv_internal_heat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:fontFamily="@font/century_gothic_bold"
+                android:text="45"
+                android:textColor="@color/white"
+                android:textSize="70sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="240dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_main_new_theme_11_linear_layout_times_azan">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="25"
+            android:textColor="@color/white"
+            android:textSize="140sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/century_gothic_bold"
+            android:text="31"
+            android:textColor="#f9d79b"
+            android:textSize="80sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/activity_main_new_theme_11_text_view_masjid_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/century_gothic_bold"
+        android:text="اسم المسجد"
+        android:textColor="#4e4e58"
+        android:textSize="68sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/activity_main_new_theme_11_text_view_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/century_gothic_bold"
+        android:text="اسم المسجد"
+        android:textColor="#4e4e58"
+        android:textSize="38sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

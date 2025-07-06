@@ -21,13 +21,6 @@ public class ActivityRunOnStartup extends BroadcastReceiver {
             activityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(activityIntent);
         }
-//        final String action = intent.getAction();
-//        if (ConnectivityManager.CONNECTIVITY_ACTION.equals(action)) {
-//            Log.e("XXX", "network change");
-//            if (NetworkUtils.isConnect(context)) {
-//                Log.e("XXX", "Connect");
-//            }
-//        }
     }
 
     public static class NetworkUtils {

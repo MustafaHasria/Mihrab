@@ -86,47 +86,29 @@ public class AlkhushueActivity extends AppCompatActivity {
         np_mg.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SHOW_ALKHUSHUE_TIME, 7));
         np_ish.setValue(Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SHOW_ALKHUSHUE_TIME, 7));
 
-        np_fajer.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                int valuePicker1 = np_fajer.getValue();
-                Pref.setValue(getApplicationContext(), Constants.PREF_FAJR_SHOW_ALKHUSHUE_TIME, valuePicker1);
-            }
+        np_fajer.setOnValueChangedListener((numberPicker, i, i1) -> {
+            int valuePicker1 = np_fajer.getValue();
+            Pref.setValue(getApplicationContext(), Constants.PREF_FAJR_SHOW_ALKHUSHUE_TIME, valuePicker1);
         });
-        np_sunrise.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                int valuePicker1 = np_sunrise.getValue();
-                Pref.setValue(getApplicationContext(), Constants.PREF_SUNRISE_SHOW_ALKHUSHUE_TIME, valuePicker1);
-            }
+        np_sunrise.setOnValueChangedListener((numberPicker, i, i1) -> {
+            int valuePicker1 = np_sunrise.getValue();
+            Pref.setValue(getApplicationContext(), Constants.PREF_SUNRISE_SHOW_ALKHUSHUE_TIME, valuePicker1);
         });
-        np_thahr.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                int valuePicker1 = np_thahr.getValue();
-                Pref.setValue(getApplicationContext(), Constants.PREF_DHOHR_SHOW_ALKHUSHUE_TIME, valuePicker1);
-            }
+        np_thahr.setOnValueChangedListener((numberPicker, i, i1) -> {
+            int valuePicker1 = np_thahr.getValue();
+            Pref.setValue(getApplicationContext(), Constants.PREF_DHOHR_SHOW_ALKHUSHUE_TIME, valuePicker1);
         });
-        np_asr.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                int valuePicker1 = np_asr.getValue();
-                Pref.setValue(getApplicationContext(), Constants.PREF_ASR_SHOW_ALKHUSHUE_TIME, valuePicker1);
-            }
+        np_asr.setOnValueChangedListener((numberPicker, i, i1) -> {
+            int valuePicker1 = np_asr.getValue();
+            Pref.setValue(getApplicationContext(), Constants.PREF_ASR_SHOW_ALKHUSHUE_TIME, valuePicker1);
         });
-        np_mg.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                int valuePicker1 = np_mg.getValue();
-                Pref.setValue(getApplicationContext(), Constants.PREF_MAGHRIB_SHOW_ALKHUSHUE_TIME, valuePicker1);
-            }
+        np_mg.setOnValueChangedListener((numberPicker, i, i1) -> {
+            int valuePicker1 = np_mg.getValue();
+            Pref.setValue(getApplicationContext(), Constants.PREF_MAGHRIB_SHOW_ALKHUSHUE_TIME, valuePicker1);
         });
-        np_ish.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                int valuePicker1 = np_ish.getValue();
-                Pref.setValue(getApplicationContext(), Constants.PREF_ISHA_SHOW_ALKHUSHUE_TIME, valuePicker1);
-            }
+        np_ish.setOnValueChangedListener((numberPicker, i, i1) -> {
+            int valuePicker1 = np_ish.getValue();
+            Pref.setValue(getApplicationContext(), Constants.PREF_ISHA_SHOW_ALKHUSHUE_TIME, valuePicker1);
         });
 
 
@@ -147,7 +129,6 @@ public class AlkhushueActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Pref.setValue(activity, Constants.PREF_SUNRISE_SHOW_ALKHUSHUE, cb_sun.isChecked());
                 Pref.setValue(activity, Constants.PREF_SUNRISE_TEXT_ALKHUSHUE, ed_sun.getText().toString());
-
                 Pref.setValue(activity, Constants.PREF_FAJR_TEXT_ALKHUSHUE, ed_fajer.getText().toString());
                 Pref.setValue(activity, Constants.PREF_DHOHR_TEXT_ALKHUSHUE, ed_thahr.getText().toString());
                 Pref.setValue(activity, Constants.PREF_ASR_TEXT_ALKHUSHUE, ed_asr.getText().toString());
@@ -155,9 +136,6 @@ public class AlkhushueActivity extends AppCompatActivity {
                 Pref.setValue(activity, Constants.PREF_ISHA_TEXT_ALKHUSHUE, ed_isha.getText().toString());
             }
         });
-
-
-
     }
 
 

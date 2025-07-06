@@ -1,19 +1,12 @@
 package com.izzedineeita.mihrab.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,7 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import com.bumptech.glide.Glide;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.izzedineeita.mihrab.Adapters.SliderAdapter;
 import com.izzedineeita.mihrab.MainActivity;
 import com.izzedineeita.mihrab.R;
@@ -29,7 +24,6 @@ import com.izzedineeita.mihrab.constants.Constants;
 import com.izzedineeita.mihrab.constants.DateHigri;
 import com.izzedineeita.mihrab.database.DataBaseHelper;
 import com.izzedineeita.mihrab.model.Ads;
-import com.izzedineeita.mihrab.utils.ImagesArrays;
 import com.izzedineeita.mihrab.utils.Pref;
 import com.izzedineeita.mihrab.utils.Utils;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -146,8 +140,8 @@ public class ShowAdsActivity extends AppCompatActivity {
 //                dateH = Utils.writeHDate(activity, hd);
 //                break;
 //        }
-        dateM = Utils.writeMDate(activity, hd);
-        dateH = Utils.writeHDate(activity, hd);
+        dateM = Utils.writeMDate(activity);
+        dateH = Utils.writeHDate(activity);
 
 //        Log.e("XXX9", "" + ads.getMasjedID());
         init();
@@ -395,7 +389,7 @@ public class ShowAdsActivity extends AppCompatActivity {
         }
 
         SliderView sliderView = findViewById(R.id.imageSlider);
-        sliderView.setSliderAdapter(new SliderAdapter(ShowAdsActivity.this, mSliderItems));
+        sliderView.setSliderAdapter(new SliderAdapter(mSliderItems));
 
 
         // tvTitle.setText(title);

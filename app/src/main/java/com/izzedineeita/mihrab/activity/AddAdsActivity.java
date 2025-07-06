@@ -1,14 +1,5 @@
 package com.izzedineeita.mihrab.activity;
 
-import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -25,7 +16,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -35,11 +25,8 @@ import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,8 +34,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
 import com.izzedineeita.mihrab.R;
@@ -77,10 +69,11 @@ import java.util.Locale;
 public class AddAdsActivity extends AppCompatActivity
         implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
+    private static final String TAG = "AddAdsActivity";
     private Activity activity;
-    private ImageView ivAdsVideoThumb, ivSelectVideo,ivSelectVideo1, ivSelectVideo2,
-          //  ivAdsImg,
-            ivThumb,
+    private ImageView ivAdsVideoThumb, ivSelectVideo, ivSelectVideo1, ivSelectVideo2,
+    //  ivAdsImg,
+    ivThumb,
             ivSelectImg, ivSelectImg1, ivSelectImg2, ivSelectImg3, ivSelectImg4, ivSelectImg5, ivSelectImg6,
             iv_back;
     private RadioButton rbText, rbVideo, rbImage;
@@ -127,167 +120,323 @@ public class AddAdsActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int theme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 0);
-        switch (theme) {
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-                break;
-            default:
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                break;
-        }
-        setContentView(R.layout.activity_add_ads);
-
-
-
+        
         try {
+            Log.d(TAG, "=== AddAdsActivity onCreate started ===");
+            
+            // Set orientation based on theme
+            Log.d(TAG, "Setting up orientation...");
+            setupOrientation();
+            Log.d(TAG, "Orientation setup completed");
+            
+            // Set content view with error handling
+            Log.d(TAG, "Inflating layout...");
+            try {
+                setContentView(R.layout.activity_add_ads);
+                Log.d(TAG, "Layout inflated successfully");
+            } catch (Exception e) {
+                Log.e(TAG, "Error inflating layout: " + e.getMessage(), e);
+                Toast.makeText(this, "Error loading layout: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                finish();
+                return;
+            }
+            
+            // Initialize activity reference
+            Log.d(TAG, "Setting activity reference...");
             activity = this;
-            DBO = new DataBaseHelper(activity);
-            sp = getSharedPreferences(Utils.PREFS, MODE_PRIVATE);
-            askForPermissions(new String[]{
-                            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            android.Manifest.permission.READ_EXTERNAL_STORAGE},
-                    REQUEST_PERMISSIONS);
+            
+            // Initialize database with error handling
+            Log.d(TAG, "Initializing database...");
+            initializeDatabase();
+            Log.d(TAG, "Database initialization completed");
+            
+            // Initialize shared preferences
+            Log.d(TAG, "Initializing shared preferences...");
+            initializeSharedPreferences();
+            Log.d(TAG, "Shared preferences initialization completed");
+            
+            // Initialize prayer times
+            Log.d(TAG, "Initializing prayer times...");
+            initializePrayerTimes();
+            Log.d(TAG, "Prayer times initialization completed");
+            
+            // Initialize UI components
+            Log.d(TAG, "Initializing UI components...");
+            initializeUIComponents();
+            Log.d(TAG, "UI components initialization completed");
+            
+            // Setup click listeners
+            Log.d(TAG, "Setting up click listeners...");
+            setupClickListeners();
+            Log.d(TAG, "Click listeners setup completed");
+            
+            // Request permissions
+            Log.d(TAG, "Requesting permissions...");
+            requestPermissions();
+            Log.d(TAG, "Permission request completed");
+            
+            // Log final state
+            Log.d(TAG, "Logging final activity state...");
+            logActivityState();
+            
+            // Test basic functionality
+            Log.d(TAG, "Running basic functionality test...");
+            testBasicFunctionality();
+            
+            Log.d(TAG, "=== AddAdsActivity onCreate completed successfully ===");
+            
+        } catch (Exception e) {
+            Log.e(TAG, "=== CRITICAL ERROR in onCreate: " + e.getMessage() + " ===", e);
+            Toast.makeText(this, "Error initializing activity: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
 
+    private void setupOrientation() {
+        try {
+            int theme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 0);
+            switch (theme) {
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+                    break;
+                default:
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    break;
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error setting orientation: " + e.getMessage(), e);
+        }
+    }
+
+    private void initializeDatabase() {
+        try {
+            DBO = new DataBaseHelper(activity);
+            
+            // Check if database is ready
+            if (!DBO.isDatabaseReady()) {
+                Log.w(TAG, "Database not ready, attempting to ensure it's open...");
+                if (!DBO.ensureDatabaseOpen()) {
+                    throw new RuntimeException("Failed to initialize database");
+                }
+            }
+            
+            Log.d(TAG, "Database initialized successfully");
+        } catch (Exception e) {
+            Log.e(TAG, "Error initializing database: " + e.getMessage(), e);
+            Toast.makeText(this, "Database initialization failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            throw e;
+        }
+    }
+
+    private void initializeSharedPreferences() {
+        try {
+            sp = getSharedPreferences(Utils.PREFS, MODE_PRIVATE);
+            Log.d(TAG, "Shared preferences initialized");
+        } catch (Exception e) {
+            Log.e(TAG, "Error initializing shared preferences: " + e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    private void initializePrayerTimes() {
+        try {
+            prayerTimes.clear();
             prayerTimes.add(Pref.getValue(activity, Constants.PREF_FAJR_TIME_24, ""));
             prayerTimes.add(Pref.getValue(activity, Constants.PREF_SUNRISE_TIME_24, ""));
             prayerTimes.add(Pref.getValue(activity, Constants.PREF_DHOHR_TIME_24, ""));
             prayerTimes.add(Pref.getValue(activity, Constants.PREF_ASR_TIME_24, ""));
             prayerTimes.add(Pref.getValue(activity, Constants.PREF_MAGHRIB_TIME_24, ""));
             prayerTimes.add(Pref.getValue(activity, Constants.PREF_ISHA_TIME_24, ""));
+            Log.d(TAG, "Prayer times initialized: " + prayerTimes.size() + " times loaded");
+        } catch (Exception e) {
+            Log.e(TAG, "Error initializing prayer times: " + e.getMessage(), e);
+            // Don't throw here, continue with empty list
+        }
+    }
 
-            iv_back = (ImageView) findViewById(R.id.iv_back);
-            ivThumb = (ImageView) findViewById(R.id.ivThumb);
-            ivSelectImg = (ImageView) findViewById(R.id.ivSelectImg);
-            ivSelectImg1 = (ImageView) findViewById(R.id.ivSelectImg1);
-            ivSelectImg2 = (ImageView) findViewById(R.id.ivSelectImg2);
-            ivSelectImg3 = (ImageView) findViewById(R.id.ivSelectImg3);
-            ivSelectImg4 = (ImageView) findViewById(R.id.ivSelectImg4);
-            ivSelectImg5 = (ImageView) findViewById(R.id.ivSelectImg5);
-            ivSelectImg6 = (ImageView) findViewById(R.id.ivSelectImg6);
-        //    ivAdsImg = (ImageView) findViewById(R.id.ivAdsImg);
-            ivAdsVideoThumb = (ImageView) findViewById(R.id.ivAdsVideoThumb);
-            ivSelectVideo = (ImageView) findViewById(R.id.ivSelectVideo);
-            ivSelectVideo1 = (ImageView) findViewById(R.id.ivSelectVideo1);
-            ivSelectVideo2 = (ImageView) findViewById(R.id.ivSelectVideo2);
+    private void initializeUIComponents() {
+        try {
+            // Initialize ImageViews
+            iv_back = findViewById(R.id.iv_back);
+            ivThumb = findViewById(R.id.ivThumb);
+            ivSelectImg = findViewById(R.id.ivSelectImg);
+            ivSelectImg1 = findViewById(R.id.ivSelectImg1);
+            ivSelectImg2 = findViewById(R.id.ivSelectImg2);
+            ivSelectImg3 = findViewById(R.id.ivSelectImg3);
+            ivSelectImg4 = findViewById(R.id.ivSelectImg4);
+            ivSelectImg5 = findViewById(R.id.ivSelectImg5);
+            ivSelectImg6 = findViewById(R.id.ivSelectImg6);
+            ivAdsVideoThumb = findViewById(R.id.ivAdsVideoThumb);
+            ivSelectVideo = findViewById(R.id.ivSelectVideo);
+            ivSelectVideo1 = findViewById(R.id.ivSelectVideo1);
+            ivSelectVideo2 = findViewById(R.id.ivSelectVideo2);
 
-            ivSelectVideo.setEnabled(true);
-            ivSelectVideo1.setEnabled(false);
-            ivSelectVideo2.setEnabled(false);
+            // Set video selection states
+            if (ivSelectVideo != null) ivSelectVideo.setEnabled(true);
+            if (ivSelectVideo1 != null) ivSelectVideo1.setEnabled(false);
+            if (ivSelectVideo2 != null) ivSelectVideo2.setEnabled(false);
 
-            RadioGroup rgAdsType = (RadioGroup) findViewById(R.id.rgAdsType);
-            rbImage = (RadioButton) findViewById(R.id.rbImage);
-            rbVideo = (RadioButton) findViewById(R.id.rbVideo);
-            rbText = (RadioButton) findViewById(R.id.rbText);
-            rlImage = (RelativeLayout) findViewById(R.id.rlImage);
-            rlVideo = (RelativeLayout) findViewById(R.id.rlVideo);
-            rlText = (RelativeLayout) findViewById(R.id.rlText);
-            edAdsText = (EditText) findViewById(R.id.edAdsText);
-            edAdsTitle = (EditText) findViewById(R.id.edAdsTitle);
-            edAddAppearance = (EditText) findViewById(R.id.edAddAppearance);
-            edAddAppearance.setFocusable(true);
-            llAdsPeriods = (LinearLayout) findViewById(R.id.llAdsPeriods);
-            ed_start = (EditText) findViewById(R.id.ed_start);
-            ed_end = (EditText) findViewById(R.id.ed_end);
-            img_sec_show = (EditText) findViewById(R.id.img_sec_show);
-            tvSave = (TextView) findViewById(R.id.tvSave);
-            tvSave.setVisibility(View.GONE);
-            tittleA = (TextView) findViewById(R.id.tittleA);
+            // Initialize RadioGroup and RadioButtons
+            RadioGroup rgAdsType = findViewById(R.id.rgAdsType);
+            rbImage = findViewById(R.id.rbImage);
+            rbVideo = findViewById(R.id.rbVideo);
+            rbText = findViewById(R.id.rbText);
 
-            Log.e("XXXd", "" + img_sec_show.getText().toString());
+            // Initialize RelativeLayouts
+            rlImage = findViewById(R.id.rlImage);
+            rlVideo = findViewById(R.id.rlVideo);
+            rlText = findViewById(R.id.rlText);
 
-            iv_back.setOnClickListener(this);
-            ivSelectImg.setOnClickListener(this);
-            ivSelectImg1.setOnClickListener(this);
-            ivSelectImg2.setOnClickListener(this);
-            ivSelectImg3.setOnClickListener(this);
-            ivSelectImg4.setOnClickListener(this);
-            ivSelectImg5.setOnClickListener(this);
-            ivSelectImg6.setOnClickListener(this);
-            ivSelectVideo.setOnClickListener(this);
-            ivSelectVideo1.setOnClickListener(this);
-            ivSelectVideo2.setOnClickListener(this);
-            ivAdsVideoThumb.setOnClickListener(this);
-            tvSave.setOnClickListener(this);
-            rgAdsType.setOnCheckedChangeListener(this);
-            ed_start.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            // Initialize EditTexts
+            edAdsText = findViewById(R.id.edAdsText);
+            edAdsTitle = findViewById(R.id.edAdsTitle);
+            edAddAppearance = findViewById(R.id.edAddAppearance);
+            llAdsPeriods = findViewById(R.id.llAdsPeriods);
+            ed_start = findViewById(R.id.ed_start);
+            ed_end = findViewById(R.id.ed_end);
+            img_sec_show = findViewById(R.id.img_sec_show);
+
+            // Initialize TextViews
+            tvSave = findViewById(R.id.tvSave);
+            tittleA = findViewById(R.id.tittleA);
+
+            // Set initial states
+            if (edAddAppearance != null) edAddAppearance.setFocusable(true);
+            if (tvSave != null) {
+                tvSave.setVisibility(View.GONE);
+            }
+
+            Log.d(TAG, "UI components initialized successfully");
+            
+        } catch (Exception e) {
+            Log.e(TAG, "Error initializing UI components: " + e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    private void setupClickListeners() {
+        try {
+            // Set click listeners for ImageViews
+            if (iv_back != null) iv_back.setOnClickListener(this);
+            if (ivSelectImg != null) ivSelectImg.setOnClickListener(this);
+            if (ivSelectImg1 != null) ivSelectImg1.setOnClickListener(this);
+            if (ivSelectImg2 != null) ivSelectImg2.setOnClickListener(this);
+            if (ivSelectImg3 != null) ivSelectImg3.setOnClickListener(this);
+            if (ivSelectImg4 != null) ivSelectImg4.setOnClickListener(this);
+            if (ivSelectImg5 != null) ivSelectImg5.setOnClickListener(this);
+            if (ivSelectImg6 != null) ivSelectImg6.setOnClickListener(this);
+            if (ivSelectVideo != null) ivSelectVideo.setOnClickListener(this);
+            if (ivSelectVideo1 != null) ivSelectVideo1.setOnClickListener(this);
+            if (ivSelectVideo2 != null) ivSelectVideo2.setOnClickListener(this);
+            if (ivAdsVideoThumb != null) ivAdsVideoThumb.setOnClickListener(this);
+            if (tvSave != null) tvSave.setOnClickListener(this);
+
+            // Set RadioGroup listener
+            RadioGroup rgAdsType = findViewById(R.id.rgAdsType);
+            if (rgAdsType != null) {
+                rgAdsType.setOnCheckedChangeListener(this);
+            }
+
+            // Set date picker listeners
+            if (ed_start != null) {
+                ed_start.setOnClickListener(view -> {
                     Utils.hideSoftKeyboard(activity);
                     showDatePicker(ed_start);
-                }
-            });
-            ed_end.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                });
+            }
+            
+            if (ed_end != null) {
+                ed_end.setOnClickListener(view -> {
                     Utils.hideSoftKeyboard(activity);
                     showDatePicker(ed_end);
-                }
-            });
+                });
+            }
 
-            edAddAppearance.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    tvSave.setVisibility(View.GONE);
-                    if (!TextUtils.isEmpty(edAddAppearance.getText().toString().trim())) {
-                        int size = Integer.parseInt(edAddAppearance.getText().toString().trim());
-                        llAdsPeriods.removeAllViews();
-                        tittleA.setVisibility(View.VISIBLE);
-                        if (size < checkList.size()) {
-                            size = checkList.size();
-                            edAddAppearance.setText(String.valueOf(size));
-                        }
-                        if (size > 0) {
-                            llAdsPeriods.removeAllViews();
-                            for (int i = 0; i < size; i++) {
-                                AdsPeriods adsPeriods = null;
-                                if (i < adsList.size()) {
-                                    adsPeriods = adsList.get(i);
-                                    llAdsPeriods.addView(getItem(i, adsPeriods));
-                                } else
-                                    llAdsPeriods.addView(getItem(i, null));
-                            }
-                        } else {
-                            llAdsPeriods.removeAllViews();
-                            tittleA.setVisibility(View.GONE);
-                            for (int i = 0; i < adsList.size(); i++) {
-                                AdsPeriods adsPeriods = null;
-                                tittleA.setVisibility(View.VISIBLE);
-                                adsPeriods = adsList.get(i);
-                                llAdsPeriods.addView(getItem(i, adsPeriods));
-                            }
-                        }
-                    } else {
-                        llAdsPeriods.removeAllViews();
-                        tittleA.setVisibility(View.GONE);
-                        for (int i = 0; i < adsList.size(); i++) {
-                            AdsPeriods adsPeriods = null;
-                            tittleA.setVisibility(View.VISIBLE);
-                            adsPeriods = adsList.get(i);
-                            llAdsPeriods.addView(getItem(i, adsPeriods));
-                        }
+            // Set TextWatcher for edAddAppearance
+            if (edAddAppearance != null) {
+                edAddAppearance.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     }
 
-                }
-            });
-        } catch (Exception e) {
-            Log.e("XXX", e.getLocalizedMessage());
-        }
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    }
 
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        handleAppearanceTextChanged();
+                    }
+                });
+            }
+
+            Log.d(TAG, "Click listeners setup completed");
+            
+        } catch (Exception e) {
+            Log.e(TAG, "Error setting up click listeners: " + e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    private void handleAppearanceTextChanged() {
+        try {
+            if (tvSave != null) tvSave.setVisibility(View.GONE);
+            if (!TextUtils.isEmpty(edAddAppearance.getText().toString().trim())) {
+                int size = Integer.parseInt(edAddAppearance.getText().toString().trim());
+                if (llAdsPeriods != null) llAdsPeriods.removeAllViews();
+                if (tittleA != null) tittleA.setVisibility(View.VISIBLE);
+                if (size < checkList.size()) {
+                    size = checkList.size();
+                    edAddAppearance.setText(String.valueOf(size));
+                }
+                if (size > 0) {
+                    if (llAdsPeriods != null) llAdsPeriods.removeAllViews();
+                    for (int i = 0; i < size; i++) {
+                        AdsPeriods adsPeriods;
+                        if (i < adsList.size()) {
+                            adsPeriods = adsList.get(i);
+                            llAdsPeriods.addView(getItem(i, adsPeriods));
+                        } else
+                            llAdsPeriods.addView(getItem(i, null));
+                    }
+                } else {
+                    if (llAdsPeriods != null) llAdsPeriods.removeAllViews();
+                    if (tittleA != null) tittleA.setVisibility(View.GONE);
+                    for (int i = 0; i < adsList.size(); i++) {
+                        AdsPeriods adsPeriods;
+                        if (tittleA != null) tittleA.setVisibility(View.VISIBLE);
+                        adsPeriods = adsList.get(i);
+                        llAdsPeriods.addView(getItem(i, adsPeriods));
+                    }
+                }
+            } else {
+                if (llAdsPeriods != null) llAdsPeriods.removeAllViews();
+                if (tittleA != null) tittleA.setVisibility(View.GONE);
+                for (int i = 0; i < adsList.size(); i++) {
+                    AdsPeriods adsPeriods;
+                    if (tittleA != null) tittleA.setVisibility(View.VISIBLE);
+                    adsPeriods = adsList.get(i);
+                    llAdsPeriods.addView(getItem(i, adsPeriods));
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error in handleAppearanceTextChanged: " + e.getMessage(), e);
+        }
+    }
+
+    private void requestPermissions() {
+        try {
+            askForPermissions(new String[]{
+                            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                    REQUEST_PERMISSIONS);
+        } catch (Exception e) {
+            Log.e(TAG, "Error requesting permissions: " + e.getMessage(), e);
+        }
     }
 
     private LinearLayout getItem(final int pos, AdsPeriods adsPeriods) {
@@ -335,249 +484,238 @@ public class AddAdsActivity extends AppCompatActivity
                 btnCheck.setVisibility(View.GONE);
 
             }
-            ed_startTime.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Utils.hideSoftKeyboard(activity);
-                    showDateTimePicker((EditText) ((llAdsPeriods.getChildAt(pos)).findViewById(R.id.ed_start)));
-                }
+            ed_startTime.setOnClickListener(view -> {
+                Utils.hideSoftKeyboard(activity);
+                showDateTimePicker((EditText) ((llAdsPeriods.getChildAt(pos)).findViewById(R.id.ed_start)));
             });
-            ed_endTime.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Utils.hideSoftKeyboard(activity);
-                    showDateTimePicker((EditText) ((llAdsPeriods.getChildAt(pos)).findViewById(R.id.ed_end)));
-                }
+            ed_endTime.setOnClickListener(view -> {
+                Utils.hideSoftKeyboard(activity);
+                showDateTimePicker((EditText) ((llAdsPeriods.getChildAt(pos)).findViewById(R.id.ed_end)));
             });
-            btnCheck.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    adsPeriodsList.clear();
-                    final View v = llAdsPeriods.getChildAt(pos);
-                    EditText edStartTime = ((EditText) (v.findViewById(R.id.ed_start)));
-                    EditText edEndTime = ((EditText) (v.findViewById(R.id.ed_end)));
-                    cbSat = (CheckBox) v.findViewById(R.id.cbSat);
-                    cbSun = (CheckBox) v.findViewById(R.id.cbSun);
-                    cbMon = (CheckBox) v.findViewById(R.id.cbMon);
-                    cbTue = (CheckBox) v.findViewById(R.id.cbTue);
-                    cbWed = (CheckBox) v.findViewById(R.id.cbWed);
-                    cbThu = (CheckBox) v.findViewById(R.id.cbThu);
-                    cbFri = (CheckBox) v.findViewById(R.id.cbFri);
-                    Button btn = (Button) v.findViewById(R.id.btnCheck);
-                    isConflictAds = false;
-                    edAdsTitle.setError(null);
-                    edAdsText.setError(null);
-                    ed_start.setError(null);
-                    ed_end.setError(null);
-                    edStartTime.setError(null);
-                    edEndTime.setError(null);
-                    if (TextUtils.isEmpty(edAdsTitle.getText().toString().toString())) {
-                        edAdsTitle.setError(getString(R.string.required));
-                        return;
-                    }
-                    if (type == 1 && selectedImage == null) {
-                        Utils.showCustomToast(activity, getString(R.string.chooseAdvImage));
-                        return;
-                    }
-                    if (type == 2 && videoData == null) {
-                        Utils.showCustomToast(activity, getString(R.string.chooseVideo));
-                        return;
-                    }
-                    if (type == 3 && TextUtils.isEmpty(edAdsText.getText().toString().toString())) {
-                        edAdsText.setError(getString(R.string.addAdvDesc));
-                        Utils.showCustomToast(activity, getString(R.string.addAdvDesc));
-                        return;
-                    }
-                    if (TextUtils.isEmpty(ed_start.getText().toString())) {
-                        ed_start.setError(getString(R.string.addStartDate));
-                        return;
-                    }
-                    if (TextUtils.isEmpty(ed_end.getText().toString())) {
-                        ed_end.setError(getString(R.string.addEndDate));
-                        return;
-                    }
-                    if (!Utils.compareDate(ed_start.getText().toString(), ed_end.getText().toString())) {
-                        Utils.showCustomToast(activity, getString(R.string.error_date));
-                        ed_end.setError(getString(R.string.error_date));
-                        return;
-                    }
-                    if (TextUtils.isEmpty(edStartTime.getText().toString())) {
-                        edStartTime.setError(getString(R.string.addStartTime));
-                    }
-                    if (TextUtils.isEmpty(edEndTime.getText().toString())) {
-                        edEndTime.setError(getString(R.string.addEndTime));
-                        return;
-                    }
-                    if (!Utils.compareTimes(edStartTime.getText().toString(), edEndTime.getText().toString())) {
-                        Utils.showCustomToast(activity, getString(R.string.error_time));
-                        edEndTime.setError(getString(R.string.error_time));
-                        return;
-                    }
-                    if (!cbSat.isChecked() && !cbSun.isChecked() && !cbMon.isChecked() && !cbTue.isChecked() && !cbWed.isChecked()
-                            && !cbThu.isChecked() && !cbFri.isChecked()) {
-                        Utils.showCustomToast(activity, getString(R.string.addDays));
-                        return;
-                    }
+            btnCheck.setOnClickListener(view -> {
+                adsPeriodsList.clear();
+                final View v = llAdsPeriods.getChildAt(pos);
+                EditText edStartTime = ((EditText) (v.findViewById(R.id.ed_start)));
+                EditText edEndTime = ((EditText) (v.findViewById(R.id.ed_end)));
+                cbSat = (CheckBox) v.findViewById(R.id.cbSat);
+                cbSun = (CheckBox) v.findViewById(R.id.cbSun);
+                cbMon = (CheckBox) v.findViewById(R.id.cbMon);
+                cbTue = (CheckBox) v.findViewById(R.id.cbTue);
+                cbWed = (CheckBox) v.findViewById(R.id.cbWed);
+                cbThu = (CheckBox) v.findViewById(R.id.cbThu);
+                cbFri = (CheckBox) v.findViewById(R.id.cbFri);
+                Button btn = (Button) v.findViewById(R.id.btnCheck);
+                isConflictAds = false;
+                edAdsTitle.setError(null);
+                edAdsText.setError(null);
+                ed_start.setError(null);
+                ed_end.setError(null);
+                edStartTime.setError(null);
+                edEndTime.setError(null);
+                if (TextUtils.isEmpty(edAdsTitle.getText().toString().toString())) {
+                    edAdsTitle.setError(getString(R.string.required));
+                    return;
+                }
+                if (type == 1 && selectedImage == null) {
+                    Utils.showCustomToast(activity, getString(R.string.chooseAdvImage));
+                    return;
+                }
+                if (type == 2 && videoData == null) {
+                    Utils.showCustomToast(activity, getString(R.string.chooseVideo));
+                    return;
+                }
+                if (type == 3 && TextUtils.isEmpty(edAdsText.getText().toString().toString())) {
+                    edAdsText.setError(getString(R.string.addAdvDesc));
+                    Utils.showCustomToast(activity, getString(R.string.addAdvDesc));
+                    return;
+                }
+                if (TextUtils.isEmpty(ed_start.getText().toString())) {
+                    ed_start.setError(getString(R.string.addStartDate));
+                    return;
+                }
+                if (TextUtils.isEmpty(ed_end.getText().toString())) {
+                    ed_end.setError(getString(R.string.addEndDate));
+                    return;
+                }
+                if (!Utils.compareDate(ed_start.getText().toString(), ed_end.getText().toString())) {
+                    Utils.showCustomToast(activity, getString(R.string.error_date));
+                    ed_end.setError(getString(R.string.error_date));
+                    return;
+                }
+                if (TextUtils.isEmpty(edStartTime.getText().toString())) {
+                    edStartTime.setError(getString(R.string.addStartTime));
+                }
+                if (TextUtils.isEmpty(edEndTime.getText().toString())) {
+                    edEndTime.setError(getString(R.string.addEndTime));
+                    return;
+                }
+                if (!Utils.compareTimes(edStartTime.getText().toString(), edEndTime.getText().toString())) {
+                    Utils.showCustomToast(activity, getString(R.string.error_time));
+                    edEndTime.setError(getString(R.string.error_time));
+                    return;
+                }
+                if (!cbSat.isChecked() && !cbSun.isChecked() && !cbMon.isChecked() && !cbTue.isChecked() && !cbWed.isChecked()
+                        && !cbThu.isChecked() && !cbFri.isChecked()) {
+                    Utils.showCustomToast(activity, getString(R.string.addDays));
+                    return;
+                }
 
-                    List<Integer> dayList = new ArrayList<>();
-                    dayList.clear();
-                    if (cbSat.isChecked()) {
-                        dayList.add(1);
-                    }
-                    if (cbSun.isChecked()) {
-                        dayList.add(2);
-                    }
-                    if (cbMon.isChecked()) {
-                        dayList.add(3);
-                    }
-                    if (cbTue.isChecked()) {
-                        dayList.add(4);
-                    }
-                    if (cbWed.isChecked()) {
-                        dayList.add(5);
-                    }
-                    if (cbThu.isChecked()) {
-                        dayList.add(6);
-                    }
-                    if (cbFri.isChecked()) {
-                        dayList.add(7);
-                    }
-                    String days = "";
+                List<Integer> dayList = new ArrayList<>();
+                dayList.clear();
+                if (cbSat.isChecked()) {
+                    dayList.add(1);
+                }
+                if (cbSun.isChecked()) {
+                    dayList.add(2);
+                }
+                if (cbMon.isChecked()) {
+                    dayList.add(3);
+                }
+                if (cbTue.isChecked()) {
+                    dayList.add(4);
+                }
+                if (cbWed.isChecked()) {
+                    dayList.add(5);
+                }
+                if (cbThu.isChecked()) {
+                    dayList.add(6);
+                }
+                if (cbFri.isChecked()) {
+                    dayList.add(7);
+                }
+                String days = "";
 
-                    for (int x = 0; x < dayList.size(); x++) {
-                        AdsPeriods adsPeriods = new AdsPeriods();
-                        adsPeriods.setStartTime(edStartTime.getText().toString().trim());
-                        adsPeriods.setEndTime(edEndTime.getText().toString().trim());
-                        adsPeriods.setStartDate(ed_start.getText().toString().trim());
-                        adsPeriods.setEndDate(ed_end.getText().toString().trim());
-                        days = dayList.get(x) + "," + days;
-                        adsPeriods.setDay(dayList.get(x));
-                        DBO.openDataBase();
-                        boolean hasConflict = DBO.itHasConflict(sp.getInt("masjedId", -1), adsPeriods);
-                        DBO.close();
-                        if (hasConflict) {
-                            isConflictAds = true;
-                            Utils.showCustomToast(activity, getString(R.string.conflictWithAnotherAdv));
-                            break;
-                        }
-                        if (inPrayPeriod(prayerTimes, adsPeriods)) {
-                            Utils.showCustomToast(activity, getString(R.string.conflictWithPray));
-                            break;
-                        }
-                        adsPeriodsList.add(adsPeriods);
-                        if (x == dayList.size() - 1) {
-                            if (!isConflictAds) {
-                                int repeatNo = Integer.parseInt(edAddAppearance.getText().toString().trim());
-                                if (type == 1) {
-                                    videoData = null;
-                                    selectedVideoPath = "";
-                                    selectedVideoPath1 = "";
-                                    selectedVideoPath2 = "";
-                                    edAdsText.setText("");
-                                } else if (type == 2) {
-                                    selectedImage = null;
-                                    selectedImagePath = "";
-                                    selectedImagePath1 = "";
-                                    selectedImagePath2 = "";
-                                    selectedImagePath3 = "";
-                                    selectedImagePath4 = "";
-                                    selectedImagePath5 = "";
-                                    selectedImagePath6 = "";
-                                    edAdsText.setText("");
-                                } else if (type == 3) {
-                                    selectedImage = null;
-                                    selectedImagePath = "";
-                                    selectedImagePath1 = "";
-                                    selectedImagePath2 = "";
-                                    selectedImagePath3 = "";
-                                    selectedImagePath4 = "";
-                                    selectedImagePath5 = "";
-                                    selectedImagePath6 = "";
-                                    videoData = null;
-                                    selectedVideoPath = "";
-                                    selectedVideoPath1 = "";
-                                    selectedVideoPath2 = "";
-                                }
-                                Ads ads = new Ads();
-                                ads.setMasjedID(sp.getInt("masjedId", -1));
-                                ads.setTitle(edAdsTitle.getText().toString().trim());
-                                ads.setType(type);
-                                ads.setImage(selectedImagePath);
-                                ads.setImage1(selectedImagePath1);
-                                ads.setImage2(selectedImagePath2);
-                                ads.setImage3(selectedImagePath3);
-                                ads.setImage4(selectedImagePath4);
-                                ads.setImage5(selectedImagePath5);
-                                ads.setImage6(selectedImagePath6);
-                                ads.setVideo(selectedVideoPath);
-                                ads.setVideo1(selectedVideoPath1);
-                                ads.setVideo2(selectedVideoPath2);
-
-                                ads.setImageSec(Integer.parseInt(img_sec_show.getText().toString()));
-                                ads.setText(edAdsText.getText().toString().trim());
-                                ads.setStartDate(ed_start.getText().toString().trim());
-                                ads.setEndDate(ed_end.getText().toString().trim());
-                                String msg = getString(R.string.AdvAddedSuccess);
-
-                                DBO = new DataBaseHelper(activity);
-                                if (advId == -1) {
-                                    advId = DBO.insertAds(ads);
-                                }
-                                if (advId != -1) {
-                                    if (count == 0) {
-                                        msg = getString(R.string.AdvAddedSuccess);
-                                        count++;
-                                    } else
-                                        msg = getString(R.string.periodAdded);
-
-                                    for (int i = 0; i < adsPeriodsList.size(); i++) {
-                                        AdsPeriods advPeriod = adsPeriodsList.get(i);
-                                        advPeriod.setAdvId(advId);
-                                        advPeriod.setAdded(true);
-                                    }
-                                    DBO.insertAdsPeriod(adsPeriodsList);
-                                    adsPeriods.setDays(days);
-                                    DBO.openDataBase();
-                                    String AdsDay = DBO.getAdvPeriods(advId, adsPeriods.getStartTime(), adsPeriods.getEndTime());
-                                    String AdsIds = DBO.getAdvPeriodsIds(advId, adsPeriods.getStartTime(), adsPeriods.getEndTime());
-                                    DBO.close();
-                                    adsList.add(new AdsPeriods(adsPeriods.getAdvId(), adsPeriods.getStartTime(), adsPeriods.getEndTime(),
-                                            adsPeriods.getStartDate(), adsPeriods.getEndDate(), adsPeriods.getDays(), AdsIds, true));
-
-                                    btn.setVisibility(View.GONE);
-                                    checkList.add(pos);
-                                    ed_start.setEnabled(false);
-                                    ed_end.setEnabled(false);
-                                    rbImage.setEnabled(false);
-                                    rbText.setEnabled(false);
-                                    rbVideo.setEnabled(false);
-                                    edAdsText.setEnabled(false);
-                                    edAdsTitle.setEnabled(false);
-                                    ivSelectImg.setClickable(false);
-                                    ivSelectImg1.setClickable(false);
-                                    ivSelectImg2.setClickable(false);
-                                    ivSelectImg3.setClickable(false);
-                                    ivSelectImg4.setClickable(false);
-                                    ivSelectImg5.setClickable(false);
-                                    ivSelectImg6.setClickable(false);
-                                    ivSelectVideo.setClickable(false);
-                                    ivSelectVideo1.setClickable(false);
-                                    ivSelectVideo2.setClickable(false);
-                                    cbSat.setEnabled(false);
-                                    cbSun.setEnabled(false);
-                                    cbMon.setEnabled(false);
-                                    cbTue.setEnabled(false);
-                                    cbWed.setEnabled(false);
-                                    cbThu.setEnabled(false);
-                                    cbFri.setEnabled(false);
-                                    edEndTime.setEnabled(false);
-                                    edStartTime.setEnabled(false);
-                                    Utils.showCustomToast(activity, msg);
-                                } else {
-                                    Utils.showCustomToast(activity, getString(R.string.AdvNotAdded) + advId);
-                                }
-
+                for (int x = 0; x < dayList.size(); x++) {
+                    AdsPeriods adsPeriods1 = new AdsPeriods();
+                    adsPeriods1.setStartTime(edStartTime.getText().toString().trim());
+                    adsPeriods1.setEndTime(edEndTime.getText().toString().trim());
+                    adsPeriods1.setStartDate(ed_start.getText().toString().trim());
+                    adsPeriods1.setEndDate(ed_end.getText().toString().trim());
+                    days = dayList.get(x) + "," + days;
+                    adsPeriods1.setDay(dayList.get(x));
+                    DBO.openDataBase();
+                    boolean hasConflict = DBO.itHasConflict(sp.getInt("masjedId", -1), adsPeriods1);
+                    DBO.close();
+                    if (hasConflict) {
+                        isConflictAds = true;
+                        Utils.showCustomToast(activity, getString(R.string.conflictWithAnotherAdv));
+                        break;
+                    }
+                    if (inPrayPeriod(prayerTimes, adsPeriods1)) {
+                        Utils.showCustomToast(activity, getString(R.string.conflictWithPray));
+                        break;
+                    }
+                    adsPeriodsList.add(adsPeriods1);
+                    if (x == dayList.size() - 1) {
+                        if (!isConflictAds) {
+                            if (type == 1) {
+                                videoData = null;
+                                selectedVideoPath = "";
+                                selectedVideoPath1 = "";
+                                selectedVideoPath2 = "";
+                                edAdsText.setText("");
+                            } else if (type == 2) {
+                                selectedImage = null;
+                                selectedImagePath = "";
+                                selectedImagePath1 = "";
+                                selectedImagePath2 = "";
+                                selectedImagePath3 = "";
+                                selectedImagePath4 = "";
+                                selectedImagePath5 = "";
+                                selectedImagePath6 = "";
+                                edAdsText.setText("");
+                            } else if (type == 3) {
+                                selectedImage = null;
+                                selectedImagePath = "";
+                                selectedImagePath1 = "";
+                                selectedImagePath2 = "";
+                                selectedImagePath3 = "";
+                                selectedImagePath4 = "";
+                                selectedImagePath5 = "";
+                                selectedImagePath6 = "";
+                                videoData = null;
+                                selectedVideoPath = "";
+                                selectedVideoPath1 = "";
+                                selectedVideoPath2 = "";
                             }
+                            Ads ads = new Ads();
+                            ads.setMasjedID(sp.getInt("masjedId", -1));
+                            ads.setTitle(edAdsTitle.getText().toString().trim());
+                            ads.setType(type);
+                            ads.setImage(selectedImagePath);
+                            ads.setImage1(selectedImagePath1);
+                            ads.setImage2(selectedImagePath2);
+                            ads.setImage3(selectedImagePath3);
+                            ads.setImage4(selectedImagePath4);
+                            ads.setImage5(selectedImagePath5);
+                            ads.setImage6(selectedImagePath6);
+                            ads.setVideo(selectedVideoPath);
+                            ads.setVideo1(selectedVideoPath1);
+                            ads.setVideo2(selectedVideoPath2);
+
+                            ads.setImageSec(Integer.parseInt(img_sec_show.getText().toString()));
+                            ads.setText(edAdsText.getText().toString().trim());
+                            ads.setStartDate(ed_start.getText().toString().trim());
+                            ads.setEndDate(ed_end.getText().toString().trim());
+                            String msg;
+
+                            DBO = new DataBaseHelper(activity);
+                            if (advId == -1) {
+                                advId = DBO.insertAds(ads);
+                            }
+                            if (advId != -1) {
+                                if (count == 0) {
+                                    msg = getString(R.string.AdvAddedSuccess);
+                                    count++;
+                                } else
+                                    msg = getString(R.string.periodAdded);
+
+                                for (int i = 0; i < adsPeriodsList.size(); i++) {
+                                    AdsPeriods advPeriod = adsPeriodsList.get(i);
+                                    advPeriod.setAdvId(advId);
+                                    advPeriod.setAdded(true);
+                                }
+                                DBO.insertAdsPeriod(adsPeriodsList);
+                                adsPeriods1.setDays(days);
+                                DBO.openDataBase();
+                                String AdsIds = DBO.getAdvPeriodsIds(advId, adsPeriods1.getStartTime(), adsPeriods1.getEndTime());
+                                DBO.close();
+                                adsList.add(new AdsPeriods(adsPeriods1.getAdvId(), adsPeriods1.getStartTime(), adsPeriods1.getEndTime(),
+                                        adsPeriods1.getStartDate(), adsPeriods1.getEndDate(), adsPeriods1.getDays(), AdsIds, true));
+
+                                btn.setVisibility(View.GONE);
+                                checkList.add(pos);
+                                ed_start.setEnabled(false);
+                                ed_end.setEnabled(false);
+                                rbImage.setEnabled(false);
+                                rbText.setEnabled(false);
+                                rbVideo.setEnabled(false);
+                                edAdsText.setEnabled(false);
+                                edAdsTitle.setEnabled(false);
+                                ivSelectImg.setClickable(false);
+                                ivSelectImg1.setClickable(false);
+                                ivSelectImg2.setClickable(false);
+                                ivSelectImg3.setClickable(false);
+                                ivSelectImg4.setClickable(false);
+                                ivSelectImg5.setClickable(false);
+                                ivSelectImg6.setClickable(false);
+                                ivSelectVideo.setClickable(false);
+                                ivSelectVideo1.setClickable(false);
+                                ivSelectVideo2.setClickable(false);
+                                cbSat.setEnabled(false);
+                                cbSun.setEnabled(false);
+                                cbMon.setEnabled(false);
+                                cbTue.setEnabled(false);
+                                cbWed.setEnabled(false);
+                                cbThu.setEnabled(false);
+                                cbFri.setEnabled(false);
+                                edEndTime.setEnabled(false);
+                                edStartTime.setEnabled(false);
+                                Utils.showCustomToast(activity, msg);
+                            } else {
+                                Utils.showCustomToast(activity, getString(R.string.AdvNotAdded) + advId);
+                            }
+
                         }
                     }
                 }
@@ -612,28 +750,23 @@ public class AddAdsActivity extends AppCompatActivity
 
     private void showDatePicker(final EditText editText) {
         Calendar mcurrentTime = Calendar.getInstance();
-        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-        int minute = mcurrentTime.get(Calendar.MINUTE);
         DatePickerDialog mDatePicker;
         Calendar cal = Calendar.getInstance();
         int calYear = cal.get(Calendar.YEAR);
         int calMonth = cal.get(Calendar.MONTH);
         int calDay = cal.get(Calendar.DAY_OF_MONTH);
-        mDatePicker = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                int MONTH = (month + 1);
-                int DAY = day;
-                String monthS = MONTH + "";
-                String dayS = DAY + "";
-                if (MONTH < 10)
-                    monthS = "0" + MONTH;
-                if (DAY < 10)
-                    dayS = "0" + DAY;
-                editText.setText(String.format(Locale.ENGLISH, getString(R.string.formatDate), String.valueOf(year), String.valueOf(monthS)
-                        , String.valueOf(dayS)));
+        mDatePicker = new DatePickerDialog(activity, (datePicker, year, month, day) -> {
+            int MONTH = (month + 1);
+            int DAY = day;
+            String monthS = MONTH + "";
+            String dayS = DAY + "";
+            if (MONTH < 10)
+                monthS = "0" + MONTH;
+            if (DAY < 10)
+                dayS = "0" + DAY;
+            editText.setText(String.format(Locale.ENGLISH, getString(R.string.formatDate), String.valueOf(year), String.valueOf(monthS)
+                    , dayS));
 
-            }
         }, calYear, calMonth, calDay);
         mDatePicker.show();
     }
@@ -643,18 +776,15 @@ public class AddAdsActivity extends AppCompatActivity
         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
         int minute = mcurrentTime.get(Calendar.MINUTE);
         TimePickerDialog mTimePicker;
-        mTimePicker = new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                String hours = "" + selectedHour;
-                if (selectedHour < 10)
-                    hours = "0" + selectedHour;
+        mTimePicker = new TimePickerDialog(activity, (timePicker, selectedHour, selectedMinute) -> {
+            String hours = "" + selectedHour;
+            if (selectedHour < 10)
+                hours = "0" + selectedHour;
 
-                String minute = "" + selectedMinute;
-                if (selectedMinute < 10)
-                    minute = "0" + selectedMinute;
-                editText.setText(String.format(Locale.ENGLISH, getString(R.string.formatTime), hours, minute));
-            }
+            String minute1 = "" + selectedMinute;
+            if (selectedMinute < 10)
+                minute1 = "0" + selectedMinute;
+            editText.setText(String.format(Locale.ENGLISH, getString(R.string.formatTime), hours, minute1));
         }, hour, minute, false);//Yes 24 hour time
         mTimePicker.setTitle(getString(R.string.chooseTime));
         mTimePicker.show();
@@ -711,19 +841,27 @@ public class AddAdsActivity extends AppCompatActivity
 
     protected final void askForPermissions(String[] permissions, int requestCode) {
         try {
-
+            Log.d(TAG, "Requesting permissions: " + permissions.length + " permissions");
+            
             List<String> permissionsToRequest = new ArrayList<>();
             for (String permission : permissions) {
                 if (ActivityCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
                     permissionsToRequest.add(permission);
+                    Log.d(TAG, "Permission needed: " + permission);
+                } else {
+                    Log.d(TAG, "Permission already granted: " + permission);
                 }
             }
+            
             if (!permissionsToRequest.isEmpty()) {
+                Log.d(TAG, "Requesting " + permissionsToRequest.size() + " permissions");
                 ActivityCompat.requestPermissions(activity,
                         permissionsToRequest.toArray(new String[permissionsToRequest.size()]), requestCode);
+            } else {
+                Log.d(TAG, "All permissions already granted");
             }
         } catch (Exception e) {
-            Log.e("XXX", e.getLocalizedMessage());
+            Log.e(TAG, "Error requesting permissions: " + e.getMessage(), e);
         }
     }
 
@@ -732,10 +870,30 @@ public class AddAdsActivity extends AppCompatActivity
                                                  @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == REQUEST_PERMISSIONS) {
-            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                finish();
+        try {
+            Log.d(TAG, "Permission result received for request code: " + requestCode);
+            
+            if (requestCode == REQUEST_PERMISSIONS) {
+                boolean allGranted = true;
+                for (int i = 0; i < grantResults.length; i++) {
+                    if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                        Log.w(TAG, "Permission denied: " + permissions[i]);
+                        allGranted = false;
+                    } else {
+                        Log.d(TAG, "Permission granted: " + permissions[i]);
+                    }
+                }
+                
+                if (!allGranted) {
+                    Log.w(TAG, "Some permissions were denied");
+                    Toast.makeText(this, "Storage permissions are required for this feature", Toast.LENGTH_LONG).show();
+                    // Don't finish the activity, just show a warning
+                } else {
+                    Log.d(TAG, "All permissions granted successfully");
+                }
             }
+        } catch (Exception e) {
+            Log.e(TAG, "Error handling permission result: " + e.getMessage(), e);
         }
     }
 
@@ -811,7 +969,7 @@ public class AddAdsActivity extends AppCompatActivity
 
                 }
 
-             //   image_str = makePictureToBase64(checkImg(selectedImagePath), ivAdsImg);
+                //   image_str = makePictureToBase64(checkImg(selectedImagePath), ivAdsImg);
             } catch (Exception e) {
                 Utils.showCustomToast(activity, getString(R.string.failLoadImage));
                 e.printStackTrace();
@@ -1058,36 +1216,112 @@ public class AddAdsActivity extends AppCompatActivity
         }
     }
 
-
-    public abstract class AbstractCustomCursorLoader extends CursorLoader
-    {
-        private final Loader.ForceLoadContentObserver mObserver = new Loader.ForceLoadContentObserver();
-
-        public AbstractCustomCursorLoader(Context context)
-        {
-            super(context);
-        }
-
-        @Override
-        public Cursor loadInBackground()
-        {
-            Cursor cursor = getCursor();
-
-            if (cursor != null)
-            {
-                // Ensure the cursor window is filled
-                cursor.getCount();
-                cursor.registerContentObserver(mObserver);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            Log.d(TAG, "AddAdsActivity onResume");
+            
+            // Ensure database is still available
+            if (DBO != null && !DBO.isDatabaseReady()) {
+                Log.w(TAG, "Database not ready in onResume, attempting to reopen...");
+                if (!DBO.ensureDatabaseOpen()) {
+                    Log.e(TAG, "Failed to reopen database in onResume");
+                    Toast.makeText(this, "Database connection lost", Toast.LENGTH_SHORT).show();
+                }
             }
-
-            cursor.setNotificationUri(getContext().getContentResolver(), getContentUri());
-            return cursor;
+        } catch (Exception e) {
+            Log.e(TAG, "Error in onResume: " + e.getMessage(), e);
         }
-
-        protected abstract Cursor getCursor();
-        protected abstract Uri getContentUri();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            Log.d(TAG, "AddAdsActivity onPause");
+        } catch (Exception e) {
+            Log.e(TAG, "Error in onPause: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            Log.d(TAG, "AddAdsActivity onDestroy");
+            if (DBO != null) {
+                DBO.close();
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error in onDestroy: " + e.getMessage(), e);
+        }
+    }
+
+    private void logActivityState() {
+        try {
+            Log.d(TAG, "=== Activity State ===");
+            Log.d(TAG, "Activity: " + (activity != null ? "Initialized" : "NULL"));
+            Log.d(TAG, "Database: " + (DBO != null ? (DBO.isDatabaseReady() ? "Ready" : "Not Ready") : "NULL"));
+            Log.d(TAG, "SharedPreferences: " + (sp != null ? "Initialized" : "NULL"));
+            Log.d(TAG, "Prayer Times: " + prayerTimes.size() + " loaded");
+            Log.d(TAG, "UI Components: " + (iv_back != null ? "Back Button: OK" : "Back Button: NULL"));
+            Log.d(TAG, "=====================");
+        } catch (Exception e) {
+            Log.e(TAG, "Error logging activity state: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Simple test method to verify basic activity functionality
+     */
+    private void testBasicFunctionality() {
+        try {
+            Log.d(TAG, "Testing basic functionality...");
+            
+            // Test if we can show a toast
+            Toast.makeText(this, "AddAdsActivity is working!", Toast.LENGTH_SHORT).show();
+            
+            // Test if we can find basic views
+            if (iv_back != null) {
+                Log.d(TAG, "Back button found successfully");
+            } else {
+                Log.w(TAG, "Back button is null");
+            }
+            
+            Log.d(TAG, "Basic functionality test completed");
+            
+        } catch (Exception e) {
+            Log.e(TAG, "Error in basic functionality test: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Alternative minimal onCreate for testing purposes
+     */
+    private void createMinimalActivity() {
+        try {
+            Log.d(TAG, "Creating minimal activity...");
+            
+            // Just set a simple layout
+            setContentView(R.layout.activity_add_ads);
+            
+            // Find only the back button
+            iv_back = findViewById(R.id.iv_back);
+            if (iv_back != null) {
+                iv_back.setOnClickListener(v -> finish());
+                Log.d(TAG, "Minimal activity created successfully");
+                Toast.makeText(this, "Minimal AddAdsActivity loaded", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.e(TAG, "Back button not found in minimal activity");
+            }
+            
+        } catch (Exception e) {
+            Log.e(TAG, "Error creating minimal activity: " + e.getMessage(), e);
+            Toast.makeText(this, "Minimal activity failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
 
 }
 

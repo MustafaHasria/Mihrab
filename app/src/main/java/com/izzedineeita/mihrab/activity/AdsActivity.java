@@ -4,14 +4,15 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.izzedineeita.mihrab.Adapters.AdsAdapter;
 import com.izzedineeita.mihrab.R;
@@ -24,10 +25,6 @@ import com.izzedineeita.mihrab.utils.Utils;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Activity for managing advertisements in the Mihrab app.
- * Provides functionality to view, add, edit, and delete advertisements.
- */
 public class AdsActivity extends AppCompatActivity {
 
     private static final String TAG = "AdsActivity";
@@ -53,7 +50,7 @@ public class AdsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setupOrientation();
         setContentView(R.layout.activity_ads);
-        
+
         initializeComponents();
         setupDatabase();
         setupRecyclerView();
@@ -73,11 +70,11 @@ public class AdsActivity extends AppCompatActivity {
     private void setupOrientation() {
         int selectedTheme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 0);
         boolean isLandscapeTheme = selectedTheme >= 5 && selectedTheme <= 9;
-        
-        int orientation = isLandscapeTheme ? 
-            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE : 
-            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-        
+
+        int orientation = isLandscapeTheme ?
+                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE :
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+
         setRequestedOrientation(orientation);
     }
 
@@ -89,7 +86,7 @@ public class AdsActivity extends AppCompatActivity {
         textViewTitle = findViewById(R.id.tv_tittle);
         imageViewAddAds = findViewById(R.id.iv_addAds);
         imageViewBack = findViewById(R.id.iv_back);
-        
+
         adsList = new ArrayList<>();
         sharedPreferences = getSharedPreferences(Utils.PREFS, MODE_PRIVATE);
     }
@@ -115,7 +112,7 @@ public class AdsActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewAds.setLayoutManager(layoutManager);
-        
+
         createAndSetAdapter();
     }
 
@@ -147,14 +144,27 @@ public class AdsActivity extends AppCompatActivity {
      */
     private void setupClickListeners() {
         imageViewBack.setOnClickListener(view -> finish());
-        
+
         imageViewAddAds.setOnClickListener(view -> {
             try {
+                Log.d(TAG, "Attempting to start AddAdsActivity...");
                 Intent intent = new Intent(AdsActivity.this, AddAdsActivity.class);
                 startActivity(intent);
+                Log.d(TAG, "AddAdsActivity started successfully");
             } catch (Exception e) {
                 Log.e(TAG, "Failed to start AddAdsActivity", e);
-                showErrorDialog("خطأ في إضافة الإعلان");
+                showErrorDialog("خطأ في إضافة الإعلان: " + e.getMessage());
+                
+                // Try to start test activity instead
+                try {
+                    Log.d(TAG, "Attempting to start TestAddAdsActivity as fallback...");
+                    Intent testIntent = new Intent(AdsActivity.this, TestAddAdsActivity.class);
+                    startActivity(testIntent);
+                    Log.d(TAG, "TestAddAdsActivity started successfully");
+                } catch (Exception testException) {
+                    Log.e(TAG, "Failed to start TestAddAdsActivity as well", testException);
+                    showErrorDialog("Both activities failed to start");
+                }
             }
         });
     }
@@ -181,7 +191,7 @@ public class AdsActivity extends AppCompatActivity {
             adsList = databaseHelper.getAdsList(masjedId);
             Log.d(TAG, "Loaded " + adsList.size() + " advertisements");
             databaseHelper.close();
-            
+
             updateAdapter();
         } catch (Exception e) {
             Log.e(TAG, "Failed to load ads data", e);
@@ -200,7 +210,7 @@ public class AdsActivity extends AppCompatActivity {
 
     /**
      * Handles viewing an advertisement.
-     * 
+     *
      * @param ads The advertisement to view
      */
     private void handleViewAds(Ads ads) {
@@ -222,7 +232,7 @@ public class AdsActivity extends AppCompatActivity {
 
     /**
      * Handles editing an advertisement.
-     * 
+     *
      * @param ads The advertisement to edit
      */
     private void handleEditAds(Ads ads) {
@@ -243,7 +253,7 @@ public class AdsActivity extends AppCompatActivity {
 
     /**
      * Handles deleting an advertisement with confirmation dialog.
-     * 
+     *
      * @param position The position of the advertisement in the list
      */
     private void handleDeleteAds(int position) {
@@ -257,19 +267,19 @@ public class AdsActivity extends AppCompatActivity {
 
     /**
      * Shows a confirmation dialog before deleting an advertisement.
-     * 
+     *
      * @param position The position of the advertisement to delete
      */
     private void showDeleteConfirmationDialog(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.tv_delTitle))
-               .setMessage(getString(R.string.tv_delAttention))
-               .setCancelable(false)
-               .setPositiveButton(R.string.confirm_delete, (dialog, id) -> {
-                   dialog.dismiss();
-                   performDelete(position);
-               })
-               .setNegativeButton(R.string.cancel_delete, (dialog, id) -> dialog.cancel());
+                .setMessage(getString(R.string.tv_delAttention))
+                .setCancelable(false)
+                .setPositiveButton(R.string.confirm_delete, (dialog, id) -> {
+                    dialog.dismiss();
+                    performDelete(position);
+                })
+                .setNegativeButton(R.string.cancel_delete, (dialog, id) -> dialog.cancel());
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -277,7 +287,7 @@ public class AdsActivity extends AppCompatActivity {
 
     /**
      * Performs the actual deletion of an advertisement.
-     * 
+     *
      * @param position The position of the advertisement to delete
      */
     private void performDelete(int position) {
@@ -290,15 +300,15 @@ public class AdsActivity extends AppCompatActivity {
             databaseHelper.openDataBase();
             Ads adsToDelete = adsList.get(position);
             int masjedId = sharedPreferences.getInt(PREF_MASJED_ID, DEFAULT_MASJED_ID);
-            
+
             // Delete from database (method returns void)
             databaseHelper.delAdvertisement(adsToDelete.getId(), masjedId);
-            
+
             // Remove from local list and update adapter
             adsList.remove(position);
             updateAdapter();
             Log.d(TAG, "Successfully deleted advertisement at position: " + position);
-            
+
             databaseHelper.close();
         } catch (Exception e) {
             Log.e(TAG, "Error deleting advertisement", e);
@@ -308,14 +318,14 @@ public class AdsActivity extends AppCompatActivity {
 
     /**
      * Shows a generic error dialog with the given message.
-     * 
+     *
      * @param message The error message to display
      */
     private void showErrorDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("خطأ")
-               .setMessage(message)
-               .setPositiveButton(android.R.string.ok, null);
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, null);
         builder.create().show();
     }
 
@@ -325,8 +335,8 @@ public class AdsActivity extends AppCompatActivity {
     private void showDatabaseErrorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("خطأ")
-               .setMessage("خطأ في تهيئة قاعدة البيانات")
-               .setPositiveButton(android.R.string.ok, (dialog, which) -> finish());
+                .setMessage("خطأ في تهيئة قاعدة البيانات")
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> finish());
         builder.create().show();
     }
 }

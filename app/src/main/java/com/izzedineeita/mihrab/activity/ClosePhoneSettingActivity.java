@@ -3,11 +3,8 @@ package com.izzedineeita.mihrab.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -346,25 +343,4 @@ public class ClosePhoneSettingActivity extends AppCompatActivity implements View
         }
     }
 
-    private void saveChanges() {
-//        final ProgressDialog pd = new ProgressDialog(activity);
-//        pd.setMessage(getString(R.string.saving));
-//        pd.show();
-//        pd.setCanceledOnTouchOutside(false);
-//
-//        WS.UpdateSettings(activity, settings, new OnLoadedFinished() {
-//            @Override
-//            public void onSuccess(String response) {
-//                pd.dismiss();
-//                Utils.showCustomToast(activity, "" + response);
-//                DBO.insertSettings(settings);
-//            }
-//
-//            @Override
-//            public void onFail(String error) {
-//                pd.dismiss();
-//                Utils.showCustomToast(activity, "" + error);
-//            }
-//        });
-    }
 }

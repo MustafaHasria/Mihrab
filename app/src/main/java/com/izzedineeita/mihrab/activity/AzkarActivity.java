@@ -7,12 +7,15 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -66,44 +69,44 @@ public class AzkarActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_azkar);
 
-      try {
-          activity = this;
+        try {
+            activity = this;
 
-          sp = getSharedPreferences(Utils.PREFS, MODE_PRIVATE);
-          SharedPreferences.Editor spedit = sp.edit();
+            sp = getSharedPreferences(Utils.PREFS, MODE_PRIVATE);
+            SharedPreferences.Editor spedit = sp.edit();
 
-          DBO = new DataBaseHelper(this);
-          DBO.openDataBase();
+            DBO = new DataBaseHelper(this);
+            DBO.openDataBase();
 
-          ImageView iv_addAds = findViewById(R.id.iv_addAds);
-          ImageView iv_back = findViewById(R.id.iv_back);
+            ImageView iv_addAds = findViewById(R.id.iv_addAds);
+            ImageView iv_back = findViewById(R.id.iv_back);
 
-          iv_back.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                  finish();
-              }
-          });
-          iv_addAds.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                  addAzkarDialog(null);
-              }
-          });
+            iv_back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            });
+            iv_addAds.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    addAzkarDialog(null);
+                }
+            });
 
-          recyclerView = (RecyclerView) findViewById(R.id.rv_ads);
-          recyclerView.setHasFixedSize(true);
-          LinearLayoutManager llm = new LinearLayoutManager(this);
-          llm.setOrientation(LinearLayoutManager.VERTICAL);
+            recyclerView = (RecyclerView) findViewById(R.id.rv_ads);
+            recyclerView.setHasFixedSize(true);
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            llm.setOrientation(LinearLayoutManager.VERTICAL);
 
-          DBO.openDataBase();
-          azkarModels = DBO.getAzkar("azkar");
-          DBO.close();
-          recyclerView.setLayoutManager(llm);
-          setAdapter(azkarModels);
-      } catch (Exception e) {
-          Log.e("XXX", e.getLocalizedMessage());
-      }
+            DBO.openDataBase();
+            azkarModels = DBO.getAzkar("azkar");
+            DBO.close();
+            recyclerView.setLayoutManager(llm);
+            setAdapter(azkarModels);
+        } catch (Exception e) {
+            Log.e("XXX", e.getLocalizedMessage());
+        }
     }
 
     private void addAzkarDialog(final AzkarModel objectAzkar) {

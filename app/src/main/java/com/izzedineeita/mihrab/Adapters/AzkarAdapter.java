@@ -3,8 +3,10 @@ package com.izzedineeita.mihrab.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,15 +24,12 @@ import java.util.ArrayList;
 
 public class AzkarAdapter extends RecyclerView.Adapter<AzkarAdapter.AdsViewHolder> {
     private static final int TYPE_HEADER = 0;
-    private  OnRecycleViewItemClicked listener;
-    private Activity activity;
-    private ArrayList<AzkarModel> adsList;
-
+    private final OnRecycleViewItemClicked listener;
+    private final ArrayList<AzkarModel> adsList;
 
     public AzkarAdapter(Activity activity, ArrayList<AzkarModel> adsList, OnRecycleViewItemClicked listener) {
-        this.activity = activity;
         this.adsList = adsList;
-        this.listener=listener;
+        this.listener = listener;
         SharedPreferences sp = activity.getSharedPreferences(Utils.PREFS, Context.MODE_PRIVATE);
         DataBaseHelper DBO = new DataBaseHelper(activity);
         try {
@@ -53,7 +52,7 @@ public class AzkarAdapter extends RecyclerView.Adapter<AzkarAdapter.AdsViewHolde
     public void onBindViewHolder(final AdsViewHolder holder, final int i) {
         holder.tv_azkar_text.setText(adsList.get(i).getTextAzakar());
         holder.iv_delete.setOnClickListener(view -> listener.onItemClicked(view, i));
-        holder.iv_edit.setOnClickListener(view -> listener.onItemClick(view,i));
+        holder.iv_edit.setOnClickListener(view -> listener.onItemClick(view, i));
 
     }
 
@@ -72,7 +71,8 @@ public class AzkarAdapter extends RecyclerView.Adapter<AzkarAdapter.AdsViewHolde
         int viewType;
 
         TextView tv_azkar_text;
-        AppCompatImageView iv_delete,iv_edit;
+        AppCompatImageView iv_delete, iv_edit;
+
         AdsViewHolder(View itemView, int viewType) {
             super(itemView);
             this.viewType = viewType;
@@ -88,9 +88,10 @@ public class AzkarAdapter extends RecyclerView.Adapter<AzkarAdapter.AdsViewHolde
         return TYPE_HEADER;
     }
 
-    public interface OnRecycleViewItemClicked{
-         void onItemClicked(View view, int position);
-         void onItemClick(View view, int position);
+    public interface OnRecycleViewItemClicked {
+        void onItemClicked(View view, int position);
+
+        void onItemClick(View view, int position);
     }
 
 }

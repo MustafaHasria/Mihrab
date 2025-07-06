@@ -30,10 +30,8 @@ public class Khotab implements Serializable {
     private int ShowTime;
 
 
-
-
-
-    public Khotab(){}
+    public Khotab() {
+    }
 
     public Khotab(int Id, String Title, String Body, String DateKhotab, String UpdatedAt, int isDeleted, String Description
             , String Title1, String Body1, String Title2, String Body2, String UrlVideoDeaf, int TimeExpected, int isException) {

@@ -20,16 +20,10 @@ import com.izzedineeita.mihrab.utils.Utils;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
-/**
- * Created by Izzedine Eita on 3/4/2021
- */
-
-
 public class KhotabAdapter extends RecyclerView.Adapter<KhotabAdapter.KhotabViewHolder> {
     private static final int TYPE_HEADER = 0;
-    private OnRecycleViewItemClicked listener;
-    private ArrayList<Khotab> khotabList;
+    private final OnRecycleViewItemClicked listener;
+    private final ArrayList<Khotab> khotabList;
 
 
     public KhotabAdapter(Activity activity, ArrayList<Khotab> khotabList, OnRecycleViewItemClicked listener) {

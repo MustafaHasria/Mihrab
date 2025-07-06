@@ -512,6 +512,7 @@ public class MainActivity extends AppCompatActivity {
 
         selectedTheme = Pref.getValue(getApplicationContext(), Constants.PREF_THEM_POSITION_SELECTED, 11);
 
+//        selectedTheme =11;
         // Apply theme configuration only if not theme 11
         if (selectedTheme != 11) {
             applyThemeConfiguration(selectedTheme);
@@ -526,11 +527,11 @@ public class MainActivity extends AppCompatActivity {
 
         currentActivity = MainActivity.this;
 
-        DateHigri hd = new DateHigri();
-        date = Utils.writeIslamicDate(MainActivity.this, hd);
+        DateHigri dateHigri = new DateHigri();
+        date = Utils.writeIslamicDate(MainActivity.this, dateHigri);
 
         // Add null check for date array
-        if (date == null || date.length < 7) {
+        if (date.length < 7) {
             date = new String[]{"1", "1", "1", "2024", "1", "1", "2024"};
         }
 
@@ -726,140 +727,161 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        bottomLayout = findViewById(R.id.img_bottom);
-        mosqueNameTextView = findViewById(R.id.tv_masged_name);
-        temperatureTextView = findViewById(R.id.tv_internal_heat);
+        // Skip old theme views for theme 11
+        if (selectedTheme != 11) {
+            bottomLayout = findViewById(R.id.img_bottom);
+            mosqueNameTextView = findViewById(R.id.tv_masged_name);
+            temperatureTextView = findViewById(R.id.tv_internal_heat);
 
-        LinearLayout lay_sin = findViewById(R.id.lay_sin);
-        LinearLayout lay_friday = findViewById(R.id.lay_friday);
+            LinearLayout lay_sin = findViewById(R.id.lay_sin);
+            LinearLayout lay_friday = findViewById(R.id.lay_friday);
 
-        if (Pref.getValue(getApplicationContext(), Constants.PREF_SINSER_SHOW, false)) {
-            lay_sin.setVisibility(View.VISIBLE);
-            lay_friday.setVisibility(View.GONE);
+            if (Pref.getValue(getApplicationContext(), Constants.PREF_SINSER_SHOW, false)) {
+                lay_sin.setVisibility(View.VISIBLE);
+                lay_friday.setVisibility(View.GONE);
+            } else {
+                lay_sin.setVisibility(View.GONE);
+                lay_friday.setVisibility(View.VISIBLE);
+            }
+
+            mosqueNameTextView.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
+
+            timeHourTensDigit = findViewById(R.id.img_time_hour_1);
+            timeHourOnesDigit = findViewById(R.id.img_time_hour_2);
+            timeMinuteTensDigit = findViewById(R.id.img_time_mint_1);
+            timeMinuteOnesDigit = findViewById(R.id.img_time_mint_2);
+            timeSecondTensDigit = findViewById(R.id.img_time_sec_2);
+            timeSecondOnesDigit = findViewById(R.id.img_time_sec_1);
+            dateDayImage = findViewById(R.id.img_date_day);
+            dateMonthTensDigit = findViewById(R.id.img_date_month_m_2);
+            dateMonthOnesDigit = findViewById(R.id.img_date_month_m_1);
+            dateMonthImage = findViewById(R.id.img_date_month_m);
+            dateYearThousandsDigit = findViewById(R.id.img_date_years_4);
+            dateYearHundredsDigit = findViewById(R.id.img_date_years_3);
+            dateYearTensDigit = findViewById(R.id.img_date_years_2);
+            dateYearOnesDigit = findViewById(R.id.img_date_years_1);
+            hijriMonthTensDigit = findViewById(R.id.img_date_month_h_2);
+            hijriMonthOnesDigit = findViewById(R.id.img_date_month_h_1);
+            hijriMonthImage = findViewById(R.id.img_date_month_h);
+            hijriYearThousandsDigit = findViewById(R.id.img_date_years_h_4);
+            hijriYearHundredsDigit = findViewById(R.id.img_date_years_h_3);
+            hijriYearTensDigit = findViewById(R.id.img_date_years_h_2);
+            hijriYearOnesDigit = findViewById(R.id.img_date_years_h_1);
+
+            nextPrayerIndicator = findViewById(R.id.img_next_azan);
+
+            fajrAzanHourTensDigit = findViewById(R.id.img_fjr_azan_h_1);
+            fajrAzanHourOnesDigit = findViewById(R.id.img_fjr_azan_h_2);
+            fajrAzanMinuteTensDigit = findViewById(R.id.img_fjr_azan_m_1);
+            fajrAzanMinuteOnesDigit = findViewById(R.id.img_fjr_azan_m_2);
+
+            sunriseAzanHourTensDigit = findViewById(R.id.img_shroq_azan_h_1);
+            sunriseAzanHourOnesDigit = findViewById(R.id.img_shroq_azan_h_2);
+            sunriseAzanMinuteTensDigit = findViewById(R.id.img_shroq_azan_m_1);
+            sunriseAzanMinuteOnesDigit = findViewById(R.id.img_shroq_azan_m_2);
+
+            dhuhrAzanHourTensDigit = findViewById(R.id.img_daheq_azan_h_1);
+            dhuhrAzanHourOnesDigit = findViewById(R.id.img_daheq_azan_h_2);
+            dhuhrAzanMinuteTensDigit = findViewById(R.id.img_daheq_azan_m_1);
+            dhuhrAzanMinuteOnesDigit = findViewById(R.id.img_daheq_azan_m_2);
+
+            asrAzanHourTensDigit = findViewById(R.id.img_asr_azan_h_1);
+            asrAzanHourOnesDigit = findViewById(R.id.img_asr_azan_h_2);
+            asrAzanMinuteTensDigit = findViewById(R.id.img_asr_azan_m_1);
+            asrAzanMinuteOnesDigit = findViewById(R.id.img_asr_azan_m_2);
+
+            maghribAzanHourTensDigit = findViewById(R.id.img_mgrb_azan_h_1);
+            maghribAzanHourOnesDigit = findViewById(R.id.img_mgrb_azan_h_2);
+            maghribAzanMinuteTensDigit = findViewById(R.id.img_mgrb_azan_m_1);
+            maghribAzanMinuteOnesDigit = findViewById(R.id.img_mgrb_azan_m_2);
+
+            ishaAzanHourTensDigit = findViewById(R.id.img_isha_azan_h_1);
+            ishaAzanHourOnesDigit = findViewById(R.id.img_isha_azan_h_2);
+            ishaAzanMinuteTensDigit = findViewById(R.id.img_isha_azan_m_1);
+            ishaAzanMinuteOnesDigit = findViewById(R.id.img_isha_azan_m_2);
+
+            /* init fjr iqamh images */
+            fajrIqamahHourTensDigit = findViewById(R.id.img_fjr_iqamh_h_1);
+            fajrIqamahHourOnesDigit = findViewById(R.id.img_fjr_iqamh_h_2);
+            fajrIqamahMinuteTensDigit = findViewById(R.id.img_fjr_iqamh_m_1);
+            fajrIqamahMinuteOnesDigit = findViewById(R.id.img_fjr_iqamh_m_2);
+
+            /* init shroq iqamh images */
+            sunriseIqamahHourTensDigit = findViewById(R.id.img_shroq_iqamh_h_1);
+            sunriseIqamahHourOnesDigit = findViewById(R.id.img_shroq_iqamh_h_2);
+            sunriseIqamahMinuteTensDigit = findViewById(R.id.img_shroq_iqamh_m_1);
+            sunriseIqamahMinuteOnesDigit = findViewById(R.id.img_shroq_iqamh_m_2);
+
+            /* init dahr iqamg images */
+            dhuhrIqamahHourTensDigit = findViewById(R.id.img_daheq_iqamg_h_1);
+            dhuhrIqamahHourOnesDigit = findViewById(R.id.img_daheq_iqamg_h_2);
+            dhuhrIqamahMinuteTensDigit = findViewById(R.id.img_daheq_iqamg_m_1);
+            dhuhrIqamahMinuteOnesDigit = findViewById(R.id.img_daheq_iqamg_m_2);
+
+            /* init asr iqamg images */
+            asrIqamahHourTensDigit = findViewById(R.id.img_asr_iqamg_h_1);
+            asrIqamahHourOnesDigit = findViewById(R.id.img_asr_iqamg_h_2);
+            asrIqamahMinuteTensDigit = findViewById(R.id.img_asr_iqamg_m_1);
+            asrIqamahMinuteOnesDigit = findViewById(R.id.img_asr_iqamg_m_2);
+
+            /* init mgrb iqamg images */
+            maghribIqamahHourTensDigit = findViewById(R.id.img_mgrb_iqamg_h_1);
+            maghribIqamahHourOnesDigit = findViewById(R.id.img_mgrb_iqamg_h_2);
+            maghribIqamahMinuteTensDigit = findViewById(R.id.img_mgrb_iqamg_m_1);
+            maghribIqamahMinuteOnesDigit = findViewById(R.id.img_mgrb_iqamg_m_2);
+
+            /* init isha iqamg images */
+            ishaIqamahHourTensDigit = findViewById(R.id.img_isha_iqamh_h_1);
+            ishaIqamahHourOnesDigit = findViewById(R.id.img_isha_iqamh_h_2);
+            ishaIqamahMinuteTensDigit = findViewById(R.id.img_isha_iqamh_m_1);
+            ishaIqamahMinuteOnesDigit = findViewById(R.id.img_isha_iqamh_m_2);
+
+            /* init azan time left image */
+            azanCountdownHourTensDigit = findViewById(R.id.img_time_left_h_1);
+            azanCountdownHourOnesDigit = findViewById(R.id.img_time_left_h_2);
+            azanCountdownMinuteTensDigit = findViewById(R.id.img_time_left_m_1);
+            azanCountdownMinuteOnesDigit = findViewById(R.id.img_time_left_m_2);
+            azanCountdownSecondTensDigit = findViewById(R.id.img_time_left_s_1);
+            azanCountdownSecondOnesDigit = findViewById(R.id.img_time_left_s_2);
+
+            /* init iqamh time left image */
+            iqamahCountdownMinuteTensDigit = findViewById(R.id.img_iqamh_time_left_m_1);
+            iqamahCountdownMinuteOnesDigit = findViewById(R.id.img_iqamh_time_left_m_2);
+            iqamahCountdownSecondTensDigit = findViewById(R.id.img_iqamh_time_left_s_1);
+            iqamahCountdownSecondOnesDigit = findViewById(R.id.img_iqamh_time_left_s_2);
+
+            /* init LinearLayout left */
+            azanCountdownContainer = findViewById(R.id.lay_img_azan_time_left);
+            iqamahCountdownContainer = findViewById(R.id.lay_img_iqamh_time_left);
+
+            /* next azan jm3a    */
+            fridayAzanHourTensDigit = findViewById(R.id.img_azan_jm3a_time_h_1);
+            fridayAzanHourOnesDigit = findViewById(R.id.img_azan_jm3a_time_h_2);
+            fridayAzanMinuteTensDigit = findViewById(R.id.img_azan_jm3a_time_m_1);
+            fridayAzanMinuteOnesDigit = findViewById(R.id.img_azan_jm3a_time_m_2);
         } else {
-            lay_sin.setVisibility(View.GONE);
-            lay_friday.setVisibility(View.VISIBLE);
+            // For theme 11, initialize only the views that exist
+            mosqueNameTextView = findViewById(R.id.activity_main_new_theme_11_text_view_masjid_name);
+            temperatureTextView = findViewById(R.id.tv_internal_heat);
+            
+            if (mosqueNameTextView != null) {
+                mosqueNameTextView.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
+            }
         }
-
-        mosqueNameTextView.setText(Pref.getValue(getApplicationContext(), Constants.PREF_MASGED_NAME, "اسم المسجد"));
-
-        timeHourTensDigit = findViewById(R.id.img_time_hour_1);
-        timeHourOnesDigit = findViewById(R.id.img_time_hour_2);
-        timeMinuteTensDigit = findViewById(R.id.img_time_mint_1);
-        timeMinuteOnesDigit = findViewById(R.id.img_time_mint_2);
-        timeSecondTensDigit = findViewById(R.id.img_time_sec_2);
-        timeSecondOnesDigit = findViewById(R.id.img_time_sec_1);
-        dateDayImage = findViewById(R.id.img_date_day);
-        dateMonthTensDigit = findViewById(R.id.img_date_month_m_2);
-        dateMonthOnesDigit = findViewById(R.id.img_date_month_m_1);
-        dateMonthImage = findViewById(R.id.img_date_month_m);
-        dateYearThousandsDigit = findViewById(R.id.img_date_years_4);
-        dateYearHundredsDigit = findViewById(R.id.img_date_years_3);
-        dateYearTensDigit = findViewById(R.id.img_date_years_2);
-        dateYearOnesDigit = findViewById(R.id.img_date_years_1);
-        hijriMonthTensDigit = findViewById(R.id.img_date_month_h_2);
-        hijriMonthOnesDigit = findViewById(R.id.img_date_month_h_1);
-        hijriMonthImage = findViewById(R.id.img_date_month_h);
-        hijriYearThousandsDigit = findViewById(R.id.img_date_years_h_4);
-        hijriYearHundredsDigit = findViewById(R.id.img_date_years_h_3);
-        hijriYearTensDigit = findViewById(R.id.img_date_years_h_2);
-        hijriYearOnesDigit = findViewById(R.id.img_date_years_h_1);
-
-        nextPrayerIndicator = findViewById(R.id.img_next_azan);
-
-        fajrAzanHourTensDigit = findViewById(R.id.img_fjr_azan_h_1);
-        fajrAzanHourOnesDigit = findViewById(R.id.img_fjr_azan_h_2);
-        fajrAzanMinuteTensDigit = findViewById(R.id.img_fjr_azan_m_1);
-        fajrAzanMinuteOnesDigit = findViewById(R.id.img_fjr_azan_m_2);
-
-        sunriseAzanHourTensDigit = findViewById(R.id.img_shroq_azan_h_1);
-        sunriseAzanHourOnesDigit = findViewById(R.id.img_shroq_azan_h_2);
-        sunriseAzanMinuteTensDigit = findViewById(R.id.img_shroq_azan_m_1);
-        sunriseAzanMinuteOnesDigit = findViewById(R.id.img_shroq_azan_m_2);
-
-        dhuhrAzanHourTensDigit = findViewById(R.id.img_daheq_azan_h_1);
-        dhuhrAzanHourOnesDigit = findViewById(R.id.img_daheq_azan_h_2);
-        dhuhrAzanMinuteTensDigit = findViewById(R.id.img_daheq_azan_m_1);
-        dhuhrAzanMinuteOnesDigit = findViewById(R.id.img_daheq_azan_m_2);
-
-        asrAzanHourTensDigit = findViewById(R.id.img_asr_azan_h_1);
-        asrAzanHourOnesDigit = findViewById(R.id.img_asr_azan_h_2);
-        asrAzanMinuteTensDigit = findViewById(R.id.img_asr_azan_m_1);
-        asrAzanMinuteOnesDigit = findViewById(R.id.img_asr_azan_m_2);
-
-        maghribAzanHourTensDigit = findViewById(R.id.img_mgrb_azan_h_1);
-        maghribAzanHourOnesDigit = findViewById(R.id.img_mgrb_azan_h_2);
-        maghribAzanMinuteTensDigit = findViewById(R.id.img_mgrb_azan_m_1);
-        maghribAzanMinuteOnesDigit = findViewById(R.id.img_mgrb_azan_m_2);
-
-        ishaAzanHourTensDigit = findViewById(R.id.img_isha_azan_h_1);
-        ishaAzanHourOnesDigit = findViewById(R.id.img_isha_azan_h_2);
-        ishaAzanMinuteTensDigit = findViewById(R.id.img_isha_azan_m_1);
-        ishaAzanMinuteOnesDigit = findViewById(R.id.img_isha_azan_m_2);
-
-        /* init fjr iqamh images */
-        fajrIqamahHourTensDigit = findViewById(R.id.img_fjr_iqamh_h_1);
-        fajrIqamahHourOnesDigit = findViewById(R.id.img_fjr_iqamh_h_2);
-        fajrIqamahMinuteTensDigit = findViewById(R.id.img_fjr_iqamh_m_1);
-        fajrIqamahMinuteOnesDigit = findViewById(R.id.img_fjr_iqamh_m_2);
-
-        /* init shroq iqamh images */
-        sunriseIqamahHourTensDigit = findViewById(R.id.img_shroq_iqamh_h_1);
-        sunriseIqamahHourOnesDigit = findViewById(R.id.img_shroq_iqamh_h_2);
-        sunriseIqamahMinuteTensDigit = findViewById(R.id.img_shroq_iqamh_m_1);
-        sunriseIqamahMinuteOnesDigit = findViewById(R.id.img_shroq_iqamh_m_2);
-
-        /* init dahr iqamg images */
-        dhuhrIqamahHourTensDigit = findViewById(R.id.img_daheq_iqamg_h_1);
-        dhuhrIqamahHourOnesDigit = findViewById(R.id.img_daheq_iqamg_h_2);
-        dhuhrIqamahMinuteTensDigit = findViewById(R.id.img_daheq_iqamg_m_1);
-        dhuhrIqamahMinuteOnesDigit = findViewById(R.id.img_daheq_iqamg_m_2);
-
-        /* init asr iqamg images */
-        asrIqamahHourTensDigit = findViewById(R.id.img_asr_iqamg_h_1);
-        asrIqamahHourOnesDigit = findViewById(R.id.img_asr_iqamg_h_2);
-        asrIqamahMinuteTensDigit = findViewById(R.id.img_asr_iqamg_m_1);
-        asrIqamahMinuteOnesDigit = findViewById(R.id.img_asr_iqamg_m_2);
-
-        /* init mgrb iqamg images */
-        maghribIqamahHourTensDigit = findViewById(R.id.img_mgrb_iqamg_h_1);
-        maghribIqamahHourOnesDigit = findViewById(R.id.img_mgrb_iqamg_h_2);
-        maghribIqamahMinuteTensDigit = findViewById(R.id.img_mgrb_iqamg_m_1);
-        maghribIqamahMinuteOnesDigit = findViewById(R.id.img_mgrb_iqamg_m_2);
-
-        /* init isha iqamg images */
-        ishaIqamahHourTensDigit = findViewById(R.id.img_isha_iqamh_h_1);
-        ishaIqamahHourOnesDigit = findViewById(R.id.img_isha_iqamh_h_2);
-        ishaIqamahMinuteTensDigit = findViewById(R.id.img_isha_iqamh_m_1);
-        ishaIqamahMinuteOnesDigit = findViewById(R.id.img_isha_iqamh_m_2);
-
-        /* init azan time left image */
-        azanCountdownHourTensDigit = findViewById(R.id.img_time_left_h_1);
-        azanCountdownHourOnesDigit = findViewById(R.id.img_time_left_h_2);
-        azanCountdownMinuteTensDigit = findViewById(R.id.img_time_left_m_1);
-        azanCountdownMinuteOnesDigit = findViewById(R.id.img_time_left_m_2);
-        azanCountdownSecondTensDigit = findViewById(R.id.img_time_left_s_1);
-        azanCountdownSecondOnesDigit = findViewById(R.id.img_time_left_s_2);
-
-        /* init iqamh time left image */
-        iqamahCountdownMinuteTensDigit = findViewById(R.id.img_iqamh_time_left_m_1);
-        iqamahCountdownMinuteOnesDigit = findViewById(R.id.img_iqamh_time_left_m_2);
-        iqamahCountdownSecondTensDigit = findViewById(R.id.img_iqamh_time_left_s_1);
-        iqamahCountdownSecondOnesDigit = findViewById(R.id.img_iqamh_time_left_s_2);
-
-        /* init LinearLayout left */
-        azanCountdownContainer = findViewById(R.id.lay_img_azan_time_left);
-        iqamahCountdownContainer = findViewById(R.id.lay_img_iqamh_time_left);
-
-        /* next azan jm3a    */
-        fridayAzanHourTensDigit = findViewById(R.id.img_azan_jm3a_time_h_1);
-        fridayAzanHourOnesDigit = findViewById(R.id.img_azan_jm3a_time_h_2);
-        fridayAzanMinuteTensDigit = findViewById(R.id.img_azan_jm3a_time_m_1);
-        fridayAzanMinuteOnesDigit = findViewById(R.id.img_azan_jm3a_time_m_2);
     }
 
     private void updatePrayerAndDateDisplays() {
         try {
+            // For theme 11, skip the old image-based updates since it uses TextViews
+            if (selectedTheme == 11) {
+                // Theme 11 uses TextViews, so we don't need to update ImageViews
+                // Just handle news text if needed
+                if (newsTextView != null) {
+                    newsTextView.setSelected(true);
+                }
+                return;
+            }
+
             // Check if views are initialized
             if (newsTextView == null || bottomLayout == null) {
                 return;
@@ -985,7 +1007,7 @@ public class MainActivity extends AppCompatActivity {
             date = Utils.writeIslamicDate(MainActivity.this, hd);
 
             // Add null check for date array
-            if (date == null || date.length < 7) {
+            if (date.length < 7) {
                 date = new String[]{"1", "1", "1", "2024", "1", "1", "2024"};
             }
 
@@ -1782,6 +1804,12 @@ public class MainActivity extends AppCompatActivity {
             updatePrayerAndDateDisplays();
             updateNextPrayerIndicator();
             showAdsIfScheduled();
+            
+            // Skip ImageView updates for theme 11 since it uses TextViews
+            if (selectedTheme == 11) {
+                return;
+            }
+            
             DateFormat timeNow = new SimpleDateFormat("hh:mmass", Locale.ENGLISH);
             Calendar c = Calendar.getInstance();
             String timeText = timeNow.format(c.getTime());

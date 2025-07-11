@@ -1036,108 +1036,107 @@ public class MainActivity extends AppCompatActivity {
             return; // Exit early if nextPrayerIndicator is null
         }
 
-        long fajr = 0, sunrise = 0, thuhr = 0, assr = 0, maghrib = 0, ishaa = 0, fajrIqamh = 0, sunriseIqamh = 0, thuhrIqamh = 0, assrIqamh = 0, maghribIqamh = 0, ishaaIqamh = 0;
+        long fajrIqamahTime = 0, sunriseIqamahTime = 0, dhuhrIqamahTime = 0, asrIqamahTime = 0, maghribIqamahTime = 0, ishaIqamahTime = 0;
+        long fajrIqamahDelay = 0, sunriseIqamahDelay = 0, dhuhrIqamahDelay = 0, asrIqamahDelay = 0, maghribIqamahDelay = 0, ishaIqamahDelay = 0;
 
-
-        SimpleDateFormat h_mm_a = new SimpleDateFormat("hh:mmaa", Locale.ENGLISH);
-        SimpleDateFormat hh_mm_ss = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH);
+        SimpleDateFormat timeFormat12Hour = new SimpleDateFormat("hh:mmaa", Locale.ENGLISH);
+        SimpleDateFormat timeFormat24Hour = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH);
 
         if (!Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_RELATIVE, false)) {
-            fajrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_RELATIVE_TIME_SELECTED, 25);
-            fajr = getMilliseconds(String.valueOf(fajrTime12h)) + fajrIqamh * 60000;
+            fajrIqamahDelay = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_RELATIVE_TIME_SELECTED, 25);
+            fajrIqamahTime = getMilliseconds(String.valueOf(fajrTime12h)) + fajrIqamahDelay * 60000;
         } else {
-            String date2323 = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_CONSTANT_TIME_SELECTED, "20:20am");
-            Date d1 = null;
+            String fajrConstantTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_CONSTANT_TIME_SELECTED, "20:20am");
+            Date fajrDate = null;
             try {
-                d1 = h_mm_a.parse(date2323);
+                fajrDate = timeFormat12Hour.parse(fajrConstantTime);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            fajr = getMilliseconds((hh_mm_ss.format(d1)));
+            fajrIqamahTime = getMilliseconds((timeFormat24Hour.format(fajrDate)));
         }
+
         if (!Pref.getValue(getApplicationContext(), Constants.PREF_SUNRISE_RELATIVE, false)) {
-            sunriseIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_SUNRISE_RELATIVE_TIME_SELECTED, 20);
-            sunrise = getMilliseconds(String.valueOf(sunriseTime12h)) + sunriseIqamh * 60000;
+            sunriseIqamahDelay = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_SUNRISE_RELATIVE_TIME_SELECTED, 20);
+            sunriseIqamahTime = getMilliseconds(String.valueOf(sunriseTime12h)) + sunriseIqamahDelay * 60000;
         } else {
-            sunrise = getMilliseconds1(String.valueOf(sunriseTime12h), String.valueOf(Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_SUNRISE_CONSTANT_TIME_SELECTED, "20:20am")));
+            sunriseIqamahTime = getMilliseconds1(String.valueOf(sunriseTime12h), String.valueOf(Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_SUNRISE_CONSTANT_TIME_SELECTED, "20:20am")));
         }
+
         if (!Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_RELATIVE, false)) {
-            thuhrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_RELATIVE_TIME_SELECTED, 20);
-            thuhr = getMilliseconds(String.valueOf(dhuhrTime12h)) + thuhrIqamh * 60000;
+            dhuhrIqamahDelay = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_RELATIVE_TIME_SELECTED, 20);
+            dhuhrIqamahTime = getMilliseconds(String.valueOf(dhuhrTime12h)) + dhuhrIqamahDelay * 60000;
         } else {
-            String date2323 = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_CONSTANT_TIME_SELECTED, "20:20am");
-            Date d1 = null;
+            String dhuhrConstantTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_CONSTANT_TIME_SELECTED, "20:20am");
+            Date dhuhrDate = null;
             try {
-                d1 = h_mm_a.parse(date2323);
+                dhuhrDate = timeFormat12Hour.parse(dhuhrConstantTime);
             } catch (Exception e) {
                 e.printStackTrace();
 
             }
-            thuhr = getMilliseconds((hh_mm_ss.format(d1)));
+            dhuhrIqamahTime = getMilliseconds((timeFormat24Hour.format(dhuhrDate)));
 
         }
+
         if (!Pref.getValue(getApplicationContext(), Constants.PREF_ASR_RELATIVE, false)) {
-            assrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_RELATIVE_TIME_SELECTED, 20);
-            assr = getMilliseconds(String.valueOf(asrTime12h)) + assrIqamh * 60000;
+            asrIqamahDelay = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_RELATIVE_TIME_SELECTED, 20);
+            asrIqamahTime = getMilliseconds(String.valueOf(asrTime12h)) + asrIqamahDelay * 60000;
 
         } else {
-
-
-            String date2323 = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_CONSTANT_TIME_SELECTED, "20:20am");
-            Date d1 = null;
+            String asrConstantTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_CONSTANT_TIME_SELECTED, "20:20am");
+            Date asrDate = null;
             try {
-                d1 = h_mm_a.parse(date2323);
+                asrDate = timeFormat12Hour.parse(asrConstantTime);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            assr = getMilliseconds((hh_mm_ss.format(d1)));
+            asrIqamahTime = getMilliseconds((timeFormat24Hour.format(asrDate)));
         }
+
         if (!Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_RELATIVE, false)) {
-            maghribIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_MAGHRIB_RELATIVE_TIME_SELECTED, 20);
-            maghrib = getMilliseconds(String.valueOf(maghribTime12h)) + maghribIqamh * 60000;
+            maghribIqamahDelay = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_MAGHRIB_RELATIVE_TIME_SELECTED, 20);
+            maghribIqamahTime = getMilliseconds(String.valueOf(maghribTime12h)) + maghribIqamahDelay * 60000;
         } else {
-
-
-            String date2323 = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_MAGHRIB_CONSTANT_TIME_SELECTED, "20:20am");
-            Date d1 = null;
+            String maghribConstantTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_MAGHRIB_CONSTANT_TIME_SELECTED, "20:20am");
+            Date maghribDate = null;
             try {
-                d1 = h_mm_a.parse(date2323);
+                maghribDate = timeFormat12Hour.parse(maghribConstantTime);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            maghrib = getMilliseconds((hh_mm_ss.format(d1)));
+            maghribIqamahTime = getMilliseconds((timeFormat24Hour.format(maghribDate)));
 
         }
+
         if (!Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_RELATIVE, false)) {
-            ishaaIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ISHA_RELATIVE_TIME_SELECTED, 20);
-            ishaa = getMilliseconds(String.valueOf(ishaTime12h)) + ishaaIqamh * 60000;
+            ishaIqamahDelay = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ISHA_RELATIVE_TIME_SELECTED, 20);
+            ishaIqamahTime = getMilliseconds(String.valueOf(ishaTime12h)) + ishaIqamahDelay * 60000;
         } else {
-
-
-            String date2323 = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ISHA_CONSTANT_TIME_SELECTED, "20:20am");
-            Date d1 = null;
+            String ishaConstantTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ISHA_CONSTANT_TIME_SELECTED, "20:20am");
+            Date ishaDate = null;
             try {
-                d1 = h_mm_a.parse(date2323);
+                ishaDate = timeFormat12Hour.parse(ishaConstantTime);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            ishaa = getMilliseconds((hh_mm_ss.format(d1)));
+            ishaIqamahTime = getMilliseconds((timeFormat24Hour.format(ishaDate)));
         }
 
-        String time = (String) android.text.format.DateFormat.format("HH:mm:aa", new Date());
+        String currentTime = (String) android.text.format.DateFormat.format("HH:mm:aa", new Date());
 
-        ViewGroup.MarginLayoutParams marginParams;
+        ViewGroup.MarginLayoutParams marginLayoutParams;
 
 
-        if (getMilliseconds(time) >= getMilliseconds(String.valueOf(fajrTime12h)) && getMilliseconds(time) < fajr) {
+        if (getMilliseconds(currentTime) >= getMilliseconds(String.valueOf(fajrTime12h)) && getMilliseconds(currentTime) < fajrIqamahTime) {
 
 
             switch (selectedTheme) {
                 case 3:
                     setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
-                    marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 0, marginParams.bottomMargin);
+                    marginLayoutParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
+                    marginLayoutParams.setMargins(marginLayoutParams.leftMargin, marginLayoutParams.topMargin, 0, marginLayoutParams.bottomMargin);
                     break;
                 case 4:
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_5);
@@ -1161,11 +1160,11 @@ public class MainActivity extends AppCompatActivity {
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh);
                     break;
             }
-            getTimeLeftForIqamh(fajrTime12h, fajrIqamh, 1);
+            getTimeLeftForIqamh(fajrTime12h, fajrIqamahDelay, 1);
 
             azanCountdownContainer.setVisibility(View.GONE);
             iqamahCountdownContainer.setVisibility(View.VISIBLE);
-        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(fajrTime12h)) && getMilliseconds(time) < getMilliseconds(String.valueOf(dhuhrTime12h))) {
+        } else if (getMilliseconds(currentTime) > getMilliseconds(String.valueOf(fajrTime12h)) && getMilliseconds(currentTime) < getMilliseconds(String.valueOf(dhuhrTime12h))) {
 
             getTimeLeftForAzan(dhuhrTime12h, 3);
 
@@ -1177,8 +1176,8 @@ public class MainActivity extends AppCompatActivity {
                     case 3:
                         setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                         nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_freday_4);
-                        marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
-                        marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
+                        marginLayoutParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
+                        marginLayoutParams.setMargins(marginLayoutParams.leftMargin, marginLayoutParams.topMargin, -30, marginLayoutParams.bottomMargin);
                         break;
                     case 4:
                         nextPrayerIndicator.setImageResource(R.drawable.icon_fri_1_theme_5_1);
@@ -1239,7 +1238,7 @@ public class MainActivity extends AppCompatActivity {
 
             azanCountdownContainer.setVisibility(View.VISIBLE);
             iqamahCountdownContainer.setVisibility(View.GONE);
-        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(dhuhrTime12h)) && getMilliseconds(time) < thuhr) {
+        } else if (getMilliseconds(currentTime) >= getMilliseconds(String.valueOf(dhuhrTime12h)) && getMilliseconds(currentTime) < dhuhrIqamahTime) {
 
             Calendar calendar = Calendar.getInstance();
             if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
@@ -1250,8 +1249,8 @@ public class MainActivity extends AppCompatActivity {
                     case 3:
                         setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                         nextPrayerIndicator.setImageResource(R.drawable.icon_fri_1_theme_4);
-                        marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
-                        marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 30, marginParams.bottomMargin);
+                        marginLayoutParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
+                        marginLayoutParams.setMargins(marginLayoutParams.leftMargin, marginLayoutParams.topMargin, 30, marginLayoutParams.bottomMargin);
                         break;
                     case 4:
                         nextPrayerIndicator.setImageResource(R.drawable.icon_fri_1_theme_5);
@@ -1266,8 +1265,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 8:
 
-                        marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
-                        marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 10, marginParams.bottomMargin);
+                        marginLayoutParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
+                        marginLayoutParams.setMargins(marginLayoutParams.leftMargin, marginLayoutParams.topMargin, 10, marginLayoutParams.bottomMargin);
                         nextPrayerIndicator.setImageResource(R.drawable.ic_pray_friday);
                         break;
                     case 7:
@@ -1293,8 +1292,8 @@ public class MainActivity extends AppCompatActivity {
                     case 3:
                         setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                         nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
-                        marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
-                        marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 0, marginParams.bottomMargin);
+                        marginLayoutParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
+                        marginLayoutParams.setMargins(marginLayoutParams.leftMargin, marginLayoutParams.topMargin, 0, marginLayoutParams.bottomMargin);
                         break;
                     case 4:
                         nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_5);
@@ -1320,19 +1319,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            getTimeLeftForIqamh(dhuhrTime12h, thuhrIqamh, 3);
+            getTimeLeftForIqamh(dhuhrTime12h, dhuhrIqamahDelay, 3);
 
             azanCountdownContainer.setVisibility(View.GONE);
             iqamahCountdownContainer.setVisibility(View.VISIBLE);
-        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(dhuhrTime12h)) && getMilliseconds(time) < getMilliseconds(String.valueOf(asrTime12h))) {
+        } else if (getMilliseconds(currentTime) >= getMilliseconds(String.valueOf(dhuhrTime12h)) && getMilliseconds(currentTime) < getMilliseconds(String.valueOf(asrTime12h))) {
 
 
             switch (selectedTheme) {
                 case 3:
                     setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
-                    marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
+                    marginLayoutParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
+                    marginLayoutParams.setMargins(marginLayoutParams.leftMargin, marginLayoutParams.topMargin, -30, marginLayoutParams.bottomMargin);
                     break;
                 case 4:
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_3_5);
@@ -1362,15 +1361,15 @@ public class MainActivity extends AppCompatActivity {
 
             azanCountdownContainer.setVisibility(View.VISIBLE);
             iqamahCountdownContainer.setVisibility(View.GONE);
-        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(asrTime12h)) && getMilliseconds(time) < assr) {
+        } else if (getMilliseconds(currentTime) >= getMilliseconds(String.valueOf(asrTime12h)) && getMilliseconds(currentTime) < asrIqamahTime) {
 
 
             switch (selectedTheme) {
                 case 3:
                     setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
-                    marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -0, marginParams.bottomMargin);
+                    marginLayoutParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
+                    marginLayoutParams.setMargins(marginLayoutParams.leftMargin, marginLayoutParams.topMargin, -0, marginLayoutParams.bottomMargin);
                     break;
                 case 4:
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_5);
@@ -1395,19 +1394,19 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
 
-            getTimeLeftForIqamh(asrTime12h, assrIqamh, 4);
+            getTimeLeftForIqamh(asrTime12h, asrIqamahDelay, 4);
 
             azanCountdownContainer.setVisibility(View.GONE);
             iqamahCountdownContainer.setVisibility(View.VISIBLE);
-        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(asrTime12h)) && getMilliseconds(time) < getMilliseconds(String.valueOf(maghribTime12h))) {
+        } else if (getMilliseconds(currentTime) > getMilliseconds(String.valueOf(asrTime12h)) && getMilliseconds(currentTime) < getMilliseconds(String.valueOf(maghribTime12h))) {
 
 
             switch (selectedTheme) {
                 case 3:
                     setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
-                    marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
+                    marginLayoutParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
+                    marginLayoutParams.setMargins(marginLayoutParams.leftMargin, marginLayoutParams.topMargin, -30, marginLayoutParams.bottomMargin);
                     break;
                 case 4:
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_4_5);
@@ -1437,15 +1436,15 @@ public class MainActivity extends AppCompatActivity {
 
             azanCountdownContainer.setVisibility(View.VISIBLE);
             iqamahCountdownContainer.setVisibility(View.GONE);
-        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(maghribTime12h)) && getMilliseconds(time) < maghrib) {
+        } else if (getMilliseconds(currentTime) >= getMilliseconds(String.valueOf(maghribTime12h)) && getMilliseconds(currentTime) < maghribIqamahTime) {
 
 
             switch (selectedTheme) {
                 case 3:
                     setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
-                    marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 0, marginParams.bottomMargin);
+                    marginLayoutParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
+                    marginLayoutParams.setMargins(marginLayoutParams.leftMargin, marginLayoutParams.topMargin, 0, marginLayoutParams.bottomMargin);
                     break;
                 case 4:
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_5);
@@ -1471,19 +1470,19 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            getTimeLeftForIqamh(maghribTime12h, maghribIqamh, 5);
+            getTimeLeftForIqamh(maghribTime12h, maghribIqamahDelay, 5);
 
             azanCountdownContainer.setVisibility(View.GONE);
             iqamahCountdownContainer.setVisibility(View.VISIBLE);
-        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(maghribTime12h)) && getMilliseconds(time) < getMilliseconds(String.valueOf(ishaTime12h))) {
+        } else if (getMilliseconds(currentTime) > getMilliseconds(String.valueOf(maghribTime12h)) && getMilliseconds(currentTime) < getMilliseconds(String.valueOf(ishaTime12h))) {
 
 
             switch (selectedTheme) {
                 case 3:
                     setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
-                    marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
+                    marginLayoutParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
+                    marginLayoutParams.setMargins(marginLayoutParams.leftMargin, marginLayoutParams.topMargin, -30, marginLayoutParams.bottomMargin);
                     break;
                 case 4:
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_5_5);
@@ -1513,15 +1512,15 @@ public class MainActivity extends AppCompatActivity {
 
             azanCountdownContainer.setVisibility(View.VISIBLE);
             iqamahCountdownContainer.setVisibility(View.GONE);
-        } else if (getMilliseconds(time) >= getMilliseconds(String.valueOf(ishaTime12h)) && getMilliseconds(time) < ishaa) {
+        } else if (getMilliseconds(currentTime) >= getMilliseconds(String.valueOf(ishaTime12h)) && getMilliseconds(currentTime) < ishaIqamahTime) {
 
 
             switch (selectedTheme) {
                 case 3:
                     setNextPrayerIndicatorSecondaryVisibility(View.GONE);
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
-                    marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, 0, marginParams.bottomMargin);
+                    marginLayoutParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
+                    marginLayoutParams.setMargins(marginLayoutParams.leftMargin, marginLayoutParams.topMargin, 0, marginLayoutParams.bottomMargin);
                     break;
                 case 4:
                     nextPrayerIndicator.setImageResource(R.drawable.img_to_iqamh_5);
@@ -1547,19 +1546,19 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            getTimeLeftForIqamh(ishaTime12h, ishaaIqamh, 6);
+            getTimeLeftForIqamh(ishaTime12h, ishaIqamahDelay, 6);
 
             azanCountdownContainer.setVisibility(View.GONE);
             iqamahCountdownContainer.setVisibility(View.VISIBLE);
-        } else if (getMilliseconds(time) > getMilliseconds(String.valueOf(fajrTime12h)) || getMilliseconds(time) < getMilliseconds(String.valueOf(fajrTime12h))) {
+        } else if (getMilliseconds(currentTime) > getMilliseconds(String.valueOf(fajrTime12h)) || getMilliseconds(currentTime) < getMilliseconds(String.valueOf(fajrTime12h))) {
 
 
             switch (selectedTheme) {
                 case 3:
                     setNextPrayerIndicatorSecondaryVisibility(View.VISIBLE);
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_4);
-                    marginParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
-                    marginParams.setMargins(marginParams.leftMargin, marginParams.topMargin, -30, marginParams.bottomMargin);
+                    marginLayoutParams = (ViewGroup.MarginLayoutParams) nextPrayerIndicator.getLayoutParams();
+                    marginLayoutParams.setMargins(marginLayoutParams.leftMargin, marginLayoutParams.topMargin, -30, marginLayoutParams.bottomMargin);
                     break;
                 case 4:
                     nextPrayerIndicator.setImageResource(R.drawable.icon_next_azan_1_5);

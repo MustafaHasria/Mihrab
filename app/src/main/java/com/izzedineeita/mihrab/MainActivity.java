@@ -86,16 +86,13 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity {
     //region Variables
     // Time display ImageViews
-    private ImageView imageCurrentTimeHourTens, imageCurrentTimeHourOnes, imageCurrentTimeMinuteTens, imageCurrentTimeMinuteOnes,
-            imageCurrentTimeSecondOnes, imageCurrentTimeSecondTens;
+    private ImageView imageCurrentTimeHourTens, imageCurrentTimeHourOnes, imageCurrentTimeMinuteTens, imageCurrentTimeMinuteOnes, imageCurrentTimeSecondOnes, imageCurrentTimeSecondTens;
 
     // Date display ImageViews
-    private ImageView imageCurrentDay, imageCurrentDateMonthOnes, imageCureentDateMonthTens, imageCurrentDateMonth,
-            dateYearThousandsDigit, dateYearHundredsDigit, dateYearTensDigit, dateYearOnesDigit;
+    private ImageView imageCurrentDay, imageCurrentDateMonthOnes, imageCureentDateMonthTens, imageCurrentDateMonth, dateYearThousandsDigit, dateYearHundredsDigit, dateYearTensDigit, dateYearOnesDigit;
 
     // Hijri date display ImageViews
-    private ImageView hijriMonthTensDigit, hijriMonthOnesDigit, hijriMonthImage,
-            hijriYearThousandsDigit, hijriYearHundredsDigit, hijriYearTensDigit, hijriYearOnesDigit;
+    private ImageView hijriMonthTensDigit, hijriMonthOnesDigit, hijriMonthImage, hijriYearThousandsDigit, hijriYearHundredsDigit, hijriYearTensDigit, hijriYearOnesDigit;
 
     // Fajr prayer time ImageViews
     private ImageView fajrAzanHourTensDigit, fajrAzanHourOnesDigit, fajrAzanMinuteTensDigit, fajrAzanMinuteOnesDigit;
@@ -122,10 +119,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ishaIqamahHourTensDigit, ishaIqamahHourOnesDigit, ishaIqamahMinuteTensDigit, ishaIqamahMinuteOnesDigit;
 
     // Countdown timer ImageViews
-    private ImageView azanCountdownHourTensDigit, azanCountdownHourOnesDigit, azanCountdownMinuteTensDigit,
-            azanCountdownMinuteOnesDigit, azanCountdownSecondTensDigit, azanCountdownSecondOnesDigit;
-    private ImageView iqamahCountdownMinuteTensDigit, iqamahCountdownMinuteOnesDigit,
-            iqamahCountdownSecondTensDigit, iqamahCountdownSecondOnesDigit;
+    private ImageView azanCountdownHourTensDigit, azanCountdownHourOnesDigit, azanCountdownMinuteTensDigit, azanCountdownMinuteOnesDigit, azanCountdownSecondTensDigit, azanCountdownSecondOnesDigit;
+    private ImageView iqamahCountdownMinuteTensDigit, iqamahCountdownMinuteOnesDigit, iqamahCountdownSecondTensDigit, iqamahCountdownSecondOnesDigit;
 
     // Friday prayer time ImageViews
     private ImageView imageAzanFridayTimeHourTens, imageAzanFridayTimeHourOnes, imageAzanFridayTimeMinuteTens, imageAzanFridayTimeMinuteOnes;
@@ -206,11 +201,7 @@ public class MainActivity extends AppCompatActivity {
         final byte hasNextPrayerIndicator; // Using byte instead of boolean for memory efficiency
         final byte hasNextPrayerIndicatorSecondary;
 
-        ThemeConfiguration(int layoutResId, int orientation, int backgroundResId, String newsTextColor,
-                           int[] dayImages, int[] monthImages, int[] hijriMonthImages, int[] digitImages,
-                           int[] timeDigitImages, int[] azanTimeDigitImages, int[] iqamahTimeDigitImages,
-                           int[] iqamahCountdownDigitImages, int[] azanCountdownDigitImages, int[] secondDigitImages,
-                           boolean hasNextPrayerIndicator, boolean hasNextPrayerIndicatorSecondary) {
+        ThemeConfiguration(int layoutResId, int orientation, int backgroundResId, String newsTextColor, int[] dayImages, int[] monthImages, int[] hijriMonthImages, int[] digitImages, int[] timeDigitImages, int[] azanTimeDigitImages, int[] iqamahTimeDigitImages, int[] iqamahCountdownDigitImages, int[] azanCountdownDigitImages, int[] secondDigitImages, boolean hasNextPrayerIndicator, boolean hasNextPrayerIndicatorSecondary) {
             this.layoutResId = layoutResId;
             this.orientation = orientation;
             this.backgroundResId = backgroundResId;
@@ -257,222 +248,43 @@ public class MainActivity extends AppCompatActivity {
      */
     private static void initializeThemeConfigurations() {
         // Theme 0 (default)
-        THEME_CONFIGURATIONS.put(0, new ThemeConfiguration(
-                R.layout.activity_main,
-                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
-                R.drawable.background_main,
-                null,
-                ImagesArrays.daysImageTheme1,
-                ImagesArrays.monthImageTheme1,
-                ImagesArrays.monthImageHijriTheme1,
-                ImagesArrays.dateNumberTheme1,
-                ImagesArrays.timeNumberTheme1,
-                ImagesArrays.timeNumberAzanTheme1,
-                ImagesArrays.timeNumberIqamhTheme1,
-                ImagesArrays.timeNumberTheme1,
-                ImagesArrays.timeNumberTheme1,
-                ImagesArrays.timeNumberTheme1,
-                false,
-                true
-        ));
+        THEME_CONFIGURATIONS.put(0, new ThemeConfiguration(R.layout.activity_main, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, R.drawable.background_main, null, ImagesArrays.daysImageTheme1, ImagesArrays.monthImageTheme1, ImagesArrays.monthImageHijriTheme1, ImagesArrays.dateNumberTheme1, ImagesArrays.timeNumberTheme1, ImagesArrays.timeNumberAzanTheme1, ImagesArrays.timeNumberIqamhTheme1, ImagesArrays.timeNumberTheme1, ImagesArrays.timeNumberTheme1, ImagesArrays.timeNumberTheme1, false, true));
 
         // Theme 1
-        THEME_CONFIGURATIONS.put(1, new ThemeConfiguration(
-                R.layout.activity_main,
-                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
-                R.drawable.background_main_them_1,
-                "#ED0606",
-                ImagesArrays.daysImageTheme1,
-                ImagesArrays.monthImageTheme1,
-                ImagesArrays.monthImageHijriTheme1,
-                ImagesArrays.dateNumberTheme1,
-                ImagesArrays.timeNumberTheme1,
-                ImagesArrays.timeNumberAzanTheme1,
-                ImagesArrays.timeNumberIqamhTheme1,
-                ImagesArrays.timeNumberTheme1,
-                ImagesArrays.timeNumberTheme1,
-                ImagesArrays.timeNumberTheme1,
-                false,
-                false
-        ));
+        THEME_CONFIGURATIONS.put(1, new ThemeConfiguration(R.layout.activity_main, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, R.drawable.background_main_them_1, "#ED0606", ImagesArrays.daysImageTheme1, ImagesArrays.monthImageTheme1, ImagesArrays.monthImageHijriTheme1, ImagesArrays.dateNumberTheme1, ImagesArrays.timeNumberTheme1, ImagesArrays.timeNumberAzanTheme1, ImagesArrays.timeNumberIqamhTheme1, ImagesArrays.timeNumberTheme1, ImagesArrays.timeNumberTheme1, ImagesArrays.timeNumberTheme1, false, false));
 
         // Theme 2
-        THEME_CONFIGURATIONS.put(2, new ThemeConfiguration(
-                R.layout.activity_main,
-                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
-                R.drawable.background_main_them_2,
-                "#ED0606",
-                ImagesArrays.daysImageTheme1,
-                ImagesArrays.monthImageTheme1,
-                ImagesArrays.monthImageHijriTheme1,
-                ImagesArrays.dateNumberTheme1,
-                ImagesArrays.timeNumberTheme1,
-                ImagesArrays.timeNumberAzanTheme1,
-                ImagesArrays.timeNumberIqamhTheme1,
-                ImagesArrays.timeNumberTheme1,
-                ImagesArrays.timeNumberTheme1,
-                ImagesArrays.timeNumberTheme1,
-                false,
-                false
-        ));
+        THEME_CONFIGURATIONS.put(2, new ThemeConfiguration(R.layout.activity_main, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, R.drawable.background_main_them_2, "#ED0606", ImagesArrays.daysImageTheme1, ImagesArrays.monthImageTheme1, ImagesArrays.monthImageHijriTheme1, ImagesArrays.dateNumberTheme1, ImagesArrays.timeNumberTheme1, ImagesArrays.timeNumberAzanTheme1, ImagesArrays.timeNumberIqamhTheme1, ImagesArrays.timeNumberTheme1, ImagesArrays.timeNumberTheme1, ImagesArrays.timeNumberTheme1, false, false));
 
         // Theme 3
-        THEME_CONFIGURATIONS.put(3, new ThemeConfiguration(
-                R.layout.activity_main_4,
-                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
-                0, // No background drawable
-                null,
-                ImagesArrays.daysImageTheme4,
-                ImagesArrays.monthImageTheme4,
-                ImagesArrays.monthImageHijriTheme4,
-                ImagesArrays.timeNumberTheme4,
-                ImagesArrays.timeNumberTheme4,
-                ImagesArrays.timeNumberIqamhTheme4,
-                ImagesArrays.timeNumberIqamhTheme4,
-                ImagesArrays.timeNumberIqamhLeft4,
-                ImagesArrays.timeNumberIqamhLeft4,
-                ImagesArrays.timeNumberIqamhTheme4,
-                true,
-                false
-        ));
+        THEME_CONFIGURATIONS.put(3, new ThemeConfiguration(R.layout.activity_main_4, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, 0, // No background drawable
+                null, ImagesArrays.daysImageTheme4, ImagesArrays.monthImageTheme4, ImagesArrays.monthImageHijriTheme4, ImagesArrays.timeNumberTheme4, ImagesArrays.timeNumberTheme4, ImagesArrays.timeNumberIqamhTheme4, ImagesArrays.timeNumberIqamhTheme4, ImagesArrays.timeNumberIqamhLeft4, ImagesArrays.timeNumberIqamhLeft4, ImagesArrays.timeNumberIqamhTheme4, true, false));
 
         // Theme 4
-        THEME_CONFIGURATIONS.put(4, new ThemeConfiguration(
-                R.layout.activity_main_5,
-                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
-                0, // No background drawable
-                null,
-                ImagesArrays.daysImageTheme4,
-                ImagesArrays.monthImageTheme5,
-                ImagesArrays.monthImageHijriTheme5,
-                ImagesArrays.timeNumberTheme5,
-                ImagesArrays.timeNumberTheme5,
-                ImagesArrays.timeNumberIqamhTheme4,
-                ImagesArrays.timeNumberIqamhTheme4,
-                ImagesArrays.timeNumberIqamhLeft4,
-                ImagesArrays.timeNumberIqamhLeft4,
-                ImagesArrays.timeNumberIqamhTheme4,
-                false,
-                false
-        ));
+        THEME_CONFIGURATIONS.put(4, new ThemeConfiguration(R.layout.activity_main_5, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, 0, // No background drawable
+                null, ImagesArrays.daysImageTheme4, ImagesArrays.monthImageTheme5, ImagesArrays.monthImageHijriTheme5, ImagesArrays.timeNumberTheme5, ImagesArrays.timeNumberTheme5, ImagesArrays.timeNumberIqamhTheme4, ImagesArrays.timeNumberIqamhTheme4, ImagesArrays.timeNumberIqamhLeft4, ImagesArrays.timeNumberIqamhLeft4, ImagesArrays.timeNumberIqamhTheme4, false, false));
 
         // Theme 5
-        THEME_CONFIGURATIONS.put(5, new ThemeConfiguration(
-                R.layout.activity_main_6,
-                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
-                0, // No background drawable
-                null,
-                ImagesArrays.daysImageTheme6,
-                ImagesArrays.monthImageTheme6,
-                ImagesArrays.monthImageHijriTheme6,
-                ImagesArrays.timeNumberIqamhLeft4,
-                ImagesArrays.timeNumberTheme6,
-                ImagesArrays.timeNumberAzanTheme6,
-                ImagesArrays.timeNumberIqama6,
-                ImagesArrays.timeNumberTheme6,
-                ImagesArrays.timeNumberTheme6,
-                ImagesArrays.timeNumberTheme6,
-                false,
-                false
-        ));
+        THEME_CONFIGURATIONS.put(5, new ThemeConfiguration(R.layout.activity_main_6, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, 0, // No background drawable
+                null, ImagesArrays.daysImageTheme6, ImagesArrays.monthImageTheme6, ImagesArrays.monthImageHijriTheme6, ImagesArrays.timeNumberIqamhLeft4, ImagesArrays.timeNumberTheme6, ImagesArrays.timeNumberAzanTheme6, ImagesArrays.timeNumberIqama6, ImagesArrays.timeNumberTheme6, ImagesArrays.timeNumberTheme6, ImagesArrays.timeNumberTheme6, false, false));
 
         // Theme 6
-        THEME_CONFIGURATIONS.put(6, new ThemeConfiguration(
-                R.layout.activity_main_7,
-                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
-                0, // No background drawable
-                null,
-                ImagesArrays.daysImageTheme1,
-                ImagesArrays.monthImageTheme1,
-                ImagesArrays.monthImageHijriTheme1,
-                ImagesArrays.dateNumberTheme1,
-                ImagesArrays.timeNumberIqamhLeft7,
-                ImagesArrays.timeNumberAzanTheme6,
-                ImagesArrays.timeNumberIqama6,
-                ImagesArrays.timeNumberIqamhLeft7,
-                ImagesArrays.timeNumberIqamhLeft7,
-                ImagesArrays.timeNumberIqamhLeft7,
-                true,
-                false
-        ));
+        THEME_CONFIGURATIONS.put(6, new ThemeConfiguration(R.layout.activity_main_7, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, 0, // No background drawable
+                null, ImagesArrays.daysImageTheme1, ImagesArrays.monthImageTheme1, ImagesArrays.monthImageHijriTheme1, ImagesArrays.dateNumberTheme1, ImagesArrays.timeNumberIqamhLeft7, ImagesArrays.timeNumberAzanTheme6, ImagesArrays.timeNumberIqama6, ImagesArrays.timeNumberIqamhLeft7, ImagesArrays.timeNumberIqamhLeft7, ImagesArrays.timeNumberIqamhLeft7, true, false));
 
         // Theme 7
-        THEME_CONFIGURATIONS.put(7, new ThemeConfiguration(
-                R.layout.activity_main_8,
-                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
-                0, // No background drawable
-                null,
-                ImagesArrays.daysImageTheme8,
-                ImagesArrays.monthImageTheme8,
-                ImagesArrays.monthImageHijriTheme8,
-                ImagesArrays.timeNumberDate8,
-                ImagesArrays.timeNumberTime8,
-                ImagesArrays.timeNumberAzIq8,
-                ImagesArrays.timeNumberAzIq8,
-                ImagesArrays.timeNumberTime8,
-                ImagesArrays.timeNumberTime8,
-                ImagesArrays.timeNumberTime8,
-                true,
-                false
-        ));
+        THEME_CONFIGURATIONS.put(7, new ThemeConfiguration(R.layout.activity_main_8, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, 0, // No background drawable
+                null, ImagesArrays.daysImageTheme8, ImagesArrays.monthImageTheme8, ImagesArrays.monthImageHijriTheme8, ImagesArrays.timeNumberDate8, ImagesArrays.timeNumberTime8, ImagesArrays.timeNumberAzIq8, ImagesArrays.timeNumberAzIq8, ImagesArrays.timeNumberTime8, ImagesArrays.timeNumberTime8, ImagesArrays.timeNumberTime8, true, false));
 
         // Theme 8
-        THEME_CONFIGURATIONS.put(8, new ThemeConfiguration(
-                R.layout.activity_main_9,
-                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
-                0, // No background drawable
-                null,
-                ImagesArrays.daysImageTheme1,
-                ImagesArrays.monthImageTheme1,
-                ImagesArrays.monthImageHijriTheme1,
-                ImagesArrays.dateNumberTheme1,
-                ImagesArrays.timeNumberTheme6,
-                ImagesArrays.timeNumberAzanTheme6,
-                ImagesArrays.timeNumberIqama6,
-                ImagesArrays.timeNumberTheme6,
-                ImagesArrays.timeNumberTheme6,
-                ImagesArrays.timeNumberTheme6,
-                false,
-                false
-        ));
+        THEME_CONFIGURATIONS.put(8, new ThemeConfiguration(R.layout.activity_main_9, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, 0, // No background drawable
+                null, ImagesArrays.daysImageTheme1, ImagesArrays.monthImageTheme1, ImagesArrays.monthImageHijriTheme1, ImagesArrays.dateNumberTheme1, ImagesArrays.timeNumberTheme6, ImagesArrays.timeNumberAzanTheme6, ImagesArrays.timeNumberIqama6, ImagesArrays.timeNumberTheme6, ImagesArrays.timeNumberTheme6, ImagesArrays.timeNumberTheme6, false, false));
 
         // Theme 9
-        THEME_CONFIGURATIONS.put(9, new ThemeConfiguration(
-                R.layout.activity_main_10,
-                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
-                0, // No background drawable
-                null,
-                ImagesArrays.daysImageTheme10,
-                ImagesArrays.monthImageTheme10,
-                ImagesArrays.monthImageHijriTheme10,
-                ImagesArrays.timeNumberDate10,
-                ImagesArrays.timeNumberIqamhLeft4,
-                ImagesArrays.timeNumberAzIq8,
-                ImagesArrays.timeNumberAzIq8,
-                ImagesArrays.timeNumberIqamhLeft4,
-                ImagesArrays.timeNumberIqamhLeft4,
-                ImagesArrays.timeNumberDate10,
-                false,
-                true
-        ));
-        THEME_CONFIGURATIONS.put(10, new ThemeConfiguration(
-                R.layout.activity_main_new_theme_11,
-                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
-                0, // No background drawable
-                null,
-                ImagesArrays.daysImageTheme10,
-                ImagesArrays.monthImageTheme10,
-                ImagesArrays.monthImageHijriTheme10,
-                ImagesArrays.timeNumberDate10,
-                ImagesArrays.timeNumberIqamhLeft4,
-                ImagesArrays.timeNumberAzIq8,
-                ImagesArrays.timeNumberAzIq8,
-                ImagesArrays.timeNumberIqamhLeft4,
-                ImagesArrays.timeNumberIqamhLeft4,
-                ImagesArrays.timeNumberDate10,
-                false,
-                true
-        ));
+        THEME_CONFIGURATIONS.put(9, new ThemeConfiguration(R.layout.activity_main_10, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, 0, // No background drawable
+                null, ImagesArrays.daysImageTheme10, ImagesArrays.monthImageTheme10, ImagesArrays.monthImageHijriTheme10, ImagesArrays.timeNumberDate10, ImagesArrays.timeNumberIqamhLeft4, ImagesArrays.timeNumberAzIq8, ImagesArrays.timeNumberAzIq8, ImagesArrays.timeNumberIqamhLeft4, ImagesArrays.timeNumberIqamhLeft4, ImagesArrays.timeNumberDate10, false, true));
+        THEME_CONFIGURATIONS.put(10, new ThemeConfiguration(R.layout.activity_main_new_theme_11, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, 0, // No background drawable
+                null, ImagesArrays.daysImageTheme10, ImagesArrays.monthImageTheme10, ImagesArrays.monthImageHijriTheme10, ImagesArrays.timeNumberDate10, ImagesArrays.timeNumberIqamhLeft4, ImagesArrays.timeNumberAzIq8, ImagesArrays.timeNumberAzIq8, ImagesArrays.timeNumberIqamhLeft4, ImagesArrays.timeNumberIqamhLeft4, ImagesArrays.timeNumberDate10, false, true));
     }
 
     class CountDownRunner implements Runnable {
@@ -560,15 +372,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void handleOnBackPressed() {
                 // Show confirmation dialog for app exit
-                new android.app.AlertDialog.Builder(MainActivity.this)
-                        .setTitle("Exit App")
-                        .setMessage("Do you want to exit the app?")
-                        .setPositiveButton("Exit", (dialog, which) -> {
-                            // Properly clean up resources before finishing
-                            cleanupAndExit();
-                        })
-                        .setNegativeButton("Cancel", null)
-                        .show();
+                new android.app.AlertDialog.Builder(MainActivity.this).setTitle("Exit App").setMessage("Do you want to exit the app?").setPositiveButton("Exit", (dialog, which) -> {
+                    // Properly clean up resources before finishing
+                    cleanupAndExit();
+                }).setNegativeButton("Cancel", null).show();
             }
         });
 
@@ -1202,13 +1009,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             fetchFridayPrayerTimes();
-            if (azanCountdownDigitImages != null && fridayPrayerTimes != null && fridayPrayerTimes.length > 3 &&
-                    fridayPrayerTimes[3] != null &&
-                    fridayPrayerTimes[3].length() >= 5 &&
-                    imageAzanFridayTimeHourTens != null &&
-                    imageAzanFridayTimeHourOnes != null &&
-                    imageAzanFridayTimeMinuteTens != null &&
-                    imageAzanFridayTimeMinuteOnes != null) {
+            if (azanCountdownDigitImages != null && fridayPrayerTimes != null && fridayPrayerTimes.length > 3 && fridayPrayerTimes[3] != null && fridayPrayerTimes[3].length() >= 5 && imageAzanFridayTimeHourTens != null && imageAzanFridayTimeHourOnes != null && imageAzanFridayTimeMinuteTens != null && imageAzanFridayTimeMinuteOnes != null) {
                 imageAzanFridayTimeHourTens.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(0)))]);
                 imageAzanFridayTimeHourOnes.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(1)))]);
                 imageAzanFridayTimeMinuteTens.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(fridayPrayerTimes[3].charAt(3)))]);
@@ -1245,8 +1046,6 @@ public class MainActivity extends AppCompatActivity {
             fajrIqamh = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_RELATIVE_TIME_SELECTED, 25);
             fajr = getMilliseconds(String.valueOf(fajrTime12h)) + fajrIqamh * 60000;
         } else {
-
-
             String date2323 = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_CONSTANT_TIME_SELECTED, "20:20am");
             Date d1 = null;
             try {
@@ -2025,167 +1824,166 @@ public class MainActivity extends AppCompatActivity {
         azanCountdownSecondOnesDigit.setImageResource(azanCountdownDigitImages[Integer.parseInt(String.valueOf(s11.charAt(7)))]);
     }
 
-    private void getTimeLeftForIqamh(String time, long iqmahTime, int check) {
-        long minutes;
-        long millis;
-        Calendar c;
-        Calendar c1;
-        long millis1 = 0;
-        String s = null;
-        switch (check) {
-            case 1:
+    private void getTimeLeftForIqamh(String azanTime, long iqamahDelayMinutes, int prayerType) {
+
+        long iqamahDelayMilliseconds;
+        long iqamahTimeInMillis;
+        Calendar iqamahCalendar;
+        Calendar currentTimeCalendar;
+        long timeRemainingMilliseconds = 0;
+        String formattedCountdown = null;
+
+        switch (prayerType) {
+            case 1: // Fajr
                 if (!Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_RELATIVE, false)) {
-                    c = Calendar.getInstance();
-                    c1 = Calendar.getInstance();
-                    String hour = time.charAt(0) + "" + time.charAt(1);
-                    String mint = time.charAt(3) + "" + time.charAt(4);
-                    String sec = 0 + "" + 0;
-                    c.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONDAY), c1.get(Calendar.DAY_OF_MONTH), Integer.parseInt(hour), Integer.parseInt(mint), Integer.parseInt(sec));
+                    iqamahCalendar = Calendar.getInstance();
+                    currentTimeCalendar = Calendar.getInstance();
+                    String azanHour = azanTime.charAt(0) + "" + azanTime.charAt(1);
+                    String azanMinute = azanTime.charAt(3) + "" + azanTime.charAt(4);
+                    String azanSecond = 0 + "" + 0;
+                    iqamahCalendar.set(currentTimeCalendar.get(Calendar.YEAR), currentTimeCalendar.get(Calendar.MONDAY), currentTimeCalendar.get(Calendar.DAY_OF_MONTH), Integer.parseInt(azanHour), Integer.parseInt(azanMinute), Integer.parseInt(azanSecond));
 
-                    minutes = iqmahTime * 60000;
-                    millis = c.getTimeInMillis() + minutes;
-                    millis1 = millis - c1.getTimeInMillis();
+                    iqamahDelayMilliseconds = iqamahDelayMinutes * 60000;
+                    iqamahTimeInMillis = iqamahCalendar.getTimeInMillis() + iqamahDelayMilliseconds;
+                    timeRemainingMilliseconds = iqamahTimeInMillis - currentTimeCalendar.getTimeInMillis();
                 } else {
-                    String time1 = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_CONSTANT_TIME_SELECTED, "20:20am");
-                    c = Calendar.getInstance();
-                    c1 = Calendar.getInstance();
-                    String hour = time1.charAt(0) + "" + time1.charAt(1);
-                    String mint = time1.charAt(3) + "" + time1.charAt(4);
-                    String sec = 0 + "" + 0;
-                    c.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONDAY), c1.get(Calendar.DAY_OF_MONTH), Integer.parseInt(hour), Integer.parseInt(mint), Integer.parseInt(sec));
-                    millis1 = c.getTimeInMillis() - c1.getTimeInMillis();
+                    String constantIqamahTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_FAJR_CONSTANT_TIME_SELECTED, "20:20am");
+                    iqamahCalendar = Calendar.getInstance();
+                    currentTimeCalendar = Calendar.getInstance();
+                    String iqamahHour = constantIqamahTime.charAt(0) + "" + constantIqamahTime.charAt(1);
+                    String iqamahMinute = constantIqamahTime.charAt(3) + "" + constantIqamahTime.charAt(4);
+                    String iqamahSecond = 0 + "" + 0;
+                    iqamahCalendar.set(currentTimeCalendar.get(Calendar.YEAR), currentTimeCalendar.get(Calendar.MONDAY), currentTimeCalendar.get(Calendar.DAY_OF_MONTH), Integer.parseInt(iqamahHour), Integer.parseInt(iqamahMinute), Integer.parseInt(iqamahSecond));
+                    timeRemainingMilliseconds = iqamahCalendar.getTimeInMillis() - currentTimeCalendar.getTimeInMillis();
                 }
-                s = String.format("%1$tM:%1$tS", millis1);
+                formattedCountdown = String.format("%1$tM:%1$tS", timeRemainingMilliseconds);
                 break;
-            case 3:
+            case 3: // Dhuhr
                 if (!Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_RELATIVE, false)) {
-                    c = Calendar.getInstance();
-                    c1 = Calendar.getInstance();
-                    String hour = time.charAt(0) + "" + time.charAt(1);
-                    String mint = time.charAt(3) + "" + time.charAt(4);
-                    String sec = 0 + "" + 0;
-                    c.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONDAY), c1.get(Calendar.DAY_OF_MONTH), Integer.parseInt(hour), Integer.parseInt(mint), Integer.parseInt(sec));
+                    iqamahCalendar = Calendar.getInstance();
+                    currentTimeCalendar = Calendar.getInstance();
+                    String azanHour = azanTime.charAt(0) + "" + azanTime.charAt(1);
+                    String azanMinute = azanTime.charAt(3) + "" + azanTime.charAt(4);
+                    String azanSecond = 0 + "" + 0;
+                    iqamahCalendar.set(currentTimeCalendar.get(Calendar.YEAR), currentTimeCalendar.get(Calendar.MONDAY), currentTimeCalendar.get(Calendar.DAY_OF_MONTH), Integer.parseInt(azanHour), Integer.parseInt(azanMinute), Integer.parseInt(azanSecond));
 
-                    minutes = iqmahTime * 60000;
-                    millis = c.getTimeInMillis() + minutes;
-                    millis1 = millis - c1.getTimeInMillis();
+                    iqamahDelayMilliseconds = iqamahDelayMinutes * 60000;
+                    iqamahTimeInMillis = iqamahCalendar.getTimeInMillis() + iqamahDelayMilliseconds;
+                    timeRemainingMilliseconds = iqamahTimeInMillis - currentTimeCalendar.getTimeInMillis();
                 } else {
-                    String time1 = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_CONSTANT_TIME_SELECTED, "20:20am");
-                    c = Calendar.getInstance();
-                    c1 = Calendar.getInstance();
-                    String hour = time1.charAt(0) + "" + time1.charAt(1);
-                    String mint = time1.charAt(3) + "" + time1.charAt(4);
-                    String sec = 0 + "" + 0;
-                    c.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONDAY), c1.get(Calendar.DAY_OF_MONTH), Integer.parseInt(hour), Integer.parseInt(mint), Integer.parseInt(sec));
-                    millis1 = c.getTimeInMillis() - c1.getTimeInMillis();
+                    String constantIqamahTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_DHOHR_CONSTANT_TIME_SELECTED, "20:20am");
+                    iqamahCalendar = Calendar.getInstance();
+                    currentTimeCalendar = Calendar.getInstance();
+                    String iqamahHour = constantIqamahTime.charAt(0) + "" + constantIqamahTime.charAt(1);
+                    String iqamahMinute = constantIqamahTime.charAt(3) + "" + constantIqamahTime.charAt(4);
+                    String iqamahSecond = 0 + "" + 0;
+                    iqamahCalendar.set(currentTimeCalendar.get(Calendar.YEAR), currentTimeCalendar.get(Calendar.MONDAY), currentTimeCalendar.get(Calendar.DAY_OF_MONTH), Integer.parseInt(iqamahHour), Integer.parseInt(iqamahMinute), Integer.parseInt(iqamahSecond));
+                    timeRemainingMilliseconds = iqamahCalendar.getTimeInMillis() - currentTimeCalendar.getTimeInMillis();
                 }
-                s = String.format("%1$tM:%1$tS", millis1);
+                formattedCountdown = String.format("%1$tM:%1$tS", timeRemainingMilliseconds);
                 break;
-            case 4:
+            case 4: // Asr
                 if (!Pref.getValue(getApplicationContext(), Constants.PREF_ASR_RELATIVE, false)) {
-                    c = Calendar.getInstance();
-                    c1 = Calendar.getInstance();
-                    String hour = time.charAt(0) + "" + time.charAt(1);
-                    String mint = time.charAt(3) + "" + time.charAt(4);
-                    String sec = 0 + "" + 0;
-                    c.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONDAY), c1.get(Calendar.DAY_OF_MONTH), Integer.parseInt(hour), Integer.parseInt(mint), Integer.parseInt(sec));
+                    iqamahCalendar = Calendar.getInstance();
+                    currentTimeCalendar = Calendar.getInstance();
+                    String azanHour = azanTime.charAt(0) + "" + azanTime.charAt(1);
+                    String azanMinute = azanTime.charAt(3) + "" + azanTime.charAt(4);
+                    String azanSecond = 0 + "" + 0;
+                    iqamahCalendar.set(currentTimeCalendar.get(Calendar.YEAR), currentTimeCalendar.get(Calendar.MONDAY), currentTimeCalendar.get(Calendar.DAY_OF_MONTH), Integer.parseInt(azanHour), Integer.parseInt(azanMinute), Integer.parseInt(azanSecond));
 
-                    minutes = iqmahTime * 60000;
-                    millis = c.getTimeInMillis() + minutes;
-                    millis1 = millis - c1.getTimeInMillis();
+                    iqamahDelayMilliseconds = iqamahDelayMinutes * 60000;
+                    iqamahTimeInMillis = iqamahCalendar.getTimeInMillis() + iqamahDelayMilliseconds;
+                    timeRemainingMilliseconds = iqamahTimeInMillis - currentTimeCalendar.getTimeInMillis();
                 } else {
-                    String time1 = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_CONSTANT_TIME_SELECTED, "20:20am");
-                    c = Calendar.getInstance();
-                    c1 = Calendar.getInstance();
-                    String hour = time1.charAt(0) + "" + time1.charAt(1);
-                    String mint = time1.charAt(3) + "" + time1.charAt(4);
-                    String sec = 0 + "" + 0;
-                    c.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONDAY), c1.get(Calendar.DAY_OF_MONTH), Integer.parseInt(hour), Integer.parseInt(mint), Integer.parseInt(sec));
-                    millis1 = c.getTimeInMillis() - c1.getTimeInMillis() + 43200000;
+                    String constantIqamahTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ASR_CONSTANT_TIME_SELECTED, "20:20am");
+                    iqamahCalendar = Calendar.getInstance();
+                    currentTimeCalendar = Calendar.getInstance();
+                    String iqamahHour = constantIqamahTime.charAt(0) + "" + constantIqamahTime.charAt(1);
+                    String iqamahMinute = constantIqamahTime.charAt(3) + "" + constantIqamahTime.charAt(4);
+                    String iqamahSecond = 0 + "" + 0;
+                    iqamahCalendar.set(currentTimeCalendar.get(Calendar.YEAR), currentTimeCalendar.get(Calendar.MONDAY), currentTimeCalendar.get(Calendar.DAY_OF_MONTH), Integer.parseInt(iqamahHour), Integer.parseInt(iqamahMinute), Integer.parseInt(iqamahSecond));
+                    timeRemainingMilliseconds = iqamahCalendar.getTimeInMillis() - currentTimeCalendar.getTimeInMillis() + 43200000;
                 }
-                s = String.format("%1$tM:%1$tS", millis1);
+                formattedCountdown = String.format("%1$tM:%1$tS", timeRemainingMilliseconds);
                 break;
-            case 5:
+            case 5: // Maghrib
                 if (!Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_RELATIVE, false)) {
-                    c = Calendar.getInstance();
-                    c1 = Calendar.getInstance();
-                    String hour = time.charAt(0) + "" + time.charAt(1);
-                    String mint = time.charAt(3) + "" + time.charAt(4);
-                    String sec = 0 + "" + 0;
-                    c.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONDAY), c1.get(Calendar.DAY_OF_MONTH), Integer.parseInt(hour), Integer.parseInt(mint), Integer.parseInt(sec));
+                    iqamahCalendar = Calendar.getInstance();
+                    currentTimeCalendar = Calendar.getInstance();
+                    String azanHour = azanTime.charAt(0) + "" + azanTime.charAt(1);
+                    String azanMinute = azanTime.charAt(3) + "" + azanTime.charAt(4);
+                    String azanSecond = 0 + "" + 0;
+                    iqamahCalendar.set(currentTimeCalendar.get(Calendar.YEAR), currentTimeCalendar.get(Calendar.MONDAY), currentTimeCalendar.get(Calendar.DAY_OF_MONTH), Integer.parseInt(azanHour), Integer.parseInt(azanMinute), Integer.parseInt(azanSecond));
 
-                    minutes = iqmahTime * 60000;
-                    millis = c.getTimeInMillis() + minutes;
-                    millis1 = millis - c1.getTimeInMillis();
+                    iqamahDelayMilliseconds = iqamahDelayMinutes * 60000;
+                    iqamahTimeInMillis = iqamahCalendar.getTimeInMillis() + iqamahDelayMilliseconds;
+                    timeRemainingMilliseconds = iqamahTimeInMillis - currentTimeCalendar.getTimeInMillis();
                 } else {
-                    String time1 = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_MAGHRIB_CONSTANT_TIME_SELECTED, "20:20am");
-                    c = Calendar.getInstance();
-                    c1 = Calendar.getInstance();
-                    String hour = time1.charAt(0) + "" + time1.charAt(1);
-                    String mint = time1.charAt(3) + "" + time1.charAt(4);
-                    String sec = 0 + "" + 0;
-                    c.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONDAY), c1.get(Calendar.DAY_OF_MONTH), Integer.parseInt(hour), Integer.parseInt(mint), Integer.parseInt(sec));
-                    millis1 = c.getTimeInMillis() - c1.getTimeInMillis() + 43200000;
+                    String constantIqamahTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_MAGHRIB_CONSTANT_TIME_SELECTED, "20:20am");
+                    iqamahCalendar = Calendar.getInstance();
+                    currentTimeCalendar = Calendar.getInstance();
+                    String iqamahHour = constantIqamahTime.charAt(0) + "" + constantIqamahTime.charAt(1);
+                    String iqamahMinute = constantIqamahTime.charAt(3) + "" + constantIqamahTime.charAt(4);
+                    String iqamahSecond = 0 + "" + 0;
+                    iqamahCalendar.set(currentTimeCalendar.get(Calendar.YEAR), currentTimeCalendar.get(Calendar.MONDAY), currentTimeCalendar.get(Calendar.DAY_OF_MONTH), Integer.parseInt(iqamahHour), Integer.parseInt(iqamahMinute), Integer.parseInt(iqamahSecond));
+                    timeRemainingMilliseconds = iqamahCalendar.getTimeInMillis() - currentTimeCalendar.getTimeInMillis() + 43200000;
                 }
-                s = String.format("%1$tM:%1$tS", millis1);
+                formattedCountdown = String.format("%1$tM:%1$tS", timeRemainingMilliseconds);
                 break;
-            case 6:
+            case 6: // Isha
                 if (!Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_RELATIVE, false)) {
-                    c = Calendar.getInstance();
-                    c1 = Calendar.getInstance();
-                    String hour = time.charAt(0) + "" + time.charAt(1);
-                    String mint = time.charAt(3) + "" + time.charAt(4);
-                    String sec = 0 + "" + 0;
-                    c.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONDAY), c1.get(Calendar.DAY_OF_MONTH), Integer.parseInt(hour), Integer.parseInt(mint), Integer.parseInt(sec));
+                    iqamahCalendar = Calendar.getInstance();
+                    currentTimeCalendar = Calendar.getInstance();
+                    String azanHour = azanTime.charAt(0) + "" + azanTime.charAt(1);
+                    String azanMinute = azanTime.charAt(3) + "" + azanTime.charAt(4);
+                    String azanSecond = 0 + "" + 0;
+                    iqamahCalendar.set(currentTimeCalendar.get(Calendar.YEAR), currentTimeCalendar.get(Calendar.MONDAY), currentTimeCalendar.get(Calendar.DAY_OF_MONTH), Integer.parseInt(azanHour), Integer.parseInt(azanMinute), Integer.parseInt(azanSecond));
 
-                    minutes = iqmahTime * 60000;
-                    millis = c.getTimeInMillis() + minutes;
-                    millis1 = millis - c1.getTimeInMillis();
+                    iqamahDelayMilliseconds = iqamahDelayMinutes * 60000;
+                    iqamahTimeInMillis = iqamahCalendar.getTimeInMillis() + iqamahDelayMilliseconds;
+                    timeRemainingMilliseconds = iqamahTimeInMillis - currentTimeCalendar.getTimeInMillis();
                 } else {
-                    String time1 = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ISHA_CONSTANT_TIME_SELECTED, "20:20am");
-                    c = Calendar.getInstance();
-                    c1 = Calendar.getInstance();
-                    String hour = time1.charAt(0) + "" + time1.charAt(1);
-                    String mint = time1.charAt(3) + "" + time1.charAt(4);
-                    String sec = 0 + "" + 0;
-                    c.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONDAY), c1.get(Calendar.DAY_OF_MONTH), Integer.parseInt(hour), Integer.parseInt(mint), Integer.parseInt(sec));
-                    millis1 = c.getTimeInMillis() - c1.getTimeInMillis() + 43200000;
+                    String constantIqamahTime = Pref.getValue(getApplicationContext(), Constants.PREF_IQAMH_ISHA_CONSTANT_TIME_SELECTED, "20:20am");
+                    iqamahCalendar = Calendar.getInstance();
+                    currentTimeCalendar = Calendar.getInstance();
+                    String iqamahHour = constantIqamahTime.charAt(0) + "" + constantIqamahTime.charAt(1);
+                    String iqamahMinute = constantIqamahTime.charAt(3) + "" + constantIqamahTime.charAt(4);
+                    String iqamahSecond = 0 + "" + 0;
+                    iqamahCalendar.set(currentTimeCalendar.get(Calendar.YEAR), currentTimeCalendar.get(Calendar.MONDAY), currentTimeCalendar.get(Calendar.DAY_OF_MONTH), Integer.parseInt(iqamahHour), Integer.parseInt(iqamahMinute), Integer.parseInt(iqamahSecond));
+                    timeRemainingMilliseconds = iqamahCalendar.getTimeInMillis() - currentTimeCalendar.getTimeInMillis() + 43200000;
                 }
-                s = String.format("%1$tM:%1$tS", millis1);
+                formattedCountdown = String.format("%1$tM:%1$tS", timeRemainingMilliseconds);
                 break;
         }
 
-        Calendar calendar = Calendar.getInstance();
+        Calendar currentCalendar = Calendar.getInstance();
 
-        if (check == 3) { // Removed Friday check to allow testing on any day during Dhuhr prayer
+        // Handle countdown display
+        if (prayerType == 3) { // Dhuhr prayer - special handling for Friday sermon
             iqamahCountdownMinuteTensDigit.setVisibility(View.GONE);
             iqamahCountdownMinuteOnesDigit.setVisibility(View.GONE);
             iqamahCountdownSecondTensDigit.setVisibility(View.GONE);
             iqamahCountdownSecondOnesDigit.setVisibility(View.GONE);
 
-
             if (!isOpenKhotabActivity) {
-
-                SimpleDateFormat format2 = new SimpleDateFormat("yyyy/M/d", Locale.ENGLISH);
-                Calendar today1 = Calendar.getInstance();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/M/d", Locale.ENGLISH);
+                Calendar todayCalendar = Calendar.getInstance();
 
                 databaseHelper.openDataBase();
-                final Khotab khotba = databaseHelper.getKhotba(format2.format(today1.getTime()));
+                final Khotab khotba = databaseHelper.getKhotba(dateFormat.format(todayCalendar.getTime()));
                 databaseHelper.close();
 
                 if (khotba != null) {
                     if (khotba.getIsException() == 0) {
-                        Intent cp = new Intent(getApplicationContext(), ShowKhotabActivity.class);
-                        cp.putExtra("khotba", khotba);
-                        startActivity(cp);
+                        Intent sermonIntent = new Intent(getApplicationContext(), ShowKhotabActivity.class);
+                        sermonIntent.putExtra("khotba", khotba);
+                        startActivity(sermonIntent);
                         isOpenKhotabActivity = true;
                     }
                 } else if (Pref.getValue(getApplicationContext(), Constants.PREF_SHOW_KATEB, false)) {
-                    Intent cp = new Intent(getApplicationContext(), ShowKatebActivity.class);
-                    startActivity(cp);
+                    Intent katebIntent = new Intent(getApplicationContext(), ShowKatebActivity.class);
+                    startActivity(katebIntent);
                     isOpenKhotabActivity = true;
-                } else {
-
                 }
             }
         } else {
@@ -2193,133 +1991,105 @@ public class MainActivity extends AppCompatActivity {
             iqamahCountdownMinuteOnesDigit.setVisibility(View.VISIBLE);
             iqamahCountdownSecondTensDigit.setVisibility(View.VISIBLE);
             iqamahCountdownSecondOnesDigit.setVisibility(View.VISIBLE);
-
-            long seconds = 60 * 1000;
-
-
-            if (seconds >= millis1) {
-
-
-                if (Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true)) {
-
-                    if (!isOpenClosePhone) {
-
-                        Intent intent = new Intent(MainActivity.this, ShowClosePhoneActivity.class);
-                        intent.putExtra("PRAY", check);
-                        startActivity(intent);
-                        isOpenClosePhone = true;
-
-                    }
-                }
-            } else {
-
-
-            }
-
         }
 
-        iqamahCountdownMinuteTensDigit.setImageResource(iqamahCountdownDigitImages[Integer.parseInt(String.valueOf(s.charAt(0)))]);
-        iqamahCountdownMinuteOnesDigit.setImageResource(iqamahCountdownDigitImages[Integer.parseInt(String.valueOf(s.charAt(1)))]);
-        iqamahCountdownSecondTensDigit.setImageResource(iqamahCountdownDigitImages[Integer.parseInt(String.valueOf(s.charAt(3)))]);
-        iqamahCountdownSecondOnesDigit.setImageResource(iqamahCountdownDigitImages[Integer.parseInt(String.valueOf(s.charAt(4)))]);
+        // Handle close phone activity for ALL prayers (including Dhuhr)
+        long oneMinuteInMilliseconds = 60 * 1000;
+        if (timeRemainingMilliseconds > 0 && timeRemainingMilliseconds <= oneMinuteInMilliseconds) {
+            if (Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true)) {
+                if (!isOpenClosePhone) {
+                    Intent closePhoneIntent = new Intent(MainActivity.this, ShowClosePhoneActivity.class);
+                    closePhoneIntent.putExtra("PRAY", prayerType);
+                    startActivity(closePhoneIntent);
+                    isOpenClosePhone = true;
+                }
+            }
+        }
 
+        // Update countdown display
+        iqamahCountdownMinuteTensDigit.setImageResource(iqamahCountdownDigitImages[Integer.parseInt(String.valueOf(formattedCountdown.charAt(0)))]);
+        iqamahCountdownMinuteOnesDigit.setImageResource(iqamahCountdownDigitImages[Integer.parseInt(String.valueOf(formattedCountdown.charAt(1)))]);
+        iqamahCountdownSecondTensDigit.setImageResource(iqamahCountdownDigitImages[Integer.parseInt(String.valueOf(formattedCountdown.charAt(3)))]);
+        iqamahCountdownSecondOnesDigit.setImageResource(iqamahCountdownDigitImages[Integer.parseInt(String.valueOf(formattedCountdown.charAt(4)))]);
 
-        if (millis1 <= 1000) {
-
-            if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY && check != 3) {
-
-                boolean b = shouldShowAlkhushueScreen(check);
+        // Handle Iqamah time reached (1 second or less remaining)
+        if (timeRemainingMilliseconds <= 1000) {
+            if (currentCalendar.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY && prayerType != 3) {
+                boolean shouldShowAlkhushue = shouldShowAlkhushueScreen(prayerType);
 
                 if (!Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true)) {
-
-
-                    if (b) {
-
+                    if (shouldShowAlkhushue) {
                         if (!isOpenAlkhushuePhone) {
-
-                            Intent intent = new Intent(MainActivity.this, ShowAlkhushueActivity.class);
-                            intent.putExtra("PRAY", check);
-                            startActivity(intent);
-
+                            Intent alkhushueIntent = new Intent(MainActivity.this, ShowAlkhushueActivity.class);
+                            alkhushueIntent.putExtra("PRAY", prayerType);
+                            startActivity(alkhushueIntent);
                             isOpenAlkhushuePhone = true;
                         }
                     } else {
-
                         if (!isOpenAzkarPhone) {
-                            scheduleAzkarScreen(check);
+                            scheduleAzkarScreen(prayerType);
                             isOpenAzkarPhone = true;
                         }
                     }
                 }
-
             }
 
-            switch (check) {
-                case 1:
-
-
+            // Play Iqamah audio for each prayer
+            switch (prayerType) {
+                case 1: // Fajr
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_IQAMAH, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_IQAMAH_PATH, null) != null) {
                             if (!mediaPlayer.isPlaying()) {
                                 mediaPlayer = new MediaPlayer();
-                                String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_IQAMAH_PATH, null);
-                                if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
-
+                                String fajrIqamahAudioPath = Pref.getValue(getApplicationContext(), Constants.PREF_FAJER_SOUND_IQAMAH_PATH, null);
+                                if (!mediaPlayer.isPlaying()) playAudioFromPath(fajrIqamahAudioPath);
                             }
                         }
                     }
                     break;
 
-                case 3:
-
-
-                    if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY && check != 3) {
+                case 3: // Dhuhr
+                    if (currentCalendar.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY && prayerType != 3) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_IQAMAH, false)) {
                             if (Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_IQAMAH_PATH, null) != null) {
                                 if (!mediaPlayer.isPlaying()) {
                                     mediaPlayer = new MediaPlayer();
-                                    String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_IQAMAH_PATH, null);
-                                    if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
+                                    String dhuhrIqamahAudioPath = Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_IQAMAH_PATH, null);
+                                    if (!mediaPlayer.isPlaying()) playAudioFromPath(dhuhrIqamahAudioPath);
                                 }
                             }
                         }
                     }
                     break;
-                case 4:
-
-
+                case 4: // Asr
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH_PATH, null) != null) {
                             if (!mediaPlayer.isPlaying()) {
                                 mediaPlayer = new MediaPlayer();
-                                String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH_PATH, null);
-                                if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
+                                String asrIqamahAudioPath = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SOUND_IQAMAH_PATH, null);
+                                if (!mediaPlayer.isPlaying()) playAudioFromPath(asrIqamahAudioPath);
                             }
                         }
                     }
                     break;
-                case 5:
-
-
+                case 5: // Maghrib
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH_PATH, null) != null) {
                             if (!mediaPlayer.isPlaying()) {
                                 mediaPlayer = new MediaPlayer();
-                                String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH_PATH, null);
-                                if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
+                                String maghribIqamahAudioPath = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SOUND_IQAMAH_PATH, null);
+                                if (!mediaPlayer.isPlaying()) playAudioFromPath(maghribIqamahAudioPath);
                             }
                         }
                     }
                     break;
-                case 6:
-
-
+                case 6: // Isha
                     if (Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_IQAMAH, false)) {
                         if (Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_IQAMAH_PATH, null) != null) {
                             if (!mediaPlayer.isPlaying()) {
                                 mediaPlayer = new MediaPlayer();
-                                String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_IQAMAH_PATH, null);
-                                if (!mediaPlayer.isPlaying()) playAudioFromPath(uriSound);
+                                String ishaIqamahAudioPath = Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SOUND_IQAMAH_PATH, null);
+                                if (!mediaPlayer.isPlaying()) playAudioFromPath(ishaIqamahAudioPath);
                             }
                         }
                     }

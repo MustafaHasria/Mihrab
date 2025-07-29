@@ -158,8 +158,8 @@ public class AdsActivity extends AppCompatActivity {
                 // Try to start test activity instead
                 try {
                     Log.d(TAG, "Attempting to start TestAddAdsActivity as fallback...");
-                    Intent testIntent = new Intent(AdsActivity.this, TestAddAdsActivity.class);
-                    startActivity(testIntent);
+//                    Intent testIntent = new Intent(AdsActivity.this, TestAddAdsActivity.class);
+//                    startActivity(testIntent);
                     Log.d(TAG, "TestAddAdsActivity started successfully");
                 } catch (Exception testException) {
                     Log.e(TAG, "Failed to start TestAddAdsActivity as well", testException);

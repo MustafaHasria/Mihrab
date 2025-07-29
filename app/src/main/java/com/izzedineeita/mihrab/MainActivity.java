@@ -1686,7 +1686,7 @@ public class MainActivity extends AppCompatActivity {
         String mint = time.charAt(3) + "" + time.charAt(4);
         String sec = 0 + "" + 0;
 
-        c.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONTH) + 1, c1.get(Calendar.DATE), Integer.parseInt(hour), Integer.parseInt(mint), Integer.parseInt(sec));
+        c.set(c1.get(Calendar.YEAR), c1.get(Calendar.MONTH), c1.get(Calendar.DATE), Integer.parseInt(hour), Integer.parseInt(mint), Integer.parseInt(sec));
 
 
         String givenDateString = time;
@@ -1733,7 +1733,70 @@ public class MainActivity extends AppCompatActivity {
             default:
                 throw new IllegalStateException("Unexpected value: " + check);
         }
+        
+        // Debug logging for time calculation
+        if (check == 3) { // Dhuhr prayer
+            Log.d("ClosePhoneDebug", "Time calculation - Azan time: " + time);
+            Log.d("ClosePhoneDebug", "Current time: " + c1.getTime());
+            Log.d("ClosePhoneDebug", "Azan calendar time: " + c.getTime());
+            Log.d("ClosePhoneDebug", "millis: " + millis + ", currentMillis: " + c1.getTimeInMillis());
+            Log.d("ClosePhoneDebug", "millis1 (time remaining): " + millis1);
+        }
 
+        // Handle close phone activity for Dhuhr prayer (case 3) - ONLY on Fridays and before Azan
+        if (check == 3) { // Dhuhr prayer
+            String customTimerSeconds = Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_PHONE_ALERT_SHOW_BEFORE_IQAMH, "59");
+            long customTimerMilliseconds = 0;
+            
+            try {
+                customTimerMilliseconds = Long.parseLong(customTimerSeconds) * 1000;
+            } catch (NumberFormatException e) {
+                customTimerMilliseconds = 60 * 1000;
+            }
+            
+            // Debug logging for Dhuhr prayer close phone activity
+            Log.d("ClosePhoneDebug", "Dhuhr Prayer - millis1: " + millis1 + ", customTimer: " + customTimerMilliseconds);
+            Log.d("ClosePhoneDebug", "Time condition: " + (millis1 > 0 && millis1 <= (customTimerMilliseconds + 1000)));
+            
+            // Add 1 second tolerance to handle exact minute boundaries
+            if (millis1 > 0 && millis1 <= (customTimerMilliseconds + 1000)) {
+                if (Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true)) {
+                    Calendar calendarForFridayCheck = Calendar.getInstance();
+                    boolean isFriday = calendarForFridayCheck.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY;
+                    
+                    Log.d("ClosePhoneDebug", "Is Friday: " + isFriday);
+                    
+                    boolean shouldShowClosePhone = false;
+                    if (isFriday) {
+                        shouldShowClosePhone = Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SOUND_GOMAA, true);
+                        Log.d("ClosePhoneDebug", "Friday setting (GOMAA): " + shouldShowClosePhone);
+                    } else {
+                        shouldShowClosePhone = Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SOUND_DUHR, true);
+                        Log.d("ClosePhoneDebug", "Regular day setting (DUHR): " + shouldShowClosePhone);
+                    }
+                    
+                    Log.d("ClosePhoneDebug", "isOpenClosePhone: " + isOpenClosePhone);
+                    
+                    if (shouldShowClosePhone && !isOpenClosePhone) {
+                        Log.d("ClosePhoneDebug", "Launching close phone activity for Dhuhr prayer");
+                        Intent closePhoneIntent = new Intent(MainActivity.this, ShowClosePhoneActivity.class);
+                        closePhoneIntent.putExtra("PRAY", check);
+                        startActivity(closePhoneIntent);
+                        isOpenClosePhone = true;
+                    }
+                } else {
+                    Log.d("ClosePhoneDebug", "Close notification screen is disabled");
+                }
+            } else {
+                Log.d("ClosePhoneDebug", "Time condition not met - millis1: " + millis1 + ", should be > 0 and <= " + (customTimerMilliseconds + 1000));
+            }
+        } else if (check == 3 && millis1 <= 0) {
+            // Reset the flag when Azan time has passed
+            if (isOpenClosePhone) {
+                Log.d("ClosePhoneDebug", "Resetting isOpenClosePhone flag - Azan time has passed");
+                isOpenClosePhone = false;
+            }
+        }
 
         DateFormat formatter = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH);
         formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -1992,11 +2055,12 @@ public class MainActivity extends AppCompatActivity {
             iqamahCountdownSecondOnesDigit.setVisibility(View.VISIBLE);
         }
 
-        // Handle close phone activity for ALL prayers (including Dhuhr)
+        // Handle close phone activity for ALL prayers EXCEPT Dhuhr (Dhuhr handled in getTimeLeftForAzan)
         long oneMinuteInMilliseconds = 60 * 1000;
         if (timeRemainingMilliseconds > 0 && timeRemainingMilliseconds <= oneMinuteInMilliseconds) {
             if (Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true)) {
-                if (!isOpenClosePhone) {
+                // Skip close phone activity for Dhuhr prayer (case 3) - it's handled in getTimeLeftForAzan
+                if (prayerType != 3 && !isOpenClosePhone) {
                     Intent closePhoneIntent = new Intent(MainActivity.this, ShowClosePhoneActivity.class);
                     closePhoneIntent.putExtra("PRAY", prayerType);
                     startActivity(closePhoneIntent);

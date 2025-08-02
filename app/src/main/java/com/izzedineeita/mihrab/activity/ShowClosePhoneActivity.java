@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -56,6 +57,16 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
     //int sec;
     int pray = 0;
     Animation animFadeIn;
+    
+    // Timer and blinking variables
+    private CountDownTimer countDownTimer;
+    private CountDownTimer blinkTimer;
+    private Handler blinkHandler = new Handler();
+    private boolean isBlinking = false;
+    private boolean isInBlinkingPhase = false;
+    private static final int BLINK_DURATION = 10000; // 10 seconds in milliseconds
+    private static final int BLINK_INTERVAL = 500; // 500ms for each blink cycle
+    
     private ImageView img_time_hour_1, img_time_hour_2, img_time_mint_1, img_time_sec_2,
             img_time_sec_1, img_date_day, img_date_month_m_2, img_date_month_m_1,
             img_date_month_m, img_date_years_4, img_date_years_3, img_date_years_2,
@@ -66,7 +77,6 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
     private Activity activity;
     private ImageView img_phone_photo,
             img_ud, img_en, img_ar;
-    private LinearLayout lay_img_iqamh_time_left_m, lay_img_iqamh_time_left_s;
     private MediaPlayer mp = new MediaPlayer();
 
     @Override
@@ -355,84 +365,8 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                 myThread.start();
                 setDataToImage();
 
-                String showTime = Pref.getValue(activity, Constants.PREF_CLOSE_PHONE_ALERT_SHOW_BEFORE_IQAMH, "59");
-                // sec = Integer.parseInt(showTime);
-                int millis = 1000;
-                try {
-                    millis = Integer.parseInt(showTime) * 1000;
-                } catch (Exception e) {
+                startCountdownTimer();
 
-                }
-                //
-
-
-                new CountDownTimer(millis, 1000) {
-                    public void onFinish() {
-                        boolean check = false;
-                        switch (pray) {
-                            case 1:
-                                check = Pref.getValue(getApplicationContext(), Constants.PREF_FAJR_SHOW_ALKHUSHUE, true);
-
-                                break;
-                            case 2:
-                                check = Pref.getValue(getApplicationContext(), Constants.PREF_SUNRISE_SHOW_ALKHUSHUE, true);
-                                break;
-                            case 3:
-                                check = Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SHOW_ALKHUSHUE, true);
-                                break;
-                            case 4:
-                                check = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SHOW_ALKHUSHUE, true);
-                                break;
-                            case 5:
-                                check = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SHOW_ALKHUSHUE, true);
-                                break;
-                            case 6:
-                                check = Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SHOW_ALKHUSHUE, true);
-                                break;
-                        }
-
-                        MainActivity.isOpenClosePhone = false;
-                        finish();
-                        if (check) {
-                            try {
-                                Intent intent = new Intent(activity, ShowAlkhushueActivity.class);
-                                intent.putExtra("PRAY", pray);
-                                startActivity(intent);
-                            } catch (Exception e) {
-
-                            }
-
-
-                        } else {
-
-                        }
-
-                    }
-
-                    public void onTick(long millisUntilFinished) {
-//                  DateFormat timeNow = new SimpleDateFormat("ss", Locale.ENGLISH);
-//                  Calendar c = Calendar.getInstance();
-//                  String timeText1 = timeNow.format(c.getTime());
-//                  int t = Integer.parseInt(timeText1);
-//
-//                  int i = t -60;
-//                  int i1 = 60 - t;
-//
-//
-//
-//                  String timeText = String.valueOf(i1);
-//                  if (timeText.length() == 2) {
-//                      img_iqamh_time_left_m_1.setImageResource(ImagesArrays.timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(0)))]);
-//                      img_iqamh_time_left_m_2.setImageResource(ImagesArrays.timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(1)))]);
-//                  } else {
-//                      img_iqamh_time_left_m_1.setImageResource(ImagesArrays.timeNumber[0]);
-//                      img_iqamh_time_left_m_2.setImageResource(ImagesArrays.timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(0)))]);
-//                  }
-
-                        //sec--;
-                    }
-
-                }.start();
             } catch (Exception e) {
 
             }
@@ -471,8 +405,6 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
         img_iqamh_time_left_m_2 = findViewById(R.id.img_iqamh_time_left_m_2);
 
         /* -------------------------------------------------------- */
-
-        lay_img_iqamh_time_left_m = findViewById(R.id.lay_img_iqamh_time_left_m);
 
         img_phone_photo = findViewById(R.id.img_phone_photo);
 
@@ -701,6 +633,7 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             public void run() {
                 try {
+                    // Update current time display
                     DateFormat timeNow = new SimpleDateFormat("hh:mmass", Locale.ENGLISH);
                     Calendar c = Calendar.getInstance();
                     String timeText = timeNow.format(c.getTime());
@@ -711,60 +644,11 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                     img_time_sec_1.setImageResource(timeNumberSec[Integer.parseInt(String.valueOf(timeText.charAt(7)))]);
                     img_time_sec_2.setImageResource(timeNumberSec[Integer.parseInt(String.valueOf(timeText.charAt(8)))]);
 
-                    DateFormat timeNow1 = new SimpleDateFormat("ss", Locale.ENGLISH);
-                    //Calendar c = Calendar.getInstance();
-                    String timeText1 = timeNow1.format(c.getTime());
-                    int t = Integer.parseInt(timeText1);
-
-                    int i = t - 60;
-                    int i1 = 60 - t;
-
-
-                    if (i1 == 60) {
-                        if (conEnd) {
-                            conStop = true;
-                        }
-                        img_iqamh_time_left_m_1.setImageResource(timeNumberIqamhLeft[0]);
-                        img_iqamh_time_left_m_2.setImageResource(timeNumberIqamhLeft[0]);
-                    } else {
-                        if (t > 50) {
-                            conEnd = true;
-                        }
-                        if (conEnd && conStop) {
-                            img_iqamh_time_left_m_1.setImageResource(timeNumberIqamhLeft[0]);
-                            img_iqamh_time_left_m_2.setImageResource(timeNumberIqamhLeft[0]);
-                            img_iqamh_time_left_m_1.startAnimation(animation);
-                            img_iqamh_time_left_m_2.startAnimation(animation);
-
-                            img_phone_photo.getAnimation().cancel();
-                            img_phone_photo.clearAnimation();
-
-                            img_ar.getAnimation().cancel();
-                            img_ar.clearAnimation();
-
-                            img_en.getAnimation().cancel();
-                            img_en.clearAnimation();
-
-                            img_ud.getAnimation().cancel();
-                            img_ud.clearAnimation();
-                        } else {
-                            String timeText11 = String.valueOf(i1);
-                            if (timeText11.length() == 2) {
-                                img_iqamh_time_left_m_1.setImageResource(timeNumberIqamhLeft[Integer.parseInt(String.valueOf(timeText11.charAt(0)))]);
-                                img_iqamh_time_left_m_2.setImageResource(timeNumberIqamhLeft[Integer.parseInt(String.valueOf(timeText11.charAt(1)))]);
-                            } else {
-                                img_iqamh_time_left_m_1.setImageResource(timeNumberIqamhLeft[0]);
-                                img_iqamh_time_left_m_2.setImageResource(timeNumberIqamhLeft[Integer.parseInt(String.valueOf(timeText11.charAt(0)))]);
-                            }
-                        }
-
-                    }
-
-
-//                    img_iqamh_time_left_m_1.setImageResource(ImagesArrays.timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(7)))]);
-//                    img_iqamh_time_left_m_2.setImageResource(ImagesArrays.timeNumber[Integer.parseInt(String.valueOf(timeText.charAt(8)))]);
+                    // Timer display is now handled by the CountDownTimer in startCountdownTimer()
+                    // The blinking effect is also handled separately
+                    
                 } catch (Exception e) {
-
+                    // Handle exception
                 }
             }
         });
@@ -934,6 +818,153 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
         }
     }
 
+    private void startCountdownTimer() {
+        String showTime = Pref.getValue(activity, Constants.PREF_CLOSE_PHONE_ALERT_SHOW_BEFORE_IQAMH, "59");
+        int millis = 1000;
+        try {
+            millis = Integer.parseInt(showTime) * 1000;
+        } catch (Exception e) {
+            // Use default value if parsing fails
+        }
+        
+        // Add 10 seconds to the total timer for blinking phase
+        int totalMillis = millis + BLINK_DURATION;
+        
+        countDownTimer = new CountDownTimer(totalMillis, 1000) {
+            @Override
+            public void onFinish() {
+                // Timer finished, close activity
+                finishActivity();
+            }
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Check if we're in the blinking phase (last 10 seconds)
+                if (millisUntilFinished <= BLINK_DURATION) {
+                    if (!isInBlinkingPhase) {
+                        // Start blinking phase
+                        isInBlinkingPhase = true;
+                        startBlinkingEffect();
+                    }
+                    // During blinking phase, keep showing 00
+                    img_iqamh_time_left_m_1.setImageResource(timeNumberIqamhLeft[0]);
+                    img_iqamh_time_left_m_2.setImageResource(timeNumberIqamhLeft[0]);
+                } else {
+                    // Normal countdown phase
+                    updateTimerDisplay(millisUntilFinished - BLINK_DURATION);
+                }
+            }
+        }.start();
+    }
+    
+    private void updateTimerDisplay(long millisUntilFinished) {
+        long seconds = millisUntilFinished / 1000;
+        if (seconds <= 0) {
+            // Show 00
+            img_iqamh_time_left_m_1.setImageResource(timeNumberIqamhLeft[0]);
+            img_iqamh_time_left_m_2.setImageResource(timeNumberIqamhLeft[0]);
+        } else {
+            // Show countdown
+            String timeText = String.valueOf(seconds);
+            if (timeText.length() == 2) {
+                img_iqamh_time_left_m_1.setImageResource(timeNumberIqamhLeft[Integer.parseInt(String.valueOf(timeText.charAt(0)))]);
+                img_iqamh_time_left_m_2.setImageResource(timeNumberIqamhLeft[Integer.parseInt(String.valueOf(timeText.charAt(1)))]);
+            } else {
+                img_iqamh_time_left_m_1.setImageResource(timeNumberIqamhLeft[0]);
+                img_iqamh_time_left_m_2.setImageResource(timeNumberIqamhLeft[Integer.parseInt(String.valueOf(timeText.charAt(0)))]);
+            }
+        }
+    }
+    
+    private void startBlinkingEffect() {
+        isBlinking = true;
+        
+        // Set timer to show 00
+        img_iqamh_time_left_m_1.setImageResource(timeNumberIqamhLeft[0]);
+        img_iqamh_time_left_m_2.setImageResource(timeNumberIqamhLeft[0]);
+        
+        // Make sure elements are visible initially
+        img_iqamh_time_left_m_1.setVisibility(View.VISIBLE);
+        img_iqamh_time_left_m_2.setVisibility(View.VISIBLE);
+        
+        // Use a separate CountDownTimer for blinking to ensure it runs for exactly 10 seconds
+        blinkTimer = new CountDownTimer(BLINK_DURATION, BLINK_INTERVAL) {
+            @Override
+            public void onFinish() {
+                // Blinking finished, activity will be closed by main CountDownTimer
+                isBlinking = false;
+            }
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Toggle visibility for blinking effect
+                if (img_iqamh_time_left_m_1.getVisibility() == View.VISIBLE) {
+                    img_iqamh_time_left_m_1.setVisibility(View.INVISIBLE);
+                    img_iqamh_time_left_m_2.setVisibility(View.INVISIBLE);
+                } else {
+                    img_iqamh_time_left_m_1.setVisibility(View.VISIBLE);
+                    img_iqamh_time_left_m_2.setVisibility(View.VISIBLE);
+                }
+            }
+        }.start();
+    }
+    
+    private void finishActivity() {
+        // Check if it's Friday Dhuhr prayer (pray = 3 for Dhuhr)
+        Calendar calendar = Calendar.getInstance();
+        boolean isFriday = calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY;
+        boolean isDhuhrPrayer = (pray == 3);
+        
+        // If it's Friday Dhuhr prayer, go back to main screen
+        if (isFriday && isDhuhrPrayer) {
+            MainActivity.isOpenClosePhone = false;
+            finish();
+            // Return to main screen
+            try {
+                Intent intent = new Intent(activity, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } catch (Exception e) {
+                // Handle exception
+            }
+        } else {
+            // For all other prayers, continue with normal flow
+            boolean check = false;
+            switch (pray) {
+                case 1:
+                    check = Pref.getValue(getApplicationContext(), Constants.PREF_FAJR_SHOW_ALKHUSHUE, true);
+                    break;
+                case 2:
+                    check = Pref.getValue(getApplicationContext(), Constants.PREF_SUNRISE_SHOW_ALKHUSHUE, true);
+                    break;
+                case 3:
+                    check = Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SHOW_ALKHUSHUE, true);
+                    break;
+                case 4:
+                    check = Pref.getValue(getApplicationContext(), Constants.PREF_ASR_SHOW_ALKHUSHUE, true);
+                    break;
+                case 5:
+                    check = Pref.getValue(getApplicationContext(), Constants.PREF_MAGHRIB_SHOW_ALKHUSHUE, true);
+                    break;
+                case 6:
+                    check = Pref.getValue(getApplicationContext(), Constants.PREF_ISHA_SHOW_ALKHUSHUE, true);
+                    break;
+            }
+
+            MainActivity.isOpenClosePhone = false;
+            finish();
+            if (check) {
+                try {
+                    Intent intent = new Intent(activity, ShowAlkhushueActivity.class);
+                    intent.putExtra("PRAY", pray);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    // Handle exception
+                }
+            }
+        }
+    }
+
     @Override
     protected void onDestroy() {
         if (myThread.isAlive()) {
@@ -942,6 +973,18 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
         if (mp.isPlaying()) {
             mp.stop();
         }
+        
+        // Clean up countdown timer and blinking timer
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+        if (blinkTimer != null) {
+            blinkTimer.cancel();
+        }
+        if (blinkHandler != null) {
+            blinkHandler.removeCallbacksAndMessages(null);
+        }
+        
         super.onDestroy();
     }
 

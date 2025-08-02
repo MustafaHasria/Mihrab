@@ -365,20 +365,15 @@
             android:orientation="vertical"
             android:background="@drawable/bg_ads_show_view">
 
-            <com.wonderkiln.camerakit.CameraView
+            <View
                 android:id="@+id/camera"
                 android:layout_width="match_parent"
                 android:layout_height="550dp"
-                android:adjustViewBounds="true"
-                android:keepScreenOn="true"
-                app:camera_facing="back"
-                app:camera_flash="auto"
-                app:camera_focus="continuous"
+                android:background="@android:color/black"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="200dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:camera_permissions="camera" />
+                android:layout_marginRight="20dp" />
 
         </LinearLayout>
         <ImageView

@@ -23,6 +23,36 @@
 # Add this global rule
 -keepattributes Signature
 
+# Keep MTBeaconPlus.jar classes to avoid stack map table issues
+-keep class com.mtbeacon.** { *; }
+-dontwarn com.mtbeacon.**
+
+# Keep Firebase classes
+-keep class com.google.firebase.** { *; }
+-dontwarn com.google.firebase.**
+
+# Keep YouTube API classes
+-keep class com.google.android.youtube.** { *; }
+-dontwarn com.google.android.youtube.**
+
+# Keep Glide classes
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep class * extends com.bumptech.glide.module.AppGlideModule {
+ <init>(...);
+}
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
+# Keep Material Design classes
+-keep class com.google.android.material.** { *; }
+-dontwarn com.google.android.material.**
+
+# Keep AndroidX classes
+-keep class androidx.** { *; }
+-dontwarn androidx.**
+
 # This rule will properly ProGuard all the model classes in
 # the package com.yourcompany.models.
 # Modify this rule to fit the structure of your app.

@@ -15,7 +15,7 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.camerakit.CameraKitView;
+// import com.camerakit.CameraKitView; // Removed CameraKit dependency
 import com.izzedineeita.mihrab.R;
 import com.izzedineeita.mihrab.constants.Constants;
 import com.izzedineeita.mihrab.constants.DateHigri;
@@ -45,7 +45,7 @@ public class ShowKatebActivity extends AppCompatActivity {
 
     private static final String[] CAMERA_PERMISSION = new String[]{Manifest.permission.CAMERA};
     private static final int CAMERA_REQUEST_CODE = 10;
-    private CameraKitView cameraKitView;
+    // private CameraKitView cameraKitView; // Removed CameraKit dependency
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,12 +115,12 @@ public class ShowKatebActivity extends AppCompatActivity {
         setData();
 
 
-        cameraKitView = findViewById(R.id.camera);
-        if (hasCameraPermission()) {
-            //enableCamera();
-        } else {
-            requestPermission();
-        }
+        // cameraKitView = findViewById(R.id.camera); // Removed CameraKit dependency
+        // if (hasCameraPermission()) {
+        //     //enableCamera();
+        // } else {
+        //     requestPermission();
+        // }
 
         closeActivity(Integer.parseInt(Pref.getValue(getApplicationContext(), Constants.PREF_SHOW_KATEB_TIME, "5")));
     }
@@ -368,31 +368,31 @@ public class ShowKatebActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        cameraKitView.onStart();
+        // cameraKitView.onStart(); // Removed CameraKit dependency
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        cameraKitView.onResume();
+        // cameraKitView.onResume(); // Removed CameraKit dependency
     }
 
     @Override
     protected void onPause() {
-        cameraKitView.onPause();
+        // cameraKitView.onPause(); // Removed CameraKit dependency
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        cameraKitView.onStop();
+        // cameraKitView.onStop(); // Removed CameraKit dependency
         super.onStop();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        cameraKitView.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // cameraKitView.onRequestPermissionsResult(requestCode, permissions, grantResults); // Removed CameraKit dependency
     }
 
 }

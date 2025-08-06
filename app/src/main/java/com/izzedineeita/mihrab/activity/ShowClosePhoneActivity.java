@@ -522,32 +522,54 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
         int hijriDiff1 = Pref.getValue(ShowClosePhoneActivity.this, Constants.PREF_HEJRY_INT1, 0);
         int iii = Integer.parseInt(date[4]);
         date[4] = String.valueOf(iii + hijriDiff1);
+        
+        // Apply the same offset to Hijri year if needed
+        int hijriYearOffset = Pref.getValue(ShowClosePhoneActivity.this, Constants.PREF_HEJRY_INT1, 0);
+        if (hijriYearOffset != 0) {
+            int hijriYear = Integer.parseInt(date[6]);
+            date[6] = String.valueOf(hijriYear + hijriYearOffset);
+        }
+        
+        // Debug: Let's see what values we're actually getting
 
         img_date_day.setImageResource(daysImage[Integer.parseInt(date[0])]);
-        img_date_month_m_1.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[1].charAt(0)))]);
+        // For RTL reading order, assign Gregorian day digits in reverse order
         if (date[1].length() != 1) {
+            int digit1 = Integer.parseInt(String.valueOf(date[1].charAt(1)));
+            int digit2 = Integer.parseInt(String.valueOf(date[1].charAt(0)));
+            img_date_month_m_1.setImageResource(dateNumber[digit1]);
             img_date_month_m_2.setVisibility(View.VISIBLE);
-            img_date_month_m_2.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[1].charAt(1)))]);
+            img_date_month_m_2.setImageResource(dateNumber[digit2]);
         } else {
+            int digit = Integer.parseInt(String.valueOf(date[1].charAt(0)));
+            img_date_month_m_1.setImageResource(dateNumber[digit]);
             img_date_month_m_2.setVisibility(View.GONE);
         }
         img_date_month_m.setImageResource(monthImage[Integer.parseInt(date[2])]);
-        img_date_years_1.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[3].charAt(0)))]);
-        img_date_years_2.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[3].charAt(1)))]);
-        img_date_years_3.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[3].charAt(2)))]);
-        img_date_years_4.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[3].charAt(3)))]);
-        img_date_month_h_1.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[4].charAt(0)))]);
+        // For RTL reading order, assign digits in reverse order
+        int year1 = Integer.parseInt(String.valueOf(date[3].charAt(3)));
+        int year2 = Integer.parseInt(String.valueOf(date[3].charAt(2)));
+        int year3 = Integer.parseInt(String.valueOf(date[3].charAt(1)));
+        int year4 = Integer.parseInt(String.valueOf(date[3].charAt(0)));
+        img_date_years_1.setImageResource(dateNumber[year1]);
+        img_date_years_2.setImageResource(dateNumber[year2]);
+        img_date_years_3.setImageResource(dateNumber[year3]);
+        img_date_years_4.setImageResource(dateNumber[year4]);
+        // For RTL reading order, assign Hijri day digits in reverse order
         if (date[4].length() != 1) {
+            img_date_month_h_1.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[4].charAt(1)))]);
             img_date_month_h_2.setVisibility(View.VISIBLE);
-            img_date_month_h_2.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[4].charAt(1)))]);
+            img_date_month_h_2.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[4].charAt(0)))]);
         } else {
+            img_date_month_h_1.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[4].charAt(0)))]);
             img_date_month_h_2.setVisibility(View.GONE);
         }
         img_date_month_h.setImageResource(monthImageHijri[Integer.parseInt(date[5]) - 1]);
-        img_date_years_h_1.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[6].charAt(0)))]);
-        img_date_years_h_2.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[6].charAt(1)))]);
-        img_date_years_h_3.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[6].charAt(2)))]);
-        img_date_years_h_4.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[6].charAt(3)))]);
+        // For RTL reading order, assign digits in reverse order
+        img_date_years_h_1.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[6].charAt(3)))]);
+        img_date_years_h_2.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[6].charAt(2)))]);
+        img_date_years_h_3.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[6].charAt(1)))]);
+        img_date_years_h_4.setImageResource(dateNumber[Integer.parseInt(String.valueOf(date[6].charAt(0)))]);
     }
 
     private void checkPlaySound(int pray) {
@@ -622,6 +644,20 @@ public class ShowClosePhoneActivity extends AppCompatActivity {
                         } else {
                             if (!mp.isPlaying()) play();
 
+                        }
+                    }
+                }
+                break;
+            case 7:
+                // Friday prayer - check if Friday sound notification is enabled
+                if (Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SOUND_GOMAA, true)) {
+                    if (!mp.isPlaying()) {
+                        mp = new MediaPlayer();
+                        String uriSound = Pref.getValue(getApplicationContext(), Constants.PREF_DHOHR_SOUND_CLOSE_PHONE_PATH, null);
+                        if (uriSound != null) {
+                            if (!mp.isPlaying()) play(uriSound);
+                        } else {
+                            if (!mp.isPlaying()) play();
                         }
                     }
                 }

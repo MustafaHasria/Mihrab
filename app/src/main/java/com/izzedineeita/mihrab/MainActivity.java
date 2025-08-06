@@ -1768,8 +1768,16 @@ public class MainActivity extends AppCompatActivity {
                     
                     boolean shouldShowClosePhone = false;
                     if (isFriday) {
-                        shouldShowClosePhone = Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SOUND_GOMAA, true);
-                        Log.d("ClosePhoneDebug", "Friday setting (GOMAA): " + shouldShowClosePhone);
+                        // For Friday, check if Friday screen notification is enabled
+                        boolean fridayScreenEnabled = Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SCREEN_GOMAA, true);
+                        if (fridayScreenEnabled) {
+                            // If Friday screen notification is enabled, always show the close phone activity
+                            shouldShowClosePhone = true;
+                            Log.d("ClosePhoneDebug", "Friday screen enabled, will show close phone activity");
+                        } else {
+                            shouldShowClosePhone = false;
+                            Log.d("ClosePhoneDebug", "Friday screen notification disabled");
+                        }
                     } else {
                         shouldShowClosePhone = Pref.getValue(getApplicationContext(), Constants.PREF_CLOSE_NOTIFICATION_SOUND_DUHR, true);
                         Log.d("ClosePhoneDebug", "Regular day setting (DUHR): " + shouldShowClosePhone);
@@ -1778,9 +1786,11 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("ClosePhoneDebug", "isOpenClosePhone: " + isOpenClosePhone);
                     
                     if (shouldShowClosePhone && !isOpenClosePhone) {
-                        Log.d("ClosePhoneDebug", "Launching close phone activity for Dhuhr prayer");
                         Intent closePhoneIntent = new Intent(MainActivity.this, ShowClosePhoneActivity.class);
-                        closePhoneIntent.putExtra("PRAY", check);
+                        // For Friday, pass prayer type 7, otherwise use the original check value
+                        int prayerType = isFriday ? 7 : check;
+                        closePhoneIntent.putExtra("PRAY", prayerType);
+                        Log.d("ClosePhoneDebug", "Launching close phone activity for prayer type: " + prayerType + " (Friday: " + isFriday + ")");
                         startActivity(closePhoneIntent);
                         isOpenClosePhone = true;
                     }

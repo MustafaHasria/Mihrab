@@ -22,8 +22,8 @@ import com.izzedineeita.mihrab.utils.Utils;
 public class ClosePhoneSettingActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView ivBack;
-    private LinearLayout llCloseNotifSound, llCloseNotifSoundFajr, llCloseNotifSoundShrouk, llCloseNotifSoundDuhr, llCloseNotifSoundAsr, llCloseNotifSoundMaghrib, llCloseNotifSoundIsha, llCloseNotifSoundGomaa;
-    private CheckBox cbCloseNotifSound, cbCloseNotifSoundFajr, cbCloseNotifSoundShrouk, cbCloseNotifSoundDuhr, cbCloseNotifSoundAsr, cbCloseNotifSoundMaghrib, cbCloseNotifSoundIsha, cbCloseNotifSoundGomaa;
+    private LinearLayout llCloseNotifSound, llCloseNotifSoundFajr, llCloseNotifSoundShrouk, llCloseNotifSoundDuhr, llCloseNotifSoundAsr, llCloseNotifSoundMaghrib, llCloseNotifSoundIsha, llCloseNotifSoundGomaa, llCloseNotifScreenGomaa;
+    private CheckBox cbCloseNotifSound, cbCloseNotifSoundFajr, cbCloseNotifSoundShrouk, cbCloseNotifSoundDuhr, cbCloseNotifSoundAsr, cbCloseNotifSoundMaghrib, cbCloseNotifSoundIsha, cbCloseNotifSoundGomaa, cbCloseNotifScreenGomaa;
     private View view;
     private CheckBox cbCloseNotifScreen;
     private EditText edNotifTimer;
@@ -94,6 +94,9 @@ public class ClosePhoneSettingActivity extends AppCompatActivity implements View
 
         llCloseNotifSoundGomaa = findViewById(R.id.ll_closeNotifSoundGomaa);
         cbCloseNotifSoundGomaa = findViewById(R.id.cb_closeNotifSoundGomaa);
+
+        llCloseNotifScreenGomaa = findViewById(R.id.ll_closeNotifScreenGomaa);
+        cbCloseNotifScreenGomaa = findViewById(R.id.cb_closeNotifScreenGomaa);
 
         view = findViewById(R.id.view);
         LinearLayout llCloseNotifScreen = findViewById(R.id.ll_closeNotifScreen);
@@ -254,18 +257,53 @@ public class ClosePhoneSettingActivity extends AppCompatActivity implements View
             }
         });
 
+        llCloseNotifScreenGomaa.setOnClickListener(v -> {
+            if (cbCloseNotifScreenGomaa.isChecked()) {
+                Pref.setValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SCREEN_GOMAA, false);
+                cbCloseNotifScreenGomaa.setChecked(false);
+                // Hide Friday sound notification option when Friday screen notification is disabled
+                llCloseNotifSoundGomaa.setVisibility(View.GONE);
+                cbCloseNotifSoundGomaa.setChecked(false);
+                Pref.setValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SOUND_GOMAA, false);
+            } else {
+                cbCloseNotifScreenGomaa.setChecked(true);
+                Pref.setValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SCREEN_GOMAA, true);
+                // Show Friday sound notification option when Friday screen notification is enabled
+                llCloseNotifSoundGomaa.setVisibility(View.VISIBLE);
+            }
+        });
+        cbCloseNotifScreenGomaa.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (cbCloseNotifScreenGomaa.isChecked()) {
+                Pref.setValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SCREEN_GOMAA, true);
+                // Show Friday sound notification option when Friday screen notification is enabled
+                llCloseNotifSoundGomaa.setVisibility(View.VISIBLE);
+            } else {
+                Pref.setValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SCREEN_GOMAA, false);
+                // Hide Friday sound notification option when Friday screen notification is disabled
+                llCloseNotifSoundGomaa.setVisibility(View.GONE);
+                cbCloseNotifSoundGomaa.setChecked(false);
+                Pref.setValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SOUND_GOMAA, false);
+            }
+        });
+
         //  Notification Screen Settings
         cbCloseNotifScreen.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (cbCloseNotifScreen.isChecked()) {
                 Pref.setValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true);
                 view.setVisibility(View.VISIBLE);
                 llCloseNotifSound.setVisibility(View.VISIBLE);
+                // Show Friday sound notification option when main screen notification is enabled
+                llCloseNotifSoundGomaa.setVisibility(View.VISIBLE);
             } else {
                 Pref.setValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SCREEN, false);
                 Pref.setValue(activity, "close_voice", false);
                 cbCloseNotifSound.setChecked(false);
                 llCloseNotifSound.setVisibility(View.GONE);
                 view.setVisibility(View.GONE);
+                // Hide Friday sound notification option when main screen notification is disabled
+                llCloseNotifSoundGomaa.setVisibility(View.GONE);
+                cbCloseNotifSoundGomaa.setChecked(false);
+                Pref.setValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SOUND_GOMAA, false);
             }
         });
     }
@@ -317,10 +355,28 @@ public class ClosePhoneSettingActivity extends AppCompatActivity implements View
             cbCloseNotifSoundGomaa.setChecked(false);
         }
 
+
         if (Pref.getValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SCREEN, true)) {
             cbCloseNotifScreen.setChecked(true);
+            // Show Friday screen notification option if main screen notification is enabled
+            llCloseNotifScreenGomaa.setVisibility(View.VISIBLE);
+            
+            // Check Friday screen notification state and show/hide sound option accordingly
+            if (Pref.getValue(activity, Constants.PREF_CLOSE_NOTIFICATION_SCREEN_GOMAA, true)) {
+                cbCloseNotifScreenGomaa.setChecked(true);
+                // Show Friday sound notification option if Friday screen notification is enabled
+                llCloseNotifSoundGomaa.setVisibility(View.VISIBLE);
+            } else {
+                cbCloseNotifScreenGomaa.setChecked(false);
+                // Hide Friday sound notification option if Friday screen notification is disabled
+                llCloseNotifSoundGomaa.setVisibility(View.GONE);
+            }
         } else {
             cbCloseNotifScreen.setChecked(false);
+            // Hide Friday screen notification option if main screen notification is disabled
+            llCloseNotifScreenGomaa.setVisibility(View.GONE);
+            // Hide Friday sound notification option if main screen notification is disabled
+            llCloseNotifSoundGomaa.setVisibility(View.GONE);
         }
     }
 

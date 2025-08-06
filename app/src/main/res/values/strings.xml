@@ -98,6 +98,7 @@
     <string name="closeNotifSoundMaghrib">حالة التنبيهات الصوتية لإغلاق الهاتف لصلاة المغرب</string>
     <string name="closeNotifSoundIsha">حالة التنبيهات الصوتية لإغلاق الهاتف لصلاة العشاء</string>
     <string name="closeNotifSoundGomaa">حالة التنبيهات الصوتية لإغلاق الهاتف لصلاة الجمعة</string>
+    <string name="closeNotifScreenGomaa">حالة التنبيهات المرئية لإغلاق الهاتف لصلاة الجمعة</string>
 
     <string name="arNotif">نص التنبيه باللغة العربية </string>
     <string name="enNotif">نص التنبيه باللغة الانجليزية </string>

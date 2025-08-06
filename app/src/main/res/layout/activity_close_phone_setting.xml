@@ -440,6 +440,53 @@
                     android:textSize="@dimen/small_font_size" />
             </LinearLayout>
 
+
+            <LinearLayout
+                android:id="@+id/ll_closeNotifScreenGomaa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tv_closeNotifScreenGomaa"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/closeNotifScreenGomaa"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/spinner_text_size" />
+
+                    <CheckBox
+                        android:id="@+id/cb_closeNotifScreenGomaa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|right" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvCloseScreenGomaa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/hintSoundNotif"
+                    android:textColor="#c0c0c0"
+                    android:textSize="@dimen/small_font_size" />
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_closeNotifSoundGomaa"
                 android:layout_width="match_parent"
@@ -485,6 +532,7 @@
                     android:textColor="#c0c0c0"
                     android:textSize="@dimen/small_font_size" />
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

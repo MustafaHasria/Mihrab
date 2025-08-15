@@ -105,6 +105,7 @@ public class AddAdsActivity extends AppCompatActivity
     private SharedPreferences sp;
     private DataBaseHelper DBO;
     private CheckBox cbSat, cbSun, cbMon, cbTue, cbWed, cbThu, cbFri;
+    private CheckBox cbHidePulpitAdsBox;
     private boolean isConflictAds = false;
     ArrayList<Integer> checkList = new ArrayList<>();
     ArrayList<AdsPeriods> adsPeriodsList = new ArrayList<>();
@@ -303,6 +304,44 @@ public class AddAdsActivity extends AppCompatActivity
             // Initialize TextViews
             tvSave = findViewById(R.id.tvSave);
             tittleA = findViewById(R.id.tittleA);
+
+            // Initialize CheckBoxes
+            cbHidePulpitAdsBox = findViewById(R.id.cbHidePulpitAdsBox);
+
+            // Load the pulpit ads box visibility state
+            // Handle migration from old boolean format to new integer format
+            int visibilityState;
+            try {
+                // Try to read as integer (new format)
+                visibilityState = sp.getInt(Constants.PREF_HIDE_PULPIT_ADS_BOX, View.VISIBLE);
+            } catch (ClassCastException e) {
+                // Handle migration from old boolean format
+                Log.d("AddAdsActivity", "Migrating from old boolean format to new integer format");
+                boolean oldBooleanValue = sp.getBoolean(Constants.PREF_HIDE_PULPIT_ADS_BOX, false);
+                visibilityState = oldBooleanValue ? View.GONE : View.VISIBLE;
+                
+                // Save the new integer format
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putInt(Constants.PREF_HIDE_PULPIT_ADS_BOX, visibilityState);
+                editor.apply();
+                
+                // Remove the old boolean key
+                editor.remove(Constants.PREF_HIDE_PULPIT_ADS_BOX);
+                editor.apply();
+            }
+            
+            boolean hidePulpitAdsBox = (visibilityState == View.GONE);
+            cbHidePulpitAdsBox.setChecked(hidePulpitAdsBox);
+            Log.d("AddAdsActivity", "Pulpit ads box visibility state loaded: " + visibilityState + ", checkbox checked: " + hidePulpitAdsBox);
+
+            // Debug: Log the current preference value from SharedPreferences
+            int currentPref = sp.getInt(Constants.PREF_HIDE_PULPIT_ADS_BOX, View.VISIBLE);
+            Log.d("AddAdsActivity", "Current PREF_HIDE_PULPIT_ADS_BOX value from SharedPreferences: " + currentPref);
+
+            // Add checkbox change listener for debugging
+            cbHidePulpitAdsBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                Log.d("AddAdsActivity", "Pulpit ads box checkbox changed to: " + isChecked);
+            });
 
             // Set initial states
             if (edAddAppearance != null) edAddAppearance.setFocusable(true);
@@ -687,28 +726,13 @@ public class AddAdsActivity extends AppCompatActivity
                                 checkList.add(pos);
                                 ed_start.setEnabled(false);
                                 ed_end.setEnabled(false);
-                                rbImage.setEnabled(false);
-                                rbText.setEnabled(false);
-                                rbVideo.setEnabled(false);
-                                edAdsText.setEnabled(false);
-                                edAdsTitle.setEnabled(false);
-                                ivSelectImg.setClickable(false);
-                                ivSelectImg1.setClickable(false);
-                                ivSelectImg2.setClickable(false);
-                                ivSelectImg3.setClickable(false);
-                                ivSelectImg4.setClickable(false);
-                                ivSelectImg5.setClickable(false);
-                                ivSelectImg6.setClickable(false);
-                                ivSelectVideo.setClickable(false);
-                                ivSelectVideo1.setClickable(false);
-                                ivSelectVideo2.setClickable(false);
-                                cbSat.setEnabled(false);
-                                cbSun.setEnabled(false);
-                                cbMon.setEnabled(false);
-                                cbTue.setEnabled(false);
-                                cbWed.setEnabled(false);
-                                cbThu.setEnabled(false);
-                                cbFri.setEnabled(false);
+
+                                // Save the pulpit ads box visibility state
+                                int visibilityState = cbHidePulpitAdsBox.isChecked() ? View.GONE : View.VISIBLE;
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putInt(Constants.PREF_HIDE_PULPIT_ADS_BOX, visibilityState);
+                                editor.apply();
+                                Log.d("AddAdsActivity", "Pulpit ads box visibility state saved: " + visibilityState);
                                 edEndTime.setEnabled(false);
                                 edStartTime.setEnabled(false);
                                 Utils.showCustomToast(activity, msg);

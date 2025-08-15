@@ -30,7 +30,6 @@ public class AzkarAdapter extends RecyclerView.Adapter<AzkarAdapter.AdsViewHolde
     public AzkarAdapter(Activity activity, ArrayList<AzkarModel> adsList, OnRecycleViewItemClicked listener) {
         this.adsList = adsList;
         this.listener = listener;
-        SharedPreferences sp = activity.getSharedPreferences(Utils.PREFS, Context.MODE_PRIVATE);
         DataBaseHelper DBO = new DataBaseHelper(activity);
         try {
             DBO.createDataBase();

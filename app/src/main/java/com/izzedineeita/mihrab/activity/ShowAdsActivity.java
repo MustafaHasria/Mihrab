@@ -1,6 +1,7 @@
 package com.izzedineeita.mihrab.activity;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,7 +18,6 @@ import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.izzedineeita.mihrab.Adapters.SliderAdapter;
 import com.izzedineeita.mihrab.MainActivity;
 import com.izzedineeita.mihrab.R;
 import com.izzedineeita.mihrab.constants.Constants;
@@ -26,9 +26,6 @@ import com.izzedineeita.mihrab.database.DataBaseHelper;
 import com.izzedineeita.mihrab.model.Ads;
 import com.izzedineeita.mihrab.utils.Pref;
 import com.izzedineeita.mihrab.utils.Utils;
-// import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType; // Removed Image Slider dependency
-// import com.smarteist.autoimageslider.SliderAnimations; // Removed Image Slider dependency
-// import com.smarteist.autoimageslider.SliderView; // Removed Image Slider dependency
 
 import java.io.File;
 import java.text.DateFormat;
@@ -143,6 +140,14 @@ public class ShowAdsActivity extends AppCompatActivity {
         dateM = Utils.writeMDate(activity);
         dateH = Utils.writeHDate(activity);
 
+        ImageView ivPulpitAdsBox = findViewById(R.id.ivPulpitAdsBox);
+        if (ivPulpitAdsBox != null) {
+            // Use the same SharedPreferences instance as AddAdsActivity
+            SharedPreferences sp = getSharedPreferences("Mhrab", MODE_PRIVATE);
+
+            int visibilityState = sp.getInt(Constants.PREF_HIDE_PULPIT_ADS_BOX, View.VISIBLE);
+            ivPulpitAdsBox.setVisibility(visibilityState);
+        }
 //        Log.e("XXX9", "" + ads.getMasjedID());
         init();
         card = findViewById(R.id.card);

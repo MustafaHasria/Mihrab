@@ -188,11 +188,18 @@ public class AdsActivity extends AppCompatActivity {
         try {
             databaseHelper.openDataBase();
             int masjedId = sharedPreferences.getInt(PREF_MASJED_ID, DEFAULT_MASJED_ID);
-            adsList = databaseHelper.getAdsList(masjedId);
-            Log.d(TAG, "Loaded " + adsList.size() + " advertisements");
+            ArrayList<Ads> newAdsList = databaseHelper.getAdsList(masjedId);
+            Log.d(TAG, "Loaded " + newAdsList.size() + " advertisements");
             databaseHelper.close();
 
-            updateAdapter();
+            // Update adapter data - this will automatically notify the RecyclerView
+            if (adsAdapter != null) {
+                adsAdapter.updateData(newAdsList);
+            } else {
+                // Fallback: update local list if adapter is not ready yet
+                adsList.clear();
+                adsList.addAll(newAdsList);
+            }
         } catch (Exception e) {
             Log.e(TAG, "Failed to load ads data", e);
             showErrorDialog("خطأ في تحميل الإعلانات");

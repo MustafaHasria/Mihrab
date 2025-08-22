@@ -78,7 +78,7 @@
                 android:padding="@dimen/padding"
                 android:scrollbars="vertical"
                 android:text="@string/testText"
-                android:textColor="#F4C59D"
+                android:textColor="#B3ABA5"
                 android:textSize="24sp"
                 android:visibility="visible" />
         </RelativeLayout>
@@ -94,24 +94,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:background="@drawable/background_data_6"
                 android:layout_height="155dp"
+                android:layout_gravity="right"
                 android:layout_marginBottom="-10dp"
                 android:adjustViewBounds="true"
-                android:layout_gravity="right"
+                android:background="@drawable/background_data_6"
                 android:gravity="right"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_marginRight="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:orientation="horizontal" >
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_data_hajre"
@@ -148,10 +148,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:gravity="right"
-                    android:layout_marginRight="5dp"
                     android:layout_marginTop="-30dp"
+                    android:layout_marginRight="5dp"
                     android:layout_marginBottom="15dp"
+                    android:gravity="right"
                     android:orientation="horizontal">
 
                     <TextView
@@ -185,31 +185,31 @@
 
             <LinearLayout
                 android:layout_width="180dp"
-                android:background="@drawable/background_pray_6"
                 android:layout_height="100dp"
+                android:layout_gravity="right"
                 android:layout_marginBottom="-10dp"
                 android:adjustViewBounds="true"
-                android:layout_gravity="right"
+                android:background="@drawable/background_pray_6"
                 android:gravity="right"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="22dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="30dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginRight="5dp"
                     android:adjustViewBounds="true"
+                    android:paddingLeft="30dp"
                     android:src="@drawable/faje_azkar_6" />
 
                 <TextView
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginTop="-9dp"
                     android:id="@+id/tv_fajr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="-9dp"
                     android:fontFamily="@font/verdana_bold"
                     android:gravity="center"
                     android:text="5:12"
@@ -221,31 +221,31 @@
 
             <LinearLayout
                 android:layout_width="180dp"
-                android:background="@drawable/background_pray_6"
                 android:layout_height="100dp"
+                android:layout_gravity="right"
                 android:layout_marginBottom="-10dp"
                 android:adjustViewBounds="true"
-                android:layout_gravity="right"
+                android:background="@drawable/background_pray_6"
                 android:gravity="right"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="22dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="30dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginRight="5dp"
                     android:adjustViewBounds="true"
+                    android:paddingLeft="30dp"
                     android:src="@drawable/shroq_azkar_6" />
 
                 <TextView
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginTop="-9dp"
                     android:id="@+id/tv_sun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="-9dp"
                     android:fontFamily="@font/verdana_bold"
                     android:gravity="center"
                     android:text="5:12"
@@ -257,31 +257,31 @@
 
             <LinearLayout
                 android:layout_width="180dp"
-                android:background="@drawable/background_pray_6"
                 android:layout_height="100dp"
+                android:layout_gravity="right"
                 android:layout_marginBottom="-10dp"
                 android:adjustViewBounds="true"
-                android:layout_gravity="right"
+                android:background="@drawable/background_pray_6"
                 android:gravity="right"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="22dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="30dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginRight="5dp"
                     android:adjustViewBounds="true"
+                    android:paddingLeft="30dp"
                     android:src="@drawable/thahr_azkar_6" />
 
                 <TextView
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginTop="-9dp"
                     android:id="@+id/tv_thahr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="-9dp"
                     android:fontFamily="@font/verdana_bold"
                     android:gravity="center"
                     android:text="5:12"
@@ -290,33 +290,34 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="180dp"
-                android:background="@drawable/background_pray_6"
                 android:layout_height="100dp"
+                android:layout_gravity="right"
                 android:layout_marginBottom="-10dp"
                 android:adjustViewBounds="true"
-                android:layout_gravity="right"
+                android:background="@drawable/background_pray_6"
                 android:gravity="right"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="22dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="30dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginRight="5dp"
                     android:adjustViewBounds="true"
+                    android:paddingLeft="30dp"
                     android:src="@drawable/asr_azkar_6" />
 
                 <TextView
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginTop="-9dp"
                     android:id="@+id/tv_asr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="-9dp"
                     android:fontFamily="@font/verdana_bold"
                     android:gravity="center"
                     android:text="5:12"
@@ -328,31 +329,31 @@
 
             <LinearLayout
                 android:layout_width="180dp"
-                android:background="@drawable/background_pray_6"
                 android:layout_height="100dp"
+                android:layout_gravity="right"
                 android:layout_marginBottom="-10dp"
                 android:adjustViewBounds="true"
-                android:layout_gravity="right"
+                android:background="@drawable/background_pray_6"
                 android:gravity="right"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="22dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="30dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginRight="5dp"
                     android:adjustViewBounds="true"
+                    android:paddingLeft="30dp"
                     android:src="@drawable/mgrb_azkar_6" />
 
                 <TextView
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginTop="-9dp"
                     android:id="@+id/tv_magrb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="-9dp"
                     android:fontFamily="@font/verdana_bold"
                     android:gravity="center"
                     android:text="5:12"
@@ -364,31 +365,31 @@
 
             <LinearLayout
                 android:layout_width="180dp"
-                android:background="@drawable/background_pray_6"
                 android:layout_height="100dp"
+                android:layout_gravity="right"
                 android:layout_marginBottom="-10dp"
                 android:adjustViewBounds="true"
-                android:layout_gravity="right"
+                android:background="@drawable/background_pray_6"
                 android:gravity="right"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="22dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="30dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginRight="5dp"
                     android:adjustViewBounds="true"
+                    android:paddingLeft="30dp"
                     android:src="@drawable/isha_azkar_6" />
 
                 <TextView
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginTop="-9dp"
                     android:id="@+id/tv_isha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="-9dp"
                     android:fontFamily="@font/verdana_bold"
                     android:gravity="center"
                     android:text="5:12"
@@ -446,7 +447,6 @@
     </RelativeLayout>
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/tv_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -458,6 +458,7 @@
         android:text="الأربعاء"
         android:textColor="#213F19"
         android:textSize="60sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 </RelativeLayout>

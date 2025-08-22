@@ -102,6 +102,27 @@ public class AdsAdapter extends RecyclerView.Adapter<AdsAdapter.AdsViewHolder> {
         return TYPE_HEADER;
     }
 
+    /**
+     * Updates the adapter's data list and notifies of the change.
+     *
+     * @param newAdsList The new list of advertisements
+     */
+    public void updateData(ArrayList<Ads> newAdsList) {
+        if (newAdsList != null) {
+            this.adsList.clear();
+            this.adsList.addAll(newAdsList);
+            notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * Clears all data from the adapter.
+     */
+    public void clearData() {
+        this.adsList.clear();
+        notifyDataSetChanged();
+    }
+
     public interface OnRecycleViewItemClicked {
         void onItemClicked(View view, int position);
 

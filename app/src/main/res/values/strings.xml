@@ -99,6 +99,14 @@
     <string name="closeNotifSoundIsha">حالة التنبيهات الصوتية لإغلاق الهاتف لصلاة العشاء</string>
     <string name="closeNotifSoundGomaa">حالة التنبيهات الصوتية لإغلاق الهاتف لصلاة الجمعة</string>
     <string name="hide_pulpit_ads_box">حذف مربع المنبر الدعوي</string>
+    <string name="text_font_size">حجم الخط</string>
+    <string name="text_movement_speed">سرعة الحركة</string>
+    <string name="font_size_small">صغير</string>
+    <string name="font_size_medium">متوسط</string>
+    <string name="font_size_large">كبير</string>
+    <string name="speed_slow">بطيء</string>
+    <string name="speed_medium">متوسط</string>
+    <string name="speed_fast">سريع</string>
     <string name="closeNotifScreenGomaa">حالة التنبيهات المرئية لإغلاق الهاتف لصلاة الجمعة</string>
 
     <string name="arNotif">نص التنبيه باللغة العربية </string>

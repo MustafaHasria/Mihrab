@@ -419,6 +419,119 @@
                         android:textColor="@color/black_light"
                         android:textColorHint="@color/lb_grey"
                         android:textSize="@dimen/textSize" />
+
+                    <!-- Font Size Selection -->
+                    <LinearLayout
+                        android:id="@+id/llFontSize"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/edAdsText"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_font_size"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize"
+                            android:paddingRight="@dimen/padding" />
+
+                        <RadioGroup
+                            android:id="@+id/rgFontSize"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:layout_marginTop="5dp">
+
+                            <RadioButton
+                                android:id="@+id/rbFontSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/font_size_small"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/textSize"
+                                android:layout_marginRight="@dimen/padding" />
+
+                            <RadioButton
+                                android:id="@+id/rbFontMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/font_size_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/textSize"
+                                android:checked="true"
+                                android:layout_marginRight="@dimen/padding" />
+
+                            <RadioButton
+                                android:id="@+id/rbFontLarge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/font_size_large"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/textSize" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <!-- Movement Speed Selection -->
+                    <LinearLayout
+                        android:id="@+id/llMovementSpeed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/llFontSize"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_movement_speed"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize"
+                            android:paddingRight="@dimen/padding" />
+
+                        <RadioGroup
+                            android:id="@+id/rgMovementSpeed"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:layout_marginTop="5dp">
+
+                            <RadioButton
+                                android:id="@+id/rbSpeedSlow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/speed_slow"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/textSize"
+                                android:layout_marginRight="@dimen/padding" />
+
+                            <RadioButton
+                                android:id="@+id/rbSpeedMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/speed_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/textSize"
+                                android:checked="true"
+                                android:layout_marginRight="@dimen/padding" />
+
+                            <RadioButton
+                                android:id="@+id/rbSpeedFast"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/speed_fast"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/textSize" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
                 </RelativeLayout>
             </RelativeLayout>
 

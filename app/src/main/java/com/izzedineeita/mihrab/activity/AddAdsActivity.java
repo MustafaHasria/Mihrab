@@ -106,6 +106,9 @@ public class AddAdsActivity extends AppCompatActivity
     private DataBaseHelper DBO;
     private CheckBox cbSat, cbSun, cbMon, cbTue, cbWed, cbThu, cbFri;
     private CheckBox cbHidePulpitAdsBox;
+    private RadioGroup rgFontSize, rgMovementSpeed;
+    private RadioButton rbFontSmall, rbFontMedium, rbFontLarge;
+    private RadioButton rbSpeedSlow, rbSpeedMedium, rbSpeedFast;
     private boolean isConflictAds = false;
     ArrayList<Integer> checkList = new ArrayList<>();
     ArrayList<AdsPeriods> adsPeriodsList = new ArrayList<>();
@@ -308,6 +311,16 @@ public class AddAdsActivity extends AppCompatActivity
             // Initialize CheckBoxes
             cbHidePulpitAdsBox = findViewById(R.id.cbHidePulpitAdsBox);
 
+            // Initialize Font Size and Movement Speed RadioGroups
+            rgFontSize = findViewById(R.id.rgFontSize);
+            rgMovementSpeed = findViewById(R.id.rgMovementSpeed);
+            rbFontSmall = findViewById(R.id.rbFontSmall);
+            rbFontMedium = findViewById(R.id.rbFontMedium);
+            rbFontLarge = findViewById(R.id.rbFontLarge);
+            rbSpeedSlow = findViewById(R.id.rbSpeedSlow);
+            rbSpeedMedium = findViewById(R.id.rbSpeedMedium);
+            rbSpeedFast = findViewById(R.id.rbSpeedFast);
+
             // Load the pulpit ads box visibility state
             // Handle migration from old boolean format to new integer format
             int visibilityState;
@@ -342,6 +355,9 @@ public class AddAdsActivity extends AppCompatActivity
             cbHidePulpitAdsBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 Log.d("AddAdsActivity", "Pulpit ads box checkbox changed to: " + isChecked);
             });
+
+            // Load font size and movement speed preferences
+            loadTextAdsPreferences();
 
             // Set initial states
             if (edAddAppearance != null) edAddAppearance.setFocusable(true);
@@ -733,6 +749,11 @@ public class AddAdsActivity extends AppCompatActivity
                                 editor.putInt(Constants.PREF_HIDE_PULPIT_ADS_BOX, visibilityState);
                                 editor.apply();
                                 Log.d("AddAdsActivity", "Pulpit ads box visibility state saved: " + visibilityState);
+
+                                // Save text ads preferences if this is a text ad
+                                if (type == 3) {
+                                    saveTextAdsPreferences();
+                                }
                                 edEndTime.setEnabled(false);
                                 edStartTime.setEnabled(false);
                                 Utils.showCustomToast(activity, msg);
@@ -1317,6 +1338,87 @@ public class AddAdsActivity extends AppCompatActivity
             
         } catch (Exception e) {
             Log.e(TAG, "Error in basic functionality test: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Load text ads preferences for font size and movement speed
+     */
+    private void loadTextAdsPreferences() {
+        try {
+            // Load font size preference (default: medium = 1)
+            int fontSize = sp.getInt(Constants.PREF_TEXT_ADS_FONT_SIZE, 1);
+            switch (fontSize) {
+                case 0: // Small
+                    rbFontSmall.setChecked(true);
+                    break;
+                case 1: // Medium
+                    rbFontMedium.setChecked(true);
+                    break;
+                case 2: // Large
+                    rbFontLarge.setChecked(true);
+                    break;
+                default:
+                    rbFontMedium.setChecked(true); // Default to medium
+                    break;
+            }
+
+            // Load movement speed preference (default: medium = 1)
+            int movementSpeed = sp.getInt(Constants.PREF_TEXT_ADS_MOVEMENT_SPEED, 1);
+            switch (movementSpeed) {
+                case 0: // Slow
+                    rbSpeedSlow.setChecked(true);
+                    break;
+                case 1: // Medium
+                    rbSpeedMedium.setChecked(true);
+                    break;
+                case 2: // Fast
+                    rbSpeedFast.setChecked(true);
+                    break;
+                default:
+                    rbSpeedMedium.setChecked(true); // Default to medium
+                    break;
+            }
+
+            Log.d("AddAdsActivity", "Text ads preferences loaded - Font Size: " + fontSize + ", Movement Speed: " + movementSpeed);
+        } catch (Exception e) {
+            Log.e("AddAdsActivity", "Error loading text ads preferences: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Save text ads preferences for font size and movement speed
+     */
+    private void saveTextAdsPreferences() {
+        try {
+            SharedPreferences.Editor editor = sp.edit();
+
+            // Save font size preference
+            int fontSize = 1; // Default to medium
+            if (rbFontSmall.isChecked()) {
+                fontSize = 0; // Small
+            } else if (rbFontMedium.isChecked()) {
+                fontSize = 1; // Medium
+            } else if (rbFontLarge.isChecked()) {
+                fontSize = 2; // Large
+            }
+            editor.putInt(Constants.PREF_TEXT_ADS_FONT_SIZE, fontSize);
+
+            // Save movement speed preference
+            int movementSpeed = 1; // Default to medium
+            if (rbSpeedSlow.isChecked()) {
+                movementSpeed = 0; // Slow
+            } else if (rbSpeedMedium.isChecked()) {
+                movementSpeed = 1; // Medium
+            } else if (rbSpeedFast.isChecked()) {
+                movementSpeed = 2; // Fast
+            }
+            editor.putInt(Constants.PREF_TEXT_ADS_MOVEMENT_SPEED, movementSpeed);
+
+            editor.apply();
+            Log.d("AddAdsActivity", "Text ads preferences saved - Font Size: " + fontSize + ", Movement Speed: " + movementSpeed);
+        } catch (Exception e) {
+            Log.e("AddAdsActivity", "Error saving text ads preferences: " + e.getMessage(), e);
         }
     }
 

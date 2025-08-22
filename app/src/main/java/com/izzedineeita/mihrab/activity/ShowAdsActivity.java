@@ -466,6 +466,9 @@ public class ShowAdsActivity extends AppCompatActivity {
                 vvAdsVideo.setVisibility(View.GONE);
                 tvAdsText.setText(text);
                 tvAdsText.setVisibility(View.VISIBLE);
+                
+                // Apply text ads styling and animation based on preferences
+                applyTextAdsPreferences();
             }
 
         } catch (
@@ -519,6 +522,86 @@ public class ShowAdsActivity extends AppCompatActivity {
             myThread.interrupt();
         }
         super.onBackPressed();
+    }
+
+    /**
+     * Apply text ads preferences for font size and movement speed
+     */
+    private void applyTextAdsPreferences() {
+        try {
+            SharedPreferences sp = getSharedPreferences("Mhrab", MODE_PRIVATE);
+            
+            // Apply font size based on preference
+            int fontSize = sp.getInt(Constants.PREF_TEXT_ADS_FONT_SIZE, 1); // Default: medium
+            float textSize = 24f; // Default size
+            
+            switch (fontSize) {
+                case 0: // Small
+                    textSize = 18f;
+                    break;
+                case 1: // Medium
+                    textSize = 24f;
+                    break;
+                case 2: // Large
+                    textSize = 32f;
+                    break;
+            }
+            
+            tvAdsText.setTextSize(textSize);
+
+            // Apply movement speed based on preference
+            int movementSpeed = sp.getInt(Constants.PREF_TEXT_ADS_MOVEMENT_SPEED, 1); // Default: medium
+            long animationDuration = 10000; // Default duration in milliseconds
+            
+            switch (movementSpeed) {
+                case 0: // Slow
+                    animationDuration = 15000; // 15 seconds
+                    break;
+                case 1: // Medium
+                    animationDuration = 10000; // 10 seconds
+                    break;
+                case 2: // Fast
+                    animationDuration = 5000; // 5 seconds
+                    break;
+            }
+            
+            // Apply scrolling animation for text movement
+            applyTextScrollingAnimation(animationDuration);
+            Log.d("ShowAdsActivity", "Applied movement speed: " + animationDuration + "ms");
+            
+        } catch (Exception e) {
+            Log.e("ShowAdsActivity", "Error applying text ads preferences: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Apply scrolling animation to text ads
+     */
+    private void applyTextScrollingAnimation(long duration) {
+        try {
+            // Start a simple marquee effect by enabling scrolling
+            tvAdsText.setSelected(true);
+            tvAdsText.setSingleLine(true);
+            
+            // Create a custom animation handler for text movement
+            Handler animationHandler = new Handler();
+            Runnable scrollRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    if (tvAdsText != null && tvAdsText.getVisibility() == View.VISIBLE) {
+                        // Simple scroll effect - this can be enhanced with more complex animations
+                        tvAdsText.scrollBy(1, 0);
+                        animationHandler.postDelayed(this, duration / 1000); // Adjust scroll speed
+                    }
+                }
+            };
+            
+            // Start the scrolling animation
+            animationHandler.post(scrollRunnable);
+            
+        } catch (Exception e) {
+            Log.e("ShowAdsActivity", "Error applying text scrolling animation: " + e.getMessage(), e);
+        }
     }
 
 }

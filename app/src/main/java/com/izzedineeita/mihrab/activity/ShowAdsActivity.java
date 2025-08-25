@@ -9,9 +9,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -464,8 +466,21 @@ public class ShowAdsActivity extends AppCompatActivity {
             } else if (type == 3) {
                 card.setVisibility(View.GONE);
                 vvAdsVideo.setVisibility(View.GONE);
-                tvAdsText.setText(text);
+                
+                // Make sure text is not empty
+                if (text != null && !text.isEmpty()) {
+                    Log.d("ShowAdsActivity", "Setting text ad content: " + text);
+                    tvAdsText.setText(text);
+                } else {
+                    Log.e("ShowAdsActivity", "Text ad content is empty or null");
+                    tvAdsText.setText("No content available");
+                }
+                
                 tvAdsText.setVisibility(View.VISIBLE);
+                
+                // Make ScrollView visible
+                ScrollView scrollViewAdsText = findViewById(R.id.scrollViewAdsText);
+                scrollViewAdsText.setVisibility(View.VISIBLE);
                 
                 // Apply text ads styling and animation based on preferences
                 applyTextAdsPreferences();
@@ -525,49 +540,59 @@ public class ShowAdsActivity extends AppCompatActivity {
     }
 
     /**
+     * Convert percentage (0-100) to font size in sp (10sp to 150sp)
+     * @param percentage The percentage value from SeekBar (0-100)
+     * @return Font size in sp
+     */
+    private int getFontSizeFromPercentage(int percentage) {
+        // Map 0% to 10sp, 100% to 150sp
+        return 10 + (int) ((percentage / 100.0) * 140);
+    }
+
+    /**
+     * Convert percentage (0-100) to movement speed multiplier
+     * @param percentage The percentage value from SeekBar (0-100)
+     * @return Speed multiplier (0.5x to 2.0x)
+     */
+    private float getSpeedMultiplierFromPercentage(int percentage) {
+        // Map 0% to 0.5x (slow), 50% to 1.0x (normal), 100% to 2.0x (fast)
+        if (percentage <= 50) {
+            // 0-50% maps to 0.5x - 1.0x
+            return 0.5f + (percentage / 50.0f) * 0.5f;
+        } else {
+            // 51-100% maps to 1.0x - 2.0x
+            return 1.0f + ((percentage - 50) / 50.0f) * 1.0f;
+        }
+    }
+
+    /**
      * Apply text ads preferences for font size and movement speed
      */
     private void applyTextAdsPreferences() {
         try {
             SharedPreferences sp = getSharedPreferences("Mhrab", MODE_PRIVATE);
             
-            // Apply font size based on preference
-            int fontSize = sp.getInt(Constants.PREF_TEXT_ADS_FONT_SIZE, 1); // Default: medium
-            float textSize = 24f; // Default size
+            // Apply font size based on percentage preference (0-100)
+            int fontSizePercentage = sp.getInt(Constants.PREF_TEXT_ADS_FONT_SIZE, 50); // Default: 50%
+            int fontSizeSp = getFontSizeFromPercentage(fontSizePercentage);
             
-            switch (fontSize) {
-                case 0: // Small
-                    textSize = 18f;
-                    break;
-                case 1: // Medium
-                    textSize = 24f;
-                    break;
-                case 2: // Large
-                    textSize = 32f;
-                    break;
+            // Cap font size at 80sp to ensure text is visible
+            if (fontSizeSp > 80) {
+                fontSizeSp = 80;
             }
             
-            tvAdsText.setTextSize(textSize);
+            tvAdsText.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSizeSp);
+            // Don't limit lines for scrolling text
+            tvAdsText.setMaxLines(Integer.MAX_VALUE);
+            tvAdsText.setEllipsize(null);
 
-            // Apply movement speed based on preference
-            int movementSpeed = sp.getInt(Constants.PREF_TEXT_ADS_MOVEMENT_SPEED, 1); // Default: medium
-            long animationDuration = 10000; // Default duration in milliseconds
-            
-            switch (movementSpeed) {
-                case 0: // Slow
-                    animationDuration = 15000; // 15 seconds
-                    break;
-                case 1: // Medium
-                    animationDuration = 10000; // 10 seconds
-                    break;
-                case 2: // Fast
-                    animationDuration = 5000; // 5 seconds
-                    break;
-            }
+            // Apply movement speed based on percentage preference (0-100)
+            int speedPercentage = sp.getInt(Constants.PREF_TEXT_ADS_MOVEMENT_SPEED, 50); // Default: 50%
+            float speedMultiplier = getSpeedMultiplierFromPercentage(speedPercentage);
             
             // Apply scrolling animation for text movement
-            applyTextScrollingAnimation(animationDuration);
-            Log.d("ShowAdsActivity", "Applied movement speed: " + animationDuration + "ms");
+            applyTextScrollingAnimation(speedMultiplier);
+            Log.d("ShowAdsActivity", "Applied font size: " + fontSizeSp + "sp, speed multiplier: " + speedMultiplier + "x");
             
         } catch (Exception e) {
             Log.e("ShowAdsActivity", "Error applying text ads preferences: " + e.getMessage(), e);
@@ -577,27 +602,52 @@ public class ShowAdsActivity extends AppCompatActivity {
     /**
      * Apply scrolling animation to text ads
      */
-    private void applyTextScrollingAnimation(long duration) {
+    private void applyTextScrollingAnimation(float speedMultiplier) {
         try {
-            // Start a simple marquee effect by enabling scrolling
-            tvAdsText.setSelected(true);
-            tvAdsText.setSingleLine(true);
+            // Find the ScrollView that contains the text
+            ScrollView scrollViewAdsText = findViewById(R.id.scrollViewAdsText);
             
-            // Create a custom animation handler for text movement
-            Handler animationHandler = new Handler();
-            Runnable scrollRunnable = new Runnable() {
+            // Configure TextView for multi-line display
+            tvAdsText.setSingleLine(false);
+            tvAdsText.setEllipsize(null);
+            
+            // Ensure text is visible
+            tvAdsText.setVisibility(View.VISIBLE);
+            scrollViewAdsText.setVisibility(View.VISIBLE);
+            
+            // Log the text content to verify it's not empty
+            Log.d("ShowAdsActivity", "Text content: " + tvAdsText.getText());
+            
+            // Set up auto-scrolling behavior based on speed multiplier
+            final int scrollDelay = (int) (2000 / speedMultiplier); // Base delay of 2 seconds, adjusted by speed
+            final Handler handler = new Handler();
+            final Runnable scrollRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    if (tvAdsText != null && tvAdsText.getVisibility() == View.VISIBLE) {
-                        // Simple scroll effect - this can be enhanced with more complex animations
-                        tvAdsText.scrollBy(1, 0);
-                        animationHandler.postDelayed(this, duration / 1000); // Adjust scroll speed
+                    // Calculate scroll amount based on text height and available space
+                    int maxScroll = tvAdsText.getHeight() - scrollViewAdsText.getHeight();
+                    if (maxScroll > 0) {
+                        // Get current scroll position
+                        int currentScroll = scrollViewAdsText.getScrollY();
+                        
+                        // If we're at the bottom, scroll back to top
+                        if (currentScroll >= maxScroll) {
+                            scrollViewAdsText.smoothScrollTo(0, 0);
+                        } else {
+                            // Otherwise scroll down a bit more
+                            scrollViewAdsText.smoothScrollBy(0, 10);
+                        }
                     }
+                    
+                    // Schedule the next scroll
+                    handler.postDelayed(this, 100);
                 }
             };
             
-            // Start the scrolling animation
-            animationHandler.post(scrollRunnable);
+            // Start scrolling after a short delay to allow layout to complete
+            handler.postDelayed(scrollRunnable, scrollDelay);
+            
+            Log.d("ShowAdsActivity", "Applied vertical scrolling with speed multiplier: " + speedMultiplier + "x, delay: " + scrollDelay + "ms");
             
         } catch (Exception e) {
             Log.e("ShowAdsActivity", "Error applying text scrolling animation: " + e.getMessage(), e);

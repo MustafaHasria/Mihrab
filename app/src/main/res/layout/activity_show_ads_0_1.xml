@@ -421,8 +421,8 @@
                 android:src="@drawable/logo"
                 android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/tvAdsText"
+            <ScrollView
+                android:id="@+id/scrollViewAdsText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
@@ -430,15 +430,22 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
-                android:fontFamily="@font/al_hurra_txtreg_bold"
-                android:gravity="center"
-                android:lineSpacingMultiplier="1.1"
-                android:padding="@dimen/padding"
+                android:fillViewport="true"
                 android:scrollbars="vertical"
-                android:text="@string/testText"
-                android:textColor="#fff"
-                android:textSize="24sp"
-                android:visibility="visible" />
+                android:visibility="visible">
+                
+                <TextView
+                    android:id="@+id/tvAdsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/al_hurra_txtreg_bold"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="1.1"
+                    android:padding="@dimen/padding"
+                    android:text="@string/testText"
+                    android:textColor="#fff"
+                    android:textSize="24sp" />
+            </ScrollView>
         </RelativeLayout>
 
 

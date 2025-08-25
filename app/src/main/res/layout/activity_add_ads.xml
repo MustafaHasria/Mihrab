@@ -429,50 +429,71 @@
                         android:layout_marginTop="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/text_font_size"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/textSize"
-                            android:paddingRight="@dimen/padding" />
-
-                        <RadioGroup
-                            android:id="@+id/rgFontSize"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:gravity="center"
+                            android:gravity="start|end"
                             android:layout_marginTop="5dp">
 
-                            <RadioButton
-                                android:id="@+id/rbFontSmall"
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/font_size_small"
+                                android:text="@string/text_font_size"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/textSize"
-                                android:layout_marginRight="@dimen/padding" />
+                                android:paddingRight="@dimen/padding" />
 
-                            <RadioButton
-                                android:id="@+id/rbFontMedium"
+                            <TextView
+                                android:id="@+id/tvFontSizeValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/font_size_medium"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/textSize"
-                                android:checked="true"
-                                android:layout_marginRight="@dimen/padding" />
+                                android:text="80sp"
+                                android:textColor="@color/back_text"
+                                android:textSize="@dimen/small_font_size"
+                                android:textStyle="bold" />
 
-                            <RadioButton
-                                android:id="@+id/rbFontLarge"
+                        </LinearLayout>
+
+                        <SeekBar
+                            android:id="@+id/sbFontSize"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressTint="@color/back_text"
+                            android:thumbTint="@color/back_text"
+                            android:layout_marginTop="10dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="start|end"
+                            android:layout_marginTop="5dp">
+
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/font_size_large"
+                                android:text="10sp"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/textSize" />
+                                android:textSize="@dimen/small_font_size" />
 
-                        </RadioGroup>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="80sp"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/small_font_size" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="150sp"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/small_font_size" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -485,50 +506,71 @@
                         android:layout_marginTop="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/text_movement_speed"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/textSize"
-                            android:paddingRight="@dimen/padding" />
-
-                        <RadioGroup
-                            android:id="@+id/rgMovementSpeed"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:gravity="center"
+                            android:gravity="start|end"
                             android:layout_marginTop="5dp">
 
-                            <RadioButton
-                                android:id="@+id/rbSpeedSlow"
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/speed_slow"
+                                android:text="@string/text_movement_speed"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/textSize"
-                                android:layout_marginRight="@dimen/padding" />
+                                android:paddingRight="@dimen/padding" />
 
-                            <RadioButton
-                                android:id="@+id/rbSpeedMedium"
+                            <TextView
+                                android:id="@+id/tvSpeedValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/speed_medium"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/textSize"
-                                android:checked="true"
-                                android:layout_marginRight="@dimen/padding" />
+                                android:text="1.0x"
+                                android:textColor="@color/back_text"
+                                android:textSize="@dimen/small_font_size"
+                                android:textStyle="bold" />
 
-                            <RadioButton
-                                android:id="@+id/rbSpeedFast"
+                        </LinearLayout>
+
+                        <SeekBar
+                            android:id="@+id/sbMovementSpeed"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressTint="@color/back_text"
+                            android:thumbTint="@color/back_text"
+                            android:layout_marginTop="10dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="start|end"
+                            android:layout_marginTop="5dp">
+
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/speed_fast"
+                                android:text="Slow"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/textSize" />
+                                android:textSize="@dimen/small_font_size" />
 
-                        </RadioGroup>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/small_font_size" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fast"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/small_font_size" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

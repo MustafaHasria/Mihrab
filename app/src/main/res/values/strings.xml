@@ -433,6 +433,7 @@
     <string name="hijriSet"> الفرق في التاريخ الهجري</string>
     <string name="hijriSet1">إضافة عدد أيام ثابتة</string>
     <string name="iqama_sound_close">التنبيه الصوتي لاغلاق الهاتف</string>
+    <string name="font_size_label">حجم الخط</string>
 
     <string name="corpyright">جميع الحقوق محفوظة© رقم الايداع المحلي 3087</string>
     <string name="version">Version 1.0</string>

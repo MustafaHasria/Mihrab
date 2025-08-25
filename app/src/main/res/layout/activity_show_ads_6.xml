@@ -78,7 +78,7 @@
                 android:padding="@dimen/padding"
                 android:scrollbars="vertical"
                 android:text="@string/testText"
-                android:textColor="#B3ABA5"
+                android:textColor="#FFFFFF"
                 android:textSize="24sp"
                 android:visibility="visible" />
         </RelativeLayout>

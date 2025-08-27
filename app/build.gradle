@@ -93,8 +93,8 @@ dependencies {
 
     implementation files('libs/MTBeaconPlus.jar')
 
-    // Remove problematic Android Image Slider dependency
-    // implementation 'com.github.koai-dev:Android-Image-Slider:1.4.0'
+    // Re-enable Android Image Slider dependency
+    implementation 'com.github.smarteist:Android-Image-Slider:1.4.0'
     
     // Add multidex support
     implementation 'androidx.multidex:multidex:2.0.1'

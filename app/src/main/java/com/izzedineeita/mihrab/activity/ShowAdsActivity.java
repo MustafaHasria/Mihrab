@@ -20,8 +20,12 @@ import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.izzedineeita.mihrab.Adapters.SliderAdapter;
 import com.izzedineeita.mihrab.MainActivity;
 import com.izzedineeita.mihrab.R;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 import com.izzedineeita.mihrab.constants.Constants;
 import com.izzedineeita.mihrab.constants.DateHigri;
 import com.izzedineeita.mihrab.database.DataBaseHelper;
@@ -395,8 +399,8 @@ public class ShowAdsActivity extends AppCompatActivity {
             mSliderItems.add(image6);
         }
 
-        // SliderView sliderView = findViewById(R.id.imageSlider); // Removed Image Slider dependency
-        // sliderView.setSliderAdapter(new SliderAdapter(mSliderItems)); // Removed Image Slider dependency
+        SliderView sliderView = findViewById(R.id.imageSlider);
+        sliderView.setSliderAdapter(new SliderAdapter(mSliderItems));
 
 
         // tvTitle.setText(title);
@@ -409,11 +413,11 @@ public class ShowAdsActivity extends AppCompatActivity {
                 Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
 //                ivAdsImage.setImageBitmap(bmp);
 //                Glide.with(activity).load(f).into(ivAdsImage);
-                // sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM); // Removed Image Slider dependency
-                // sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION); // Removed Image Slider dependency
+                sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+                sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
                 Log.e("XXX", "" + sec);
-                // sliderView.setScrollTimeInSec(sec); // Removed Image Slider dependency
-                // sliderView.startAutoCycle(); // Removed Image Slider dependency
+                sliderView.setScrollTimeInSec(sec);
+                sliderView.startAutoCycle();
             } else if (type == 2) {
                 card.setVisibility(View.GONE);
                 vvAdsVideo.setVisibility(View.VISIBLE);

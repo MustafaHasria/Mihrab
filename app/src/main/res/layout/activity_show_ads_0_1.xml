@@ -399,7 +399,7 @@
                 android:visibility="gone"
                 app:cardCornerRadius="6dp">
 
-                <View
+                <com.smarteist.autoimageslider.SliderView
                     android:id="@+id/imageSlider"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

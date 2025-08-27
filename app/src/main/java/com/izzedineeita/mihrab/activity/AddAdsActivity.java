@@ -51,6 +51,7 @@ import com.izzedineeita.mihrab.model.Ads;
 import com.izzedineeita.mihrab.model.AdsPeriods;
 import com.izzedineeita.mihrab.utils.Pref;
 import com.izzedineeita.mihrab.utils.Utils;
+import yuku.ambilwarna.AmbilWarnaDialog;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -109,6 +110,9 @@ public class AddAdsActivity extends AppCompatActivity
     private CheckBox cbHidePulpitAdsBox;
     private SeekBar sbFontSize, sbMovementSpeed;
     private TextView tvFontSizeValue, tvSpeedValue;
+    private View colorPreview;
+    private Button btnChooseColor;
+    private int selectedTextColor = 0xFF000000; // Default black color
     private boolean isConflictAds = false;
     ArrayList<Integer> checkList = new ArrayList<>();
     ArrayList<AdsPeriods> adsPeriodsList = new ArrayList<>();
@@ -317,6 +321,10 @@ public class AddAdsActivity extends AppCompatActivity
             tvFontSizeValue = findViewById(R.id.tvFontSizeValue);
             tvSpeedValue = findViewById(R.id.tvSpeedValue);
 
+            // Initialize Color Picker Components
+            colorPreview = findViewById(R.id.colorPreview);
+            btnChooseColor = findViewById(R.id.btnChooseColor);
+
             // Load the pulpit ads box visibility state
             // Handle migration from old boolean format to new integer format
             int visibilityState;
@@ -354,6 +362,9 @@ public class AddAdsActivity extends AppCompatActivity
 
             // Load font size and movement speed preferences
             loadTextAdsPreferences();
+            
+            // Load text color preference
+            loadTextColorPreference();
 
             // Set initial states
             if (edAddAppearance != null) edAddAppearance.setFocusable(true);
@@ -423,6 +434,11 @@ public class AddAdsActivity extends AppCompatActivity
                         handleAppearanceTextChanged();
                     }
                 });
+            }
+
+            // Set Color Picker Button Click Listener
+            if (btnChooseColor != null) {
+                btnChooseColor.setOnClickListener(view -> showColorPickerDialog());
             }
 
             // Set SeekBar change listeners for text ads preferences
@@ -1444,8 +1460,11 @@ public class AddAdsActivity extends AppCompatActivity
             }
             editor.putInt(Constants.PREF_TEXT_ADS_MOVEMENT_SPEED, speedPercentage);
 
+            // Save text color preference
+            editor.putInt(Constants.PREF_TEXT_ADS_COLOR, selectedTextColor);
+
             editor.apply();
-            Log.d("AddAdsActivity", "Text ads preferences saved - Font Size: " + fontSizePercentage + "%, Movement Speed: " + speedPercentage + "%");
+            Log.d("AddAdsActivity", "Text ads preferences saved - Font Size: " + fontSizePercentage + "%, Movement Speed: " + speedPercentage + "%, Color: " + String.format("#%06X", selectedTextColor & 0xFFFFFF));
         } catch (Exception e) {
             Log.e("AddAdsActivity", "Error saving text ads preferences: " + e.getMessage(), e);
         }
@@ -1474,6 +1493,48 @@ public class AddAdsActivity extends AppCompatActivity
         } else {
             // 51-100% maps to 1.0x - 2.0x
             return 1.0f + ((percentage - 50) / 50.0f) * 1.0f;
+        }
+    }
+
+    /**
+     * Shows the color picker dialog for selecting text color
+     */
+    private void showColorPickerDialog() {
+        AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, selectedTextColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                selectedTextColor = color;
+                updateColorPreview();
+                saveTextAdsPreferences();
+            }
+
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {
+                // User cancelled, do nothing
+            }
+        });
+        dialog.show();
+    }
+
+    /**
+     * Updates the color preview view with the selected color
+     */
+    private void updateColorPreview() {
+        if (colorPreview != null) {
+            colorPreview.setBackgroundColor(selectedTextColor);
+        }
+    }
+
+    /**
+     * Loads the saved text color preference
+     */
+    private void loadTextColorPreference() {
+        try {
+            selectedTextColor = sp.getInt(Constants.PREF_TEXT_ADS_COLOR, 0xFF000000); // Default black
+            updateColorPreview();
+            Log.d("AddAdsActivity", "Text color preference loaded: " + String.format("#%06X", selectedTextColor & 0xFFFFFF));
+        } catch (Exception e) {
+            Log.e("AddAdsActivity", "Error loading text color preference: " + e.getMessage(), e);
         }
     }
 

@@ -108,9 +108,10 @@ public interface Constants {
 
     String PREF_HIDE_PULPIT_ADS_BOX = "PREF_HIDE_PULPIT_ADS_BOX";
     
-    // Text ads font size and movement speed preferences
+    // Text ads font size, movement speed, and color preferences
     String PREF_TEXT_ADS_FONT_SIZE = "PREF_TEXT_ADS_FONT_SIZE";
     String PREF_TEXT_ADS_MOVEMENT_SPEED = "PREF_TEXT_ADS_MOVEMENT_SPEED";
+    String PREF_TEXT_ADS_COLOR = "PREF_TEXT_ADS_COLOR";
 
     String PREF_CLOSE_PHONE_ALERT_URDU = "PREF_CLOSE_PHONE_ALERT_URDU";
     String PREF_CLOSE_PHONE_ALERT_ARABIC = "PREF_CLOSE_PHONE_ALERT_ARABIC";

@@ -87,6 +87,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.firebase:firebase-database:20.0.4'
     
+    // AmbilWarna color picker library
+    implementation 'com.github.yukuku:ambilwarna:2.0.1'
+    
     annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 
     implementation files('libs/YouTubeAndroidPlayerApi.jar')

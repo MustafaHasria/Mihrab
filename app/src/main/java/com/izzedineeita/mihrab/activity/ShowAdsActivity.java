@@ -590,13 +590,17 @@ public class ShowAdsActivity extends AppCompatActivity {
             tvAdsText.setMaxLines(Integer.MAX_VALUE);
             tvAdsText.setEllipsize(null);
 
+            // Apply text color preference
+            int textColor = sp.getInt(Constants.PREF_TEXT_ADS_COLOR, 0xFF000000); // Default: black
+            tvAdsText.setTextColor(textColor);
+
             // Apply movement speed based on percentage preference (0-100)
             int speedPercentage = sp.getInt(Constants.PREF_TEXT_ADS_MOVEMENT_SPEED, 50); // Default: 50%
             float speedMultiplier = getSpeedMultiplierFromPercentage(speedPercentage);
             
             // Apply scrolling animation for text movement
             applyTextScrollingAnimation(speedMultiplier);
-            Log.d("ShowAdsActivity", "Applied font size: " + fontSizeSp + "sp, speed multiplier: " + speedMultiplier + "x");
+            Log.d("ShowAdsActivity", "Applied font size: " + fontSizeSp + "sp, speed multiplier: " + speedMultiplier + "x, color: " + String.format("#%06X", textColor & 0xFFFFFF));
             
         } catch (Exception e) {
             Log.e("ShowAdsActivity", "Error applying text ads preferences: " + e.getMessage(), e);

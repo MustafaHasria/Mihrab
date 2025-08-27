@@ -34,8 +34,6 @@ public class SliderAdapter extends
         Glide.with(viewHolder.itemView)
                 .load(sliderItem)
                 .fitCenter()
-                .placeholder(R.drawable.placeholder_image)
-                .error(R.drawable.placeholder_image)
                 .into(viewHolder.imageViewBackground);
     }
 

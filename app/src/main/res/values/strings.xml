@@ -101,6 +101,8 @@
     <string name="hide_pulpit_ads_box">حذف مربع المنبر الدعوي</string>
     <string name="text_font_size">حجم الخط</string>
     <string name="text_movement_speed">سرعة الحركة</string>
+    <string name="text_color">لون النص</string>
+    <string name="choose_color">اختر اللون</string>
     <string name="font_size_small">صغير</string>
     <string name="font_size_medium">متوسط</string>
     <string name="font_size_large">كبير</string>
